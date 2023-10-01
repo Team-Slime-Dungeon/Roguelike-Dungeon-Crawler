@@ -1,0 +1,159 @@
+[gd_scene load_steps=6 format=3 uid="uid://bnyu8vj2uc1xf"]
+
+[ext_resource type="Script" path="res://room_generation.gd" id="1_fymyj"]
+[ext_resource type="Texture2D" uid="uid://cdejfmb3r8r6b" path="res://cave1.png" id="2_fp8l3"]
+[ext_resource type="Texture2D" uid="uid://nau718e75jx1" path="res://cassandra_sheet.png" id="3_o0kyd"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yqjvn"]
+texture = ExtResource("2_fp8l3")
+texture_region_size = Vector2i(64, 32)
+0:0/0 = 0
+1:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+0:2/0 = 0
+0:3/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_42v73"]
+tile_shape = 1
+tile_layout = 4
+tile_size = Vector2i(64, 32)
+sources/0 = SubResource("TileSetAtlasSource_yqjvn")
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_fymyj")
+
+[node name="debug_seed_info" type="Label" parent="."]
+offset_left = -553.0
+offset_top = -300.0
+offset_right = -229.0
+offset_bottom = -274.0
+text = "ERROR: this label isn't reading the script :/"
+metadata/_edit_use_anchors_ = true
+
+[node name="new_seed" type="Button" parent="debug_seed_info"]
+layout_mode = 0
+offset_top = 64.0
+offset_right = 85.0
+offset_bottom = 95.0
+text = "New Seed"
+
+[node name="TileMap" type="TileMap" parent="."]
+show_behind_parent = true
+y_sort_enabled = true
+tile_set = SubResource("TileSet_42v73")
+format = 2
+layer_0/y_sort_enabled = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Cassandra" type="Skeleton2D" parent="."]
+
+[node name="hip_bone" type="Bone2D" parent="Cassandra"]
+rest = Transform2D(1, 0, 0, 1, 0, 0)
+editor_settings/show_bone_gizmo = false
+
+[node name="hip" type="Sprite2D" parent="Cassandra/hip_bone"]
+z_index = 1
+texture_filter = 1
+texture = ExtResource("3_o0kyd")
+hframes = 14
+vframes = 6
+frame = 18
+
+[node name="chest_bone" type="Bone2D" parent="Cassandra/hip_bone"]
+rest = Transform2D(1, 0, 0, 1, 0, 0)
+editor_settings/show_bone_gizmo = false
+
+[node name="chest" type="Sprite2D" parent="Cassandra/hip_bone/chest_bone"]
+z_index = 1
+texture_filter = 1
+position = Vector2(0, -16)
+texture = ExtResource("3_o0kyd")
+hframes = 14
+vframes = 6
+frame = 4
+
+[node name="head_bone" type="Bone2D" parent="Cassandra/hip_bone/chest_bone"]
+rest = Transform2D(1, 0, 0, 1, 0, 0)
+editor_settings/show_bone_gizmo = false
+
+[node name="bangs" type="Sprite2D" parent="Cassandra/hip_bone/chest_bone/head_bone"]
+z_index = 1
+texture_filter = 1
+position = Vector2(0, -29)
+texture = ExtResource("3_o0kyd")
+hframes = 14
+vframes = 6
+frame = 14
+
+[node name="head" type="Sprite2D" parent="Cassandra/hip_bone/chest_bone/head_bone"]
+show_behind_parent = true
+z_index = 1
+texture_filter = 1
+position = Vector2(0, -29)
+texture = ExtResource("3_o0kyd")
+hframes = 14
+vframes = 6
+
+[node name="hair" type="Sprite2D" parent="Cassandra/hip_bone/chest_bone/head_bone"]
+show_behind_parent = true
+texture_filter = 1
+position = Vector2(0, -28)
+texture = ExtResource("3_o0kyd")
+hframes = 7
+vframes = 3
+frame = 1
+
+[node name="arm_left_bone" type="Bone2D" parent="Cassandra/hip_bone/chest_bone"]
+rest = Transform2D(1, 0, 0, 1, 0, 0)
+editor_settings/show_bone_gizmo = false
+
+[node name="arm" type="Sprite2D" parent="Cassandra/hip_bone/chest_bone/arm_left_bone"]
+z_index = 1
+texture_filter = 1
+position = Vector2(6, -5)
+texture = ExtResource("3_o0kyd")
+hframes = 14
+vframes = 3
+frame = 7
+
+[node name="arm_right_bone" type="Bone2D" parent="Cassandra/hip_bone/chest_bone"]
+rest = Transform2D(1, 0, 0, 1, 0, 0)
+editor_settings/show_bone_gizmo = false
+
+[node name="arm" type="Sprite2D" parent="Cassandra/hip_bone/chest_bone/arm_right_bone"]
+show_behind_parent = true
+texture_filter = 1
+position = Vector2(-5, -5)
+texture = ExtResource("3_o0kyd")
+flip_h = true
+hframes = 14
+vframes = 3
+frame = 7
+
+[node name="leg_left_bone" type="Bone2D" parent="Cassandra/hip_bone"]
+rest = Transform2D(1, 0, 0, 1, 0, 0)
+editor_settings/show_bone_gizmo = false
+
+[node name="leg" type="Sprite2D" parent="Cassandra/hip_bone/leg_left_bone"]
+texture_filter = 1
+position = Vector2(3, 5)
+texture = ExtResource("3_o0kyd")
+hframes = 14
+vframes = 3
+frame = 10
+
+[node name="leg_right_bone" type="Bone2D" parent="Cassandra/hip_bone"]
+rest = Transform2D(1, 0, 0, 1, 0, 0)
+editor_settings/show_bone_gizmo = false
+
+[node name="leg" type="Sprite2D" parent="Cassandra/hip_bone/leg_right_bone"]
+texture_filter = 1
+position = Vector2(-3, 4)
+texture = ExtResource("3_o0kyd")
+hframes = 14
+vframes = 3
+frame = 10
+
+[connection signal="pressed" from="debug_seed_info/new_seed" to="." method="_on_new_seed_pressed"]
