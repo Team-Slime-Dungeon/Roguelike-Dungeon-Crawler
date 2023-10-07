@@ -22,7 +22,6 @@ tile_size = Vector2i(64, 32)
 sources/0 = SubResource("TileSetAtlasSource_yqjvn")
 
 [node name="Node2D" type="Node2D"]
-scale = Vector2(2, 2)
 script = ExtResource("1_fymyj")
 
 [node name="debug_seed_info" type="Label" parent="."]
@@ -43,6 +42,7 @@ text = "New Seed"
 [node name="TileMap" type="TileMap" parent="."]
 show_behind_parent = true
 y_sort_enabled = true
+texture_filter = 1
 tile_set = SubResource("TileSet_42v73")
 format = 2
 layer_0/y_sort_enabled = true
@@ -50,6 +50,7 @@ layer_0/y_sort_enabled = true
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="Cassandra" type="Skeleton2D" parent="."]
+texture_filter = 1
 position = Vector2(50, 0)
 
 [node name="hip_bone" type="Bone2D" parent="Cassandra"]
