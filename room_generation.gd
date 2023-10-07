@@ -39,12 +39,18 @@ func get_new_direction(old_direction):
 	return result
 
 func generate_room():
+	var cells = []
+	
 	for i in node_pos:
 		var size = random.randi_range(room_min, room_max)
 		for j in range(-size, size+1):
 			for k in range(-size, size+1):
-				$TileMap.set_cell(0, Vector2i(i.x+j, i.y+k), 
-					0, Vector2i(1,1))	
+				#$TileMap.set_cell(0, Vector2i(i.x+j, i.y+k), 0, Vector2i(1,1))
+				# Stores tile location to be used later
+				cells.append(Vector2i(i.x+j,i.y+k))
+
+	# Draws all of the tiles and connects them together using terrains
+	$TileMap.set_cells_terrain_connect(0,cells,0,0)
 
 func clear_room():
 	node_pos = [] 
