@@ -4,12 +4,15 @@ var random = RandomNumberGenerator.new()
 var node_pos = [] 
 var num_paths = 10 #the number of hallway segments
 var segment_length = 10 #length of hallway segments
+var room_min = 2 #smallest size for rooms
+var room_max = 4 #largest size for rooms
+var zoom_int = 1 #debug zoom
 
 func _ready():
 	clear_room()
 	generate_hallways() #first, generate the hallways
 	generate_room() #second, create rooms on top of selected nodes
-	$debug_seed_info.set_text("Debug\n " + str(node_pos)) #debug info visual
+	$debug_hud/debug_seed_info.set_text("Debug\n " + str(node_pos)) #debug info visual
 	
 func _on_new_seed_pressed(): return _ready() #click button for new build
 
@@ -22,7 +25,7 @@ func generate_hallways():
 	for j in range(0, num_paths):
 		for i in range(0, segment_length): # this loop creates 1 segment
 			position += direction
-			$TileMap.set_cell(0, position, 0, Vector2i(0, 0))
+			$TileMap.set_cell(0, position, 0, Vector2i(0, 3))
 		if !position in node_pos: node_pos.append(position) # since can overlap, avoid duplicates in list
 		direction = get_new_direction(direction) # get a new direction for the next segment
 
@@ -37,14 +40,14 @@ func get_new_direction(old_direction):
 
 func generate_room():
 	for i in node_pos:
-		var size = random.randi_range(1, 2)
+		var size = random.randi_range(room_min, room_max)
 		for j in range(-size, size+1):
 			for k in range(-size, size+1):
 				$TileMap.set_cell(0, Vector2i(i.x+j, i.y+k), 
-					0, Vector2i(0,0))	
+					0, Vector2i(1,1))	
 
 func clear_room():
 	node_pos = [] 
 	for i in range(-1000, 1000):
-		for j in range(-200, 200):
+		for j in range(-1000, 1000):
 			$TileMap.erase_cell(0, Vector2i(i , j))

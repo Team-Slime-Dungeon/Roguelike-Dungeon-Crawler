@@ -14,6 +14,10 @@ texture_region_size = Vector2i(64, 32)
 1:1/0 = 0
 0:2/0 = 0
 0:3/0 = 0
+2:0/0 = 0
+2:1/0 = 0
+2:2/0 = 0
+1:2/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_42v73"]
 tile_shape = 1
@@ -24,21 +28,6 @@ sources/0 = SubResource("TileSetAtlasSource_yqjvn")
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_fymyj")
 
-[node name="debug_seed_info" type="Label" parent="."]
-offset_left = -553.0
-offset_top = -300.0
-offset_right = -229.0
-offset_bottom = -274.0
-text = "ERROR: this label isn't reading the script :/"
-metadata/_edit_use_anchors_ = true
-
-[node name="new_seed" type="Button" parent="debug_seed_info"]
-layout_mode = 0
-offset_top = 64.0
-offset_right = 85.0
-offset_bottom = 95.0
-text = "New Seed"
-
 [node name="TileMap" type="TileMap" parent="."]
 show_behind_parent = true
 y_sort_enabled = true
@@ -46,8 +35,6 @@ texture_filter = 1
 tile_set = SubResource("TileSet_42v73")
 format = 2
 layer_0/y_sort_enabled = true
-
-[node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="Cassandra" type="Skeleton2D" parent="."]
 texture_filter = 1
@@ -190,4 +177,24 @@ texture = ExtResource("4_eqcf6")
 hframes = 8
 vframes = 2
 
-[connection signal="pressed" from="debug_seed_info/new_seed" to="." method="_on_new_seed_pressed"]
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="debug_hud" type="CanvasLayer" parent="."]
+follow_viewport_enabled = true
+
+[node name="debug_seed_info" type="Label" parent="debug_hud"]
+offset_left = -553.0
+offset_top = -300.0
+offset_right = -229.0
+offset_bottom = -274.0
+text = "ERROR: this label isn't reading the script :/"
+metadata/_edit_use_anchors_ = true
+
+[node name="new_seed" type="Button" parent="debug_hud/debug_seed_info"]
+layout_mode = 0
+offset_top = 64.0
+offset_right = 85.0
+offset_bottom = 95.0
+text = "New Seed"
+
+[connection signal="pressed" from="debug_hud/debug_seed_info/new_seed" to="." method="_on_new_seed_pressed"]
