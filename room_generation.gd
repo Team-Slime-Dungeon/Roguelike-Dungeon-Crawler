@@ -5,7 +5,7 @@ var node_pos = []
 var num_paths = 10 #the number of hallway segments
 var segment_length = 10 #length of hallway segments
 var room_min = 2 #smallest size for rooms
-var room_max = 5 #largest size for rooms
+var room_max = 4 #largest size for rooms
 var zoom_int = 1 #debug zoom
 
 func _ready():

@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://bnyu8vj2uc1xf"]
+[gd_scene load_steps=8 format=3 uid="uid://bnyu8vj2uc1xf"]
 
 [ext_resource type="Script" path="res://room_generation.gd" id="1_fymyj"]
 [ext_resource type="Texture2D" uid="uid://cdejfmb3r8r6b" path="res://cave1.png" id="2_fp8l3"]
 [ext_resource type="Texture2D" uid="uid://nau718e75jx1" path="res://cassandra_sheet.png" id="3_o0kyd"]
 [ext_resource type="Texture2D" uid="uid://cabf2o132snta" path="res://slime_sheet.png" id="4_eqcf6"]
+[ext_resource type="Script" path="res://Camera2D.gd" id="5_phgrc"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yqjvn"]
 texture = ExtResource("2_fp8l3")
@@ -97,6 +98,43 @@ texture_filter = 1
 tile_set = SubResource("TileSet_42v73")
 format = 2
 layer_0/y_sort_enabled = true
+
+[node name="Slime" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("4_eqcf6")
+hframes = 4
+frame = 1
+
+[node name="texture" type="Sprite2D" parent="Slime"]
+texture_repeat = 2
+position = Vector2(-3, 4.5)
+texture = ExtResource("4_eqcf6")
+hframes = 4
+frame = 3
+
+[node name="eyes" type="Sprite2D" parent="Slime"]
+position = Vector2(-2, 3)
+texture = ExtResource("4_eqcf6")
+hframes = 8
+vframes = 2
+
+[node name="debug_hud" type="CanvasLayer" parent="."]
+follow_viewport_enabled = true
+
+[node name="debug_seed_info" type="Label" parent="debug_hud"]
+offset_left = -553.0
+offset_top = -300.0
+offset_right = -229.0
+offset_bottom = -274.0
+text = "ERROR: this label isn't reading the script :/"
+metadata/_edit_use_anchors_ = true
+
+[node name="new_seed" type="Button" parent="debug_hud/debug_seed_info"]
+layout_mode = 0
+offset_top = 64.0
+offset_right = 85.0
+offset_bottom = 95.0
+text = "New Seed"
 
 [node name="Cassandra" type="Skeleton2D" parent="."]
 texture_filter = 1
@@ -229,44 +267,8 @@ offset = Vector2(-1, 9)
 hframes = 20
 frame = 17
 
-[node name="Slime" type="Sprite2D" parent="."]
-texture_filter = 1
-texture = ExtResource("4_eqcf6")
-hframes = 4
-frame = 1
-
-[node name="texture" type="Sprite2D" parent="Slime"]
-texture_repeat = 2
-position = Vector2(-3, 4.5)
-texture = ExtResource("4_eqcf6")
-hframes = 4
-frame = 3
-
-[node name="eyes" type="Sprite2D" parent="Slime"]
-position = Vector2(-2, 3)
-texture = ExtResource("4_eqcf6")
-hframes = 8
-vframes = 2
-
-[node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(0.25, 0.25)
-
-[node name="debug_hud" type="CanvasLayer" parent="."]
-follow_viewport_enabled = true
-
-[node name="debug_seed_info" type="Label" parent="debug_hud"]
-offset_left = -553.0
-offset_top = -300.0
-offset_right = -229.0
-offset_bottom = -274.0
-text = "ERROR: this label isn't reading the script :/"
-metadata/_edit_use_anchors_ = true
-
-[node name="new_seed" type="Button" parent="debug_hud/debug_seed_info"]
-layout_mode = 0
-offset_top = 64.0
-offset_right = 85.0
-offset_bottom = 95.0
-text = "New Seed"
+[node name="Camera2D" type="Camera2D" parent="Cassandra"]
+position = Vector2(-50, 0)
+script = ExtResource("5_phgrc")
 
 [connection signal="pressed" from="debug_hud/debug_seed_info/new_seed" to="." method="_on_new_seed_pressed"]
