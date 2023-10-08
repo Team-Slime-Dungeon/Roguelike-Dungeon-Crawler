@@ -109,7 +109,9 @@ editor_settings/show_bone_gizmo = false
 [node name="hip" type="Sprite2D" parent="Cassandra/hip_bone"]
 z_index = 1
 texture_filter = 1
+position = Vector2(0, -7)
 texture = ExtResource("3_o0kyd")
+offset = Vector2(0, 5)
 hframes = 20
 vframes = 2
 frame = 29
@@ -121,15 +123,16 @@ editor_settings/show_bone_gizmo = false
 [node name="chest" type="Sprite2D" parent="Cassandra/hip_bone/chest_bone"]
 z_index = 1
 texture_filter = 1
-position = Vector2(0, -16)
+position = Vector2(0, -12)
 texture = ExtResource("3_o0kyd")
+offset = Vector2(0, -6)
 hframes = 20
 vframes = 2
 frame = 9
 
 [node name="robe" type="Sprite2D" parent="Cassandra/hip_bone/chest_bone/chest"]
 texture_filter = 1
-position = Vector2(-1, 8)
+position = Vector2(-1, 2)
 texture = ExtResource("3_o0kyd")
 hframes = 20
 frame = 10
@@ -138,28 +141,30 @@ frame = 10
 rest = Transform2D(1, 0, 0, 1, 0, 0)
 editor_settings/show_bone_gizmo = false
 
-[node name="bangs" type="Sprite2D" parent="Cassandra/hip_bone/chest_bone/head_bone"]
+[node name="head" type="Sprite2D" parent="Cassandra/hip_bone/chest_bone/head_bone"]
+show_behind_parent = true
 z_index = 1
 texture_filter = 1
-position = Vector2(0, -29)
+position = Vector2(0, -27)
+texture = ExtResource("3_o0kyd")
+offset = Vector2(0, -4)
+hframes = 20
+vframes = 2
+
+[node name="bangs" type="Sprite2D" parent="Cassandra/hip_bone/chest_bone/head_bone/head"]
+z_index = 1
+texture_filter = 1
+position = Vector2(0, -4)
 texture = ExtResource("3_o0kyd")
 hframes = 20
 vframes = 2
 frame = 20
 
-[node name="head" type="Sprite2D" parent="Cassandra/hip_bone/chest_bone/head_bone"]
+[node name="hair" type="Sprite2D" parent="Cassandra/hip_bone/chest_bone/head_bone/head"]
 show_behind_parent = true
-z_index = 1
+z_index = -1
 texture_filter = 1
-position = Vector2(0, -29)
-texture = ExtResource("3_o0kyd")
-hframes = 20
-vframes = 2
-
-[node name="hair" type="Sprite2D" parent="Cassandra/hip_bone/chest_bone/head_bone"]
-show_behind_parent = true
-texture_filter = 1
-position = Vector2(0, -28)
+position = Vector2(0, -3)
 texture = ExtResource("3_o0kyd")
 hframes = 15
 frame = 4
@@ -171,14 +176,15 @@ editor_settings/show_bone_gizmo = false
 [node name="arm" type="Sprite2D" parent="Cassandra/hip_bone/chest_bone/arm_left_bone"]
 z_index = 1
 texture_filter = 1
-position = Vector2(6, -13)
+position = Vector2(6, -21)
 texture = ExtResource("3_o0kyd")
+offset = Vector2(0, 6)
 hframes = 20
 vframes = 2
 frame = 14
 
 [node name="sleeve" type="Sprite2D" parent="Cassandra/hip_bone/chest_bone/arm_left_bone/arm"]
-position = Vector2(-1, -2)
+position = Vector2(-1, 4)
 texture = ExtResource("3_o0kyd")
 hframes = 20
 vframes = 2
@@ -191,8 +197,9 @@ editor_settings/show_bone_gizmo = false
 [node name="arm" type="Sprite2D" parent="Cassandra/hip_bone/chest_bone/arm_right_bone"]
 show_behind_parent = true
 texture_filter = 1
-position = Vector2(-5, -13)
+position = Vector2(-5, -21)
 texture = ExtResource("3_o0kyd")
+offset = Vector2(0, 6)
 flip_h = true
 hframes = 20
 vframes = 2
@@ -204,8 +211,9 @@ editor_settings/show_bone_gizmo = false
 
 [node name="leg" type="Sprite2D" parent="Cassandra/hip_bone/leg_left_bone"]
 texture_filter = 1
-position = Vector2(3, 5)
+position = Vector2(3, -4)
 texture = ExtResource("3_o0kyd")
+offset = Vector2(-1, 9)
 hframes = 20
 frame = 17
 
@@ -215,8 +223,9 @@ editor_settings/show_bone_gizmo = false
 
 [node name="leg" type="Sprite2D" parent="Cassandra/hip_bone/leg_right_bone"]
 texture_filter = 1
-position = Vector2(-3, 4)
+position = Vector2(-3, -5)
 texture = ExtResource("3_o0kyd")
+offset = Vector2(-1, 9)
 hframes = 20
 frame = 17
 
@@ -240,7 +249,7 @@ hframes = 8
 vframes = 2
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(0.4, 0.4)
+zoom = Vector2(0.25, 0.25)
 
 [node name="debug_hud" type="CanvasLayer" parent="."]
 follow_viewport_enabled = true
