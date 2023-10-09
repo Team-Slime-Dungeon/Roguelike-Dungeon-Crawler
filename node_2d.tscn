@@ -136,6 +136,9 @@ offset_right = 85.0
 offset_bottom = 95.0
 text = "New Seed"
 
+[node name="Camera2D" type="Camera2D" parent="."]
+script = ExtResource("5_phgrc")
+
 [node name="Cassandra" type="Skeleton2D" parent="."]
 texture_filter = 1
 position = Vector2(50, 0)
@@ -266,9 +269,5 @@ texture = ExtResource("3_o0kyd")
 offset = Vector2(-1, 9)
 hframes = 20
 frame = 17
-
-[node name="Camera2D" type="Camera2D" parent="Cassandra"]
-position = Vector2(-50, 0)
-script = ExtResource("5_phgrc")
 
 [connection signal="pressed" from="debug_hud/debug_seed_info/new_seed" to="." method="_on_new_seed_pressed"]
