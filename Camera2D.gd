@@ -35,13 +35,3 @@ func _input(event):
 			drag_start = event.global_position
 			offset += -drag_vector * drag_speed * get_process_delta_time()
 
-	if event is InputEventMouseMotion:
-		# Check for mouse wheel input
-		if event.is_action("mouse_wheel_up"):
-			# Zoom in
-			var zoom_factor = 1.0 - zoom_speed
-			zoom = clamp(zoom * zoom_factor, min_zoom, max_zoom)
-		elif event.is_action("mouse_wheel_down"):
-			# Zoom out
-			var zoom_factor = 1.0 + zoom_speed
-			zoom = clamp(zoom * zoom_factor, min_zoom, max_zoom)

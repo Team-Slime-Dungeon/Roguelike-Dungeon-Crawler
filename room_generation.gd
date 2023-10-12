@@ -10,6 +10,7 @@ var zoom_int = 1 #debug zoom
 var min_path_width = 1
 var max_path_width = 3
 
+
 func _ready():
 	clear_room()
 	generate_hallways() #first, generate the hallways
