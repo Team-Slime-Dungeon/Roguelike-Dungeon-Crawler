@@ -10,6 +10,13 @@ var zoom_int = 1 #debug zoom
 var min_path_width = 1
 var max_path_width = 3
 
+@onready var cam = $Cassandra/Camera2D
+var zoom_min= Vector2(.1000001,.1000001) # min zoom
+var zoom_max  = Vector2(1.0,1.0)# max zoom
+var zoom_speed = Vector2(.3000001,.3000001)# speed of zooming
+
+
+
 func _ready():
 	clear_room()
 	generate_hallways() #first, generate the hallways
@@ -68,3 +75,15 @@ func clear_room():
 	for i in range(-1000, 1000):
 		for j in range(-1000, 1000):
 			$TileMap.erase_cell(0, Vector2i(i , j))
+
+
+func _on_texture_button_pressed():
+	#if cam.zoom < zoom_m:
+	cam.zoom += zoom_speed
+	print(cam.zoom)
+	pass # Replace 
+
+
+func _on_out_zoom_pressed():
+	pass # Replace with function body.
+
