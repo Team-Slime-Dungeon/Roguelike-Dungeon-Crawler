@@ -7,6 +7,9 @@ var segment_length = 10 #length of hallway segments
 var room_min = 2 #smallest size for rooms
 var room_max = 4 #largest size for rooms
 var zoom_int = 1 #debug zoom
+var min_path_width = 1
+var max_path_width = 3
+
 
 func _ready():
 	clear_room()
@@ -23,9 +26,15 @@ func generate_hallways():
 	
 	# this loop makes hallway segments
 	for j in range(0, num_paths):
+		var row_width = random.randi_range(min_path_width, max_path_width)
 		for i in range(0, segment_length): # this loop creates 1 segment
 			position += direction
-			$TileMap.set_cell(0, position, 0, Vector2i(0, 3))
+			# create a row of path width
+			var perpendicular = get_perpendicular_vector(direction)
+			var row_position = position - floor(row_width / 2) * perpendicular
+			for k in range(0, row_width):
+				$TileMap.set_cell(0, row_position, 0, Vector2i(0, 3))
+				row_position += perpendicular
 		if !position in node_pos: node_pos.append(position) # since can overlap, avoid duplicates in list
 		direction = get_new_direction(direction) # get a new direction for the next segment
 
@@ -33,10 +42,13 @@ func generate_hallways():
 # restriction: new direction should never be the reverse of the previous direction
 func get_new_direction(old_direction):
 	var directions = [Vector2i(0,1), Vector2i(0, -1), Vector2i(1, 0), Vector2i(-1, 0)]
-	var result = -old_direction
-	while result == -old_direction:
-		result = directions[random.randi_range(0, 3)]
-	return result
+	directions.erase(old_direction)
+	return directions[random.randi_range(0, directions.size() - 1)]
+
+# this function returns a vector that is perpendicular
+# to the passed in vector2i
+func get_perpendicular_vector(original):
+	return Vector2i(-original.y, original.x)
 
 func generate_room():
 	var cells = []
