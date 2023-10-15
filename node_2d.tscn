@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" path="res://room_generation.gd" id="1_fymyj"]
 [ext_resource type="Texture2D" uid="uid://cdejfmb3r8r6b" path="res://cave1.png" id="2_fp8l3"]
-[ext_resource type="Texture2D" uid="uid://nau718e75jx1" path="res://cassandra_sheet.png" id="3_o0kyd"]
 [ext_resource type="Texture2D" uid="uid://cabf2o132snta" path="res://slime_sheet.png" id="4_eqcf6"]
 [ext_resource type="Script" path="res://debug_UI.gd" id="6_grh6y"]
 [ext_resource type="Texture2D" uid="uid://dkuybpamfo8ue" path="res://camera_hud/minus.magnifyingglass.png" id="7_x0ex8"]
@@ -12,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://dwumooinw8loy" path="res://camera_hud/arrow_up.png" id="11_5aaka"]
 [ext_resource type="Texture2D" uid="uid://c074p476eaibg" path="res://camera_hud/goforward.png" id="11_ef5xo"]
 [ext_resource type="Texture2D" uid="uid://hipt83xn34pe" path="res://camera_hud/arrow_down.png" id="12_aoma3"]
+[ext_resource type="PackedScene" uid="uid://dqjumom2gi26s" path="res://character.tscn" id="13_d7p71"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yqjvn"]
 texture = ExtResource("2_fp8l3")
@@ -125,140 +125,6 @@ texture = ExtResource("4_eqcf6")
 hframes = 8
 vframes = 2
 
-[node name="Cassandra" type="Skeleton2D" parent="."]
-texture_filter = 1
-position = Vector2(50, 0)
-
-[node name="hip_bone" type="Bone2D" parent="Cassandra"]
-rest = Transform2D(1, 0, 0, 1, 0, 0)
-editor_settings/show_bone_gizmo = false
-
-[node name="hip" type="Sprite2D" parent="Cassandra/hip_bone"]
-z_index = 1
-texture_filter = 1
-position = Vector2(0, -7)
-texture = ExtResource("3_o0kyd")
-offset = Vector2(0, 5)
-hframes = 20
-vframes = 2
-frame = 29
-
-[node name="chest_bone" type="Bone2D" parent="Cassandra/hip_bone"]
-rest = Transform2D(1, 0, 0, 1, 0, 0)
-editor_settings/show_bone_gizmo = false
-
-[node name="chest" type="Sprite2D" parent="Cassandra/hip_bone/chest_bone"]
-z_index = 1
-texture_filter = 1
-position = Vector2(0, -12)
-texture = ExtResource("3_o0kyd")
-offset = Vector2(0, -6)
-hframes = 20
-vframes = 2
-frame = 9
-
-[node name="robe" type="Sprite2D" parent="Cassandra/hip_bone/chest_bone/chest"]
-texture_filter = 1
-position = Vector2(-1, 2)
-texture = ExtResource("3_o0kyd")
-hframes = 20
-frame = 10
-
-[node name="head_bone" type="Bone2D" parent="Cassandra/hip_bone/chest_bone"]
-rest = Transform2D(1, 0, 0, 1, 0, 0)
-editor_settings/show_bone_gizmo = false
-
-[node name="head" type="Sprite2D" parent="Cassandra/hip_bone/chest_bone/head_bone"]
-show_behind_parent = true
-z_index = 1
-texture_filter = 1
-position = Vector2(0, -27)
-texture = ExtResource("3_o0kyd")
-offset = Vector2(0, -4)
-hframes = 20
-vframes = 2
-
-[node name="bangs" type="Sprite2D" parent="Cassandra/hip_bone/chest_bone/head_bone/head"]
-z_index = 1
-texture_filter = 1
-position = Vector2(0, -4)
-texture = ExtResource("3_o0kyd")
-hframes = 20
-vframes = 2
-frame = 20
-
-[node name="hair" type="Sprite2D" parent="Cassandra/hip_bone/chest_bone/head_bone/head"]
-show_behind_parent = true
-z_index = -1
-texture_filter = 1
-position = Vector2(0, -3)
-texture = ExtResource("3_o0kyd")
-hframes = 15
-frame = 4
-
-[node name="arm_left_bone" type="Bone2D" parent="Cassandra/hip_bone/chest_bone"]
-rest = Transform2D(1, 0, 0, 1, 0, 0)
-editor_settings/show_bone_gizmo = false
-
-[node name="arm" type="Sprite2D" parent="Cassandra/hip_bone/chest_bone/arm_left_bone"]
-z_index = 1
-texture_filter = 1
-position = Vector2(6, -21)
-texture = ExtResource("3_o0kyd")
-offset = Vector2(0, 6)
-hframes = 20
-vframes = 2
-frame = 14
-
-[node name="sleeve" type="Sprite2D" parent="Cassandra/hip_bone/chest_bone/arm_left_bone/arm"]
-position = Vector2(-1, 4)
-texture = ExtResource("3_o0kyd")
-hframes = 20
-vframes = 2
-frame = 34
-
-[node name="arm_right_bone" type="Bone2D" parent="Cassandra/hip_bone/chest_bone"]
-rest = Transform2D(1, 0, 0, 1, 0, 0)
-editor_settings/show_bone_gizmo = false
-
-[node name="arm" type="Sprite2D" parent="Cassandra/hip_bone/chest_bone/arm_right_bone"]
-show_behind_parent = true
-texture_filter = 1
-position = Vector2(-5, -21)
-texture = ExtResource("3_o0kyd")
-offset = Vector2(0, 6)
-flip_h = true
-hframes = 20
-vframes = 2
-frame = 14
-
-[node name="leg_left_bone" type="Bone2D" parent="Cassandra/hip_bone"]
-rest = Transform2D(1, 0, 0, 1, 0, 0)
-editor_settings/show_bone_gizmo = false
-
-[node name="leg" type="Sprite2D" parent="Cassandra/hip_bone/leg_left_bone"]
-texture_filter = 1
-position = Vector2(3, -4)
-texture = ExtResource("3_o0kyd")
-offset = Vector2(-1, 9)
-hframes = 20
-frame = 17
-
-[node name="leg_right_bone" type="Bone2D" parent="Cassandra/hip_bone"]
-rest = Transform2D(1, 0, 0, 1, 0, 0)
-editor_settings/show_bone_gizmo = false
-
-[node name="leg" type="Sprite2D" parent="Cassandra/hip_bone/leg_right_bone"]
-texture_filter = 1
-position = Vector2(-3, -5)
-texture = ExtResource("3_o0kyd")
-offset = Vector2(-1, 9)
-hframes = 20
-frame = 17
-
-[node name="Camera2D" type="Camera2D" parent="Cassandra"]
-position = Vector2(-50, 0)
-
 [node name="debug_hud" type="CanvasLayer" parent="."]
 script = ExtResource("6_grh6y")
 
@@ -298,10 +164,10 @@ offset_bottom = 263.0
 texture_normal = ExtResource("11_ef5xo")
 
 [node name="debug_seed_info" type="Label" parent="debug_hud"]
-offset_left = 8.0
-offset_top = 7.0
-offset_right = 332.0
-offset_bottom = 33.0
+offset_left = 9.0
+offset_top = 15.0
+offset_right = 333.0
+offset_bottom = 67.0
 text = "ERROR: this label isn't 
 reading the script :/"
 
@@ -326,6 +192,20 @@ offset_right = 58.0
 offset_bottom = 222.0
 texture_normal = ExtResource("12_aoma3")
 
+[node name="Shake" type="Button" parent="debug_hud"]
+offset_left = 25.0
+offset_top = 274.0
+offset_right = 80.0
+offset_bottom = 310.0
+text = "Shake
+"
+
+[node name="Cassandra" parent="." instance=ExtResource("13_d7p71")]
+position = Vector2(71, -25)
+
+[node name="Camera2D" type="Camera2D" parent="Cassandra"]
+position = Vector2(-71, 25)
+
 [connection signal="pressed" from="debug_hud/out_zoom" to="debug_hud" method="_on_out_zoom_pressed"]
 [connection signal="pressed" from="debug_hud/in_zoom" to="debug_hud" method="_on_in_zoom_pressed"]
 [connection signal="pressed" from="debug_hud/left" to="debug_hud" method="_on_left_pressed"]
@@ -334,3 +214,4 @@ texture_normal = ExtResource("12_aoma3")
 [connection signal="pressed" from="debug_hud/debug_seed_info/new_seed" to="." method="_on_new_seed_pressed"]
 [connection signal="pressed" from="debug_hud/up" to="debug_hud" method="_on_up_pressed"]
 [connection signal="pressed" from="debug_hud/down" to="debug_hud" method="_on_down_pressed"]
+[connection signal="pressed" from="debug_hud/Shake" to="debug_hud" method="_on_shake_pressed"]
