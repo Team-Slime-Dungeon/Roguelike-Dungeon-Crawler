@@ -1,7 +1,8 @@
-[gd_scene load_steps=15 format=3 uid="uid://bnyu8vj2uc1xf"]
+[gd_scene load_steps=17 format=3 uid="uid://bnyu8vj2uc1xf"]
 
 [ext_resource type="Script" path="res://room_generation.gd" id="1_fymyj"]
 [ext_resource type="Texture2D" uid="uid://cdejfmb3r8r6b" path="res://cave1.png" id="2_fp8l3"]
+[ext_resource type="Texture2D" uid="uid://w72furwr3cqb" path="res://cavewalls1.png" id="3_uwdc0"]
 [ext_resource type="Texture2D" uid="uid://cabf2o132snta" path="res://slime_sheet.png" id="4_eqcf6"]
 [ext_resource type="Script" path="res://debug_UI.gd" id="6_grh6y"]
 [ext_resource type="Texture2D" uid="uid://dkuybpamfo8ue" path="res://camera_hud/minus.magnifyingglass.png" id="7_x0ex8"]
@@ -39,6 +40,7 @@ texture_region_size = Vector2i(64, 32)
 1:1/0 = 0
 1:1/0/terrain_set = 0
 1:1/0/terrain = 0
+1:1/0/probability = 0.2
 1:1/0/terrains_peering_bit/right_corner = 0
 1:1/0/terrains_peering_bit/bottom_right_side = 0
 1:1/0/terrains_peering_bit/bottom_corner = 0
@@ -85,6 +87,57 @@ texture_region_size = Vector2i(64, 32)
 1:2/0/terrains_peering_bit/top_left_side = 0
 1:2/0/terrains_peering_bit/top_corner = 0
 1:2/0/terrains_peering_bit/top_right_side = 0
+1:3/0 = 0
+1:3/0/terrain_set = 0
+1:3/0/terrain = 0
+1:3/0/probability = 0.2
+1:3/0/terrains_peering_bit/right_corner = 0
+1:3/0/terrains_peering_bit/bottom_right_side = 0
+1:3/0/terrains_peering_bit/bottom_corner = 0
+1:3/0/terrains_peering_bit/bottom_left_side = 0
+1:3/0/terrains_peering_bit/left_corner = 0
+1:3/0/terrains_peering_bit/top_left_side = 0
+1:3/0/terrains_peering_bit/top_corner = 0
+1:3/0/terrains_peering_bit/top_right_side = 0
+2:3/0 = 0
+2:3/0/terrain_set = 0
+2:3/0/terrain = 0
+2:3/0/probability = 0.2
+2:3/0/terrains_peering_bit/right_corner = 0
+2:3/0/terrains_peering_bit/bottom_right_side = 0
+2:3/0/terrains_peering_bit/bottom_corner = 0
+2:3/0/terrains_peering_bit/bottom_left_side = 0
+2:3/0/terrains_peering_bit/left_corner = 0
+2:3/0/terrains_peering_bit/top_left_side = 0
+2:3/0/terrains_peering_bit/top_corner = 0
+2:3/0/terrains_peering_bit/top_right_side = 0
+2:4/0 = 0
+2:4/0/terrain_set = 0
+2:4/0/terrain = 0
+2:4/0/probability = 0.01
+2:4/0/terrains_peering_bit/right_corner = 0
+2:4/0/terrains_peering_bit/bottom_right_side = 0
+2:4/0/terrains_peering_bit/bottom_corner = 0
+2:4/0/terrains_peering_bit/bottom_left_side = 0
+2:4/0/terrains_peering_bit/left_corner = 0
+2:4/0/terrains_peering_bit/top_left_side = 0
+2:4/0/terrains_peering_bit/top_corner = 0
+2:4/0/terrains_peering_bit/top_right_side = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_alqgh"]
+texture = ExtResource("3_uwdc0")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_42v73"]
 tile_shape = 1
@@ -94,6 +147,7 @@ terrain_set_0/mode = 0
 terrain_set_0/terrain_0/name = "Ground Floor"
 terrain_set_0/terrain_0/color = Color(0.235294, 0.396078, 0.239216, 1)
 sources/0 = SubResource("TileSetAtlasSource_yqjvn")
+sources/1 = SubResource("TileSetAtlasSource_alqgh")
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_fymyj")

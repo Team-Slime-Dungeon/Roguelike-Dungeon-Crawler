@@ -1,7 +1,8 @@
 extends Node2D
 
 var random = RandomNumberGenerator.new()
-var node_pos = [] 
+var node_pos = []
+var hallway_pos = []
 var num_paths = 10 #the number of hallway segments
 var segment_length = 10 #length of hallway segments
 var room_min = 2 #smallest size for rooms
@@ -33,6 +34,7 @@ func generate_hallways():
 			var perpendicular = get_perpendicular_vector(direction)
 			var row_position = position - floor(row_width / 2) * perpendicular
 			for k in range(0, row_width):
+				hallway_pos.append(Vector2i(row_position)) # Used in wall generation
 				$TileMap.set_cell(0, row_position, 0, Vector2i(0, 3))
 				row_position += perpendicular
 		if !position in node_pos: node_pos.append(position) # since can overlap, avoid duplicates in list
@@ -55,17 +57,26 @@ func generate_room():
 	
 	for i in node_pos:
 		var size = random.randi_range(room_min, room_max)
-		for j in range(-size, size+1):
-			for k in range(-size, size+1):
-				#$TileMap.set_cell(0, Vector2i(i.x+j, i.y+k), 0, Vector2i(1,1))
-				# Stores tile location to be used later
-				cells.append(Vector2i(i.x+j,i.y+k))
+		for j in range(-size-1, size+1):
+			for k in range(-size-1, size+1):
+				# Walls furthest from camera
+				if ((j == -size-1)) or ((k == size)) or ((j == size) or (k == -size-1)):
+					if !(Vector2i(i.x+j,i.y+k)) in hallway_pos: 
+						$TileMap.set_cell(0, Vector2i(i.x+j, i.y+k), 1, Vector2i(1, 0))
+				# Walls close to camera	
+				elif ((j == size) or (k == -size-1)):
+					if !(Vector2i(i.x+j,i.y+k)) in hallway_pos:
+						$TileMap.set_cell(0, Vector2i(i.x+j, i.y+k), 1, Vector2i(0, 0))
+				# Stores tile location to be connected
+				else:
+					cells.append(Vector2i(i.x+j,i.y+k))
 
-	# Draws all of the tiles and connects them together using terrains
+	# Draws all of the saved tiles and connects them together using terrains
 	$TileMap.set_cells_terrain_connect(0, cells, 0, 0)
 
 func clear_room():
-	node_pos = [] 
+	node_pos = []
+	hallway_pos = []
 	for i in range(-1000, 1000):
 		for j in range(-1000, 1000):
 			$TileMap.erase_cell(0, Vector2i(i , j))
