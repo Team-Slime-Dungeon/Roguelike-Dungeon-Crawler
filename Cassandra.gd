@@ -52,7 +52,7 @@ func _process(delta):
 	
 	#animation stops if there is no input	
 	if move_direction.length() == 0:
-		anim.stop()
+		anim.play("idle")
 		
 	
 	
