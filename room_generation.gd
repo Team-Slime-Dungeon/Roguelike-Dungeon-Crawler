@@ -67,7 +67,7 @@ func generate_room():
 				# Walls furthest from camera
 				if ((j == -size-1)) or ((k == size)) or ((j == size) or (k == -size-1)):
 					if !(Vector2i(i.x+j,i.y+k)) in hallway_pos: 
-						$TileMap.set_cell(0, Vector2i(i.x+j, i.y+k), 1, Vector2i(1, 0))
+						$TileMap.set_cell(0, Vector2i(i.x+j, i.y+k), 1, Vector2i(0, 0))
 				# Walls close to camera	
 				elif ((j == size) or (k == -size-1)):
 					if !(Vector2i(i.x+j,i.y+k)) in hallway_pos:

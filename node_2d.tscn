@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://w72furwr3cqb" path="res://cavewalls1.png" id="3_uwdc0"]
 [ext_resource type="Script" path="res://debug_UI.gd" id="6_grh6y"]
 [ext_resource type="Texture2D" uid="uid://2uvs3oud5cvk" path="res://debug_buttons.png" id="6_jqwbb"]
-[ext_resource type="PackedScene" path="res://slime.tscn" id="7_u3phi"]
+[ext_resource type="PackedScene" uid="uid://ct4mfveppntju" path="res://slime.tscn" id="7_u3phi"]
 [ext_resource type="PackedScene" uid="uid://dqjumom2gi26s" path="res://character.tscn" id="13_d7p71"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yqjvn"]
