@@ -8,8 +8,8 @@ var segment_length = 10 #length of hallway segments
 var room_min = 2 #smallest size for rooms
 var room_max = 4 #largest size for rooms
 var zoom_int = 1 #debug zoom
-var min_path_width = 1
-var max_path_width = 3
+var min_path_width = 3 # 2 Walls + Path
+var max_path_width = 5
 
 func _ready():
 	clear_room()
@@ -32,9 +32,15 @@ func generate_hallways():
 			# create a row of path width
 			var perpendicular = get_perpendicular_vector(direction)
 			var row_position = position - floor(row_width / 2) * perpendicular
+			# Loop for making individual tiles in the bridge
 			for k in range(0, row_width):
-				hallway_pos.append(Vector2i(row_position)) # Used in wall generation
-				$TileMap.set_cell(0, row_position, 0, Vector2i(0, 3))
+				# Draw the walls of the walkway
+				if (k == 0) or k == (row_width-1):
+					$TileMap.set_cell(0, row_position, 1, Vector2i(0, 0))
+				else:
+				# The actual walkway, saved for use later to prevent walls overwriting them.
+					hallway_pos.append(Vector2i(row_position)) # Used in wall generation
+					$TileMap.set_cell(0, row_position, 0, Vector2i(0, 3))
 				row_position += perpendicular
 		if !position in node_pos: node_pos.append(position) # since can overlap, avoid duplicates in list
 		direction = get_new_direction(direction) # get a new direction for the next segment
