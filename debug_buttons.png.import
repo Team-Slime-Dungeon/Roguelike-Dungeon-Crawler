@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bcakavq5gvhtw"
-path="res://.godot/imported/arrow.left.png-04f44726455f3c70d5ef5a7a003485a9.ctex"
+uid="uid://2uvs3oud5cvk"
+path="res://.godot/imported/debug_buttons.png-7e094143a64d3bab3fe01306c1457479.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://camera_hud/arrow.left.png"
-dest_files=["res://.godot/imported/arrow.left.png-04f44726455f3c70d5ef5a7a003485a9.ctex"]
+source_file="res://debug_buttons.png"
+dest_files=["res://.godot/imported/debug_buttons.png-7e094143a64d3bab3fe01306c1457479.ctex"]
 
 [params]
 

@@ -1,17 +1,11 @@
-[gd_scene load_steps=17 format=3 uid="uid://bnyu8vj2uc1xf"]
+[gd_scene load_steps=11 format=3 uid="uid://bnyu8vj2uc1xf"]
 
 [ext_resource type="Script" path="res://room_generation.gd" id="1_fymyj"]
 [ext_resource type="Texture2D" uid="uid://cdejfmb3r8r6b" path="res://cave1.png" id="2_fp8l3"]
 [ext_resource type="Texture2D" uid="uid://w72furwr3cqb" path="res://cavewalls1.png" id="3_uwdc0"]
-[ext_resource type="Texture2D" uid="uid://cabf2o132snta" path="res://slime_sheet.png" id="4_eqcf6"]
 [ext_resource type="Script" path="res://debug_UI.gd" id="6_grh6y"]
-[ext_resource type="Texture2D" uid="uid://dkuybpamfo8ue" path="res://camera_hud/minus.magnifyingglass.png" id="7_x0ex8"]
-[ext_resource type="Texture2D" uid="uid://c1e8lpnt6rxrv" path="res://camera_hud/plus.magnifyingglass.png" id="8_p5m3g"]
-[ext_resource type="Texture2D" uid="uid://bcakavq5gvhtw" path="res://camera_hud/arrow.left.png" id="9_r0i54"]
-[ext_resource type="Texture2D" uid="uid://bciqhy5us10o4" path="res://camera_hud/arrow.right.png" id="10_tepc0"]
-[ext_resource type="Texture2D" uid="uid://dwumooinw8loy" path="res://camera_hud/arrow_up.png" id="11_5aaka"]
-[ext_resource type="Texture2D" uid="uid://c074p476eaibg" path="res://camera_hud/goforward.png" id="11_ef5xo"]
-[ext_resource type="Texture2D" uid="uid://hipt83xn34pe" path="res://camera_hud/arrow_down.png" id="12_aoma3"]
+[ext_resource type="Texture2D" uid="uid://2uvs3oud5cvk" path="res://debug_buttons.png" id="6_jqwbb"]
+[ext_resource type="PackedScene" path="res://slime.tscn" id="7_u3phi"]
 [ext_resource type="PackedScene" uid="uid://dqjumom2gi26s" path="res://character.tscn" id="13_d7p71"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yqjvn"]
@@ -160,62 +154,74 @@ tile_set = SubResource("TileSet_42v73")
 format = 2
 layer_0/y_sort_enabled = true
 
-[node name="Slime" type="Sprite2D" parent="."]
-texture_filter = 1
-texture = ExtResource("4_eqcf6")
-hframes = 4
-frame = 1
-
-[node name="texture" type="Sprite2D" parent="Slime"]
-texture_repeat = 2
-position = Vector2(-3, 4.5)
-texture = ExtResource("4_eqcf6")
-hframes = 4
-frame = 3
-
-[node name="eyes" type="Sprite2D" parent="Slime"]
-position = Vector2(-2, 3)
-texture = ExtResource("4_eqcf6")
-hframes = 8
-vframes = 2
-
 [node name="debug_hud" type="CanvasLayer" parent="."]
 script = ExtResource("6_grh6y")
 
 [node name="out_zoom" type="TextureButton" parent="debug_hud"]
-offset_left = 10.0
-offset_top = 105.0
-offset_right = 47.0
-offset_bottom = 143.0
-texture_normal = ExtResource("7_x0ex8")
+offset_left = 20.0
+offset_top = 111.0
+offset_right = 34.0
+offset_bottom = 125.0
+scale = Vector2(2, 2)
+
+[node name="zoom_out" type="Sprite2D" parent="debug_hud/out_zoom"]
+position = Vector2(6, 6)
+texture = ExtResource("6_jqwbb")
+hframes = 4
 
 [node name="in_zoom" type="TextureButton" parent="debug_hud"]
-offset_left = 52.0
-offset_top = 104.0
-offset_right = 92.0
-offset_bottom = 144.0
-texture_normal = ExtResource("8_p5m3g")
+offset_left = 58.0
+offset_top = 111.0
+offset_right = 72.0
+offset_bottom = 125.0
+scale = Vector2(2, 2)
+
+[node name="zoom_in" type="Sprite2D" parent="debug_hud/in_zoom"]
+position = Vector2(6, 6)
+texture = ExtResource("6_jqwbb")
+hframes = 4
+frame = 1
 
 [node name="left" type="TextureButton" parent="debug_hud"]
 offset_left = 11.0
-offset_top = 177.0
-offset_right = 36.0
-offset_bottom = 196.0
-texture_normal = ExtResource("9_r0i54")
+offset_top = 176.0
+offset_right = 25.0
+offset_bottom = 190.0
+scale = Vector2(2, 2)
+
+[node name="arrow" type="Sprite2D" parent="debug_hud/left"]
+position = Vector2(7, 7)
+rotation = 4.71239
+texture = ExtResource("6_jqwbb")
+hframes = 4
+frame = 2
 
 [node name="right" type="TextureButton" parent="debug_hud"]
-offset_left = 62.0
+offset_left = 67.0
 offset_top = 176.0
-offset_right = 86.0
-offset_bottom = 195.0
-texture_normal = ExtResource("10_tepc0")
+offset_right = 81.0
+offset_bottom = 190.0
+scale = Vector2(2, 2)
+
+[node name="arrow" type="Sprite2D" parent="debug_hud/right"]
+position = Vector2(7, 7)
+rotation = 1.5708
+texture = ExtResource("6_jqwbb")
+hframes = 4
+frame = 2
 
 [node name="back" type="TextureButton" parent="debug_hud"]
-offset_left = 35.0
-offset_top = 232.0
-offset_right = 64.0
-offset_bottom = 263.0
-texture_normal = ExtResource("11_ef5xo")
+offset_left = 37.0
+offset_top = 245.0
+offset_right = 53.0
+offset_bottom = 260.0
+scale = Vector2(2, 2)
+
+[node name="return" type="Sprite2D" parent="debug_hud/back"]
+position = Vector2(8, 7)
+texture = ExtResource("6_jqwbb")
+hframes = 4
+frame = 3
 
 [node name="debug_seed_info" type="Label" parent="debug_hud"]
 offset_left = 9.0
@@ -234,23 +240,36 @@ text = "New Seed"
 
 [node name="up" type="TextureButton" parent="debug_hud"]
 offset_left = 39.0
-offset_top = 150.0
-offset_right = 59.0
-offset_bottom = 174.0
-texture_normal = ExtResource("11_5aaka")
+offset_top = 148.0
+offset_right = 53.0
+offset_bottom = 162.0
+scale = Vector2(2, 2)
+
+[node name="arrow" type="Sprite2D" parent="debug_hud/up"]
+position = Vector2(7, 7)
+texture = ExtResource("6_jqwbb")
+hframes = 4
+frame = 2
 
 [node name="down" type="TextureButton" parent="debug_hud"]
 offset_left = 39.0
-offset_top = 197.0
-offset_right = 58.0
-offset_bottom = 222.0
-texture_normal = ExtResource("12_aoma3")
+offset_top = 204.0
+offset_right = 53.0
+offset_bottom = 218.0
+scale = Vector2(2, 2)
+
+[node name="arrow" type="Sprite2D" parent="debug_hud/down"]
+position = Vector2(7, 7)
+rotation = 3.14159
+texture = ExtResource("6_jqwbb")
+hframes = 4
+frame = 2
 
 [node name="Shake" type="Button" parent="debug_hud"]
 offset_left = 25.0
-offset_top = 274.0
+offset_top = 279.0
 offset_right = 80.0
-offset_bottom = 310.0
+offset_bottom = 315.0
 text = "Shake
 "
 
@@ -259,6 +278,9 @@ position = Vector2(71, -25)
 
 [node name="Camera2D" type="Camera2D" parent="Cassandra"]
 position = Vector2(-71, 25)
+
+[node name="Slime" parent="." instance=ExtResource("7_u3phi")]
+position = Vector2(0, 0)
 
 [connection signal="pressed" from="debug_hud/out_zoom" to="debug_hud" method="_on_out_zoom_pressed"]
 [connection signal="pressed" from="debug_hud/in_zoom" to="debug_hud" method="_on_in_zoom_pressed"]
