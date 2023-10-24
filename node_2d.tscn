@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bnyu8vj2uc1xf"]
+[gd_scene load_steps=12 format=3 uid="uid://bnyu8vj2uc1xf"]
 
 [ext_resource type="Script" path="res://room_generation.gd" id="1_fymyj"]
 [ext_resource type="Texture2D" uid="uid://cdejfmb3r8r6b" path="res://cave1.png" id="2_fp8l3"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://debug_UI.gd" id="6_grh6y"]
 [ext_resource type="Texture2D" uid="uid://2uvs3oud5cvk" path="res://debug_buttons.png" id="6_jqwbb"]
 [ext_resource type="PackedScene" uid="uid://ct4mfveppntju" path="res://slime.tscn" id="7_u3phi"]
+[ext_resource type="PackedScene" uid="uid://dld8oni5e2o2l" path="res://spider.tscn" id="8_1rd0y"]
 [ext_resource type="PackedScene" uid="uid://dqjumom2gi26s" path="res://character.tscn" id="13_d7p71"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yqjvn"]
@@ -280,7 +281,11 @@ position = Vector2(71, -25)
 position = Vector2(-71, 25)
 
 [node name="Slime" parent="." instance=ExtResource("7_u3phi")]
+visible = false
 position = Vector2(0, 0)
+
+[node name="Spider" parent="." instance=ExtResource("8_1rd0y")]
+position = Vector2(-8, -2)
 
 [connection signal="pressed" from="debug_hud/out_zoom" to="debug_hud" method="_on_out_zoom_pressed"]
 [connection signal="pressed" from="debug_hud/in_zoom" to="debug_hud" method="_on_in_zoom_pressed"]
