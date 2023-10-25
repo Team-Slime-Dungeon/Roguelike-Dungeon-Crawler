@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bnyu8vj2uc1xf"]
+[gd_scene load_steps=18 format=3 uid="uid://c8fm5k1pu6l4i"]
 
 [ext_resource type="Script" path="res://room_generation.gd" id="1_fymyj"]
 [ext_resource type="Texture2D" uid="uid://cdejfmb3r8r6b" path="res://cave1.png" id="2_fp8l3"]
@@ -8,6 +8,8 @@
 [ext_resource type="Script" path="res://Slime.gd" id="7_chb7c"]
 [ext_resource type="PackedScene" uid="uid://ct4mfveppntju" path="res://slime.tscn" id="7_u3phi"]
 [ext_resource type="Script" path="res://CharacterControls.gd" id="9_iyhmm"]
+[ext_resource type="Script" path="res://Spider.gd" id="10_fsiaj"]
+[ext_resource type="PackedScene" uid="uid://dld8oni5e2o2l" path="res://spider.tscn" id="11_d5ajo"]
 [ext_resource type="PackedScene" uid="uid://dqjumom2gi26s" path="res://character.tscn" id="13_d7p71"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yqjvn"]
@@ -203,6 +205,9 @@ height = 22.0
 radius = 7.0
 height = 24.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_6ls2h"]
+radius = 16.28
+
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_fymyj")
 
@@ -360,6 +365,16 @@ shape = SubResource("CapsuleShape2D_52w7h")
 
 [node name="Camera2D" type="Camera2D" parent="Cassandra"]
 position = Vector2(61, 6)
+
+[node name="Spider" type="CharacterBody2D" parent="."]
+script = ExtResource("10_fsiaj")
+
+[node name="Spider-Skeleton" parent="Spider" instance=ExtResource("11_d5ajo")]
+position = Vector2(-46, 5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spider"]
+position = Vector2(-52, 7)
+shape = SubResource("CircleShape2D_6ls2h")
 
 [connection signal="pressed" from="debug_hud/out_zoom" to="debug_hud" method="_on_out_zoom_pressed"]
 [connection signal="pressed" from="debug_hud/in_zoom" to="debug_hud" method="_on_in_zoom_pressed"]
