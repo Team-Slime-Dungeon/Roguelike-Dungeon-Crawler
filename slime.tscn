@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://ct4mfveppntju"]
 
 [ext_resource type="Texture2D" uid="uid://cabf2o132snta" path="res://slime_sheet.png" id="1_ewl66"]
-[ext_resource type="Script" path="res://Slime.gd" id="2_n73pm"]
+[ext_resource type="Script" path="res://slimeanimation.gd" id="2_dbuuk"]
 
 [sub_resource type="Animation" id="Animation_tkc8t"]
 length = 0.001
@@ -46,7 +46,7 @@ position = Vector2(0, 2)
 texture = ExtResource("1_ewl66")
 hframes = 4
 frame = 1
-script = ExtResource("2_n73pm")
+script = ExtResource("2_dbuuk")
 
 [node name="texture" type="Sprite2D" parent="."]
 texture_repeat = 2

@@ -8,7 +8,7 @@ var segment_length = 10 #length of hallway segments
 var room_min = 2 #smallest size for rooms
 var room_max = 4 #largest size for rooms
 var zoom_int = 1 #debug zoom
-var min_path_width = 3 # 2 Walls + Path
+var min_path_width = 4 # 2 Walls + Path
 var max_path_width = 5
 
 func _ready():

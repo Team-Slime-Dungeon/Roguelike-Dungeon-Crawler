@@ -65,7 +65,7 @@ func _process(delta):
 		move_direction = move_direction.normalized()
 
 	# Update the position of the skeleton
-	var new_position = position + move_direction * move_speed * delta
-	set_position(new_position)
+	#var new_position = position + move_direction * move_speed * delta
+	#set_position(new_position)
 
 	
