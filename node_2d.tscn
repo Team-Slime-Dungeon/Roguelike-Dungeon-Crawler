@@ -1,10 +1,11 @@
-[gd_scene load_steps=18 format=3 uid="uid://c8fm5k1pu6l4i"]
+[gd_scene load_steps=21 format=3 uid="uid://c8fm5k1pu6l4i"]
 
 [ext_resource type="Script" path="res://room_generation.gd" id="1_fymyj"]
 [ext_resource type="Texture2D" uid="uid://cdejfmb3r8r6b" path="res://cave1.png" id="2_fp8l3"]
 [ext_resource type="Texture2D" uid="uid://w72furwr3cqb" path="res://cavewalls1.png" id="3_uwdc0"]
 [ext_resource type="Script" path="res://debug_UI.gd" id="6_grh6y"]
 [ext_resource type="Texture2D" uid="uid://2uvs3oud5cvk" path="res://debug_buttons.png" id="6_jqwbb"]
+[ext_resource type="PackedScene" uid="uid://eb8v1h7u5ytm" path="res://hearts_container.tscn" id="6_tho0w"]
 [ext_resource type="Script" path="res://Slime.gd" id="7_chb7c"]
 [ext_resource type="PackedScene" uid="uid://ct4mfveppntju" path="res://slime.tscn" id="7_u3phi"]
 [ext_resource type="Script" path="res://CharacterControls.gd" id="9_iyhmm"]
@@ -201,9 +202,14 @@ sources/1 = SubResource("TileSetAtlasSource_alqgh")
 radius = 11.0
 height = 22.0
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7h6dx"]
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_52w7h"]
-radius = 7.0
+radius = 8.0
 height = 24.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7gejh"]
+radius = 9.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6ls2h"]
 radius = 16.28
@@ -338,6 +344,12 @@ offset_bottom = 315.0
 text = "Shake
 "
 
+[node name="HeartsContainer" parent="debug_hud" instance=ExtResource("6_tho0w")]
+offset_left = 69.0
+offset_top = 24.0
+offset_right = 281.0
+offset_bottom = 117.0
+
 [node name="Cassandra (old)" parent="." instance=ExtResource("13_d7p71")]
 visible = false
 position = Vector2(71, -25)
@@ -350,13 +362,21 @@ position = Vector2(0, 0)
 script = null
 
 [node name="SlimeCollision" type="CollisionShape2D" parent="Slime"]
+y_sort_enabled = true
 position = Vector2(-1, 6)
 shape = SubResource("CapsuleShape2D_e2sfr")
+
+[node name="hitBox" type="Area2D" parent="Slime"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Slime/hitBox"]
+position = Vector2(-1, 4)
+shape = SubResource("CapsuleShape2D_7h6dx")
 
 [node name="Cassandra" type="CharacterBody2D" parent="."]
 script = ExtResource("9_iyhmm")
 
 [node name="Cassandra-Skeleton" parent="Cassandra" instance=ExtResource("13_d7p71")]
+y_sort_enabled = true
 position = Vector2(61, 6)
 
 [node name="CassandraCollision" type="CollisionShape2D" parent="Cassandra"]
@@ -365,6 +385,12 @@ shape = SubResource("CapsuleShape2D_52w7h")
 
 [node name="Camera2D" type="Camera2D" parent="Cassandra"]
 position = Vector2(61, 6)
+
+[node name="hurtbox" type="Area2D" parent="Cassandra"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Cassandra/hurtbox"]
+position = Vector2(60, 12)
+shape = SubResource("CapsuleShape2D_7gejh")
 
 [node name="Spider" type="CharacterBody2D" parent="."]
 script = ExtResource("10_fsiaj")
@@ -385,3 +411,4 @@ shape = SubResource("CircleShape2D_6ls2h")
 [connection signal="pressed" from="debug_hud/up" to="debug_hud" method="_on_up_pressed"]
 [connection signal="pressed" from="debug_hud/down" to="debug_hud" method="_on_down_pressed"]
 [connection signal="pressed" from="debug_hud/Shake" to="debug_hud" method="_on_shake_pressed"]
+[connection signal="area_entered" from="Cassandra/hurtbox" to="Cassandra" method="_on_hurtbox_area_entered"]
