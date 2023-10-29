@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://c8fm5k1pu6l4i"]
+[gd_scene load_steps=22 format=3 uid="uid://c8fm5k1pu6l4i"]
 
 [ext_resource type="Script" path="res://room_generation.gd" id="1_fymyj"]
 [ext_resource type="Texture2D" uid="uid://cdejfmb3r8r6b" path="res://cave1.png" id="2_fp8l3"]
@@ -200,19 +200,25 @@ sources/1 = SubResource("TileSetAtlasSource_alqgh")
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_e2sfr"]
 radius = 11.0
-height = 22.0
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7h6dx"]
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_52w7h"]
-radius = 8.0
 height = 24.0
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7h6dx"]
+radius = 14.0
+height = 42.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_52w7h"]
+height = 32.0
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7gejh"]
-radius = 9.0
+radius = 12.0
+height = 58.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6ls2h"]
-radius = 16.28
+radius = 16.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1g6bv"]
+radius = 19.0
+height = 40.0
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_fymyj")
@@ -344,6 +350,9 @@ offset_bottom = 315.0
 text = "Shake
 "
 
+[node name="CanvasLayer" type="CanvasLayer" parent="debug_hud"]
+layer = 0
+
 [node name="HeartsContainer" parent="debug_hud" instance=ExtResource("6_tho0w")]
 offset_left = 69.0
 offset_top = 24.0
@@ -369,7 +378,7 @@ shape = SubResource("CapsuleShape2D_e2sfr")
 [node name="hitBox" type="Area2D" parent="Slime"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Slime/hitBox"]
-position = Vector2(-1, 4)
+position = Vector2(-1, 6)
 shape = SubResource("CapsuleShape2D_7h6dx")
 
 [node name="Cassandra" type="CharacterBody2D" parent="."]
@@ -380,7 +389,7 @@ y_sort_enabled = true
 position = Vector2(61, 6)
 
 [node name="CassandraCollision" type="CollisionShape2D" parent="Cassandra"]
-position = Vector2(60, 14)
+position = Vector2(60, 12)
 shape = SubResource("CapsuleShape2D_52w7h")
 
 [node name="Camera2D" type="Camera2D" parent="Cassandra"]
@@ -389,7 +398,7 @@ position = Vector2(61, 6)
 [node name="hurtbox" type="Area2D" parent="Cassandra"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Cassandra/hurtbox"]
-position = Vector2(60, 12)
+position = Vector2(60, 0)
 shape = SubResource("CapsuleShape2D_7gejh")
 
 [node name="Spider" type="CharacterBody2D" parent="."]
@@ -399,8 +408,17 @@ script = ExtResource("10_fsiaj")
 position = Vector2(-46, 5)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Spider"]
-position = Vector2(-52, 7)
+position = Vector2(-56, 6)
 shape = SubResource("CircleShape2D_6ls2h")
+
+[node name="hitBox2" type="Area2D" parent="Spider"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spider/hitBox2"]
+position = Vector2(-56, 7)
+shape = SubResource("CapsuleShape2D_1g6bv")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 0
 
 [connection signal="pressed" from="debug_hud/out_zoom" to="debug_hud" method="_on_out_zoom_pressed"]
 [connection signal="pressed" from="debug_hud/in_zoom" to="debug_hud" method="_on_in_zoom_pressed"]
