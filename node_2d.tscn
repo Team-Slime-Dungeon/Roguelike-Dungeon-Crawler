@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://c8fm5k1pu6l4i"]
+[gd_scene load_steps=22 format=3 uid="uid://c8fm5k1pu6l4i"]
 
 [ext_resource type="Script" path="res://room_generation.gd" id="1_fymyj"]
 [ext_resource type="Texture2D" uid="uid://cdejfmb3r8r6b" path="res://cave1.png" id="2_fp8l3"]
@@ -11,7 +11,6 @@
 [ext_resource type="Script" path="res://CharacterControls.gd" id="9_iyhmm"]
 [ext_resource type="Script" path="res://Spider.gd" id="10_fsiaj"]
 [ext_resource type="PackedScene" uid="uid://dld8oni5e2o2l" path="res://spider.tscn" id="11_d5ajo"]
-[ext_resource type="Script" path="res://Node2D.gd" id="13_876er"]
 [ext_resource type="PackedScene" uid="uid://dqjumom2gi26s" path="res://character.tscn" id="13_d7p71"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yqjvn"]
@@ -186,7 +185,7 @@ texture_region_size = Vector2i(64, 64)
 3:1/0 = 0
 3:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 3:1/0/physics_layer_0/angular_velocity = 0.0
-3:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(0.883884, -31.4663, -31.9966, -16.2635, -32, 0, 0, 16, 32, 0, 31.2895, -18.3848)
+3:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(1, -32.5, -31, -16.5, -32, 0, 0, 16, 32, 0, 31.5, -17)
 0:2/0 = 0
 0:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:2/0/physics_layer_0/angular_velocity = 0.0
@@ -426,9 +425,6 @@ shape = SubResource("CircleShape2D_6ls2h")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Spider/hitBox2"]
 position = Vector2(-56, 7)
 shape = SubResource("CapsuleShape2D_1g6bv")
-
-[node name="Node2D" type="Node2D" parent="."]
-script = ExtResource("13_876er")
 
 [connection signal="pressed" from="debug_hud/out_zoom" to="debug_hud" method="_on_out_zoom_pressed"]
 [connection signal="pressed" from="debug_hud/in_zoom" to="debug_hud" method="_on_in_zoom_pressed"]
