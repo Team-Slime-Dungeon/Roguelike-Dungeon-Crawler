@@ -1,4 +1,4 @@
-extends Node2D
+extends CharacterBody2D
 
 enum MovementState { UP, DOWN, LEFT, RIGHT }
 
@@ -8,8 +8,8 @@ var move_timer = 0
 var current_state = MovementState.UP
 
 func _process(delta):
-	if not $Spider/AnimationPlayer.is_playing():
-		$Spider/AnimationPlayer.play("walking_left")
+	#if not $Spider/AnimationPlayer.is_playing():
+	#	$Spider/AnimationPlayer.play("walking_left")
 
 	move_timer += delta
 
@@ -38,3 +38,4 @@ func _process(delta):
 
 	position.x = clamp(position.x, -move_range, move_range)
 	position.y = clamp(position.y, -move_range, move_range)
+	move_and_slide()

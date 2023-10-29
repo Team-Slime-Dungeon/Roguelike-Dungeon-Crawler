@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://dld8oni5e2o2l"]
 
-[ext_resource type="Script" path="res://Spider.gd" id="1_8bfon"]
 [ext_resource type="Texture2D" uid="uid://cj0r4hkpvhj87" path="res://spider_sheet.png" id="1_opjvl"]
+[ext_resource type="Script" path="res://SpiderAnimation.gd" id="1_y75qh"]
 
 [sub_resource type="Animation" id="Animation_2lj6t"]
 length = 0.001
@@ -929,9 +929,9 @@ _data = {
 }
 
 [node name="Spider" type="Node2D"]
-script = ExtResource("1_8bfon")
 
 [node name="Spider" type="Skeleton2D" parent="."]
+script = ExtResource("1_y75qh")
 
 [node name="hip_bone" type="Bone2D" parent="Spider"]
 rest = Transform2D(1, 0, 0, 1, 0, 0)
@@ -1020,7 +1020,6 @@ frame = 7
 
 [node name="leg_right_bone_2" type="Bone2D" parent="Spider/hip_bone/chest_bone"]
 position = Vector2(-1, 7)
-scale = Vector2(1, 1)
 rest = Transform2D(1, 0, 0, 1, 0, 0)
 editor_settings/show_bone_gizmo = false
 
@@ -1033,7 +1032,6 @@ frame = 6
 
 [node name="leg_right_bone_2" type="Bone2D" parent="Spider/hip_bone/chest_bone/leg_right_bone_2"]
 position = Vector2(1, -17)
-scale = Vector2(1, 1)
 rest = Transform2D(1, 0, 0, 1, 0, 0)
 editor_settings/show_bone_gizmo = false
 
@@ -1046,7 +1044,6 @@ frame = 7
 
 [node name="leg_right_bone_3" type="Bone2D" parent="Spider/hip_bone/chest_bone"]
 position = Vector2(1, 6)
-scale = Vector2(1, 1)
 rest = Transform2D(1, 0, 0, 1, 0, 0)
 editor_settings/show_bone_gizmo = false
 
@@ -1059,7 +1056,6 @@ frame = 6
 
 [node name="leg_right_bone_3" type="Bone2D" parent="Spider/hip_bone/chest_bone/leg_right_bone_3"]
 position = Vector2(1, -17)
-scale = Vector2(1, 1)
 rest = Transform2D(1, 0, 0, 1, 0, 0)
 editor_settings/show_bone_gizmo = false
 
@@ -1121,7 +1117,6 @@ frame = 7
 
 [node name="leg_left_bone_2" type="Bone2D" parent="Spider/hip_bone/chest_bone"]
 position = Vector2(-10, 0)
-scale = Vector2(1, 1)
 rest = Transform2D(1, 0, 0, 1, 0, 0)
 editor_settings/show_bone_gizmo = false
 
@@ -1135,7 +1130,6 @@ frame = 6
 
 [node name="leg_left_bone_2" type="Bone2D" parent="Spider/hip_bone/chest_bone/leg_left_bone_2"]
 position = Vector2(-1, -18)
-scale = Vector2(1, 1)
 rest = Transform2D(1, 0, 0, 1, 0, 0)
 editor_settings/show_bone_gizmo = false
 
@@ -1148,7 +1142,6 @@ frame = 7
 
 [node name="leg_left_bone_3" type="Bone2D" parent="Spider/hip_bone/chest_bone"]
 position = Vector2(-8, -1)
-scale = Vector2(1, 1)
 rest = Transform2D(1, 0, 0, 1, 0, 0)
 editor_settings/show_bone_gizmo = false
 
@@ -1162,7 +1155,6 @@ frame = 6
 
 [node name="leg_left_bone_3" type="Bone2D" parent="Spider/hip_bone/chest_bone/leg_left_bone_3"]
 position = Vector2(-1, -18)
-scale = Vector2(1, 1)
 rest = Transform2D(1, 0, 0, 1, 0, 0)
 editor_settings/show_bone_gizmo = false
 

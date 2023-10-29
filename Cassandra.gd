@@ -1,5 +1,5 @@
 extends Skeleton2D
-
+var collision_count = 0
 var move_speed = 100  # Adjust the movement speed as needed
 @onready var anim = get_node("AnimationPlayer")
 
@@ -65,7 +65,11 @@ func _process(delta):
 		move_direction = move_direction.normalized()
 
 	# Update the position of the skeleton
-	var new_position = position + move_direction * move_speed * delta
-	set_position(new_position)
+	#var new_position = position + move_direction * move_speed * delta
+	#set_position(new_position)
+
 
 	
+		
+		
+		
