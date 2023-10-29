@@ -43,19 +43,9 @@ func knockback(enemyVelocity: Vector2):
 	velocity = totalKnockback
 	move_and_slide()
 	# Initialize a variable to accumulate the total knockback.
-
 	# Calculate the knockback direction and add it to the totalKnockback.
-	
-	
-
 	# Calculate the knockback from the second enemy and add it to totalKnockback.
-	
-   
-	
-
 	# Apply the total knockback to the player's velocity.
-	
-
 	# Perform the movement and sliding.
 	
 
