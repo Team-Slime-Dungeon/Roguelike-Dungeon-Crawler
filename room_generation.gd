@@ -4,7 +4,7 @@ extends Node2D
 var random = RandomNumberGenerator.new()
 var node_pos = []
 var hallway_pos = []
-var num_paths = 55 #the number of hallway segments
+var num_paths = 45 #the number of hallway segments
 var segment_length = 10 #length of hallway segments
 var room_min = 3 #smallest size for rooms
 var room_max = 4 #largest size for rooms
@@ -42,9 +42,7 @@ func generate_hallways():
 			# Create the outside wall of path if possible
 			if Vector2i(row_position) not in hallway_pos:
 				$TileMap.set_cell(0, Vector2i(row_position.x-1, row_position.y-1), 1, Vector2i(3, 1))
-			else:
-				print("Wall/ Hallway Conflict Wall 1: ", row_position)
-			
+
 			# Create a row of hallway and save it in a list
 			for k in range(0, row_width):
 				$TileMap.set_cell(0, row_position, 0, Vector2i(0, 3))
@@ -54,8 +52,6 @@ func generate_hallways():
 			# Create second hallway wall if possible			
 			if Vector2i(row_position) not in hallway_pos:
 				$TileMap.set_cell(0, Vector2i(row_position.x, row_position.y), 1, Vector2i(3, 1))
-			else:
-				print("Wall/ Hallway Conflict Wall 2: ", row_position)	
 
 		if !position in node_pos: node_pos.append(position) # since can overlap, avoid duplicates in list
 		direction = get_new_direction(direction) # get a new direction for the next segment
@@ -125,4 +121,5 @@ func clear_room():
 	for i in range(-100, 100):
 		for j in range(-100, 100):
 			$TileMap.erase_cell(0, Vector2i(i , j))
-			$TileMap.set_cell(0, Vector2i(i,j), 1, Vector2i(2, 0))
+	# Uncomment this for something cool!
+			#$TileMap.set_cell(0, Vector2i(i,j), 1, Vector2i(2, 0))
