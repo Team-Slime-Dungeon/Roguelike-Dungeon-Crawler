@@ -1,4 +1,5 @@
 extends Node2D
+var healthSetupCompleted = false
 @onready var heartsContainer = $debug_hud/HeartsContainer
 @onready var player = $Cassandra
 var random = RandomNumberGenerator.new()
@@ -13,14 +14,19 @@ var min_path_width = 4 # 2 Walls + Path
 var max_path_width = 5
 
 func _ready():
-	heartsContainer.setMaxHearts(player.maxHealth)
-	heartsContainer.updateHearts(player.currentHealth)
-	player.healthChanged.connect(heartsContainer.updateHearts)
 	clear_room()
-	generate_hallways() #first, generate the hallways
-	generate_room() #second, create rooms on top of selected nodes
-	$debug_hud/debug_seed_info.set_text("Debug\n " + str(node_pos)) #debug info visual
-	
+	generate_hallways()
+	generate_room()
+	$debug_hud/debug_seed_info.set_text("Debug\n " + str(node_pos))
+	if not healthSetupCompleted:
+		# Set up health
+		heartsContainer.setMaxHearts(player.maxHealth)
+		heartsContainer.updateHearts(player.currentHealth)
+		player.healthChanged.connect(heartsContainer.updateHearts)
+		healthSetupCompleted = true   
+  
+
+   
 func _on_new_seed_pressed(): return _ready() #click button for new build
 
 func generate_hallways():
