@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://w72furwr3cqb" path="res://cavewalls1.png" id="3_uwdc0"]
 [ext_resource type="Script" path="res://debug_UI.gd" id="6_grh6y"]
 [ext_resource type="Texture2D" uid="uid://2uvs3oud5cvk" path="res://debug_buttons.png" id="6_jqwbb"]
-[ext_resource type="PackedScene" uid="uid://eb8v1h7u5ytm" path="res://hearts_container.tscn" id="6_tho0w"]
+[ext_resource type="PackedScene" uid="uid://eb8v1h7u5ytm" path="res://Health Functions/hearts_container.tscn" id="6_tho0w"]
 [ext_resource type="Script" path="res://Slime.gd" id="7_chb7c"]
 [ext_resource type="PackedScene" uid="uid://ct4mfveppntju" path="res://slime.tscn" id="7_u3phi"]
 [ext_resource type="Script" path="res://CharacterControls.gd" id="9_iyhmm"]
@@ -204,14 +204,14 @@ height = 24.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7h6dx"]
 radius = 14.0
-height = 42.0
+height = 32.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_52w7h"]
 height = 32.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7gejh"]
 radius = 12.0
-height = 58.0
+height = 38.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6ls2h"]
 radius = 16.0
@@ -398,7 +398,7 @@ position = Vector2(61, 6)
 [node name="hurtbox" type="Area2D" parent="Cassandra"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Cassandra/hurtbox"]
-position = Vector2(60, 0)
+position = Vector2(60, 10)
 shape = SubResource("CapsuleShape2D_7gejh")
 
 [node name="Spider" type="CharacterBody2D" parent="."]

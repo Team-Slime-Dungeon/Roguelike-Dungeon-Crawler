@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://clk0spa30d0w6"
-path="res://.godot/imported/Heart.png-ddb598aaaaa844aa51574f4e49e0f899.ctex"
+uid="uid://bjm174k3ups8r"
+path="res://.godot/imported/InventoryRect.png-a31d9d87f73fcc9bac53115c882cc732.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Heart.png"
-dest_files=["res://.godot/imported/Heart.png-ddb598aaaaa844aa51574f4e49e0f899.ctex"]
+source_file="res://InventoryBackgroundPics/InventoryRect.png"
+dest_files=["res://.godot/imported/InventoryRect.png-a31d9d87f73fcc9bac53115c882cc732.ctex"]
 
 [params]
 
