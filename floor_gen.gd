@@ -36,7 +36,6 @@ func generate_hallways():
 		var perpendicular = get_perpendicular_vector(direction)
 
 		for i in range(0, hall_length): # this loop creates 1 segment
-
 			tile_pos += direction
 			# create a row of path width
 			var row_position = tile_pos - floor(row_width / 2) * perpendicular
@@ -62,36 +61,24 @@ func generate_hallways():
 # restriction: new direction should never be the reverse of the previous direction
 func get_new_direction(old_direction):
 	var directions = [Vector2i(0,1), Vector2i(0, -1), Vector2i(1, 0), Vector2i(-1, 0)]
-	#print("=======")
 	var reverse
-	
 	# Remove the reverse of the old direction
-	if old_direction == Vector2i(1,0):
-		reverse = Vector2i(-1,0)
-		#print("Moved Up!")
-	elif old_direction == Vector2i(-1,0):
-		reverse = Vector2i(1,0)
-		#print("Moved Down")
-	elif old_direction == Vector2i(0,1):
-		reverse = Vector2i(0,-1)
-		#print("Moved Right")
-	elif old_direction == Vector2i(0,-1):
-		reverse = Vector2i(0,1)
-		#print("Moved Left")
-	
+	if old_direction == Vector2i(1,0): reverse = Vector2i(-1,0)
+	elif old_direction == Vector2i(-1,0): reverse = Vector2i(1,0)
+	elif old_direction == Vector2i(0,1): reverse = Vector2i(0,-1)
+	elif old_direction == Vector2i(0,-1): reverse = Vector2i(0,1)
+
 	directions.erase(reverse)
 	var new_directions = directions[random.randi_range(0, directions.size() - 1)]
-	#print("Old Directions: ", old_direction, " New directions: ", new_directions)
 	return new_directions
 
 # this function returns a vector that is perpendicular
 # to the passed in vector2i
-func get_perpendicular_vector(original): 
+func get_perpendicular_vector(original):
 	var perpen
 	if original == Vector2i(1,0) or original == Vector2i(0,-1):
 		perpen = Vector2i(-original.y, original.x)
-	else:
-		perpen = Vector2i(original.y,-original.x)
+	else: perpen = Vector2i(original.y,-original.x)
 	return perpen
 
 func generate_rooms():
@@ -99,13 +86,14 @@ func generate_rooms():
 	
 	for i in node_pos:
 		var size = random.randi_range(room_min, room_max)
+
 		for j in range(-size, size):
 			for k in range(-size, size):
 				# Walls furthest from camera
 				if ((j == -size)) or ((k == size-1)):
 					if !(Vector2i(i.x+j,i.y+k)) in hall_pos: 
 						tilemap.set_cell(0, Vector2i(i.x+j, i.y+k), 1, Vector2i(0, 0))
-				# Walls close to camera	
+				# Walls close to camera
 				elif ((j == size-1) or (k == -size)):
 					if !(Vector2i(i.x+j,i.y+k)) in hall_pos:
 						tilemap.set_cell(0, Vector2i(i.x+j, i.y+k), 1, Vector2i(0, 0))
@@ -115,5 +103,10 @@ func generate_rooms():
 
 	# Draws all of the saved tiles and connects them together using terrains
 	tilemap.set_cells_terrain_connect(0, cells, 0, 0)
-
-func clear_room(): tilemap.clear()
+	
+func clear_room(): 
+	tilemap.clear()
+	
+	for i in range(-100, 100): # higher wall generation
+		for j in range(-100, 100):
+			tilemap.set_cell(0, Vector2i(i,j), 1, Vector2i(2, 0))

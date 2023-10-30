@@ -15,7 +15,7 @@ var FloorDic = {1: [45, 10, 3, 4],
 
 # wip health, player
 var healthSetupCompleted = false
-@onready var heartsContainer = $debug_hud/HeartsContainer
+@onready var heartsContainer = $Debug_Hud/HeartsContainer
 @onready var player = $Cassandra
 
 func _ready():
