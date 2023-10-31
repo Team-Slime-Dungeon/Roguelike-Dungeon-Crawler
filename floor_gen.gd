@@ -7,7 +7,7 @@ var hall_count = 0
 var hall_length = 0
 var room_min = 0
 var room_max = 0
-var min_path_width = 4 # 2 Walls + Path, rec 3
+var min_path_width = 3 # 2 Walls + Path, rec 3
 var max_path_width = 5 # rec 5
 var tilemap = null
 
@@ -22,6 +22,7 @@ func _init(hall_count_param, hall_length_param, room_min_param, room_max_param, 
 	self.room_min = room_min_param
 	self.room_max = room_max_param
 	self.tilemap = tile_param
+	if room_min < max_path_width: max_path_width = room_min
 
 func get_seed(): return node_pos
 
@@ -42,7 +43,7 @@ func generate_hallways():
 			
 			# Create the outside wall of path if possible
 			if Vector2i(row_position) not in hall_pos:
-				tilemap.set_cell(0, Vector2i(row_position.x-1, row_position.y-1), 1, Vector2i(3, 1))
+				tilemap.set_cell(0, Vector2i(row_position.x-1, row_position.y-1), 1, Vector2i(0, 0))
 
 			# Create a row of hallway and save it in a list
 			for k in range(0, row_width):
@@ -52,7 +53,7 @@ func generate_hallways():
 	
 			# Create second hallway wall if possible			
 			if Vector2i(row_position) not in hall_pos:
-				tilemap.set_cell(0, Vector2i(row_position.x, row_position.y), 1, Vector2i(3, 1))
+				tilemap.set_cell(0, Vector2i(row_position.x, row_position.y), 1, Vector2i(0, 0))
 
 		if !tile_pos in node_pos: node_pos.append(tile_pos) # since can overlap, avoid duplicates in list
 		direction = get_new_direction(direction) # get a new direction for the next segment
@@ -105,6 +106,8 @@ func generate_rooms():
 	tilemap.set_cells_terrain_connect(0, cells, 0, 0)
 	
 func clear_room(): 
+	node_pos = []
+	hall_pos = []
 	tilemap.clear()
 	
 	for i in range(-100, 100): # higher wall generation
