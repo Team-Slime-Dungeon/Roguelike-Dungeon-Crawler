@@ -3,9 +3,9 @@
 [ext_resource type="Script" path="res://mainmenu.gd" id="1_7tlm3"]
 [ext_resource type="Script" path="res://Button.gd" id="2_yv7qc"]
 [ext_resource type="PackedScene" uid="uid://bd775fqojwp4p" path="res://bg.tscn" id="3_ge17n"]
-[ext_resource type="Texture2D" uid="uid://c32cji1hifxob" path="res://untitled folder/270.png" id="4_hn7rw"]
-[ext_resource type="Texture2D" uid="uid://dbvs8l4bnadih" path="res://untitled folder/270-219.png.png" id="5_54n3u"]
-[ext_resource type="Texture2D" uid="uid://dcvb624n1ed76" path="res://untitled folder/New Piskel (4).png" id="6_v84jq"]
+[ext_resource type="Texture2D" uid="uid://c32cji1hifxob" path="res://MenuAssets/270.png" id="4_hn7rw"]
+[ext_resource type="Texture2D" uid="uid://dbvs8l4bnadih" path="res://MenuAssets/270-219.png.png" id="5_54n3u"]
+[ext_resource type="Texture2D" uid="uid://dcvb624n1ed76" path="res://MenuAssets/New Piskel (4).png" id="6_v84jq"]
 
 [sub_resource type="Animation" id="Animation_ps7b1"]
 length = 0.001

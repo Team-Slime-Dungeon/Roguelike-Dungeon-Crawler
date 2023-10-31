@@ -106,10 +106,10 @@ func generate_rooms():
 	tilemap.set_cells_terrain_connect(0, cells, 0, 0)
 	
 func clear_room(): 
-	node_pos = []
-	hall_pos = []
+	#node_pos = []
+	#hall_pos = []
 	tilemap.clear()
 	
-	for i in range(-100, 100): # higher wall generation
-		for j in range(-100, 100):
-			tilemap.set_cell(0, Vector2i(i,j), 1, Vector2i(2, 0))
+	#for i in range(-100, 100): # higher wall generation
+	#	for j in range(-100, 100):
+	#		tilemap.set_cell(0, Vector2i(i,j), 1, Vector2i(2, 0))

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://mainmenu.gd" id="1_230jb"]
 [ext_resource type="Texture2D" uid="uid://c32cji1hifxob" path="res://MenuAssets/270.png" id="3_f50f4"]
-[ext_resource type="PackedScene" path="res://bg.tscn" id="3_kn0gk"]
+[ext_resource type="PackedScene" uid="uid://bd775fqojwp4p" path="res://bg.tscn" id="3_kn0gk"]
 [ext_resource type="Texture2D" uid="uid://dbvs8l4bnadih" path="res://MenuAssets/270-219.png.png" id="4_efpxw"]
 [ext_resource type="Texture2D" uid="uid://dcvb624n1ed76" path="res://MenuAssets/New Piskel (4).png" id="5_biqbo"]
 [ext_resource type="Texture2D" uid="uid://d1de8tcjv7x4b" path="res://MenuAssets/0179.png" id="6_hpig8"]

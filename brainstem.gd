@@ -1,9 +1,9 @@
 extends Node2D
 
-var debug = false
+var debug = true
 
 var CurrentFloor = 1 # starting floor
-var FloorDic = {1: [45, 10, 3, 4],
+var FloorDic = {1: [45, 12, 3, 6],
 				2: [10, 6, 3, 5],
 				3: [15, 7, 4, 6],
 				4: [20, 8, 5, 7],
@@ -31,9 +31,8 @@ func _ready():
 	FloorGen._ready()
 	#insert player
 	#insert entities 
-	if debug == true: 
-		$Debug_Hud.visible = true
-		$Debug_Hud/Seed.set_text("Debug\n " + str(FloorGen.get_seed())) 
+	$Debug_Hud.visible = debug
+	$Debug_Hud/Seed.set_text("Debug\n " + str(FloorGen.get_seed())) 
 	
 	# move to function as dev continues
 	if not healthSetupCompleted: # Set up health
