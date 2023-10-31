@@ -1,6 +1,6 @@
 [gd_scene load_steps=22 format=3 uid="uid://c8fm5k1pu6l4i"]
 
-[ext_resource type="Script" path="res://room_generation.gd" id="1_fymyj"]
+[ext_resource type="Script" path="res://brainstem.gd" id="1_ikiub"]
 [ext_resource type="Texture2D" uid="uid://cdejfmb3r8r6b" path="res://cave1.png" id="2_fp8l3"]
 [ext_resource type="Texture2D" uid="uid://w72furwr3cqb" path="res://cavewalls1.png" id="3_uwdc0"]
 [ext_resource type="Script" path="res://debug_UI.gd" id="6_grh6y"]
@@ -229,8 +229,8 @@ radius = 16.0
 radius = 19.0
 height = 40.0
 
-[node name="Node2D" type="Node2D"]
-script = ExtResource("1_fymyj")
+[node name="Dungeon" type="Node2D"]
+script = ExtResource("1_ikiub")
 
 [node name="TileMap" type="TileMap" parent="."]
 show_behind_parent = true
@@ -240,76 +240,10 @@ tile_set = SubResource("TileSet_42v73")
 format = 2
 layer_0/y_sort_enabled = true
 
-[node name="debug_hud" type="CanvasLayer" parent="."]
+[node name="Debug_Hud" type="CanvasLayer" parent="."]
 script = ExtResource("6_grh6y")
 
-[node name="out_zoom" type="TextureButton" parent="debug_hud"]
-offset_left = 20.0
-offset_top = 111.0
-offset_right = 34.0
-offset_bottom = 125.0
-scale = Vector2(2, 2)
-
-[node name="zoom_out" type="Sprite2D" parent="debug_hud/out_zoom"]
-position = Vector2(6, 6)
-texture = ExtResource("6_jqwbb")
-hframes = 4
-
-[node name="in_zoom" type="TextureButton" parent="debug_hud"]
-offset_left = 58.0
-offset_top = 111.0
-offset_right = 72.0
-offset_bottom = 125.0
-scale = Vector2(2, 2)
-
-[node name="zoom_in" type="Sprite2D" parent="debug_hud/in_zoom"]
-position = Vector2(6, 6)
-texture = ExtResource("6_jqwbb")
-hframes = 4
-frame = 1
-
-[node name="left" type="TextureButton" parent="debug_hud"]
-offset_left = 11.0
-offset_top = 176.0
-offset_right = 25.0
-offset_bottom = 190.0
-scale = Vector2(2, 2)
-
-[node name="arrow" type="Sprite2D" parent="debug_hud/left"]
-position = Vector2(7, 7)
-rotation = 4.71239
-texture = ExtResource("6_jqwbb")
-hframes = 4
-frame = 2
-
-[node name="right" type="TextureButton" parent="debug_hud"]
-offset_left = 67.0
-offset_top = 176.0
-offset_right = 81.0
-offset_bottom = 190.0
-scale = Vector2(2, 2)
-
-[node name="arrow" type="Sprite2D" parent="debug_hud/right"]
-position = Vector2(7, 7)
-rotation = 1.5708
-texture = ExtResource("6_jqwbb")
-hframes = 4
-frame = 2
-
-[node name="back" type="TextureButton" parent="debug_hud"]
-offset_left = 37.0
-offset_top = 245.0
-offset_right = 53.0
-offset_bottom = 260.0
-scale = Vector2(2, 2)
-
-[node name="return" type="Sprite2D" parent="debug_hud/back"]
-position = Vector2(8, 7)
-texture = ExtResource("6_jqwbb")
-hframes = 4
-frame = 3
-
-[node name="debug_seed_info" type="Label" parent="debug_hud"]
+[node name="Seed" type="Label" parent="Debug_Hud"]
 offset_left = 9.0
 offset_top = 15.0
 offset_right = 333.0
@@ -317,41 +251,107 @@ offset_bottom = 67.0
 text = "ERROR: this label isn't 
 reading the script :/"
 
-[node name="new_seed" type="Button" parent="debug_hud/debug_seed_info"]
+[node name="New Seed" type="Button" parent="Debug_Hud/Seed"]
 layout_mode = 0
 offset_top = 56.0
 offset_right = 85.0
 offset_bottom = 87.0
 text = "New Seed"
 
-[node name="up" type="TextureButton" parent="debug_hud"]
+[node name="out_zoom" type="TextureButton" parent="Debug_Hud"]
+offset_left = 20.0
+offset_top = 111.0
+offset_right = 34.0
+offset_bottom = 125.0
+scale = Vector2(2, 2)
+
+[node name="zoom_out" type="Sprite2D" parent="Debug_Hud/out_zoom"]
+position = Vector2(6, 6)
+texture = ExtResource("6_jqwbb")
+hframes = 4
+
+[node name="in_zoom" type="TextureButton" parent="Debug_Hud"]
+offset_left = 58.0
+offset_top = 111.0
+offset_right = 72.0
+offset_bottom = 125.0
+scale = Vector2(2, 2)
+
+[node name="zoom_in" type="Sprite2D" parent="Debug_Hud/in_zoom"]
+position = Vector2(6, 6)
+texture = ExtResource("6_jqwbb")
+hframes = 4
+frame = 1
+
+[node name="left" type="TextureButton" parent="Debug_Hud"]
+offset_left = 11.0
+offset_top = 176.0
+offset_right = 25.0
+offset_bottom = 190.0
+scale = Vector2(2, 2)
+
+[node name="arrow" type="Sprite2D" parent="Debug_Hud/left"]
+position = Vector2(7, 7)
+rotation = 4.71239
+texture = ExtResource("6_jqwbb")
+hframes = 4
+frame = 2
+
+[node name="right" type="TextureButton" parent="Debug_Hud"]
+offset_left = 67.0
+offset_top = 176.0
+offset_right = 81.0
+offset_bottom = 190.0
+scale = Vector2(2, 2)
+
+[node name="arrow" type="Sprite2D" parent="Debug_Hud/right"]
+position = Vector2(7, 7)
+rotation = 1.5708
+texture = ExtResource("6_jqwbb")
+hframes = 4
+frame = 2
+
+[node name="back" type="TextureButton" parent="Debug_Hud"]
+offset_left = 37.0
+offset_top = 245.0
+offset_right = 53.0
+offset_bottom = 260.0
+scale = Vector2(2, 2)
+
+[node name="return" type="Sprite2D" parent="Debug_Hud/back"]
+position = Vector2(8, 7)
+texture = ExtResource("6_jqwbb")
+hframes = 4
+frame = 3
+
+[node name="up" type="TextureButton" parent="Debug_Hud"]
 offset_left = 39.0
 offset_top = 148.0
 offset_right = 53.0
 offset_bottom = 162.0
 scale = Vector2(2, 2)
 
-[node name="arrow" type="Sprite2D" parent="debug_hud/up"]
+[node name="arrow" type="Sprite2D" parent="Debug_Hud/up"]
 position = Vector2(7, 7)
 texture = ExtResource("6_jqwbb")
 hframes = 4
 frame = 2
 
-[node name="down" type="TextureButton" parent="debug_hud"]
+[node name="down" type="TextureButton" parent="Debug_Hud"]
 offset_left = 39.0
 offset_top = 204.0
 offset_right = 53.0
 offset_bottom = 218.0
 scale = Vector2(2, 2)
 
-[node name="arrow" type="Sprite2D" parent="debug_hud/down"]
+[node name="arrow" type="Sprite2D" parent="Debug_Hud/down"]
 position = Vector2(7, 7)
 rotation = 3.14159
 texture = ExtResource("6_jqwbb")
 hframes = 4
 frame = 2
 
-[node name="Shake" type="Button" parent="debug_hud"]
+[node name="shake" type="Button" parent="Debug_Hud"]
 offset_left = 25.0
 offset_top = 279.0
 offset_right = 80.0
@@ -359,10 +359,10 @@ offset_bottom = 315.0
 text = "Shake
 "
 
-[node name="CanvasLayer" type="CanvasLayer" parent="debug_hud"]
+[node name="CanvasLayer" type="CanvasLayer" parent="Debug_Hud"]
 layer = 0
 
-[node name="HeartsContainer" parent="debug_hud" instance=ExtResource("6_tho0w")]
+[node name="HeartsContainer" parent="Debug_Hud" instance=ExtResource("6_tho0w")]
 offset_left = 69.0
 offset_top = 24.0
 offset_right = 281.0
@@ -426,13 +426,13 @@ shape = SubResource("CircleShape2D_6ls2h")
 position = Vector2(-56, 7)
 shape = SubResource("CapsuleShape2D_1g6bv")
 
-[connection signal="pressed" from="debug_hud/out_zoom" to="debug_hud" method="_on_out_zoom_pressed"]
-[connection signal="pressed" from="debug_hud/in_zoom" to="debug_hud" method="_on_in_zoom_pressed"]
-[connection signal="pressed" from="debug_hud/left" to="debug_hud" method="_on_left_pressed"]
-[connection signal="pressed" from="debug_hud/right" to="debug_hud" method="_on_right_pressed"]
-[connection signal="pressed" from="debug_hud/back" to="debug_hud" method="_on_back_pressed"]
-[connection signal="pressed" from="debug_hud/debug_seed_info/new_seed" to="." method="_on_new_seed_pressed"]
-[connection signal="pressed" from="debug_hud/up" to="debug_hud" method="_on_up_pressed"]
-[connection signal="pressed" from="debug_hud/down" to="debug_hud" method="_on_down_pressed"]
-[connection signal="pressed" from="debug_hud/Shake" to="debug_hud" method="_on_shake_pressed"]
+[connection signal="pressed" from="Debug_Hud/Seed/New Seed" to="." method="_on_new_seed_pressed"]
+[connection signal="pressed" from="Debug_Hud/out_zoom" to="Debug_Hud" method="_on_out_zoom_pressed"]
+[connection signal="pressed" from="Debug_Hud/in_zoom" to="Debug_Hud" method="_on_in_zoom_pressed"]
+[connection signal="pressed" from="Debug_Hud/left" to="Debug_Hud" method="_on_left_pressed"]
+[connection signal="pressed" from="Debug_Hud/right" to="Debug_Hud" method="_on_right_pressed"]
+[connection signal="pressed" from="Debug_Hud/back" to="Debug_Hud" method="_on_back_pressed"]
+[connection signal="pressed" from="Debug_Hud/up" to="Debug_Hud" method="_on_up_pressed"]
+[connection signal="pressed" from="Debug_Hud/down" to="Debug_Hud" method="_on_down_pressed"]
+[connection signal="pressed" from="Debug_Hud/shake" to="Debug_Hud" method="_on_shake_pressed"]
 [connection signal="area_entered" from="Cassandra/hurtbox" to="Cassandra" method="_on_hurtbox_area_entered"]
