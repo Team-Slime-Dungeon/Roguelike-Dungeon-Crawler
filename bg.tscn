@@ -1,0 +1,83 @@
+[gd_scene load_steps=7 format=3 uid="uid://bd775fqojwp4p"]
+
+[ext_resource type="Script" path="res://bg.gd" id="1_ejel4"]
+[ext_resource type="Texture2D" uid="uid://dnxkof7ves7p7" path="res://untitled folder/BG2.png" id="3_snr3c"]
+[ext_resource type="Texture2D" uid="uid://damjn23mhquhc" path="res://OrnagePebleblur.png" id="3_vbcwp"]
+[ext_resource type="Texture2D" uid="uid://c7yrt6nwqmtkl" path="res://PinkPebleblur.png" id="4_gfjps"]
+[ext_resource type="Texture2D" uid="uid://bmibfbkky4wiv" path="res://untitled folder/RedPebleblur.png" id="6_05e5j"]
+[ext_resource type="Texture2D" uid="uid://chvae17wd1yqx" path="res://PurplePebleblur.png" id="6_o1gid"]
+
+[node name="Bg" type="ParallaxBackground"]
+script = ExtResource("1_ejel4")
+
+[node name="Bg" type="Sprite2D" parent="."]
+position = Vector2(577.5, 320.625)
+scale = Vector2(1.12956, 1.1336)
+texture = ExtResource("3_snr3c")
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="."]
+modulate = Color(1, 1, 1, 0.623529)
+motion_mirroring = Vector2(1150, 2.08165e-12)
+
+[node name="OrnagePeble" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(258, 235)
+scale = Vector2(0.673653, 0.673653)
+texture = ExtResource("3_vbcwp")
+
+[node name="PinkPeble" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(534.5, 131.811)
+scale = Vector2(0.57767, 0.57767)
+texture = ExtResource("4_gfjps")
+
+[node name="OrnagePeble2" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(866.397, 415.75)
+scale = Vector2(0.661677, 0.661677)
+texture = ExtResource("3_vbcwp")
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="."]
+modulate = Color(1, 1, 1, 0.8)
+motion_mirroring = Vector2(1150, 2.08165e-12)
+
+[node name="RedPeble" type="Sprite2D" parent="ParallaxLayer2"]
+position = Vector2(139, 384)
+texture = ExtResource("6_05e5j")
+
+[node name="RedPeble2" type="Sprite2D" parent="ParallaxLayer2"]
+position = Vector2(704.25, 105.25)
+scale = Vector2(0.649153, 0.621107)
+texture = ExtResource("6_05e5j")
+
+[node name="RedPeble3" type="Sprite2D" parent="ParallaxLayer2"]
+position = Vector2(987.25, 243.75)
+scale = Vector2(0.544068, 0.479239)
+texture = ExtResource("6_05e5j")
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="."]
+modulate = Color(1, 1, 1, 0.411765)
+motion_scale = Vector2(0.6, 0.6)
+motion_mirroring = Vector2(1150, 2.08165e-12)
+
+[node name="PurplePeble4" type="Sprite2D" parent="ParallaxLayer3"]
+position = Vector2(633, 203)
+scale = Vector2(0.31006, 0.222956)
+texture = ExtResource("6_o1gid")
+
+[node name="PurplePeble3" type="Sprite2D" parent="ParallaxLayer3"]
+position = Vector2(945, 152)
+scale = Vector2(0.369685, 0.431278)
+texture = ExtResource("6_o1gid")
+
+[node name="PurplePeble" type="Sprite2D" parent="ParallaxLayer3"]
+position = Vector2(353.5, 306.27)
+scale = Vector2(0.452703, 0.452703)
+texture = ExtResource("6_o1gid")
+
+[node name="PurplePeble2" type="Sprite2D" parent="ParallaxLayer3"]
+position = Vector2(401, 223)
+scale = Vector2(0.20494, 0.20494)
+texture = ExtResource("6_o1gid")
+
+[node name="PurplePeble5" type="Sprite2D" parent="ParallaxLayer3"]
+position = Vector2(513.53, 444.92)
+scale = Vector2(0.20494, 0.20494)
+texture = ExtResource("6_o1gid")
