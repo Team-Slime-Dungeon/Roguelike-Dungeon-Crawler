@@ -128,4 +128,4 @@ func clear_room():
 		for j in range(-100, 100):
 			$TileMap.erase_cell(0, Vector2i(i , j))
 	# Uncomment this for something cool!
-			#$TileMap.set_cell(0, Vector2i(i,j), 1, Vector2i(2, 0))
+			$TileMap.set_cell(0, Vector2i(i,j), 1, Vector2i(2, 0))
