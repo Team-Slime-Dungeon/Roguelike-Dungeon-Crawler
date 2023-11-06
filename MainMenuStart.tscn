@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dk3ustog51xob"]
+[gd_scene load_steps=14 format=3 uid="uid://dk3ustog51xob"]
 
 [ext_resource type="Script" path="res://mainmenu.gd" id="1_230jb"]
 [ext_resource type="Texture2D" uid="uid://c32cji1hifxob" path="res://MenuAssets/270.png" id="3_f50f4"]
@@ -6,6 +6,108 @@
 [ext_resource type="Texture2D" uid="uid://dbvs8l4bnadih" path="res://MenuAssets/270-219.png.png" id="4_efpxw"]
 [ext_resource type="Texture2D" uid="uid://dcvb624n1ed76" path="res://MenuAssets/New Piskel (4).png" id="5_biqbo"]
 [ext_resource type="Texture2D" uid="uid://d1de8tcjv7x4b" path="res://MenuAssets/0179.png" id="6_hpig8"]
+[ext_resource type="FontFile" uid="uid://b1dyomvma53nt" path="res://PixelifySans-Regular.ttf" id="7_2mmw6"]
+[ext_resource type="Script" path="res://Resolutions.gd" id="8_ws277"]
+
+[sub_resource type="Animation" id="Animation_l35mj"]
+resource_name = "Bring back"
+length = 10.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureButton:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ExitButton:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("TextureButton:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 2.2),
+"transitions": PackedFloat32Array(0.3, 1),
+"update": 0,
+"values": [Vector2(-500, 196), Vector2(27, 196)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ExitButton:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 2.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-500, 420), Vector2(239, 420)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("CanvasLayer2/ColorRect:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 2.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("CanvasLayer2:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(2.2),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("CanvasLayer2/Control:modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 2.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("CanvasLayer2/Control:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(2.2),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_esr5p"]
 length = 0.001
@@ -76,6 +178,202 @@ tracks/5/path = NodePath("Sprite2D4:visible")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("TextureButton:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(27, 196)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("ExitButton:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(239, 420)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("CanvasLayer2/ColorRect:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 660)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("CanvasLayer2/ColorRect:modulate")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("CanvasLayer2:visible")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("CanvasLayer2/Control:modulate")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("CanvasLayer2/Control:visible")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_h7t3o"]
+resource_name = "Remove"
+length = 10.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureButton:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ExitButton:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("TextureButton:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 2.1),
+"transitions": PackedFloat32Array(1, 0.3),
+"update": 0,
+"values": [Vector2(27, 196), Vector2(-500, 196)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ExitButton:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 2.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(239, 420), Vector2(-500, 420)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("CanvasLayer2/ColorRect:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 2.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("CanvasLayer2/ColorRect:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(3, 8)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("CanvasLayer2:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("CanvasLayer2/Control:modulate")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 2.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("CanvasLayer2/Control:visible")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -160,7 +458,9 @@ tracks/5/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_6od4r"]
 _data = {
+"Bring back": SubResource("Animation_l35mj"),
 "RESET": SubResource("Animation_esr5p"),
+"Remove": SubResource("Animation_h7t3o"),
 "dust": SubResource("Animation_ejvhq")
 }
 
@@ -172,6 +472,107 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_230jb")
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer2"]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 660.0
+offset_bottom = 660.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0.854902, 0.588235, 1)
+
+[node name="Control" type="Control" parent="CanvasLayer2"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_top = -1.0
+offset_right = 40.0
+offset_bottom = 39.0
+
+[node name="ResolutionButton" type="OptionButton" parent="CanvasLayer2/Control"]
+layout_mode = 0
+offset_left = 365.0
+offset_top = 161.0
+offset_right = 592.0
+offset_bottom = 181.0
+
+[node name="Label" type="Label" parent="CanvasLayer2/Control"]
+layout_mode = 0
+offset_left = 130.0
+offset_top = 149.0
+offset_right = 357.0
+offset_bottom = 195.0
+theme_override_colors/font_color = Color(0.494118, 0.184314, 0.0117647, 1)
+theme_override_fonts/font = ExtResource("7_2mmw6")
+theme_override_font_sizes/font_size = 35
+text = "Resolution :"
+script = ExtResource("8_ws277")
+
+[node name="CheckButton" type="CheckButton" parent="CanvasLayer2/Control"]
+layout_mode = 0
+offset_left = 359.0
+offset_top = 235.0
+offset_right = 586.0
+offset_bottom = 259.0
+
+[node name="Label2" type="Label" parent="CanvasLayer2/Control"]
+layout_mode = 0
+offset_left = 129.0
+offset_top = 217.0
+offset_right = 356.0
+offset_bottom = 263.0
+theme_override_colors/font_color = Color(0.494118, 0.184314, 0.0117647, 1)
+theme_override_fonts/font = ExtResource("7_2mmw6")
+theme_override_font_sizes/font_size = 35
+text = "Fullscreen :"
+script = ExtResource("8_ws277")
+
+[node name="Label3" type="Label" parent="CanvasLayer2/Control"]
+layout_mode = 0
+offset_left = 83.0
+offset_top = 51.0
+offset_right = 310.0
+offset_bottom = 127.0
+theme_override_colors/font_color = Color(0.494118, 0.184314, 0.0117647, 1)
+theme_override_fonts/font = ExtResource("7_2mmw6")
+theme_override_font_sizes/font_size = 60
+text = "Options"
+script = ExtResource("8_ws277")
+
+[node name="Button" type="Button" parent="CanvasLayer2/Control"]
+layout_mode = 0
+offset_left = 480.0
+offset_top = 448.0
+offset_right = 530.0
+offset_bottom = 479.0
+theme_override_fonts/font = ExtResource("7_2mmw6")
+theme_override_font_sizes/font_size = 34
+text = "BACK
+"
+
+[node name="HSlider" type="HSlider" parent="CanvasLayer2/Control"]
+layout_mode = 0
+offset_left = 395.0
+offset_top = 317.0
+offset_right = 564.0
+offset_bottom = 337.0
+
+[node name="Label4" type="Label" parent="CanvasLayer2/Control"]
+layout_mode = 0
+offset_left = 135.0
+offset_top = 293.0
+offset_right = 362.0
+offset_bottom = 339.0
+theme_override_colors/font_color = Color(0.494118, 0.184314, 0.0117647, 1)
+theme_override_fonts/font = ExtResource("7_2mmw6")
+theme_override_font_sizes/font_size = 35
+text = "Volume :"
+script = ExtResource("8_ws277")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -214,6 +615,7 @@ offset_top = 196.0
 offset_right = 1127.0
 offset_bottom = 596.0
 scale = Vector2(0.54, 0.54)
+auto_translate = false
 texture_normal = ExtResource("4_efpxw")
 
 [node name="Sprite2D4" type="Sprite2D" parent="."]
@@ -238,5 +640,20 @@ offset_bottom = 521.0
 scale = Vector2(0.5, 0.5)
 texture_normal = ExtResource("6_hpig8")
 
+[node name="SettingsBut" type="Button" parent="."]
+layout_mode = 0
+offset_left = 241.0
+offset_top = 514.0
+offset_right = 384.0
+offset_bottom = 560.0
+theme_override_fonts/font = ExtResource("7_2mmw6")
+theme_override_font_sizes/font_size = 31
+text = "Settings
+"
+
+[connection signal="item_selected" from="CanvasLayer2/Control/ResolutionButton" to="CanvasLayer2/Control/Label" method="_on_OptionButton_item_selected"]
+[connection signal="toggled" from="CanvasLayer2/Control/CheckButton" to="CanvasLayer2/Control/Label" method="_on_check_button_toggled"]
+[connection signal="pressed" from="CanvasLayer2/Control/Button" to="." method="_on_button_Back_pressed"]
 [connection signal="pressed" from="TextureButton" to="." method="_on_texture_button_pressed"]
 [connection signal="pressed" from="ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="SettingsBut" to="." method="_on_button_pressed"]

@@ -22,3 +22,13 @@ func _on_texture_button_pressed():
 func _on_exit_button_pressed():
 	get_tree().quit()
 	pass # Replace with function body.
+
+
+func _on_button_pressed():
+	ani.play("Remove")
+	pass # Replace with function body.
+
+
+func _on_button_Back_pressed():
+	ani.play("Bring back")
+	pass # Replace with function body.
