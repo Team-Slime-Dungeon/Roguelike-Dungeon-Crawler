@@ -47,5 +47,11 @@ func knockback(enemyVelocity: Vector2):
 	# Calculate the knockback from the second enemy and add it to totalKnockback.
 	# Apply the total knockback to the player's velocity.
 	# Perform the movement and sliding.
-	
 
+
+func _on_staircase_hitbox_area_entered(area):
+	print("hi")
+
+
+func _on_staircase_hitbox_area_exited(area):
+	print("bye")
