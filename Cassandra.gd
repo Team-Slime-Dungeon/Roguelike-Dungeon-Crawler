@@ -3,6 +3,7 @@ var collision_count = 0
 var move_speed = 100  # Adjust the movement speed as needed
 @onready var anim = get_node("AnimationPlayer")
 @onready var weapon = $hip_bone/chest_bone/arm_left_bone/arm_left_upper/weapon #fetches weapoon sprite
+#added a comment for Jira Practice
 
 # Add a variable to track the player's last movement direction
 var last_direction = Vector2(1, 0)  # Initialize it to face right
