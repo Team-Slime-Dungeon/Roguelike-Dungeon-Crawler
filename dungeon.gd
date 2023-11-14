@@ -15,7 +15,7 @@ var min_path_width = 3 # 2 Walls + Path, rec 3
 var max_path_width = 5 # rec 5
 var staircase_pos = 0 # selected element in node_pos
 var current_floor = 0 # starting floor
-
+var kink_probability = 0.5
 var descend = false # check if player stepped on a staircase
 
 func _ready():
@@ -57,7 +57,7 @@ func floor_structure():
 		hall_length = (10) # length of hallway segments, rec 10
 		room_min = (3) # min size for rooms, rec 2
 		room_max = (4) # max size for rooms, rec 4
-		if room_min < max_path_width: max_path_width = room_min
+		if room_min <= max_path_width : max_path_width = room_min - 1
 
 func generate_entity():
 	# finds a random position in the last quarter of node_pos
@@ -78,8 +78,13 @@ func generate_hallways():
 	node_pos.append(tile_pos) #initial room at 0,0
 
 	for j in range(0, hall_count): # this loop makes hallway segments
+		
 		var row_width = random.randi_range(min_path_width, max_path_width)
 		var perpendicular = get_perpendicular_vector(direction)
+
+		#predict where room will be placed, add to node_pos collection
+		var room_pos = tile_pos + ((hall_length) * direction)
+		if !room_pos in node_pos: node_pos.append(room_pos) # since can overlap, avoid duplicates in list
 
 		for i in range(0, hall_length): # this loop creates 1 segment
 			tile_pos += direction
@@ -87,33 +92,35 @@ func generate_hallways():
 			var row_position = tile_pos - floor(row_width / 2) * perpendicular
 			
 			# Create the outside wall of path if possible
-			if Vector2i(row_position) not in hall_pos:
-				$TileMap.set_cell(0, Vector2i(row_position.x-1, row_position.y-1), 1, Vector2i(0, 0))
+			if row_position - perpendicular not in hall_pos:
+				$TileMap.set_cell(0, row_position - perpendicular, 1, Vector2i(0, 0))
 
 			# Create a row of hallway and save it in a list
 			for k in range(0, row_width):
 				$TileMap.set_cell(0, row_position, 0, Vector2i(0, 3))
-				hall_pos.append(Vector2i(row_position.x, row_position.y))
+				hall_pos.append(row_position)
 				row_position += perpendicular
 	
+			#kink probability midway path
+			if i == floor(hall_length / 2) and random.randf() > kink_probability:
+				$TileMap.set_cell(0, row_position, 0, Vector2i(0, 3))
+				hall_pos.append(row_position)
+				row_position += perpendicular
+				tile_pos += perpendicular
+				
 			# Create second hallway wall if possible			
 			if Vector2i(row_position) not in hall_pos:
-				$TileMap.set_cell(0, Vector2i(row_position.x, row_position.y), 1, Vector2i(0, 0))
-
-		if !tile_pos in node_pos: node_pos.append(tile_pos) # since can overlap, avoid duplicates in list
+				$TileMap.set_cell(0, row_position, 1, Vector2i(0, 0))
+				
+		tile_pos = room_pos #fixes kink mis-alignment
 		direction = get_new_direction(direction) # get a new direction for the next segment
 
 # this function determines the direction of the new hallway segment 
 # restriction: new direction should never be the reverse of the previous direction
 func get_new_direction(old_direction):
 	var directions = [Vector2i(0,1), Vector2i(0, -1), Vector2i(1, 0), Vector2i(-1, 0)]
-	var reverse
-	# Remove the reverse of the old direction
-	if old_direction == Vector2i(1,0): reverse = Vector2i(-1,0)
-	elif old_direction == Vector2i(-1,0): reverse = Vector2i(1,0)
-	elif old_direction == Vector2i(0,1): reverse = Vector2i(0,-1)
-	elif old_direction == Vector2i(0,-1): reverse = Vector2i(0,1)
-
+	var reverse = -1 * old_direction
+	# Remove the reverse of the old direction 
 	directions.erase(reverse)
 	var new_directions = directions[random.randi_range(0, directions.size() - 1)]
 	return new_directions
