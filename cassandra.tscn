@@ -1,8 +1,12 @@
-[gd_scene load_steps=18 format=3 uid="uid://pkukur1dj0vo"]
+[gd_scene load_steps=19 format=3 uid="uid://pkukur1dj0vo"]
 
 [ext_resource type="Script" path="res://Cassandra.gd" id="1_jhm8e"]
 [ext_resource type="Texture2D" uid="uid://nau718e75jx1" path="res://cassandra_sheet.png" id="3_fculm"]
 [ext_resource type="Texture2D" uid="uid://hau6lcqggcfx" path="res://weapons/weapon_1.png" id="3_fe1aj"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8n2l5"]
+radius = 2.98913
+height = 13.9992
 
 [sub_resource type="Animation" id="Animation_vn7k2"]
 length = 0.001
@@ -1098,6 +1102,18 @@ tracks/90/keys = {
 "update": 1,
 "values": [2]
 }
+tracks/91/type = "value"
+tracks/91/imported = false
+tracks/91/enabled = true
+tracks/91/path = NodePath("hip_bone/chest_bone/arm_left_bone/arm_left_upper/weapon/weapon/CollisionShape2D:position")
+tracks/91/interp = 1
+tracks/91/loop_wrap = true
+tracks/91/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-7.93563, 7.87565)]
+}
 
 [sub_resource type="Animation" id="Animation_axvom"]
 resource_name = "attack_walking_left"
@@ -2180,6 +2196,18 @@ tracks/89/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [4]
+}
+tracks/90/type = "value"
+tracks/90/imported = false
+tracks/90/enabled = true
+tracks/90/path = NodePath("hip_bone/chest_bone/arm_left_bone/arm_left_upper/weapon/weapon/CollisionShape2D:position")
+tracks/90/interp = 1
+tracks/90/loop_wrap = true
+tracks/90/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(11.0307, -11.0601)]
 }
 
 [sub_resource type="Animation" id="Animation_ixjiu"]
@@ -3276,6 +3304,18 @@ tracks/90/keys = {
 "update": 1,
 "values": [2]
 }
+tracks/91/type = "value"
+tracks/91/imported = false
+tracks/91/enabled = true
+tracks/91/path = NodePath("hip_bone/chest_bone/arm_left_bone/arm_left_upper/weapon/weapon/CollisionShape2D:position")
+tracks/91/interp = 1
+tracks/91/loop_wrap = true
+tracks/91/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(11.0307, -11.0601)]
+}
 
 [sub_resource type="Animation" id="Animation_gcy1w"]
 resource_name = "attack_walking_right"
@@ -4358,6 +4398,18 @@ tracks/89/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [2]
+}
+tracks/90/type = "value"
+tracks/90/imported = false
+tracks/90/enabled = true
+tracks/90/path = NodePath("hip_bone/chest_bone/arm_left_bone/arm_left_upper/weapon/weapon/CollisionShape2D:position")
+tracks/90/interp = 1
+tracks/90/loop_wrap = true
+tracks/90/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(11.0307, -11.0601)]
 }
 
 [sub_resource type="Animation" id="Animation_p30ho"]
@@ -5454,6 +5506,18 @@ tracks/90/keys = {
 "update": 1,
 "values": [1]
 }
+tracks/91/type = "value"
+tracks/91/imported = false
+tracks/91/enabled = true
+tracks/91/path = NodePath("hip_bone/chest_bone/arm_left_bone/arm_left_upper/weapon/weapon/CollisionShape2D:position")
+tracks/91/interp = 1
+tracks/91/loop_wrap = true
+tracks/91/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(11.0307, -11.0601)]
+}
 
 [sub_resource type="Animation" id="Animation_4p3yh"]
 resource_name = "attack_left"
@@ -6501,6 +6565,18 @@ tracks/86/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [4]
+}
+tracks/87/type = "value"
+tracks/87/imported = false
+tracks/87/enabled = true
+tracks/87/path = NodePath("hip_bone/chest_bone/arm_left_bone/arm_left_upper/weapon/weapon/CollisionShape2D:position")
+tracks/87/interp = 1
+tracks/87/loop_wrap = true
+tracks/87/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(11.0307, -11.0601)]
 }
 
 [sub_resource type="Animation" id="Animation_e17fi"]
@@ -7550,6 +7626,18 @@ tracks/86/keys = {
 "update": 1,
 "values": [2]
 }
+tracks/87/type = "value"
+tracks/87/imported = false
+tracks/87/enabled = true
+tracks/87/path = NodePath("hip_bone/chest_bone/arm_left_bone/arm_left_upper/weapon/weapon/CollisionShape2D:position")
+tracks/87/interp = 1
+tracks/87/loop_wrap = true
+tracks/87/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(11.0307, -11.0601)]
+}
 
 [sub_resource type="Animation" id="Animation_er85k"]
 resource_name = "idle_left"
@@ -8596,6 +8684,18 @@ tracks/86/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [4]
+}
+tracks/87/type = "value"
+tracks/87/imported = false
+tracks/87/enabled = true
+tracks/87/path = NodePath("hip_bone/chest_bone/arm_left_bone/arm_left_upper/weapon/weapon/CollisionShape2D:position")
+tracks/87/interp = 1
+tracks/87/loop_wrap = true
+tracks/87/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-7.93563, 7.87565)]
 }
 
 [sub_resource type="Animation" id="Animation_0g1jx"]
@@ -9644,6 +9744,18 @@ tracks/86/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [2]
+}
+tracks/87/type = "value"
+tracks/87/imported = false
+tracks/87/enabled = true
+tracks/87/path = NodePath("hip_bone/chest_bone/arm_left_bone/arm_left_upper/weapon/weapon/CollisionShape2D:position")
+tracks/87/interp = 1
+tracks/87/loop_wrap = true
+tracks/87/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-13.5567, 12.8536)]
 }
 
 [sub_resource type="Animation" id="Animation_4kko4"]
@@ -10728,6 +10840,18 @@ tracks/89/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [4]
+}
+tracks/90/type = "value"
+tracks/90/imported = false
+tracks/90/enabled = true
+tracks/90/path = NodePath("hip_bone/chest_bone/arm_left_bone/arm_left_upper/weapon/weapon/CollisionShape2D:position")
+tracks/90/interp = 1
+tracks/90/loop_wrap = true
+tracks/90/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-9.65261, 10.3357)]
 }
 
 [sub_resource type="Animation" id="Animation_386so"]
@@ -11825,6 +11949,18 @@ tracks/90/keys = {
 "update": 1,
 "values": [3]
 }
+tracks/91/type = "value"
+tracks/91/imported = false
+tracks/91/enabled = true
+tracks/91/path = NodePath("hip_bone/chest_bone/arm_left_bone/arm_left_upper/weapon/weapon/CollisionShape2D:position")
+tracks/91/interp = 1
+tracks/91/loop_wrap = true
+tracks/91/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-9.65261, 10.3357)]
+}
 
 [sub_resource type="Animation" id="Animation_5fh8m"]
 resource_name = "walking_right"
@@ -12908,6 +13044,18 @@ tracks/89/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [2]
+}
+tracks/90/type = "value"
+tracks/90/imported = false
+tracks/90/enabled = true
+tracks/90/path = NodePath("hip_bone/chest_bone/arm_left_bone/arm_left_upper/weapon/weapon/CollisionShape2D:position")
+tracks/90/interp = 1
+tracks/90/loop_wrap = true
+tracks/90/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-13.9589, 13.4963)]
 }
 
 [sub_resource type="Animation" id="Animation_ymub1"]
@@ -13993,6 +14141,18 @@ tracks/89/keys = {
 "update": 1,
 "values": [4]
 }
+tracks/90/type = "value"
+tracks/90/imported = false
+tracks/90/enabled = true
+tracks/90/path = NodePath("hip_bone/chest_bone/arm_left_bone/arm_left_upper/weapon/weapon/CollisionShape2D:position")
+tracks/90/interp = 1
+tracks/90/loop_wrap = true
+tracks/90/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-13.9589, 13.4963)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_brgve"]
 _data = {
@@ -14215,6 +14375,13 @@ z_as_relative = false
 position = Vector2(-20, 7)
 rotation = -8.46332
 texture = ExtResource("3_fe1aj")
+
+[node name="weapon" type="Area2D" parent="hip_bone/chest_bone/arm_left_bone/arm_left_upper/weapon"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hip_bone/chest_bone/arm_left_bone/arm_left_upper/weapon/weapon"]
+position = Vector2(-7.93563, 7.87565)
+rotation = 0.881391
+shape = SubResource("CapsuleShape2D_8n2l5")
 
 [node name="arm_right_bone" type="Bone2D" parent="hip_bone/chest_bone"]
 position = Vector2(-5, -11)
