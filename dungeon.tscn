@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://c8fm5k1pu6l4i"]
+[gd_scene load_steps=35 format=3 uid="uid://c8fm5k1pu6l4i"]
 
 [ext_resource type="Script" path="res://dungeon.gd" id="1_ifql2"]
 [ext_resource type="Texture2D" uid="uid://cdejfmb3r8r6b" path="res://cave1.png" id="2_fp8l3"]
@@ -208,12 +208,115 @@ sources/0 = SubResource("TileSetAtlasSource_yqjvn")
 sources/1 = SubResource("TileSetAtlasSource_alqgh")
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_e2sfr"]
-radius = 11.0
-height = 24.0
+radius = 9.0
+height = 20.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7h6dx"]
-radius = 14.0
+radius = 16.0
 height = 32.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tv8ho"]
+radius = 14.0
+height = 28.0
+
+[sub_resource type="Animation" id="Animation_0nh4p"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SlimeArt:vframes")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SlimeArt:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="Animation" id="Animation_7ouy1"]
+resource_name = "death"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SlimeArt:vframes")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [1, 2, 1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SlimeArt:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(-0.3, 0.1, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [1, 2, 3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hmou4"]
+_data = {
+"RESET": SubResource("Animation_0nh4p"),
+"death": SubResource("Animation_7ouy1")
+}
+
+[sub_resource type="Animation" id="Animation_qvxlx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SlimeArt/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.611765, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_4ykad"]
+resource_name = "hurt"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SlimeArt/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.611765, 0, 0, 0), Color(0.611765, 0, 0, 0.65098)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4tehq"]
+_data = {
+"RESET": SubResource("Animation_qvxlx"),
+"hurt": SubResource("Animation_4ykad")
+}
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_52w7h"]
 height = 32.0
@@ -222,12 +325,53 @@ height = 32.0
 radius = 12.0
 height = 38.0
 
+[sub_resource type="Animation" id="Animation_wngmo"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.454902, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_cllsl"]
+resource_name = "hurtBlink"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.454902, 0, 0, 0), Color(0.454902, 0, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bmatr"]
+_data = {
+"RESET": SubResource("Animation_wngmo"),
+"hurtBlink": SubResource("Animation_cllsl")
+}
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_6ls2h"]
-radius = 16.0
+radius = 10.198
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1g6bv"]
-radius = 19.0
-height = 40.0
+radius = 18.0
+height = 36.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5s02t"]
+radius = 14.0
+height = 32.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4noh4"]
 radius = 8.0
@@ -398,8 +542,16 @@ position = Vector2(71, -25)
 script = ExtResource("7_chb7c")
 
 [node name="SlimeArt" parent="Slime" instance=ExtResource("7_u3phi")]
+clip_children = 2
 position = Vector2(0, 0)
 script = null
+
+[node name="ColorRect" type="ColorRect" parent="Slime/SlimeArt"]
+offset_left = -16.0
+offset_top = -10.0
+offset_right = 16.0
+offset_bottom = 24.0
+color = Color(0.611765, 0, 0, 0)
 
 [node name="SlimeCollision" type="CollisionShape2D" parent="Slime"]
 y_sort_enabled = true
@@ -409,8 +561,28 @@ shape = SubResource("CapsuleShape2D_e2sfr")
 [node name="hitBox" type="Area2D" parent="Slime"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Slime/hitBox"]
-position = Vector2(-1, 6)
+position = Vector2(0, 6)
 shape = SubResource("CapsuleShape2D_7h6dx")
+
+[node name="hurtBox" type="Area2D" parent="Slime"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Slime/hurtBox"]
+position = Vector2(0, 6)
+shape = SubResource("CapsuleShape2D_tv8ho")
+
+[node name="SlimeDeath" type="AnimationPlayer" parent="Slime"]
+libraries = {
+"": SubResource("AnimationLibrary_hmou4")
+}
+
+[node name="Hurt" type="AnimationPlayer" parent="Slime"]
+libraries = {
+"": SubResource("AnimationLibrary_4tehq")
+}
+
+[node name="HurtTimer1" type="Timer" parent="Slime"]
+
+[node name="deathTimer" type="Timer" parent="Slime"]
 
 [node name="Cassandra" type="CharacterBody2D" parent="."]
 script = ExtResource("9_iyhmm")
@@ -432,6 +604,20 @@ position = Vector2(61, 6)
 position = Vector2(60, 10)
 shape = SubResource("CapsuleShape2D_7gejh")
 
+[node name="HurtTimer" type="Timer" parent="Cassandra"]
+
+[node name="ColorRect" type="ColorRect" parent="Cassandra"]
+offset_left = 52.0
+offset_top = -32.0
+offset_right = 70.0
+offset_bottom = 26.0
+color = Color(0.454902, 0, 0, 0)
+
+[node name="Effects" type="AnimationPlayer" parent="Cassandra"]
+libraries = {
+"": SubResource("AnimationLibrary_bmatr")
+}
+
 [node name="Spider" type="CharacterBody2D" parent="."]
 script = ExtResource("10_fsiaj")
 
@@ -445,8 +631,18 @@ shape = SubResource("CircleShape2D_6ls2h")
 [node name="hitBox2" type="Area2D" parent="Spider"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Spider/hitBox2"]
-position = Vector2(-56, 7)
+position = Vector2(-56, 8)
 shape = SubResource("CapsuleShape2D_1g6bv")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Spider"]
+
+[node name="deathTimer3" type="Timer" parent="Spider"]
+
+[node name="hurtArea" type="Area2D" parent="Spider"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spider/hurtArea"]
+position = Vector2(-56, 8)
+shape = SubResource("CapsuleShape2D_5s02t")
 
 [node name="Staircase" type="StaticBody2D" parent="."]
 
@@ -473,6 +669,8 @@ shape = SubResource("CircleShape2D_b827w")
 [connection signal="pressed" from="Debug_Hud/up" to="Debug_Hud" method="_on_up_pressed"]
 [connection signal="pressed" from="Debug_Hud/down" to="Debug_Hud" method="_on_down_pressed"]
 [connection signal="pressed" from="Debug_Hud/shake" to="Debug_Hud" method="_on_shake_pressed"]
+[connection signal="area_entered" from="Slime/hurtBox" to="Slime" method="_on_hurt_box_area_entered"]
 [connection signal="area_entered" from="Cassandra/hurtbox" to="Cassandra" method="_on_hurtbox_area_entered"]
+[connection signal="area_entered" from="Spider/hurtArea" to="Spider" method="_on_hurt_area_area_entered"]
 [connection signal="area_entered" from="Staircase/Staircase_hitbox" to="Cassandra" method="_on_staircase_hitbox_area_entered"]
 [connection signal="area_exited" from="Staircase/Staircase_hitbox" to="Cassandra" method="_on_staircase_hitbox_area_exited"]
