@@ -672,5 +672,4 @@ shape = SubResource("CircleShape2D_b827w")
 [connection signal="area_entered" from="Slime/hurtBox" to="Slime" method="_on_hurt_box_area_entered"]
 [connection signal="area_entered" from="Cassandra/hurtbox" to="Cassandra" method="_on_hurtbox_area_entered"]
 [connection signal="area_entered" from="Spider/hurtArea" to="Spider" method="_on_hurt_area_area_entered"]
-[connection signal="area_entered" from="Staircase/Staircase_hitbox" to="Cassandra" method="_on_staircase_hitbox_area_entered"]
-[connection signal="area_exited" from="Staircase/Staircase_hitbox" to="Cassandra" method="_on_staircase_hitbox_area_exited"]
+[connection signal="area_entered" from="Staircase/Staircase_hitbox" to="." method="_on_staircase_hitbox_area_entered"]

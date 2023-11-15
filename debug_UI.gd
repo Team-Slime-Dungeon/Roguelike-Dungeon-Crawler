@@ -32,12 +32,12 @@ func _process(delta): # This function is called every frame to handle screen sha
 func _on_in_zoom_pressed():
 	#if cam.zoom < zoom_m:
 	cam.zoom += zoom_speed1
-	print(cam.zoom)
+	#print(cam.zoom)
 
 func _on_out_zoom_pressed():
 	if cam.zoom > zoom_min:
 		cam.zoom -= zoom_speed1
-	print(cam.zoom)
+	#print(cam.zoom)
 
 func _on_left_pressed():
 	velocity.x -= 100.0
