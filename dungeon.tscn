@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://c8fm5k1pu6l4i"]
+[gd_scene load_steps=48 format=3 uid="uid://c8fm5k1pu6l4i"]
 
 [ext_resource type="Script" path="res://dungeon.gd" id="1_ifql2"]
 [ext_resource type="Texture2D" uid="uid://cdejfmb3r8r6b" path="res://Environments/cave1.png" id="2_nq54f"]
@@ -17,6 +17,8 @@
 [ext_resource type="PackedScene" uid="uid://dld8oni5e2o2l" path="res://spider.tscn" id="11_d5ajo"]
 [ext_resource type="AudioStream" uid="uid://b0y6yvmws73tm" path="res://Music/slimedeathsound.mp3" id="11_ibp8m"]
 [ext_resource type="AudioStream" uid="uid://dhiy4c1nn72yc" path="res://Music/background sound.mp3" id="13_7lc74"]
+[ext_resource type="PackedScene" uid="uid://cul7b22epo42i" path="res://InventoryTesting/inventory_gui.tscn" id="13_87dgk"]
+[ext_resource type="PackedScene" uid="uid://dryac8f57oat6" path="res://Pause Menu/pause_menu.tscn" id="13_cipy3"]
 [ext_resource type="PackedScene" uid="uid://dqjumom2gi26s" path="res://character.tscn" id="13_d7p71"]
 [ext_resource type="Script" path="res://BackgroundSound.gd" id="14_1o1d0"]
 [ext_resource type="AudioStream" uid="uid://yww5dewpo13e" path="res://Music/spiderhit1.mp3" id="16_tj00d"]
@@ -581,6 +583,12 @@ layer_0/y_sort_enabled = true
 
 [node name="GUI" type="CanvasLayer" parent="."]
 
+[node name="Pause_Menu" parent="GUI" instance=ExtResource("13_cipy3")]
+offset_left = -1.25
+offset_top = -1.25
+offset_right = -1.25
+offset_bottom = -1.25
+
 [node name="Current_Floor" type="Label" parent="GUI"]
 anchors_preset = 3
 anchor_left = 1.0
@@ -592,6 +600,9 @@ offset_top = -26.0
 grow_horizontal = 0
 grow_vertical = 0
 text = "Current Floor Here"
+
+[node name="Inventory_gui" parent="GUI" instance=ExtResource("13_87dgk")]
+visible = false
 
 [node name="Debug_Hud" type="CanvasLayer" parent="."]
 script = ExtResource("6_grh6y")
