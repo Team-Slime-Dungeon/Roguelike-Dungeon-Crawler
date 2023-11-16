@@ -7,6 +7,9 @@ var move_range = 50
 var move_timer = 0
 var current_state = MovementState.UP
 @onready var deathTimer3 = $deathTimer3
+@onready var hurtsoundspider = $hurtsoundspider
+@onready var deathsoundspider = $deathsoundspider
+@onready var hurttimer3 = $hurttimer3
 func _process(delta):
 	#if not $Spider/AnimationPlayer.is_playing():
 	#	$Spider/AnimationPlayer.play("walking_left")
@@ -45,7 +48,11 @@ func _on_hurt_area_area_entered(area):
 	if area.name == "weapon":
 		print_debug(currentHealth)
 		currentHealth -= 1
+		hurtsoundspider.play()
+		hurttimer3.start()
+		await hurttimer3.timeout
 		if currentHealth < 0:
+			deathsoundspider.play()
 			deathTimer3.start()
 			await deathTimer3.timeout
 			queue_free()
