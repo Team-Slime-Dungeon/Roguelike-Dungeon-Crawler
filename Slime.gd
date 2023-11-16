@@ -10,6 +10,8 @@ var currentHealth: int = 5
 @onready var Hurt = $Hurt
 @onready var HurtTimer1 = $HurtTimer1
 @onready var deathTimer = $deathTimer
+@onready var slimedeathsound = $slimedeathsound
+@onready var slimehitsound  = $slimehitsound
 func _process(delta):
 	#if not $AnimationPlayer.is_playing():
 	#	$AnimationPlayer.play("movement")
@@ -49,11 +51,13 @@ func _on_hurt_box_area_entered(area):
 		print_debug(currentHealth)
 		currentHealth -= 1
 		Hurt.play("hurt")
+		slimehitsound.play()
 		HurtTimer1.start()
 		await HurtTimer1.timeout
 		Hurt.play("RESET")
 		if currentHealth < 0:
 			SlimeDeath.play("death")
+			slimedeathsound.play()
 			deathTimer.start()
 			await deathTimer.timeout
 			queue_free()
