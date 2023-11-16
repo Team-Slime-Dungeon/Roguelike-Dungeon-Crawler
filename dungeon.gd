@@ -12,7 +12,7 @@ var hall_length = 0 # max length for hallways
 var room_min = 0 # absolute minimum size for a room
 var room_max = 0 # absolute maximum size for a room
 var min_path_width = 3 # 2 Walls + Path, rec 3
-var max_path_width = 5 # rec 5
+var max_path_width = 7 # rec 5
 var staircase_pos = 0 # selected element in node_pos
 var current_floor = 0 # starting floor
 var kink_probability = 0.5
@@ -67,28 +67,23 @@ func _ready():
 		$Debug_Hud/HeartsContainer.updateHearts($Cassandra.currentHealth)
 		$Cassandra.healthChanged.connect($Debug_Hud/HeartsContainer.updateHearts)
 		healthSetupCompleted = true   
+		
 
-func _process(delta): 
-	#$Cassandra.descendChanged.connect(descend)
-	#if descend == true:
-	#	descend = false
-	#	_ready()
-	pass
+func _process(delta): pass
 
-func _on_new_seed_pressed(): _ready()
+func _on_staircase_hitbox_area_entered(area): _ready()
+func _on_new_seed_pressed(): _ready() #debug
 
 func floor_structure():
 		hall_count = (current_floor + 3) # num of hallway segments, rec 10
-		hall_length = (10) # length of hallway segments, rec 10
-		room_min = (3) # min size for rooms, rec 2
-		room_max = (4) # max size for rooms, rec 4
+		hall_length = (20) # length of hallway segments, rec 10
+		room_min = (5) # min size for rooms, rec 2
+		room_max = (10) # max size for rooms, rec 4
 		if room_min <= max_path_width : max_path_width = room_min - 1
 
 func generate_entity():
 	# finds a random position in the last quarter of node_pos
 	staircase_pos = randi() % (node_pos.size() - int(node_pos.size() * 0.75)) + int(node_pos.size() * 0.75)
-	
-	#$TileMap.set_cell(0, node_pos[staircase_pos], 0, Vector2i(1, 4)) # places staircase in middle of room
 	
 	# converts the tilemap coords to global coords for staircase placement	
 	$Staircase.global_position = $TileMap.map_to_local(node_pos[staircase_pos]) / 2
@@ -126,8 +121,9 @@ func generate_hallways():
 				row_position += perpendicular
 	
 			#kink probability midway path
-			if i == floor(hall_length / 2) and random.randf() > kink_probability:
-				$TileMap.set_cell(0, row_position, dungeon_floor, Vector2i(0, 3))
+			#additional check for paths too small to get through
+			if i == floor(hall_length / 2) and random.randf() > kink_probability and row_width > 2:
+				$TileMap.set_cell(0, row_position, 0, Vector2i(0, 3))
 				hall_pos.append(row_position)
 				row_position += perpendicular
 				tile_pos += perpendicular

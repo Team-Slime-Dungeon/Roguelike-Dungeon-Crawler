@@ -37,7 +37,7 @@ func handleCollision():
 	for i in get_slide_collision_count():
 		var collision = get_slide_collision(i)
 		var collider = collision.get_collider()
-		print_debug(collider.name)
+		#print_debug(collider.name)
 
 
 func _on_hurtbox_area_entered(area):
@@ -66,11 +66,3 @@ func knockback(enemyVelocity: Vector2):
 	# Calculate the knockback from the second enemy and add it to totalKnockback.
 	# Apply the total knockback to the player's velocity.
 	# Perform the movement and sliding.
-
-
-func _on_staircase_hitbox_area_entered(area):
-	print("hi")
-
-
-func _on_staircase_hitbox_area_exited(area):
-	print("bye")
