@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://c8fm5k1pu6l4i"]
+[gd_scene load_steps=42 format=3 uid="uid://c8fm5k1pu6l4i"]
 
 [ext_resource type="Script" path="res://dungeon.gd" id="1_ifql2"]
 [ext_resource type="Texture2D" uid="uid://cdejfmb3r8r6b" path="res://Environments/cave1.png" id="2_nq54f"]
@@ -12,8 +12,15 @@
 [ext_resource type="PackedScene" uid="uid://ct4mfveppntju" path="res://slime.tscn" id="7_u3phi"]
 [ext_resource type="Script" path="res://CharacterControls.gd" id="9_iyhmm"]
 [ext_resource type="Script" path="res://Spider.gd" id="10_fsiaj"]
+[ext_resource type="AudioStream" uid="uid://68v4cb4ndmid" path="res://Music/slimehit1.mp3" id="10_lmqik"]
+[ext_resource type="AudioStream" uid="uid://dxchpyeihgda" path="res://Music/Roblox-death-sound.mp3" id="11_607tm"]
 [ext_resource type="PackedScene" uid="uid://dld8oni5e2o2l" path="res://spider.tscn" id="11_d5ajo"]
+[ext_resource type="AudioStream" uid="uid://b0y6yvmws73tm" path="res://Music/slimedeathsound.mp3" id="11_ibp8m"]
+[ext_resource type="AudioStream" uid="uid://dhiy4c1nn72yc" path="res://Music/background sound.mp3" id="13_7lc74"]
 [ext_resource type="PackedScene" uid="uid://dqjumom2gi26s" path="res://character.tscn" id="13_d7p71"]
+[ext_resource type="Script" path="res://BackgroundSound.gd" id="14_1o1d0"]
+[ext_resource type="AudioStream" uid="uid://yww5dewpo13e" path="res://Music/spiderhit1.mp3" id="16_tj00d"]
+[ext_resource type="AudioStream" uid="uid://c7ioyi1e8fxds" path="res://Music/spider death sound.mp3" id="17_djwu3"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yqjvn"]
 texture = ExtResource("2_nq54f")
@@ -765,6 +772,12 @@ libraries = {
 
 [node name="deathTimer" type="Timer" parent="Slime"]
 
+[node name="slimehitsound" type="AudioStreamPlayer" parent="Slime"]
+stream = ExtResource("10_lmqik")
+
+[node name="slimedeathsound" type="AudioStreamPlayer" parent="Slime"]
+stream = ExtResource("11_ibp8m")
+
 [node name="Cassandra" type="CharacterBody2D" parent="."]
 script = ExtResource("9_iyhmm")
 
@@ -799,6 +812,9 @@ libraries = {
 "": SubResource("AnimationLibrary_bmatr")
 }
 
+[node name="hurtsound1" type="AudioStreamPlayer" parent="Cassandra"]
+stream = ExtResource("11_607tm")
+
 [node name="Spider" type="CharacterBody2D" parent="."]
 script = ExtResource("10_fsiaj")
 
@@ -825,6 +841,14 @@ shape = SubResource("CapsuleShape2D_1g6bv")
 position = Vector2(-56, 8)
 shape = SubResource("CapsuleShape2D_5s02t")
 
+[node name="hurtsoundspider" type="AudioStreamPlayer" parent="Spider"]
+stream = ExtResource("16_tj00d")
+
+[node name="deathsoundspider" type="AudioStreamPlayer2D" parent="Spider"]
+stream = ExtResource("17_djwu3")
+
+[node name="hurttimer3" type="Timer" parent="Spider"]
+
 [node name="Staircase" type="StaticBody2D" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="Staircase"]
@@ -840,6 +864,10 @@ shape = SubResource("CircleShape2D_4noh4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Staircase/Staircase_hitbox"]
 shape = SubResource("CircleShape2D_b827w")
+
+[node name="BackgroundSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("13_7lc74")
+script = ExtResource("14_1o1d0")
 
 [connection signal="pressed" from="Debug_Hud/Seed/New Seed" to="." method="_on_new_seed_pressed"]
 [connection signal="pressed" from="Debug_Hud/out_zoom" to="Debug_Hud" method="_on_out_zoom_pressed"]
