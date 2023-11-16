@@ -1,14 +1,24 @@
 extends CharacterBody2D
 var collision_count = 0
-const SPEED = 250.0
+
 signal healthChanged
 @export var maxHealth = 3
 @onready var currentHealth: int = maxHealth
 @export var knockbackPower: int = 500
 @onready var effects = $Effects
 @onready var HurtTimer = $HurtTimer
+var SPEED
+const walking_speed = 100
+const running_speed = 250
+
 func get_input():
 	var input_dir = Input.get_vector("ui_left","ui_right","ui_up","ui_down")
+	SPEED = walking_speed
+	if(Input.is_action_pressed("running")):
+		SPEED = running_speed
+	else:
+		SPEED = walking_speed
+		
 	velocity = input_dir * SPEED
 	
 func _physics_process(delta):
