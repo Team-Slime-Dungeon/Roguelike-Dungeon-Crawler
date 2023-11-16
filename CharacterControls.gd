@@ -7,6 +7,7 @@ signal healthChanged
 @export var knockbackPower: int = 500
 @onready var effects = $Effects
 @onready var HurtTimer = $HurtTimer
+@onready var hurtsound1 = $hurtsound1
 func get_input():
 	var input_dir = Input.get_vector("ui_left","ui_right","ui_up","ui_down")
 	velocity = input_dir * SPEED
@@ -36,6 +37,7 @@ func _on_hurtbox_area_entered(area):
 		healthChanged.emit(currentHealth)
 		knockback(area.get_parent().velocity)
 		effects.play("hurtBlink")
+		hurtsound1.play()
 		HurtTimer.start()
 		await HurtTimer.timeout
 		effects.play("RESET")
