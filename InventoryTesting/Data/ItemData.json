@@ -1,0 +1,20 @@
+{
+  "10001": {
+	"Name": "Weapon_1",
+	"Category": "Weapon",
+	"Type": "Sword",
+	"EquipmentSlot": "MainHand",
+	"Attack": null,
+	"Defense": null,
+	"Block": null,
+	},
+  "10002": {
+	"Name": "Weapon_2",
+	"Category": "Weapon",
+	"Type": "Sword",
+	"EquipmentSlot": "MainHand",
+	"Attack": null,
+	"Defense": null,
+	"Block": null,
+  }
+}
