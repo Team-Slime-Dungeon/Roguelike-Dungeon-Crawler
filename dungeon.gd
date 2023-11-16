@@ -18,13 +18,38 @@ var current_floor = 0 # starting floor
 var kink_probability = 0.5
 var descend = false # check if player stepped on a staircase
 
+var dungeon_floor_tiles = [0,2] # IDs for the dungeon floors
+var dungeon_wall_tiles = [1,3] # IDs for the dungeon walls
+var dungeon_terrains = [0,1] # Terrains for the tiles (seperate or they will connect together
+
+var dungeon_floor= dungeon_floor_tiles[0]
+var dungeon_walls = dungeon_wall_tiles[0]
+var dungeon_terrain = dungeon_terrains[0]
+
 func _ready():
 	current_floor += 1 # when entering the dungeon scene, you have descended once
+
+	# Selects the tileset for the current floor
+	if current_floor <= 5:
+		dungeon_floor = dungeon_floor_tiles[0]
+		dungeon_walls = dungeon_wall_tiles[0]
+		dungeon_terrain = dungeon_terrains[0]
+	else:
+		dungeon_floor = dungeon_floor_tiles[1]
+		dungeon_walls = dungeon_wall_tiles[1]
+		dungeon_terrain = dungeon_terrains[1]
+
+	# Inventory Creation
+	var Player_Inventory = inventory.new()
+	Player_Inventory._ready()
+	Player_Inventory._print_inventory()
+
 	clear_room() # clean up for new floor
 	floor_structure() # fill in int
 	generate_hallways()
 	generate_rooms()
 	generate_entity()
+	
 	$Cassandra.global_position = Vector2(0,0) # returns player to root room
 	#$TileMap/Staircase_Area.position = Vector2(node_pos[staircase_pos])
 	$GUI/Current_Floor.set_text("Floor " + str(current_floor))
@@ -93,24 +118,23 @@ func generate_hallways():
 			
 			# Create the outside wall of path if possible
 			if row_position - perpendicular not in hall_pos:
-				$TileMap.set_cell(0, row_position - perpendicular, 1, Vector2i(0, 0))
-
+				$TileMap.set_cell(0, row_position - perpendicular, dungeon_walls, Vector2i(0, 0))
 			# Create a row of hallway and save it in a list
 			for k in range(0, row_width):
-				$TileMap.set_cell(0, row_position, 0, Vector2i(0, 3))
+				$TileMap.set_cell(0, row_position, dungeon_floor, Vector2i(0, 3))
 				hall_pos.append(row_position)
 				row_position += perpendicular
 	
 			#kink probability midway path
 			if i == floor(hall_length / 2) and random.randf() > kink_probability:
-				$TileMap.set_cell(0, row_position, 0, Vector2i(0, 3))
+				$TileMap.set_cell(0, row_position, dungeon_floor, Vector2i(0, 3))
 				hall_pos.append(row_position)
 				row_position += perpendicular
 				tile_pos += perpendicular
 				
 			# Create second hallway wall if possible			
 			if Vector2i(row_position) not in hall_pos:
-				$TileMap.set_cell(0, row_position, 1, Vector2i(0, 0))
+				$TileMap.set_cell(0, row_position, dungeon_walls, Vector2i(0, 0))
 				
 		tile_pos = room_pos #fixes kink mis-alignment
 		direction = get_new_direction(direction) # get a new direction for the next segment
@@ -145,16 +169,16 @@ func generate_rooms():
 				# Walls furthest from camera
 				if ((j == -size)) or ((k == size-1)):
 					if !(Vector2i(i.x+j,i.y+k)) in hall_pos: 
-						$TileMap.set_cell(0, Vector2i(i.x+j, i.y+k), 1, Vector2i(0, 0))
+						$TileMap.set_cell(0, Vector2i(i.x+j, i.y+k), dungeon_walls, Vector2i(0, 0))
 				# Walls close to camera
 				elif ((j == size-1) or (k == -size)):
 					if !(Vector2i(i.x+j,i.y+k)) in hall_pos:
-						$TileMap.set_cell(0, Vector2i(i.x+j, i.y+k), 1, Vector2i(0, 0))
+						$TileMap.set_cell(0, Vector2i(i.x+j, i.y+k), dungeon_walls, Vector2i(0, 0))
 				# Stores tile location to be connected
 				else: cells.append(Vector2i(i.x+j,i.y+k))
 
 	# Draws all of the saved tiles and connects them together using terrains
-	$TileMap.set_cells_terrain_connect(0, cells, 0, 0)
+	$TileMap.set_cells_terrain_connect(0, cells, 0, dungeon_terrain)
 
 func clear_room(): 
 	node_pos = []
