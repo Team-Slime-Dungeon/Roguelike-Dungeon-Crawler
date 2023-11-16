@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://c8fm5k1pu6l4i"]
+[gd_scene load_steps=48 format=3 uid="uid://c8fm5k1pu6l4i"]
 
 [ext_resource type="Script" path="res://dungeon.gd" id="1_ifql2"]
 [ext_resource type="Texture2D" uid="uid://cdejfmb3r8r6b" path="res://Environments/cave1.png" id="2_nq54f"]
@@ -15,6 +15,8 @@
 [ext_resource type="AudioStream" uid="uid://68v4cb4ndmid" path="res://Music/slimehit1.mp3" id="10_lmqik"]
 [ext_resource type="AudioStream" uid="uid://dxchpyeihgda" path="res://Music/Roblox-death-sound.mp3" id="11_607tm"]
 [ext_resource type="PackedScene" uid="uid://dld8oni5e2o2l" path="res://spider.tscn" id="11_d5ajo"]
+[ext_resource type="AudioStream" uid="uid://b0y6yvmws73tm" path="res://Music/slimedeathsound.mp3" id="11_ibp8m"]
+[ext_resource type="AudioStream" uid="uid://dhiy4c1nn72yc" path="res://Music/background sound.mp3" id="13_7lc74"]
 [ext_resource type="PackedScene" uid="uid://cul7b22epo42i" path="res://InventoryTesting/inventory_gui.tscn" id="13_87dgk"]
 [ext_resource type="PackedScene" uid="uid://dryac8f57oat6" path="res://Pause Menu/pause_menu.tscn" id="13_cipy3"]
 [ext_resource type="PackedScene" uid="uid://dqjumom2gi26s" path="res://character.tscn" id="13_d7p71"]
@@ -840,6 +842,14 @@ shape = SubResource("CircleShape2D_6ls2h")
 position = Vector2(-56, 8)
 shape = SubResource("CapsuleShape2D_1g6bv")
 
+[node name="hurtsoundspider" type="AudioStreamPlayer" parent="Spider"]
+stream = ExtResource("16_tj00d")
+
+[node name="deathsoundspider" type="AudioStreamPlayer2D" parent="Spider"]
+stream = ExtResource("17_djwu3")
+
+[node name="hurttimer3" type="Timer" parent="Spider"]
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Spider"]
 
 [node name="deathTimer3" type="Timer" parent="Spider"]
@@ -849,14 +859,6 @@ shape = SubResource("CapsuleShape2D_1g6bv")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Spider/hurtArea"]
 position = Vector2(-56, 8)
 shape = SubResource("CapsuleShape2D_5s02t")
-
-[node name="hurtsoundspider" type="AudioStreamPlayer" parent="Spider"]
-stream = ExtResource("16_tj00d")
-
-[node name="deathsoundspider" type="AudioStreamPlayer2D" parent="Spider"]
-stream = ExtResource("17_djwu3")
-
-[node name="hurttimer3" type="Timer" parent="Spider"]
 
 [node name="Staircase" type="StaticBody2D" parent="."]
 

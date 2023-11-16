@@ -123,7 +123,7 @@ func generate_hallways():
 			#kink probability midway path
 			#additional check for paths too small to get through
 			if i == floor(hall_length / 2) and random.randf() > kink_probability and row_width > 2:
-				$TileMap.set_cell(0, row_position, 0, Vector2i(0, 3))
+				$TileMap.set_cell(0, row_position, dungeon_floor, Vector2i(0, 3))
 				hall_pos.append(row_position)
 				row_position += perpendicular
 				tile_pos += perpendicular
