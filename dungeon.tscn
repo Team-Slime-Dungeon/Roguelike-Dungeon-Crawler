@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://c8fm5k1pu6l4i"]
+[gd_scene load_steps=37 format=3 uid="uid://c8fm5k1pu6l4i"]
 
 [ext_resource type="Script" path="res://dungeon.gd" id="1_ifql2"]
 [ext_resource type="Texture2D" uid="uid://cdejfmb3r8r6b" path="res://cave1.png" id="2_fp8l3"]
@@ -11,6 +11,8 @@
 [ext_resource type="Script" path="res://CharacterControls.gd" id="9_iyhmm"]
 [ext_resource type="Script" path="res://Spider.gd" id="10_fsiaj"]
 [ext_resource type="PackedScene" uid="uid://dld8oni5e2o2l" path="res://spider.tscn" id="11_d5ajo"]
+[ext_resource type="PackedScene" uid="uid://cul7b22epo42i" path="res://InventoryTesting/inventory_gui.tscn" id="13_87dgk"]
+[ext_resource type="PackedScene" uid="uid://dryac8f57oat6" path="res://Pause Menu/pause_menu.tscn" id="13_cipy3"]
 [ext_resource type="PackedScene" uid="uid://dqjumom2gi26s" path="res://character.tscn" id="13_d7p71"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yqjvn"]
@@ -393,6 +395,12 @@ layer_0/y_sort_enabled = true
 
 [node name="GUI" type="CanvasLayer" parent="."]
 
+[node name="Pause_Menu" parent="GUI" instance=ExtResource("13_cipy3")]
+offset_left = -1.25
+offset_top = -1.25
+offset_right = -1.25
+offset_bottom = -1.25
+
 [node name="Current_Floor" type="Label" parent="GUI"]
 anchors_preset = 3
 anchor_left = 1.0
@@ -404,6 +412,9 @@ offset_top = -26.0
 grow_horizontal = 0
 grow_vertical = 0
 text = "Current Floor Here"
+
+[node name="Inventory_gui" parent="GUI" instance=ExtResource("13_87dgk")]
+visible = false
 
 [node name="Debug_Hud" type="CanvasLayer" parent="."]
 script = ExtResource("6_grh6y")
