@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://dryac8f57oat6"]
+[gd_scene load_steps=3 format=3 uid="uid://dryac8f57oat6"]
 
 [ext_resource type="Script" path="res://Pause Menu/Pause_Menu.gd" id="1_kpkq0"]
+[ext_resource type="Script" path="res://Pause Menu/Resolutions_settings.gd" id="2_kulj6"]
 
 [node name="Pause Menu" type="Control"]
 process_mode = 3
@@ -57,6 +58,81 @@ text = "Settings"
 layout_mode = 2
 text = "Save & Quit"
 
+[node name="Settings" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Back" type="Button" parent="Settings"]
+layout_mode = 0
+offset_left = 513.0
+offset_top = 535.0
+offset_right = 578.0
+offset_bottom = 566.0
+scale = Vector2(2, 2)
+text = "Back"
+
+[node name="Resolution" type="Label" parent="Settings"]
+layout_mode = 0
+offset_left = 184.0
+offset_top = 136.0
+offset_right = 267.0
+offset_bottom = 162.0
+scale = Vector2(2.5, 2.5)
+text = "Resolution:"
+script = ExtResource("2_kulj6")
+
+[node name="Fullscreen" type="Label" parent="Settings"]
+layout_mode = 0
+offset_left = 189.0
+offset_top = 241.0
+offset_right = 273.0
+offset_bottom = 267.0
+scale = Vector2(2.5, 2.5)
+text = "Fullscreen:"
+script = ExtResource("2_kulj6")
+
+[node name="Volume" type="Label" parent="Settings"]
+layout_mode = 0
+offset_left = 217.0
+offset_top = 338.0
+offset_right = 281.0
+offset_bottom = 364.0
+scale = Vector2(2.5, 2.5)
+text = "Volume:"
+script = ExtResource("2_kulj6")
+
+[node name="Fullscreen2" type="CheckButton" parent="Settings"]
+layout_mode = 0
+offset_left = 529.0
+offset_top = 247.0
+offset_right = 573.0
+offset_bottom = 271.0
+scale = Vector2(2.5, 2.5)
+
+[node name="Resolution2" type="OptionButton" parent="Settings"]
+layout_mode = 0
+offset_left = 448.0
+offset_top = 155.0
+offset_right = 594.0
+offset_bottom = 175.0
+scale = Vector2(2, 2)
+
+[node name="HSlider" type="HSlider" parent="Settings"]
+layout_mode = 0
+offset_left = 446.0
+offset_top = 346.0
+offset_right = 569.0
+offset_bottom = 362.0
+scale = Vector2(2.5, 2.5)
+
 [connection signal="pressed" from="CenterContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/Save Quit" to="." method="_on_save_quit_pressed"]
+[connection signal="pressed" from="Settings/Back" to="." method="_on_back_pressed"]
+[connection signal="toggled" from="Settings/Fullscreen2" to="Settings/Fullscreen" method="_on_fullscreen_2_toggled"]
+[connection signal="item_selected" from="Settings/Resolution2" to="Settings/Resolution" method="_on_resolution_2_item_selected"]

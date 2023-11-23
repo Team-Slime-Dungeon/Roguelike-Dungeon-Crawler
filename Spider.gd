@@ -1,20 +1,24 @@
 extends CharacterBody2D
-
+var chase_speed = 5
 enum MovementState { UP, DOWN, LEFT, RIGHT }
 var currentHealth: int = 5
 var speed = 100
 var move_range = 50
 var move_timer = 0
+var player_chase = false
+var motion = Vector2.ZERO
+var player = null
 var current_state = MovementState.UP
 @onready var deathTimer3 = $deathTimer3
 @onready var hurtsoundspider = $hurtsoundspider
 @onready var deathsoundspider = $deathsoundspider
 @onready var hurttimer3 = $hurttimer3
-func _process(delta):
-	#if not $Spider/AnimationPlayer.is_playing():
-	#	$Spider/AnimationPlayer.play("walking_left")
-
-	move_timer += delta
+func _physics_process(delta):
+	if player_chase:
+		position += (player.position - position)/chase_speed
+		
+	else:
+		move_timer += delta
 
 	if move_timer >= 2.0:  # Adjust this value to control the time for each type of movement
 		move_timer = 0
@@ -56,3 +60,14 @@ func _on_hurt_area_area_entered(area):
 			deathTimer3.start()
 			await deathTimer3.timeout
 			queue_free()
+
+
+func _on_detectionarea_1_body_entered(body):
+	player = body
+	player_chase = true
+
+
+
+func _on_detectionarea_1_body_exited(body):
+	player = null
+	player_chase = false
