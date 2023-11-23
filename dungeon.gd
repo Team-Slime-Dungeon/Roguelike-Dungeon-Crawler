@@ -43,6 +43,9 @@ func _ready():
 	var Player_Inventory = inventory.new()
 	Player_Inventory._ready()
 	Player_Inventory._print_inventory()
+	Player_Inventory._add_item(1,1)
+	var myprint = Player_Inventory._save_inventory()
+	print(myprint)
 
 	clear_room() # clean up for new floor
 	floor_structure() # fill in int

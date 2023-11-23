@@ -481,8 +481,8 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = 660.0
-offset_right = 8064.0
-offset_bottom = 5196.0
+offset_right = 14976.0
+offset_bottom = 9084.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 0.854902, 0.588235, 1)
@@ -642,6 +642,7 @@ scale = Vector2(0.5, 0.5)
 texture_normal = ExtResource("6_hpig8")
 
 [node name="SettingsBut" type="Button" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 241.0
 offset_top = 514.0

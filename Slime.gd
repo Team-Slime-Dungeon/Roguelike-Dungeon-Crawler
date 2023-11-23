@@ -1,22 +1,26 @@
 extends CharacterBody2D
-
 enum MovementState { UP, DOWN, LEFT, RIGHT }
-@onready var SlimeDeath = $SlimeDeath
-var speed = 100
 var move_range = 50
 var move_timer = 0
 var current_state = MovementState.UP
+@onready var SlimeDeath = $SlimeDeath
+var chase_speed = 5
+var speed = 100
+var player_chase = false
 var currentHealth: int = 5
 @onready var Hurt = $Hurt
 @onready var HurtTimer1 = $HurtTimer1
 @onready var deathTimer = $deathTimer
 @onready var slimedeathsound = $slimedeathsound
 @onready var slimehitsound  = $slimehitsound
-func _process(delta):
-	#if not $AnimationPlayer.is_playing():
-	#	$AnimationPlayer.play("movement")
-
-	move_timer += delta
+var motion = Vector2.ZERO
+var player = null
+func _physics_process(delta):
+	if player_chase:
+		position += (player.position - position)/chase_speed
+		
+	else:
+		move_timer += delta
 
 	if move_timer >= 2.0:  # Adjust this value to control the time for each type of movement
 		move_timer = 0
@@ -61,3 +65,13 @@ func _on_hurt_box_area_entered(area):
 			deathTimer.start()
 			await deathTimer.timeout
 			queue_free()
+
+
+func _on_detectionarea_1_body_entered(body):
+	player = body
+	player_chase = true
+
+
+func _on_detectionarea_1_body_exited(body):
+	player = null
+	player_chase = false

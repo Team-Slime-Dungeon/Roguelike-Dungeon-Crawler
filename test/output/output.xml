@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="GutTests" failures="0" tests="13" >
+  <testsuite name="res://test/unit/test_example.gd" tests="0" failures="0" skipped="0" >
+      </testsuite>
+  <testsuite name="res://test/unit/test_example.gd.Test_Adding" tests="4" failures="0" skipped="0" >
+      <testcase name="test_Add_to_Inventory" assertions="1" status="pass" classname="res://test/unit/test_example.gd.Test_Adding" >
+      </testcase>
+      <testcase name="test_Add_Multiple" assertions="1" status="pass" classname="res://test/unit/test_example.gd.Test_Adding" >
+      </testcase>
+      <testcase name="test_Inventory_Overfill" assertions="1" status="pass" classname="res://test/unit/test_example.gd.Test_Adding" >
+      </testcase>
+      <testcase name="test_Overfill_Multiple_Inventory" assertions="1" status="pass" classname="res://test/unit/test_example.gd.Test_Adding" >
+      </testcase>
+      </testsuite>
+  <testsuite name="res://test/unit/test_example.gd.Test_Get_Item_Name" tests="1" failures="0" skipped="0" >
+      <testcase name="test_Get_Single_Item_Name" assertions="1" status="pass" classname="res://test/unit/test_example.gd.Test_Get_Item_Name" >
+      </testcase>
+      </testsuite>
+  <testsuite name="res://test/unit/test_example.gd.Test_Get_Item_Attack" tests="1" failures="0" skipped="0" >
+      <testcase name="test_Get_Single_Item_Attack" assertions="1" status="pass" classname="res://test/unit/test_example.gd.Test_Get_Item_Attack" >
+      </testcase>
+      </testsuite>
+  <testsuite name="res://test/unit/test_example.gd.Test_Get_Item_Defense" tests="1" failures="0" skipped="0" >
+      <testcase name="test_Get_Single_Item_Defense" assertions="1" status="pass" classname="res://test/unit/test_example.gd.Test_Get_Item_Defense" >
+      </testcase>
+      </testsuite>
+  <testsuite name="res://test/unit/test_example.gd.Test_Load_Inventory" tests="1" failures="0" skipped="0" >
+      <testcase name="test_Load_Inventory" assertions="1" status="pass" classname="res://test/unit/test_example.gd.Test_Load_Inventory" >
+      </testcase>
+      </testsuite>
+  <testsuite name="res://test/unit/test_example.gd.Test_Save_Inventory" tests="2" failures="0" skipped="0" >
+      <testcase name="test_Saving_New_Inventory" assertions="1" status="pass" classname="res://test/unit/test_example.gd.Test_Save_Inventory" >
+      </testcase>
+      <testcase name="test_Saving_Another_Inventory" assertions="1" status="pass" classname="res://test/unit/test_example.gd.Test_Save_Inventory" >
+      </testcase>
+      </testsuite>
+  <testsuite name="res://test/unit/test_example.gd.Test_Remove_Items" tests="1" failures="0" skipped="0" >
+      <testcase name="test_Remove_Items" assertions="1" status="pass" classname="res://test/unit/test_example.gd.Test_Remove_Items" >
+      </testcase>
+      </testsuite>
+  <testsuite name="res://test/unit/test_example.gd.Test_Delete_Items" tests="1" failures="0" skipped="0" >
+      <testcase name="test_Destroy_Items" assertions="1" status="pass" classname="res://test/unit/test_example.gd.Test_Delete_Items" >
+      </testcase>
+      </testsuite>
+  <testsuite name="res://test/unit/test_example.gd.Test_Inventory_System" tests="1" failures="0" skipped="0" >
+      <testcase name="test_Starting_Inventory" assertions="1" status="pass" classname="res://test/unit/test_example.gd.Test_Inventory_System" >
+      </testcase>
+      </testsuite>
+  </testsuites>
