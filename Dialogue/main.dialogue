@@ -1,0 +1,60 @@
+~ start
+Potion: [[Hi|Hey|Hello]], do you need something?
+- What are you?
+	Potion: Me?... Odd question.
+	Potion: I'm a mystical potion duh! Can't you tell?
+	- But I thought potion's can't talk?
+		Potion: Hah! You don't seem very bright. 
+		Potion: How can you be so silly and believe that?
+		Potion: Forget it ... it's useless trying to explain to you.
+		- Where am I?
+			Potion: Here? Well, you're in shi-... I mean dungeon.
+			Potion: There's supposedly some really valuable treasures around these parts but other than myself, everything is just mediocore at best.
+			Potion: If you want my advice, I'd say you should just turn back and not bother with this place.
+			Potion: Humans such as yourself never last long enouth here.
+			- Nevermind => END
+		- Nevermind => END
+	- Oh, my bad. I didn't know.
+		Potion: Wow... I never thought I'd meet someone who doesn't know about my greatness.
+		Potion: What a shame humans are so dumb...
+		- Where am I?
+			Potion: Here? Well, you're in shi-... I mean dungeon.
+			Potion: There's supposedly some really valuable treasures around these parts but other than myself, everything is just mediocore at best.
+			Potion: If you want my advice, I'd say you should just turn back and not bother with this place.
+			Potion: Humans such as yourself never last long enouth here.
+			- Nevermind => END
+		- Nevermind => END
+	- That's cool!
+		Potion: You have a good eye!
+		Potion: You know what... I like you! Here, I'll give you this item I had on me.
+		- Where am I?
+			Potion: Here? Well, you're in shi-... I mean dungeon.
+			Potion: There's supposedly some really valuable treasures around these parts but other than myself, everything is just mediocore at best.
+			Potion: If you want my advice, I'd say you should just turn back and not bother with this place.
+			Potion: Humans such as yourself never last long enouth here.
+			- Nevermind => END
+		- Nevermind => END 
+- Where am I?
+	Potion: Here? Well, you're in shi-... I mean dungeon.
+	Potion: There's supposedly some really valuable treasures around these parts but other than myself, everything is just mediocore at best.
+	Potion: If you want my advice, I'd say you should just turn back and not bother with this place.
+	Potion: Humans such as yourself never last long enouth here.
+	- What are you?
+		Potion: Me?... Odd question.
+		Potion: I'm a mystical potion duh! Can't you tell?
+		- But I thought potion's can't talk?
+			Potion: Hah! You don't seem very bright. 
+			Potion: How can you be so silly and believe that?
+			Potion: Forget it ... it's useless trying to explain to you.
+			- Nevermind => END
+		- Oh, my bad. I didn't know.
+			Potion: Wow... I never thought I'd meet someone who doesn't know about my greatness.
+			Potion: What a shame humans are so dumb...
+			- Nevermind => END 
+		- That's cool!
+			Potion: You have a good eye!
+			Potion: You know what... I like you! Here, I'll give you this item I had on me.
+			- Nevermind => END 
+	- Nevermind => END 
+- Nevermind => END 
+=> END

@@ -1,4 +1,4 @@
-[gd_scene load_steps=102 format=3 uid="uid://c8fm5k1pu6l4i"]
+[gd_scene load_steps=106 format=3 uid="uid://c8fm5k1pu6l4i"]
 
 [ext_resource type="Script" path="res://dungeon.gd" id="1_ifql2"]
 [ext_resource type="Texture2D" uid="uid://cdejfmb3r8r6b" path="res://environment/cave1.png" id="2_nq54f"]
@@ -25,6 +25,8 @@
 [ext_resource type="AudioStream" uid="uid://c7ioyi1e8fxds" path="res://Music/spider death sound.mp3" id="17_djwu3"]
 [ext_resource type="Texture2D" uid="uid://bqs2ydffkjk73" path="res://player/cassandra_walk.png" id="17_pf4by"]
 [ext_resource type="Texture2D" uid="uid://hau6lcqggcfx" path="res://equipment/weapon_1.png" id="18_x4evw"]
+[ext_resource type="Texture2D" uid="uid://b2hy2p668k0ub" path="res://equipment/item_sheet.png" id="26_7dvrl"]
+[ext_resource type="Script" path="res://Potion.gd" id="26_j2vsr"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yqjvn"]
 texture = ExtResource("2_nq54f")
@@ -1179,6 +1181,9 @@ states/walk/node = SubResource("AnimationNodeBlendSpace2D_qon3s")
 states/walk/position = Vector2(784, 209)
 transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_fipjl"), "idle", "attack", SubResource("AnimationNodeStateMachineTransition_ig6am"), "attack", "idle", SubResource("AnimationNodeStateMachineTransition_y87bg"), "walk", "attack", SubResource("AnimationNodeStateMachineTransition_ll4pi"), "attack", "walk", SubResource("AnimationNodeStateMachineTransition_jny84"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_2wwe5"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_en154")]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_ja0t6"]
+radius = 39.6989
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7gejh"]
 radius = 12.0
 height = 38.0
@@ -1240,6 +1245,8 @@ radius = 8.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_b827w"]
 radius = 8.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_idjd7"]
 
 [node name="Dungeon" type="Node2D"]
 scale = Vector2(0.5, 0.5)
@@ -1494,6 +1501,7 @@ texture = ExtResource("18_x4evw")
 [node name="weapon" type="Area2D" parent="Cassandra/CassandraSprite/weapon"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Cassandra/CassandraSprite/weapon/weapon"]
+visible = false
 position = Vector2(7.87091, -8.60516)
 rotation = 0.705113
 shape = SubResource("CapsuleShape2D_jfoj0")
@@ -1506,6 +1514,7 @@ offset_bottom = 38.0
 color = Color(0.454902, 0, 0, 0)
 
 [node name="CassandraCollision" type="CollisionShape2D" parent="Cassandra"]
+visible = false
 position = Vector2(60, 12)
 shape = SubResource("CapsuleShape2D_52w7h")
 
@@ -1524,12 +1533,20 @@ parameters/attack/blend_position = Vector2(0.783742, 0.134389)
 parameters/idle/blend_position = Vector2(-0.978528, 0.066)
 parameters/walk/blend_position = Vector2(-0.978528, 0.0293334)
 
+[node name="detection_area" type="Area2D" parent="Cassandra"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Cassandra/detection_area"]
+position = Vector2(60, -2)
+shape = SubResource("CircleShape2D_ja0t6")
+
 [node name="Camera2D" type="Camera2D" parent="Cassandra"]
 position = Vector2(61, 6)
 
 [node name="hurtbox" type="Area2D" parent="Cassandra"]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Cassandra/hurtbox"]
+visible = false
 position = Vector2(60, 10)
 shape = SubResource("CapsuleShape2D_7gejh")
 
@@ -1595,16 +1612,31 @@ vframes = 10
 frame = 13
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Staircase"]
+visible = false
 shape = SubResource("CircleShape2D_4noh4")
 
 [node name="Staircase_hitbox" type="Area2D" parent="Staircase"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Staircase/Staircase_hitbox"]
+visible = false
 shape = SubResource("CircleShape2D_b827w")
 
 [node name="BackgroundSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("13_7lc74")
 script = ExtResource("14_1o1d0")
+
+[node name="Potion" type="CharacterBody2D" parent="."]
+script = ExtResource("26_j2vsr")
+
+[node name="PotionSprite" type="Sprite2D" parent="Potion"]
+position = Vector2(0, -54)
+texture = ExtResource("26_7dvrl")
+hframes = 4
+vframes = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Potion"]
+position = Vector2(0, -56)
+shape = SubResource("CircleShape2D_idjd7")
 
 [connection signal="pressed" from="Debug_Hud/Seed/New Seed" to="." method="_on_new_seed_pressed"]
 [connection signal="pressed" from="Debug_Hud/out_zoom" to="Debug_Hud" method="_on_out_zoom_pressed"]
@@ -1618,6 +1650,8 @@ script = ExtResource("14_1o1d0")
 [connection signal="area_entered" from="Slime/hurtBox" to="Slime" method="_on_hurt_box_area_entered"]
 [connection signal="body_entered" from="Slime/detectionarea1" to="Slime" method="_on_detectionarea_1_body_entered"]
 [connection signal="body_exited" from="Slime/detectionarea1" to="Slime" method="_on_detectionarea_1_body_exited"]
+[connection signal="body_entered" from="Cassandra/detection_area" to="Cassandra" method="_on_detection_area_body_entered"]
+[connection signal="body_exited" from="Cassandra/detection_area" to="Cassandra" method="_on_detection_area_body_exited"]
 [connection signal="area_entered" from="Cassandra/hurtbox" to="Cassandra" method="_on_hurtbox_area_entered"]
 [connection signal="area_entered" from="Spider/hurtArea" to="Spider" method="_on_hurt_area_area_entered"]
 [connection signal="body_entered" from="Spider/detectionarea1" to="Spider" method="_on_detectionarea_1_body_entered"]
