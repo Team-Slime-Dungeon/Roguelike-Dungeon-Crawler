@@ -1625,16 +1625,16 @@ shape = SubResource("CircleShape2D_b827w")
 stream = ExtResource("13_7lc74")
 script = ExtResource("14_1o1d0")
 
-[node name="Potion" type="CharacterBody2D" parent="."]
+[node name="Potion1" type="CharacterBody2D" parent="."]
 script = ExtResource("26_j2vsr")
 
-[node name="PotionSprite" type="Sprite2D" parent="Potion"]
+[node name="PotionSprite" type="Sprite2D" parent="Potion1"]
 position = Vector2(0, -54)
 texture = ExtResource("26_7dvrl")
 hframes = 4
 vframes = 3
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Potion"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Potion1"]
 position = Vector2(0, -56)
 shape = SubResource("CircleShape2D_idjd7")
 

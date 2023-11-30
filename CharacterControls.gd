@@ -15,8 +15,9 @@ var SPEED
 const walking_speed = 100
 const running_speed = 250
 var input_dir
-var is_attacking = false
-var potion_is_in_range = false
+var is_attacking: bool = false
+var potion_is_in_range: bool = false
+var is_talking: bool = false
 
 func _ready():
 	#activate animation tree
@@ -28,7 +29,7 @@ func _ready():
 
 
 func get_input():
-	if (is_attacking == true):
+	if (is_attacking == true or is_talking == true):
 		input_dir = Vector2(0,0)
 	else:
 		input_dir = Input.get_vector("ui_left","ui_right","ui_up","ui_down")
@@ -75,10 +76,15 @@ func update_animation_parameter():
 
 func _unhandled_input(event):
 	#if player is in range of potion and presses 'f', dialogue balloon will load
+		is_talking = false
 		if potion_is_in_range == true:
 			if Input.is_action_pressed("interact"):
 				DialogueManager.show_example_dialogue_balloon(load("res://Dialogue/main.dialogue"), "start")
+				is_talking = true
 				return
+		
+
+	
 				
 func _physics_process(delta):
 	handleCollision()
