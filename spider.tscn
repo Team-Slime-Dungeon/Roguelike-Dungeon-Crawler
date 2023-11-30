@@ -1,6 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://dld8oni5e2o2l"]
+[gd_scene load_steps=6 format=3 uid="uid://1nsc1ahfpth4"]
 
-[ext_resource type="Texture2D" uid="uid://cj0r4hkpvhj87" path="res://spider_sheet.png" id="1_opjvl"]
+[ext_resource type="Texture2D" uid="uid://cj0r4hkpvhj87" path="res://monsters/spider_sheet.png" id="1_opjvl"]
 [ext_resource type="Script" path="res://SpiderAnimation.gd" id="1_y75qh"]
 
 [sub_resource type="Animation" id="Animation_2lj6t"]
