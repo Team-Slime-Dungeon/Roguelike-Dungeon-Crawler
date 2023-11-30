@@ -1,185 +1,628 @@
-extends Node2D
+[gd_scene load_steps=22 format=3 uid="uid://c8fm5k1pu6l4i"]
 
-var debug = true
+[ext_resource type="Script" path="res://dungeon.gd" id="1_ifql2"]
+[ext_resource type="Texture2D" uid="uid://cdejfmb3r8r6b" path="res://environment/cave1.png" id="2_nq54f"]
+[ext_resource type="Texture2D" uid="uid://w72furwr3cqb" path="res://environment/cavewalls1.png" id="3_gtmqh"]
+[ext_resource type="Texture2D" uid="uid://dtmfkxp1v7kq" path="res://environment/funguscave1.png" id="4_efs67"]
+[ext_resource type="Texture2D" uid="uid://domoj1a0tcvuy" path="res://environment/funguscavewalls1.png" id="5_rqtvc"]
+[ext_resource type="Script" path="res://debug_UI.gd" id="6_grh6y"]
+[ext_resource type="Texture2D" uid="uid://2uvs3oud5cvk" path="res://debug_buttons.png" id="6_jqwbb"]
+[ext_resource type="PackedScene" uid="uid://eb8v1h7u5ytm" path="res://Health Functions/hearts_container.tscn" id="6_tho0w"]
+[ext_resource type="PackedScene" uid="uid://crcqnnl6ies46" path="res://cassandra_scene.tscn" id="11_ai3vm"]
+[ext_resource type="AudioStream" uid="uid://dhiy4c1nn72yc" path="res://Music/background sound.mp3" id="13_7lc74"]
+[ext_resource type="PackedScene" uid="uid://cul7b22epo42i" path="res://InventoryTesting/inventory_gui.tscn" id="13_87dgk"]
+[ext_resource type="PackedScene" uid="uid://dryac8f57oat6" path="res://Pause Menu/pause_menu.tscn" id="13_cipy3"]
+[ext_resource type="Script" path="res://BackgroundSound.gd" id="14_1o1d0"]
+[ext_resource type="PackedScene" uid="uid://8mujy3eharaw" path="res://potion_1.tscn" id="14_4maq5"]
 
-var healthSetupCompleted = false
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yqjvn"]
+texture = ExtResource("2_nq54f")
+texture_region_size = Vector2i(64, 32)
+0:0/0 = 0
+0:0/0/terrain_set = 0
+0:0/0/terrain = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+0:0/0/terrains_peering_bit/right_corner = 0
+0:0/0/terrains_peering_bit/bottom_right_side = 0
+0:0/0/terrains_peering_bit/bottom_corner = 0
+0:0/0/terrains_peering_bit/bottom_left_side = 0
+0:0/0/terrains_peering_bit/top_right_side = 0
+1:0/0 = 0
+1:0/0/terrain_set = 0
+1:0/0/terrain = 0
+1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:0/0/physics_layer_0/angular_velocity = 0.0
+1:0/0/terrains_peering_bit/bottom_right_side = 0
+1:0/0/terrains_peering_bit/bottom_corner = 0
+1:0/0/terrains_peering_bit/bottom_left_side = 0
+0:1/0 = 0
+0:1/0/terrain_set = 0
+0:1/0/terrain = 0
+0:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:1/0/physics_layer_0/angular_velocity = 0.0
+0:1/0/terrains_peering_bit/right_corner = 0
+0:1/0/terrains_peering_bit/bottom_right_side = 0
+0:1/0/terrains_peering_bit/top_right_side = 0
+1:1/0 = 0
+1:1/0/terrain_set = 0
+1:1/0/terrain = 0
+1:1/0/probability = 0.2
+1:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:1/0/physics_layer_0/angular_velocity = 0.0
+1:1/0/terrains_peering_bit/right_corner = 0
+1:1/0/terrains_peering_bit/bottom_right_side = 0
+1:1/0/terrains_peering_bit/bottom_corner = 0
+1:1/0/terrains_peering_bit/bottom_left_side = 0
+1:1/0/terrains_peering_bit/left_corner = 0
+1:1/0/terrains_peering_bit/top_left_side = 0
+1:1/0/terrains_peering_bit/top_corner = 0
+1:1/0/terrains_peering_bit/top_right_side = 0
+0:2/0 = 0
+0:2/0/terrain_set = 0
+0:2/0/terrain = 0
+0:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:2/0/physics_layer_0/angular_velocity = 0.0
+0:2/0/terrains_peering_bit/right_corner = 0
+0:2/0/terrains_peering_bit/bottom_right_side = 0
+0:2/0/terrains_peering_bit/top_left_side = 0
+0:2/0/terrains_peering_bit/top_corner = 0
+0:2/0/terrains_peering_bit/top_right_side = 0
+0:3/0 = 0
+0:3/0/terrain_set = 0
+0:3/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:3/0/physics_layer_0/angular_velocity = 0.0
+2:0/0 = 0
+2:0/0/terrain_set = 0
+2:0/0/terrain = 0
+2:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+2:0/0/physics_layer_0/angular_velocity = 0.0
+2:0/0/terrains_peering_bit/bottom_right_side = 0
+2:0/0/terrains_peering_bit/bottom_corner = 0
+2:0/0/terrains_peering_bit/bottom_left_side = 0
+2:0/0/terrains_peering_bit/left_corner = 0
+2:0/0/terrains_peering_bit/top_left_side = 0
+2:1/0 = 0
+2:1/0/terrain_set = 0
+2:1/0/terrain = 0
+2:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+2:1/0/physics_layer_0/angular_velocity = 0.0
+2:1/0/terrains_peering_bit/bottom_left_side = 0
+2:1/0/terrains_peering_bit/left_corner = 0
+2:1/0/terrains_peering_bit/top_left_side = 0
+2:2/0 = 0
+2:2/0/terrain_set = 0
+2:2/0/terrain = 0
+2:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+2:2/0/physics_layer_0/angular_velocity = 0.0
+2:2/0/terrains_peering_bit/bottom_left_side = 0
+2:2/0/terrains_peering_bit/left_corner = 0
+2:2/0/terrains_peering_bit/top_left_side = 0
+2:2/0/terrains_peering_bit/top_corner = 0
+2:2/0/terrains_peering_bit/top_right_side = 0
+1:2/0 = 0
+1:2/0/terrain_set = 0
+1:2/0/terrain = 0
+1:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:2/0/physics_layer_0/angular_velocity = 0.0
+1:2/0/terrains_peering_bit/top_left_side = 0
+1:2/0/terrains_peering_bit/top_corner = 0
+1:2/0/terrains_peering_bit/top_right_side = 0
+1:3/0 = 0
+1:3/0/terrain_set = 0
+1:3/0/terrain = 0
+1:3/0/probability = 0.2
+1:3/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:3/0/physics_layer_0/angular_velocity = 0.0
+1:3/0/terrains_peering_bit/right_corner = 0
+1:3/0/terrains_peering_bit/bottom_right_side = 0
+1:3/0/terrains_peering_bit/bottom_corner = 0
+1:3/0/terrains_peering_bit/bottom_left_side = 0
+1:3/0/terrains_peering_bit/left_corner = 0
+1:3/0/terrains_peering_bit/top_left_side = 0
+1:3/0/terrains_peering_bit/top_corner = 0
+1:3/0/terrains_peering_bit/top_right_side = 0
+2:3/0 = 0
+2:3/0/terrain_set = 0
+2:3/0/terrain = 0
+2:3/0/probability = 0.2
+2:3/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+2:3/0/physics_layer_0/angular_velocity = 0.0
+2:3/0/terrains_peering_bit/right_corner = 0
+2:3/0/terrains_peering_bit/bottom_right_side = 0
+2:3/0/terrains_peering_bit/bottom_corner = 0
+2:3/0/terrains_peering_bit/bottom_left_side = 0
+2:3/0/terrains_peering_bit/left_corner = 0
+2:3/0/terrains_peering_bit/top_left_side = 0
+2:3/0/terrains_peering_bit/top_corner = 0
+2:3/0/terrains_peering_bit/top_right_side = 0
+2:4/0 = 0
+2:4/0/terrain_set = 0
+2:4/0/terrain = 0
+2:4/0/probability = 0.01
+2:4/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+2:4/0/physics_layer_0/angular_velocity = 0.0
+2:4/0/terrains_peering_bit/right_corner = 0
+2:4/0/terrains_peering_bit/bottom_right_side = 0
+2:4/0/terrains_peering_bit/bottom_corner = 0
+2:4/0/terrains_peering_bit/bottom_left_side = 0
+2:4/0/terrains_peering_bit/left_corner = 0
+2:4/0/terrains_peering_bit/top_left_side = 0
+2:4/0/terrains_peering_bit/top_corner = 0
+2:4/0/terrains_peering_bit/top_right_side = 0
+2:5/0 = 0
+2:5/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+2:5/0/physics_layer_0/angular_velocity = 0.0
+2:6/0 = 0
+2:6/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+2:6/0/physics_layer_0/angular_velocity = 0.0
 
-var random = RandomNumberGenerator.new()
-var node_pos = [] # keeps track of the root for each room
-var hall_pos = [] # for building pathways
-var hall_count = 0 # quantity of paths created
-var hall_length = 0 # max length for hallways
-var room_min = 0 # absolute minimum size for a room
-var room_max = 0 # absolute maximum size for a room
-var min_path_width = 3 # 2 Walls + Path, rec 3
-var max_path_width = 7 # rec 5
-var staircase_pos = 0 # selected element in node_pos
-var current_floor = 0 # starting floor
-var kink_probability = 0.5
-var descend = false # check if player stepped on a staircase
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_alqgh"]
+texture = ExtResource("3_gtmqh")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-34.5, -17, -34, 2, 0, 19, 33, 3, 34, -18, 0, -35)
+1:0/0 = 0
+1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:0/0/physics_layer_0/angular_velocity = 0.0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(0, -16, -32, 0, 0, 16, 32, 0)
+2:0/0 = 0
+2:0/0/z_index = 1
+2:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+2:0/0/physics_layer_0/angular_velocity = 0.0
+3:0/0 = 0
+3:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+3:0/0/physics_layer_0/angular_velocity = 0.0
+0:1/0 = 0
+0:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:1/0/physics_layer_0/angular_velocity = 0.0
+1:1/0 = 0
+1:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:1/0/physics_layer_0/angular_velocity = 0.0
+2:1/0 = 0
+2:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+2:1/0/physics_layer_0/angular_velocity = 0.0
+3:1/0 = 0
+3:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+3:1/0/physics_layer_0/angular_velocity = 0.0
+3:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(1, -32.5, -31, -16.5, -32, 0, 0, 16, 32, 0, 31.5, -17)
+0:2/0 = 0
+0:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:2/0/physics_layer_0/angular_velocity = 0.0
+1:2/0 = 0
+1:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:2/0/physics_layer_0/angular_velocity = 0.0
+2:2/0 = 0
+2:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+2:2/0/physics_layer_0/angular_velocity = 0.0
 
-var dungeon_floor_tiles = [0,2] # IDs for the dungeon floors
-var dungeon_wall_tiles = [1,3] # IDs for the dungeon walls
-var dungeon_terrains = [0,1] # Terrains for the tiles (seperate or they will connect together
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jple6"]
+texture = ExtResource("4_efs67")
+texture_region_size = Vector2i(64, 32)
+0:0/0 = 0
+0:0/0/terrain_set = 0
+0:0/0/terrain = 1
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+0:0/0/terrains_peering_bit/right_corner = 1
+0:0/0/terrains_peering_bit/bottom_right_side = 1
+0:0/0/terrains_peering_bit/bottom_corner = 1
+0:0/0/terrains_peering_bit/bottom_left_side = 1
+0:0/0/terrains_peering_bit/top_right_side = 1
+1:0/0 = 0
+1:0/0/terrain_set = 0
+1:0/0/terrain = 1
+1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:0/0/physics_layer_0/angular_velocity = 0.0
+1:0/0/terrains_peering_bit/bottom_right_side = 1
+1:0/0/terrains_peering_bit/bottom_corner = 1
+1:0/0/terrains_peering_bit/bottom_left_side = 1
+2:0/0 = 0
+2:0/0/terrain_set = 0
+2:0/0/terrain = 1
+2:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+2:0/0/physics_layer_0/angular_velocity = 0.0
+2:0/0/terrains_peering_bit/bottom_right_side = 1
+2:0/0/terrains_peering_bit/bottom_corner = 1
+2:0/0/terrains_peering_bit/bottom_left_side = 1
+2:0/0/terrains_peering_bit/left_corner = 1
+2:0/0/terrains_peering_bit/top_left_side = 1
+0:1/0 = 0
+0:1/0/terrain_set = 0
+0:1/0/terrain = 1
+0:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:1/0/physics_layer_0/angular_velocity = 0.0
+0:1/0/terrains_peering_bit/right_corner = 1
+0:1/0/terrains_peering_bit/bottom_right_side = 1
+0:1/0/terrains_peering_bit/top_right_side = 1
+1:1/0 = 0
+1:1/0/terrain_set = 0
+1:1/0/terrain = 1
+1:1/0/probability = 0.2
+1:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:1/0/physics_layer_0/angular_velocity = 0.0
+1:1/0/terrains_peering_bit/right_corner = 1
+1:1/0/terrains_peering_bit/bottom_right_side = 1
+1:1/0/terrains_peering_bit/bottom_corner = 1
+1:1/0/terrains_peering_bit/bottom_left_side = 1
+1:1/0/terrains_peering_bit/left_corner = 1
+1:1/0/terrains_peering_bit/top_left_side = 1
+1:1/0/terrains_peering_bit/top_corner = 1
+1:1/0/terrains_peering_bit/top_right_side = 1
+2:1/0 = 0
+2:1/0/terrain_set = 0
+2:1/0/terrain = 1
+2:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+2:1/0/physics_layer_0/angular_velocity = 0.0
+2:1/0/terrains_peering_bit/bottom_left_side = 1
+2:1/0/terrains_peering_bit/left_corner = 1
+2:1/0/terrains_peering_bit/top_left_side = 1
+0:2/0 = 0
+0:2/0/terrain_set = 0
+0:2/0/terrain = 1
+0:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:2/0/physics_layer_0/angular_velocity = 0.0
+0:2/0/terrains_peering_bit/right_corner = 1
+0:2/0/terrains_peering_bit/bottom_right_side = 1
+0:2/0/terrains_peering_bit/top_left_side = 1
+0:2/0/terrains_peering_bit/top_corner = 1
+0:2/0/terrains_peering_bit/top_right_side = 1
+1:2/0 = 0
+1:2/0/terrain_set = 0
+1:2/0/terrain = 1
+1:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:2/0/physics_layer_0/angular_velocity = 0.0
+1:2/0/terrains_peering_bit/top_left_side = 1
+1:2/0/terrains_peering_bit/top_corner = 1
+1:2/0/terrains_peering_bit/top_right_side = 1
+2:2/0 = 0
+2:2/0/terrain_set = 0
+2:2/0/terrain = 1
+2:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+2:2/0/physics_layer_0/angular_velocity = 0.0
+2:2/0/terrains_peering_bit/bottom_left_side = 1
+2:2/0/terrains_peering_bit/left_corner = 1
+2:2/0/terrains_peering_bit/top_left_side = 1
+2:2/0/terrains_peering_bit/top_corner = 1
+2:2/0/terrains_peering_bit/top_right_side = 1
+0:3/0 = 0
+0:3/0/terrain_set = 0
+0:3/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:3/0/physics_layer_0/angular_velocity = 0.0
+1:3/0 = 0
+1:3/0/terrain_set = 0
+1:3/0/terrain = 1
+1:3/0/probability = 0.2
+1:3/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:3/0/physics_layer_0/angular_velocity = 0.0
+1:3/0/terrains_peering_bit/right_corner = 1
+1:3/0/terrains_peering_bit/bottom_right_side = 1
+1:3/0/terrains_peering_bit/bottom_corner = 1
+1:3/0/terrains_peering_bit/bottom_left_side = 1
+1:3/0/terrains_peering_bit/left_corner = 1
+1:3/0/terrains_peering_bit/top_left_side = 1
+1:3/0/terrains_peering_bit/top_corner = 1
+1:3/0/terrains_peering_bit/top_right_side = 1
+2:3/0 = 0
+2:3/0/terrain_set = 0
+2:3/0/terrain = 1
+2:3/0/probability = 0.2
+2:3/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+2:3/0/physics_layer_0/angular_velocity = 0.0
+2:3/0/terrains_peering_bit/right_corner = 1
+2:3/0/terrains_peering_bit/bottom_right_side = 1
+2:3/0/terrains_peering_bit/bottom_corner = 1
+2:3/0/terrains_peering_bit/bottom_left_side = 1
+2:3/0/terrains_peering_bit/left_corner = 1
+2:3/0/terrains_peering_bit/top_left_side = 1
+2:3/0/terrains_peering_bit/top_corner = 1
+2:3/0/terrains_peering_bit/top_right_side = 1
+2:4/0 = 0
+2:4/0/terrain_set = 0
+2:4/0/terrain = 1
+2:4/0/probability = 0.19
+2:4/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+2:4/0/physics_layer_0/angular_velocity = 0.0
+2:4/0/terrains_peering_bit/right_corner = 1
+2:4/0/terrains_peering_bit/bottom_right_side = 1
+2:4/0/terrains_peering_bit/bottom_corner = 1
+2:4/0/terrains_peering_bit/bottom_left_side = 1
+2:4/0/terrains_peering_bit/left_corner = 1
+2:4/0/terrains_peering_bit/top_left_side = 1
+2:4/0/terrains_peering_bit/top_corner = 1
+2:4/0/terrains_peering_bit/top_right_side = 1
+2:5/0 = 0
+2:5/0/terrain_set = 0
+2:5/0/terrain = 1
+2:5/0/probability = 0.01
+2:5/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+2:5/0/physics_layer_0/angular_velocity = 0.0
+2:5/0/terrains_peering_bit/right_corner = 1
+2:5/0/terrains_peering_bit/bottom_right_side = 1
+2:5/0/terrains_peering_bit/bottom_corner = 1
+2:5/0/terrains_peering_bit/bottom_left_side = 1
+2:5/0/terrains_peering_bit/left_corner = 1
+2:5/0/terrains_peering_bit/top_left_side = 1
+2:5/0/terrains_peering_bit/top_corner = 1
+2:5/0/terrains_peering_bit/top_right_side = 1
+2:6/0 = 0
+2:6/0/terrain_set = 0
+2:6/0/terrain = 1
+2:6/0/probability = 0.2
+2:6/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+2:6/0/physics_layer_0/angular_velocity = 0.0
+2:6/0/terrains_peering_bit/right_corner = 1
+2:6/0/terrains_peering_bit/bottom_right_side = 1
+2:6/0/terrains_peering_bit/bottom_corner = 1
+2:6/0/terrains_peering_bit/bottom_left_side = 1
+2:6/0/terrains_peering_bit/left_corner = 1
+2:6/0/terrains_peering_bit/top_left_side = 1
+2:6/0/terrains_peering_bit/top_corner = 1
+2:6/0/terrains_peering_bit/top_right_side = 1
 
-var dungeon_floor= dungeon_floor_tiles[0]
-var dungeon_walls = dungeon_wall_tiles[0]
-var dungeon_terrain = dungeon_terrains[0]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_djfqb"]
+texture = ExtResource("5_rqtvc")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-34.5, -17, -34, 2, 0, 19, 33, 3, 34, -18, 0, -35)
+1:0/0 = 0
+1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:0/0/physics_layer_0/angular_velocity = 0.0
+2:0/0 = 0
+2:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+2:0/0/physics_layer_0/angular_velocity = 0.0
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-0.280613, -32.5514, -32, -16, -32, 0, 0, 16, 32, 0, 32, -16)
+3:0/0 = 0
+3:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+3:0/0/physics_layer_0/angular_velocity = 0.0
+0:1/0 = 0
+0:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:1/0/physics_layer_0/angular_velocity = 0.0
+1:1/0 = 0
+1:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:1/0/physics_layer_0/angular_velocity = 0.0
+2:1/0 = 0
+2:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+2:1/0/physics_layer_0/angular_velocity = 0.0
+3:1/0 = 0
+3:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+3:1/0/physics_layer_0/angular_velocity = 0.0
+0:2/0 = 0
+0:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:2/0/physics_layer_0/angular_velocity = 0.0
+1:2/0 = 0
+1:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:2/0/physics_layer_0/angular_velocity = 0.0
+2:2/0 = 0
+2:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+2:2/0/physics_layer_0/angular_velocity = 0.0
+3:2/0 = 0
+3:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+3:2/0/physics_layer_0/angular_velocity = 0.0
 
-func _ready():
-	current_floor += 1 # when entering the dungeon scene, you have descended once
+[sub_resource type="TileSet" id="TileSet_42v73"]
+tile_shape = 1
+tile_layout = 4
+tile_size = Vector2i(64, 32)
+physics_layer_0/collision_layer = 1
+terrain_set_0/mode = 0
+terrain_set_0/terrain_0/name = "Cave Ground"
+terrain_set_0/terrain_0/color = Color(0.235294, 0.396078, 0.239216, 1)
+terrain_set_0/terrain_1/name = "Fungus Ground"
+terrain_set_0/terrain_1/color = Color(0.772549, 0.168627, 0.34902, 1)
+sources/0 = SubResource("TileSetAtlasSource_yqjvn")
+sources/1 = SubResource("TileSetAtlasSource_alqgh")
+sources/2 = SubResource("TileSetAtlasSource_jple6")
+sources/3 = SubResource("TileSetAtlasSource_djfqb")
 
-	# Selects the tileset for the current floor
-	if current_floor <= 5:
-		dungeon_floor = dungeon_floor_tiles[0]
-		dungeon_walls = dungeon_wall_tiles[0]
-		dungeon_terrain = dungeon_terrains[0]
-	else:
-		dungeon_floor = dungeon_floor_tiles[1]
-		dungeon_walls = dungeon_wall_tiles[1]
-		dungeon_terrain = dungeon_terrains[1]
+[sub_resource type="CircleShape2D" id="CircleShape2D_4noh4"]
+radius = 8.0
 
-	# Inventory Creation
-	var Player_Inventory = inventory.new()
-	Player_Inventory._ready()
-	Player_Inventory._print_inventory()
-	Player_Inventory._add_item(1,1)
-	var myprint = Player_Inventory._save_inventory()
-	print(myprint)
+[sub_resource type="CircleShape2D" id="CircleShape2D_b827w"]
+radius = 8.0
 
-	clear_room() # clean up for new floor
-	floor_structure() # fill in int
-	generate_hallways()
-	generate_rooms()
-	generate_entity()
-	
-	$Cassandra.global_position = Vector2(0,0) # returns player to root room
-	#$TileMap/Staircase_Area.position = Vector2(node_pos[staircase_pos])
-	$GUI/Current_Floor.set_text("Floor " + str(current_floor))
-	
-	# debug info
-	$Debug_Hud.visible = debug
-	$Debug_Hud/Seed.set_text("Debug " 
-		+ "\nnode_pos: " + str(node_pos)
-		+ "\nStaircase Position: " + str(node_pos[staircase_pos])
-		+ "\nfloor_structure: " + str([hall_count, hall_length, room_min, room_max])) 
-	
-	# move to function as dev continues
-	if not healthSetupCompleted: # Set up health
-		$Debug_Hud/HeartsContainer.setMaxHearts($Cassandra.maxHealth)
-		$Debug_Hud/HeartsContainer.updateHearts($Cassandra.currentHealth)
-		$Cassandra.healthChanged.connect($Debug_Hud/HeartsContainer.updateHearts)
-		healthSetupCompleted = true   
-		
+[node name="Dungeon" type="Node2D"]
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_ifql2")
 
-func _process(delta): pass
+[node name="TileMap" type="TileMap" parent="."]
+show_behind_parent = true
+y_sort_enabled = true
+texture_filter = 1
+tile_set = SubResource("TileSet_42v73")
+format = 2
+layer_0/name = "Ground"
+layer_0/y_sort_enabled = true
 
-func _on_staircase_hitbox_area_entered(area): _ready()
-func _on_new_seed_pressed(): _ready() #debug
+[node name="GUI" type="CanvasLayer" parent="."]
 
-func floor_structure():
-		hall_count = (current_floor + 3) # num of hallway segments, rec 10
-		hall_length = (20) # length of hallway segments, rec 10
-		room_min = (5) # min size for rooms, rec 2
-		room_max = (10) # max size for rooms, rec 4
-		if room_min <= max_path_width : max_path_width = room_min - 1
+[node name="Pause_Menu" parent="GUI" instance=ExtResource("13_cipy3")]
+offset_left = -1.25
+offset_top = -1.25
+offset_right = -1.25
+offset_bottom = -1.25
 
-func generate_entity():
-	# finds a random position in the last quarter of node_pos
-	staircase_pos = randi() % (node_pos.size() - int(node_pos.size() * 0.75)) + int(node_pos.size() * 0.75)
-	
-	# converts the tilemap coords to global coords for staircase placement	
-	$Staircase.global_position = $TileMap.map_to_local(node_pos[staircase_pos]) / 2
+[node name="Current_Floor" type="Label" parent="GUI"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -145.0
+offset_top = -26.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Current Floor Here"
 
-	# generate items
-	# generate enemies
-	# generate NPCs
+[node name="Inventory_gui" parent="GUI" instance=ExtResource("13_87dgk")]
+visible = false
 
-func generate_hallways():
-	var direction = Vector2i(1, 0) #tracks which way the hall segment will travel
-	var tile_pos = Vector2i(0, 0) #tracks current tile position
-	node_pos.append(tile_pos) #initial room at 0,0
+[node name="Debug_Hud" type="CanvasLayer" parent="."]
+script = ExtResource("6_grh6y")
 
-	for j in range(0, hall_count): # this loop makes hallway segments
-		
-		var row_width = random.randi_range(min_path_width, max_path_width)
-		var perpendicular = get_perpendicular_vector(direction)
+[node name="Seed" type="Label" parent="Debug_Hud"]
+offset_left = 9.0
+offset_top = 15.0
+offset_right = 333.0
+offset_bottom = 67.0
+text = "ERROR: this label isn't 
+reading the script :/"
 
-		#predict where room will be placed, add to node_pos collection
-		var room_pos = tile_pos + ((hall_length) * direction)
-		if !room_pos in node_pos: node_pos.append(room_pos) # since can overlap, avoid duplicates in list
+[node name="New Seed" type="Button" parent="Debug_Hud/Seed"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 105.0
+offset_right = 87.0
+offset_bottom = 136.0
+text = "New Seed"
 
-		for i in range(0, hall_length): # this loop creates 1 segment
-			tile_pos += direction
-			# create a row of path width
-			var row_position = tile_pos - floor(row_width / 2) * perpendicular
-			
-			# Create the outside wall of path if possible
-			if row_position - perpendicular not in hall_pos:
-				$TileMap.set_cell(0, row_position - perpendicular, dungeon_walls, Vector2i(0, 0))
-			# Create a row of hallway and save it in a list
-			for k in range(0, row_width):
-				$TileMap.set_cell(0, row_position, dungeon_floor, Vector2i(0, 3))
-				hall_pos.append(row_position)
-				row_position += perpendicular
-	
-			#kink probability midway path
-			#additional check for paths too small to get through
-			if i == floor(hall_length / 2) and random.randf() > kink_probability and row_width > 2:
-				$TileMap.set_cell(0, row_position, dungeon_floor, Vector2i(0, 3))
-				hall_pos.append(row_position)
-				row_position += perpendicular
-				tile_pos += perpendicular
-				
-			# Create second hallway wall if possible			
-			if Vector2i(row_position) not in hall_pos:
-				$TileMap.set_cell(0, row_position, dungeon_walls, Vector2i(0, 0))
-				
-		tile_pos = room_pos #fixes kink mis-alignment
-		direction = get_new_direction(direction) # get a new direction for the next segment
+[node name="out_zoom" type="TextureButton" parent="Debug_Hud"]
+offset_left = 22.0
+offset_top = 160.0
+offset_right = 36.0
+offset_bottom = 174.0
+scale = Vector2(2, 2)
 
-# this function determines the direction of the new hallway segment 
-# restriction: new direction should never be the reverse of the previous direction
-func get_new_direction(old_direction):
-	var directions = [Vector2i(0,1), Vector2i(0, -1), Vector2i(1, 0), Vector2i(-1, 0)]
-	var reverse = -1 * old_direction
-	# Remove the reverse of the old direction 
-	directions.erase(reverse)
-	var new_directions = directions[random.randi_range(0, directions.size() - 1)]
-	return new_directions
+[node name="zoom_out" type="Sprite2D" parent="Debug_Hud/out_zoom"]
+position = Vector2(6, 6)
+texture = ExtResource("6_jqwbb")
+hframes = 4
 
-# this function returns a vector that is perpendicular
-# to the passed in vector2i
-func get_perpendicular_vector(original):
-	var perpen
-	if original == Vector2i(1,0) or original == Vector2i(0,-1):
-		perpen = Vector2i(-original.y, original.x)
-	else: perpen = Vector2i(original.y,-original.x)
-	return perpen
+[node name="in_zoom" type="TextureButton" parent="Debug_Hud"]
+offset_left = 60.0
+offset_top = 160.0
+offset_right = 74.0
+offset_bottom = 174.0
+scale = Vector2(2, 2)
 
-func generate_rooms():
-	var cells = []
-	
-	for i in node_pos:
-		var size = random.randi_range(room_min, room_max)
+[node name="zoom_in" type="Sprite2D" parent="Debug_Hud/in_zoom"]
+position = Vector2(6, 6)
+texture = ExtResource("6_jqwbb")
+hframes = 4
+frame = 1
 
-		for j in range(-size, size):
-			for k in range(-size, size):
-				# Walls furthest from camera
-				if ((j == -size)) or ((k == size-1)):
-					if !(Vector2i(i.x+j,i.y+k)) in hall_pos: 
-						$TileMap.set_cell(0, Vector2i(i.x+j, i.y+k), dungeon_walls, Vector2i(0, 0))
-				# Walls close to camera
-				elif ((j == size-1) or (k == -size)):
-					if !(Vector2i(i.x+j,i.y+k)) in hall_pos:
-						$TileMap.set_cell(0, Vector2i(i.x+j, i.y+k), dungeon_walls, Vector2i(0, 0))
-				# Stores tile location to be connected
-				else: cells.append(Vector2i(i.x+j,i.y+k))
+[node name="left" type="TextureButton" parent="Debug_Hud"]
+offset_left = 13.0
+offset_top = 225.0
+offset_right = 27.0
+offset_bottom = 239.0
+scale = Vector2(2, 2)
 
-	# Draws all of the saved tiles and connects them together using terrains
-	$TileMap.set_cells_terrain_connect(0, cells, 0, dungeon_terrain)
+[node name="arrow" type="Sprite2D" parent="Debug_Hud/left"]
+position = Vector2(7, 7)
+rotation = 4.71239
+texture = ExtResource("6_jqwbb")
+hframes = 4
+frame = 2
 
-func clear_room(): 
-	node_pos = []
-	hall_pos = []
-	$TileMap.clear()
+[node name="right" type="TextureButton" parent="Debug_Hud"]
+offset_left = 69.0
+offset_top = 225.0
+offset_right = 83.0
+offset_bottom = 239.0
+scale = Vector2(2, 2)
+
+[node name="arrow" type="Sprite2D" parent="Debug_Hud/right"]
+position = Vector2(7, 7)
+rotation = 1.5708
+texture = ExtResource("6_jqwbb")
+hframes = 4
+frame = 2
+
+[node name="back" type="TextureButton" parent="Debug_Hud"]
+offset_left = 39.0
+offset_top = 294.0
+offset_right = 55.0
+offset_bottom = 309.0
+scale = Vector2(2, 2)
+
+[node name="return" type="Sprite2D" parent="Debug_Hud/back"]
+position = Vector2(8, 7)
+texture = ExtResource("6_jqwbb")
+hframes = 4
+frame = 3
+
+[node name="up" type="TextureButton" parent="Debug_Hud"]
+offset_left = 41.0
+offset_top = 197.0
+offset_right = 55.0
+offset_bottom = 211.0
+scale = Vector2(2, 2)
+
+[node name="arrow" type="Sprite2D" parent="Debug_Hud/up"]
+position = Vector2(7, 7)
+texture = ExtResource("6_jqwbb")
+hframes = 4
+frame = 2
+
+[node name="down" type="TextureButton" parent="Debug_Hud"]
+offset_left = 41.0
+offset_top = 253.0
+offset_right = 55.0
+offset_bottom = 267.0
+scale = Vector2(2, 2)
+
+[node name="arrow" type="Sprite2D" parent="Debug_Hud/down"]
+position = Vector2(7, 7)
+rotation = 3.14159
+texture = ExtResource("6_jqwbb")
+hframes = 4
+frame = 2
+
+[node name="shake" type="Button" parent="Debug_Hud"]
+offset_left = 27.0
+offset_top = 328.0
+offset_right = 82.0
+offset_bottom = 364.0
+text = "Shake
+"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Debug_Hud"]
+layer = 0
+
+[node name="HeartsContainer" parent="Debug_Hud" instance=ExtResource("6_tho0w")]
+offset_left = 69.0
+offset_top = 24.0
+offset_right = 281.0
+offset_bottom = 117.0
+
+[node name="Cassandra" parent="." instance=ExtResource("11_ai3vm")]
+
+[node name="Staircase" type="StaticBody2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Staircase"]
+texture = ExtResource("2_nq54f")
+hframes = 3
+vframes = 10
+frame = 13
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Staircase"]
+visible = false
+shape = SubResource("CircleShape2D_4noh4")
+
+[node name="Staircase_hitbox" type="Area2D" parent="Staircase"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Staircase/Staircase_hitbox"]
+visible = false
+shape = SubResource("CircleShape2D_b827w")
+
+[node name="BackgroundSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("13_7lc74")
+script = ExtResource("14_1o1d0")
+
+[node name="Potion1" parent="." instance=ExtResource("14_4maq5")]
+
+[connection signal="pressed" from="Debug_Hud/Seed/New Seed" to="." method="_on_new_seed_pressed"]
+[connection signal="pressed" from="Debug_Hud/out_zoom" to="Debug_Hud" method="_on_out_zoom_pressed"]
+[connection signal="pressed" from="Debug_Hud/in_zoom" to="Debug_Hud" method="_on_in_zoom_pressed"]
+[connection signal="pressed" from="Debug_Hud/left" to="Debug_Hud" method="_on_left_pressed"]
+[connection signal="pressed" from="Debug_Hud/right" to="Debug_Hud" method="_on_right_pressed"]
+[connection signal="pressed" from="Debug_Hud/back" to="Debug_Hud" method="_on_back_pressed"]
+[connection signal="pressed" from="Debug_Hud/up" to="Debug_Hud" method="_on_up_pressed"]
+[connection signal="pressed" from="Debug_Hud/down" to="Debug_Hud" method="_on_down_pressed"]
+[connection signal="pressed" from="Debug_Hud/shake" to="Debug_Hud" method="_on_shake_pressed"]
+[connection signal="area_entered" from="Staircase/Staircase_hitbox" to="." method="_on_staircase_hitbox_area_entered"]
