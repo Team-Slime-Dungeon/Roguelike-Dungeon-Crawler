@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://c8fm5k1pu6l4i"]
+[gd_scene load_steps=22 format=3 uid="uid://c8fm5k1pu6l4i"]
 
 [ext_resource type="Script" path="res://dungeon.gd" id="1_ifql2"]
 [ext_resource type="Texture2D" uid="uid://cdejfmb3r8r6b" path="res://environment/cave1.png" id="2_nq54f"]
@@ -8,11 +8,12 @@
 [ext_resource type="Script" path="res://debug_UI.gd" id="6_grh6y"]
 [ext_resource type="Texture2D" uid="uid://2uvs3oud5cvk" path="res://debug_buttons.png" id="6_jqwbb"]
 [ext_resource type="PackedScene" uid="uid://eb8v1h7u5ytm" path="res://Health Functions/hearts_container.tscn" id="6_tho0w"]
-[ext_resource type="PackedScene" uid="uid://crcqnnl6ies46" path="res://cassandra_scene.tscn" id="11_5w2xi"]
+[ext_resource type="PackedScene" uid="uid://crcqnnl6ies46" path="res://cassandra_scene.tscn" id="11_ai3vm"]
 [ext_resource type="AudioStream" uid="uid://dhiy4c1nn72yc" path="res://Music/background sound.mp3" id="13_7lc74"]
 [ext_resource type="PackedScene" uid="uid://cul7b22epo42i" path="res://InventoryTesting/inventory_gui.tscn" id="13_87dgk"]
 [ext_resource type="PackedScene" uid="uid://dryac8f57oat6" path="res://Pause Menu/pause_menu.tscn" id="13_cipy3"]
 [ext_resource type="Script" path="res://BackgroundSound.gd" id="14_1o1d0"]
+[ext_resource type="PackedScene" uid="uid://8mujy3eharaw" path="res://potion_1.tscn" id="14_4maq5"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yqjvn"]
 texture = ExtResource("2_nq54f")
@@ -162,7 +163,7 @@ texture_region_size = Vector2i(64, 64)
 0:0/0 = 0
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:0/0/physics_layer_0/angular_velocity = 0.0
-0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(0.353554, -32.5269, -31.8198, -16.617, -32, 0, 0, 16, 32, 0, 31.8198, -16.617)
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-34.5, -17, -34, 2, 0, 19, 33, 3, 34, -18, 0, -35)
 1:0/0 = 0
 1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 1:0/0/physics_layer_0/angular_velocity = 0.0
@@ -239,6 +240,7 @@ texture_region_size = Vector2i(64, 32)
 1:1/0 = 0
 1:1/0/terrain_set = 0
 1:1/0/terrain = 1
+1:1/0/probability = 0.2
 1:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 1:1/0/physics_layer_0/angular_velocity = 0.0
 1:1/0/terrains_peering_bit/right_corner = 1
@@ -292,6 +294,7 @@ texture_region_size = Vector2i(64, 32)
 1:3/0 = 0
 1:3/0/terrain_set = 0
 1:3/0/terrain = 1
+1:3/0/probability = 0.2
 1:3/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 1:3/0/physics_layer_0/angular_velocity = 0.0
 1:3/0/terrains_peering_bit/right_corner = 1
@@ -305,6 +308,7 @@ texture_region_size = Vector2i(64, 32)
 2:3/0 = 0
 2:3/0/terrain_set = 0
 2:3/0/terrain = 1
+2:3/0/probability = 0.2
 2:3/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 2:3/0/physics_layer_0/angular_velocity = 0.0
 2:3/0/terrains_peering_bit/right_corner = 1
@@ -318,6 +322,7 @@ texture_region_size = Vector2i(64, 32)
 2:4/0 = 0
 2:4/0/terrain_set = 0
 2:4/0/terrain = 1
+2:4/0/probability = 0.19
 2:4/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 2:4/0/physics_layer_0/angular_velocity = 0.0
 2:4/0/terrains_peering_bit/right_corner = 1
@@ -328,6 +333,34 @@ texture_region_size = Vector2i(64, 32)
 2:4/0/terrains_peering_bit/top_left_side = 1
 2:4/0/terrains_peering_bit/top_corner = 1
 2:4/0/terrains_peering_bit/top_right_side = 1
+2:5/0 = 0
+2:5/0/terrain_set = 0
+2:5/0/terrain = 1
+2:5/0/probability = 0.01
+2:5/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+2:5/0/physics_layer_0/angular_velocity = 0.0
+2:5/0/terrains_peering_bit/right_corner = 1
+2:5/0/terrains_peering_bit/bottom_right_side = 1
+2:5/0/terrains_peering_bit/bottom_corner = 1
+2:5/0/terrains_peering_bit/bottom_left_side = 1
+2:5/0/terrains_peering_bit/left_corner = 1
+2:5/0/terrains_peering_bit/top_left_side = 1
+2:5/0/terrains_peering_bit/top_corner = 1
+2:5/0/terrains_peering_bit/top_right_side = 1
+2:6/0 = 0
+2:6/0/terrain_set = 0
+2:6/0/terrain = 1
+2:6/0/probability = 0.2
+2:6/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+2:6/0/physics_layer_0/angular_velocity = 0.0
+2:6/0/terrains_peering_bit/right_corner = 1
+2:6/0/terrains_peering_bit/bottom_right_side = 1
+2:6/0/terrains_peering_bit/bottom_corner = 1
+2:6/0/terrains_peering_bit/bottom_left_side = 1
+2:6/0/terrains_peering_bit/left_corner = 1
+2:6/0/terrains_peering_bit/top_left_side = 1
+2:6/0/terrains_peering_bit/top_corner = 1
+2:6/0/terrains_peering_bit/top_right_side = 1
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_djfqb"]
 texture = ExtResource("5_rqtvc")
@@ -335,7 +368,7 @@ texture_region_size = Vector2i(64, 64)
 0:0/0 = 0
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:0/0/physics_layer_0/angular_velocity = 0.0
-0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-0.280613, -32.5514, -32, -16, -32, 0, 0, 16, 32, 0, 32, -16)
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-34.5, -17, -34, 2, 0, 19, 33, 3, 34, -18, 0, -35)
 1:0/0 = 0
 1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 1:0/0/physics_layer_0/angular_velocity = 0.0
@@ -557,7 +590,7 @@ offset_top = 24.0
 offset_right = 281.0
 offset_bottom = 117.0
 
-[node name="Cassandra" parent="." instance=ExtResource("11_5w2xi")]
+[node name="Cassandra" parent="." instance=ExtResource("11_ai3vm")]
 
 [node name="Staircase" type="StaticBody2D" parent="."]
 
@@ -580,6 +613,8 @@ shape = SubResource("CircleShape2D_b827w")
 [node name="BackgroundSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("13_7lc74")
 script = ExtResource("14_1o1d0")
+
+[node name="Potion1" parent="." instance=ExtResource("14_4maq5")]
 
 [connection signal="pressed" from="Debug_Hud/Seed/New Seed" to="." method="_on_new_seed_pressed"]
 [connection signal="pressed" from="Debug_Hud/out_zoom" to="Debug_Hud" method="_on_out_zoom_pressed"]

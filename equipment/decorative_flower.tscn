@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://dpc143vs3qvk0"]
+
+[ext_resource type="Texture2D" uid="uid://65d33y76bja8" path="res://environment/Fungus_Decorations.png" id="1_23dme"]
+
+[node name="Decorative Flower" type="CharacterBody2D"]
+z_index = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 1
+texture = ExtResource("1_23dme")
+hframes = 2

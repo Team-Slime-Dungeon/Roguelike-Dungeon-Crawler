@@ -716,6 +716,7 @@ _data = {
 }
 
 [node name="Cassandra" type="CharacterBody2D"]
+
 collision_layer = 7
 collision_mask = 7
 script = ExtResource("1_fqxek")
@@ -723,7 +724,9 @@ script = ExtResource("1_fqxek")
 [node name="CassandraSprite" type="Sprite2D" parent="."]
 clip_children = 2
 position = Vector2(60, -2)
+
 texture = ExtResource("2_afcbe")
+
 hframes = 6
 vframes = 4
 frame = 1
@@ -733,6 +736,7 @@ z_index = 1
 z_as_relative = false
 position = Vector2(18, -14)
 rotation = -6.4618
+
 texture = ExtResource("3_bd4h4")
 
 [node name="weapon" type="Area2D" parent="CassandraSprite/weapon"]
@@ -780,10 +784,12 @@ shape = SubResource("CircleShape2D_ja0t6")
 position = Vector2(61, 6)
 
 [node name="hurtbox" type="Area2D" parent="."]
+
 visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox"]
 visible = false
+
 position = Vector2(60, 10)
 shape = SubResource("CapsuleShape2D_7gejh")
 
@@ -795,8 +801,10 @@ libraries = {
 }
 
 [node name="hurtsound1" type="AudioStreamPlayer" parent="."]
+
 stream = ExtResource("4_c7vi2")
 
 [connection signal="body_entered" from="detection_area" to="." method="_on_detection_area_body_entered"]
 [connection signal="body_exited" from="detection_area" to="." method="_on_detection_area_body_exited"]
+
 [connection signal="area_entered" from="hurtbox" to="." method="_on_hurtbox_area_entered"]
