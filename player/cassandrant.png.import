@@ -2,10 +2,15 @@
 
 importer="texture"
 type="CompressedTexture2D"
+<<<<<<<< 899e4610819a61f34b1e86b4dcf8f9e9210db3d4:player/cassandrant.png.import
 
 uid="uid://3jrppdbfn5k3"
 path="res://.godot/imported/cassandrant.png-233b7b9e9722a165121d860496eb4631.ctex"
 
+========
+uid="uid://yceqkc7j8ycr"
+path="res://.godot/imported/cassandrant.png-99e2b0ca0bc4942251c6e4689d4c9863.ctex"
+>>>>>>>> 830d8c172f362eac186790b03c18d63552871224:cassandrant.png.import
 metadata={
 "vram_texture": false
 }
