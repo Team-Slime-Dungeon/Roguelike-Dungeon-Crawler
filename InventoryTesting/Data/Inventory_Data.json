@@ -3,22 +3,22 @@
 		"Item": 10001
 	},
 	"Inv2": {
-		"Item": 10001
+		"Item": null
 	},
 	"Inv3": {
 		"Item": null
 	},
 	"Inv4": {
-		"Item": 10002
+		"Item": null
 	},
 	"Inv5": {
-		"Item": 10001
+		"Item": null
 	},
 	"Inv6": {
-		"Item": 10002
+		"Item": null
 	},
 	"Inv7": {
-		"Item": 10002
+		"Item": null
 	},
 	"Inv8": {
 		"Item": null
@@ -43,11 +43,5 @@
 	},
 	"Inv15": {
 		"Item": null
-	},
-	"Inv16": {
-		"Item": null
-	},
-	"Inv17": {
-		"Item": 10001
 	}
 }

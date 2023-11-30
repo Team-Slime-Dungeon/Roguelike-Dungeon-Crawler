@@ -1,8 +1,12 @@
 [gd_scene load_steps=6 format=3 uid="uid://1nsc1ahfpth4"]
 
 [ext_resource type="Texture2D" uid="uid://cj0r4hkpvhj87" path="res://monsters/spider_sheet.png" id="1_opjvl"]
+<<<<<<<< b803f77c3033b1a37fd20b3c85fb59f446900232:monsters/spider.tscn
 
 [ext_resource type="Script" path="res://monsters/SpiderAnimation.gd" id="1_y75qh"]
+========
+[ext_resource type="Script" path="res://SpiderAnimation.gd" id="1_y75qh"]
+>>>>>>>> e7ba3bb824650f00e1de69f24a8c740e668e0a28:spider.tscn
 
 [sub_resource type="Animation" id="Animation_2lj6t"]
 length = 0.001
@@ -932,6 +936,7 @@ _data = {
 [node name="Spider" type="Node2D"]
 
 [node name="Spider" type="Skeleton2D" parent="."]
+position = Vector2(494, 193)
 script = ExtResource("1_y75qh")
 
 [node name="hip_bone" type="Bone2D" parent="Spider"]

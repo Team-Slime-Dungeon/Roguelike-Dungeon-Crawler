@@ -23,7 +23,7 @@ func _ready():
 		gridcontainer.add_child(inv_slot_new, true)
 		
 		#Grab Signal from Pause Menu node
-	var pause_menu = get_node("../Pause_Menu")
+	var pause_menu = get_node("../../Pause_Menu")
 	pause_menu.connect("pause_toggled", Callable(self, "_on_pause_toggled"))
 
 #Makes sure it hides inventory when paused

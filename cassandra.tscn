@@ -1,8 +1,7 @@
-[gd_scene load_steps=56 format=3 uid="uid://pkukur1dj0vo"]
+[gd_scene load_steps=55 format=3 uid="uid://pkukur1dj0vo"]
 
 [ext_resource type="Script" path="res://Cassandra.gd" id="1_jhm8e"]
-[ext_resource type="Texture2D" uid="uid://nau718e75jx1" path="res://cassandra_sheet.png" id="3_fculm"]
-[ext_resource type="Texture2D" uid="uid://hau6lcqggcfx" path="res://weapons/weapon_1.png" id="3_fe1aj"]
+[ext_resource type="Texture2D" uid="uid://hau6lcqggcfx" path="res://equipment/weapon_1.png" id="3_fe1aj"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8n2l5"]
 radius = 2.98913
@@ -18889,7 +18888,6 @@ editor_settings/show_bone_gizmo = false
 
 [node name="hip" type="Sprite2D" parent="hip_bone"]
 z_index = 4
-texture = ExtResource("3_fculm")
 hframes = 24
 vframes = 2
 frame = 29
@@ -18902,33 +18900,29 @@ editor_settings/show_bone_gizmo = false
 [node name="chest" type="Sprite2D" parent="hip_bone/chest_bone"]
 z_index = 4
 position = Vector2(0, -8)
-texture = ExtResource("3_fculm")
-flip_h = true
 hframes = 24
 vframes = 2
 frame = 5
 
 [node name="robe_left" type="Sprite2D" parent="hip_bone/chest_bone"]
-visible = false
 z_index = 4
 position = Vector2(-1, -8)
-texture = ExtResource("3_fculm")
 hframes = 24
 vframes = 2
 frame = 6
 
 [node name="robe_right" type="Sprite2D" parent="hip_bone/chest_bone"]
+visible = false
 z_index = 4
 position = Vector2(1, -8)
-texture = ExtResource("3_fculm")
+flip_h = true
 hframes = 24
 vframes = 2
 frame = 7
 
 [node name="robe_bottom_still" type="Sprite2D" parent="hip_bone/chest_bone"]
 z_index = 4
-position = Vector2(2, 8)
-texture = ExtResource("3_fculm")
+position = Vector2(-1, 8)
 hframes = 24
 vframes = 2
 frame = 30
@@ -18937,7 +18931,6 @@ frame = 30
 visible = false
 z_index = 4
 position = Vector2(-2, 8)
-texture = ExtResource("3_fculm")
 flip_h = true
 hframes = 24
 vframes = 2
@@ -18954,7 +18947,6 @@ editor_settings/show_bone_gizmo = false
 [node name="hair_back_top" type="Sprite2D" parent="hip_bone/chest_bone/head_bone"]
 z_index = 3
 position = Vector2(0, -12)
-texture = ExtResource("3_fculm")
 hframes = 24
 vframes = 2
 frame = 2
@@ -18963,18 +18955,15 @@ frame = 2
 z_index = 1
 z_as_relative = false
 position = Vector2(1.07288e-06, 16)
-texture = ExtResource("3_fculm")
-flip_h = true
 hframes = 24
 vframes = 2
 frame = 26
 
 [node name="hair_back_bottom_moving" type="Sprite2D" parent="hip_bone/chest_bone/head_bone/hair_back_top"]
 visible = false
-z_index = 3
+z_index = 6
 z_as_relative = false
 position = Vector2(4, 16)
-texture = ExtResource("3_fculm")
 flip_h = true
 hframes = 15
 vframes = 2
@@ -18983,20 +18972,17 @@ frame = 17
 [node name="face_blank" type="Sprite2D" parent="hip_bone/chest_bone/head_bone"]
 z_index = 4
 position = Vector2(0, -5)
-texture = ExtResource("3_fculm")
 hframes = 24
 vframes = 2
 
 [node name="eye_right_open" type="Sprite2D" parent="hip_bone/chest_bone/head_bone/face_blank"]
-position = Vector2(-1, 0)
-texture = ExtResource("3_fculm")
+position = Vector2(-5, 0)
 hframes = 48
 vframes = 4
 frame = 2
 
 [node name="eye_left_open" type="Sprite2D" parent="hip_bone/chest_bone/head_bone/face_blank"]
-position = Vector2(5, 0)
-texture = ExtResource("3_fculm")
+position = Vector2(1, 0)
 flip_h = true
 hframes = 48
 vframes = 4
@@ -19005,7 +18991,6 @@ frame = 2
 [node name="eye_right_closed" type="Sprite2D" parent="hip_bone/chest_bone/head_bone/face_blank"]
 visible = false
 position = Vector2(-5, 0)
-texture = ExtResource("3_fculm")
 hframes = 48
 vframes = 4
 frame = 3
@@ -19013,32 +18998,28 @@ frame = 3
 [node name="eye_left_closed" type="Sprite2D" parent="hip_bone/chest_bone/head_bone/face_blank"]
 visible = false
 position = Vector2(1, 0)
-texture = ExtResource("3_fculm")
 flip_h = true
 hframes = 48
 vframes = 4
 frame = 3
 
 [node name="mouth_closed" type="Sprite2D" parent="hip_bone/chest_bone/head_bone/face_blank"]
-position = Vector2(2, 3)
-texture = ExtResource("3_fculm")
+position = Vector2(-2, 3)
 hframes = 48
 vframes = 4
 frame = 6
 
 [node name="hairBangs_left" type="Sprite2D" parent="hip_bone/chest_bone/head_bone"]
-visible = false
 z_index = 4
 position = Vector2(0, -5)
-texture = ExtResource("3_fculm")
 hframes = 24
 vframes = 2
 frame = 24
 
 [node name="hairBangs_right" type="Sprite2D" parent="hip_bone/chest_bone/head_bone"]
+visible = false
 z_index = 4
 position = Vector2(0, -5)
-texture = ExtResource("3_fculm")
 hframes = 24
 vframes = 2
 frame = 25
@@ -19052,16 +19033,14 @@ bone_angle = 97.297
 editor_settings/show_bone_gizmo = false
 
 [node name="arm_left_upper" type="Sprite2D" parent="hip_bone/chest_bone/arm_left_bone"]
-z_index = 1
+z_index = 4
 position = Vector2(0, 3)
-texture = ExtResource("3_fculm")
 hframes = 48
 vframes = 2
 frame = 16
 
 [node name="sleeve_left" type="Sprite2D" parent="hip_bone/chest_bone/arm_left_bone/arm_left_upper"]
 position = Vector2(1, -3)
-texture = ExtResource("3_fculm")
 flip_h = true
 hframes = 48
 vframes = 4
@@ -19069,25 +19048,23 @@ frame = 112
 
 [node name="arm_left_lower" type="Sprite2D" parent="hip_bone/chest_bone/arm_left_bone/arm_left_upper"]
 z_index = 1
-position = Vector2(1, 9)
-texture = ExtResource("3_fculm")
-flip_h = true
+position = Vector2(0, 9)
 hframes = 48
 vframes = 2
 frame = 17
 
 [node name="weapon" type="Sprite2D" parent="hip_bone/chest_bone/arm_left_bone/arm_left_upper"]
 visible = false
-z_index = 2
+z_index = 4
 z_as_relative = false
-position = Vector2(18, 5)
-rotation = -5.79535
+position = Vector2(-20, 7)
+rotation = -8.46332
 texture = ExtResource("3_fe1aj")
 
 [node name="weapon" type="Area2D" parent="hip_bone/chest_bone/arm_left_bone/arm_left_upper/weapon"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hip_bone/chest_bone/arm_left_bone/arm_left_upper/weapon/weapon"]
-position = Vector2(-13.5567, 12.8536)
+position = Vector2(-7.93563, 7.87565)
 rotation = 0.881391
 shape = SubResource("CapsuleShape2D_8n2l5")
 
@@ -19100,9 +19077,8 @@ bone_angle = -266.551
 editor_settings/show_bone_gizmo = false
 
 [node name="arm_right_upper" type="Sprite2D" parent="hip_bone/chest_bone/arm_right_bone"]
-z_index = 5
+z_index = 3
 position = Vector2(2.38419e-06, 3)
-texture = ExtResource("3_fculm")
 flip_h = true
 hframes = 48
 vframes = 2
@@ -19111,22 +19087,19 @@ frame = 16
 [node name="sleeve_right" type="Sprite2D" parent="hip_bone/chest_bone/arm_right_bone/arm_right_upper"]
 visible = false
 position = Vector2(1.90735e-06, -3)
-texture = ExtResource("3_fculm")
 flip_h = true
 hframes = 48
 vframes = 4
 frame = 112
 
 [node name="arm_right_lower" type="Sprite2D" parent="hip_bone/chest_bone/arm_right_bone/arm_right_upper"]
-position = Vector2(-4.76837e-07, 9)
-texture = ExtResource("3_fculm")
-flip_h = true
+position = Vector2(-1, 9)
 hframes = 48
 vframes = 2
 frame = 17
 
 [node name="leg_right_bone" type="Bone2D" parent="hip_bone"]
-position = Vector2(-3, -2)
+position = Vector2(-3, -3)
 rest = Transform2D(1, 0, 0, 1, -3, -3)
 auto_calculate_length_and_angle = false
 length = 23.0
@@ -19136,13 +19109,11 @@ editor_settings/show_bone_gizmo = false
 [node name="leg_right" type="Sprite2D" parent="hip_bone/leg_right_bone"]
 z_index = 3
 position = Vector2(2.86102e-06, 11)
-texture = ExtResource("3_fculm")
-flip_h = true
 hframes = 24
 frame = 9
 
 [node name="leg_left_bone" type="Bone2D" parent="hip_bone"]
-position = Vector2(3, -3)
+position = Vector2(3, -2)
 rest = Transform2D(1, 0, 0, 1, 3, -2)
 auto_calculate_length_and_angle = false
 length = 23.0
@@ -19152,8 +19123,6 @@ editor_settings/show_bone_gizmo = false
 [node name="leg_left" type="Sprite2D" parent="hip_bone/leg_left_bone"]
 z_index = 2
 position = Vector2(2.26498e-06, 11)
-texture = ExtResource("3_fculm")
-flip_h = true
 hframes = 24
 frame = 9
 
