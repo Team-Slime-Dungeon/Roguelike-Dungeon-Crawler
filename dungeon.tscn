@@ -1,4 +1,4 @@
-[gd_scene load_steps=102 format=3 uid="uid://c8fm5k1pu6l4i"]
+[gd_scene load_steps=104 format=3 uid="uid://c8fm5k1pu6l4i"]
 
 [ext_resource type="Script" path="res://dungeon.gd" id="1_ifql2"]
 [ext_resource type="Texture2D" uid="uid://cdejfmb3r8r6b" path="res://environment/cave1.png" id="2_nq54f"]
@@ -10,6 +10,8 @@
 [ext_resource type="PackedScene" uid="uid://eb8v1h7u5ytm" path="res://Health Functions/hearts_container.tscn" id="6_tho0w"]
 [ext_resource type="Script" path="res://Slime.gd" id="7_chb7c"]
 [ext_resource type="PackedScene" uid="uid://ct4mfveppntju" path="res://slime.tscn" id="7_u3phi"]
+[ext_resource type="Script" path="res://InventoryTesting/Playerequip_inv/playerequip.gd" id="8_5j70o"]
+[ext_resource type="PackedScene" uid="uid://b1esj2q3hv7jy" path="res://InventoryTesting/Playerequip_inv/playerequip.tscn" id="8_i8oiw"]
 [ext_resource type="Script" path="res://CharacterControls.gd" id="9_iyhmm"]
 [ext_resource type="Script" path="res://Spider.gd" id="10_fsiaj"]
 [ext_resource type="AudioStream" uid="uid://68v4cb4ndmid" path="res://Music/slimehit1.mp3" id="10_lmqik"]
@@ -1274,8 +1276,26 @@ grow_horizontal = 0
 grow_vertical = 0
 text = "Current Floor Here"
 
-[node name="Inventory_gui" parent="GUI" instance=ExtResource("13_87dgk")]
+[node name="Inventory" type="Control" parent="GUI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Playerequip" parent="GUI/Inventory" instance=ExtResource("8_i8oiw")]
 visible = false
+layout_mode = 1
+script = ExtResource("8_5j70o")
+
+[node name="Inventory_gui" parent="GUI/Inventory" instance=ExtResource("13_87dgk")]
+visible = false
+layout_mode = 1
+offset_left = 619.0
+offset_top = 150.0
+offset_right = -428.0
+offset_bottom = -402.0
 
 [node name="Debug_Hud" type="CanvasLayer" parent="."]
 script = ExtResource("6_grh6y")
@@ -1544,6 +1564,7 @@ libraries = {
 stream = ExtResource("11_607tm")
 
 [node name="Spider" type="CharacterBody2D" parent="."]
+position = Vector2(-14, -10)
 script = ExtResource("10_fsiaj")
 
 [node name="Spider-Skeleton" parent="Spider" instance=ExtResource("11_d5ajo")]
@@ -1578,7 +1599,6 @@ position = Vector2(-56, 8)
 shape = SubResource("CapsuleShape2D_5s02t")
 
 [node name="detectionarea1" type="Area2D" parent="Spider"]
-visible = false
 collision_layer = 2
 collision_mask = 2
 

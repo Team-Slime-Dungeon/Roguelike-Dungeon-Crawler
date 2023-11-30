@@ -1,0 +1,232 @@
+[gd_scene load_steps=24 format=3 uid="uid://bx8i2hueov5yu"]
+
+[ext_resource type="Texture2D" uid="uid://b8xt3y8mbffuh" path="res://slime_sheet3.png" id="1_evx2u"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_7cpbf"]
+load_path = "res://.godot/imported/slime_sheet2.png-66abe55cdaaa60208945daa0c8bcdab6.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k2pix"]
+atlas = SubResource("CompressedTexture2D_7cpbf")
+region = Rect2(0, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cc8ov"]
+atlas = SubResource("CompressedTexture2D_7cpbf")
+region = Rect2(64, 32, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vknby"]
+atlas = SubResource("CompressedTexture2D_7cpbf")
+region = Rect2(64, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mek4p"]
+atlas = ExtResource("1_evx2u")
+region = Rect2(0, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n8xy1"]
+atlas = ExtResource("1_evx2u")
+region = Rect2(0, 32, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8sfsl"]
+atlas = ExtResource("1_evx2u")
+region = Rect2(64, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5rjmv"]
+atlas = ExtResource("1_evx2u")
+region = Rect2(64, 32, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i6sha"]
+atlas = ExtResource("1_evx2u")
+region = Rect2(0, 96, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fic28"]
+atlas = SubResource("CompressedTexture2D_7cpbf")
+region = Rect2(0, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e7kc4"]
+atlas = SubResource("CompressedTexture2D_7cpbf")
+region = Rect2(0, 32, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6ls5p"]
+atlas = SubResource("CompressedTexture2D_7cpbf")
+region = Rect2(64, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0hxg5"]
+atlas = SubResource("CompressedTexture2D_7cpbf")
+region = Rect2(64, 32, 64, 32)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ogt08"]
+load_path = "res://.godot/imported/slime_sprite.png-d151365a8e861228afacb09573f7e86a.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x1hc6"]
+atlas = SubResource("CompressedTexture2D_ogt08")
+region = Rect2(0, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oe0h7"]
+atlas = SubResource("CompressedTexture2D_ogt08")
+region = Rect2(128, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jygd4"]
+atlas = SubResource("CompressedTexture2D_ogt08")
+region = Rect2(0, 32, 64, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xkvqk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k2pix")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cc8ov")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vknby")
+}],
+"loop": true,
+"name": &"Chase",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mek4p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n8xy1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8sfsl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5rjmv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i6sha")
+}],
+"loop": true,
+"name": &"Death",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fic28")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e7kc4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6ls5p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0hxg5")
+}],
+"loop": true,
+"name": &"Hurt",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x1hc6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oe0h7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jygd4")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_w4r6y"]
+resource_name = "Chase"
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Chase"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 1]
+}
+
+[sub_resource type="Animation" id="Animation_rtd2x"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="Animation" id="Animation_riayd"]
+resource_name = "Idle"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Idle"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1.1, 1.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qt8b2"]
+_data = {
+"Chase": SubResource("Animation_w4r6y"),
+"Idle": SubResource("Animation_riayd"),
+"RESET": SubResource("Animation_rtd2x")
+}
+
+[node name="Slime2" type="Node2D"]
+position = Vector2(2, 2)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(1, 1)
+sprite_frames = SubResource("SpriteFrames_xkvqk")
+animation = &"Chase"
+frame = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "Chase"
+libraries = {
+"": SubResource("AnimationLibrary_qt8b2")
+}
