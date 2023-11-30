@@ -15,7 +15,9 @@ var SPEED
 const walking_speed = 100
 const running_speed = 250
 var input_dir
-var is_attacking = false
+var is_attacking: bool = false
+var potion_is_in_range: bool = false
+var is_talking: bool = false
 
 func _ready():
 	#activate animation tree
@@ -27,7 +29,7 @@ func _ready():
 
 
 func get_input():
-	if (is_attacking == true):
+	if (is_attacking == true or is_talking == true):
 		input_dir = Vector2(0,0)
 	else:
 		input_dir = Input.get_vector("ui_left","ui_right","ui_up","ui_down")
@@ -42,6 +44,8 @@ func get_input():
 		SPEED = walking_speed
 		
 	velocity = input_dir * SPEED
+	
+	
 
 func update_animation_parameter():
 	#idle animation plays if velocity equals zero, otherwise walking animation plays
@@ -70,7 +74,18 @@ func update_animation_parameter():
 		animation_tree["parameters/idle/blend_position"] = input_dir
 		animation_tree["parameters/walk/blend_position"] = input_dir
 
+func _unhandled_input(event):
+	#if player is in range of potion and presses 'f', dialogue balloon will load
+		is_talking = false
+		if potion_is_in_range == true:
+			if Input.is_action_pressed("interact"):
+				DialogueManager.show_example_dialogue_balloon(load("res://Dialogue/main.dialogue"), "start")
+				is_talking = true
+				return
+		
+
 	
+				
 func _physics_process(delta):
 	handleCollision()
 
@@ -115,3 +130,13 @@ func knockback(enemyVelocity: Vector2):
 	# Calculate the knockback from the second enemy and add it to totalKnockback.
 	# Apply the total knockback to the player's velocity.
 	# Perform the movement and sliding.
+
+
+func _on_detection_area_body_entered(body):
+	if body.has_method("entity"):
+		potion_is_in_range = true
+
+
+func _on_detection_area_body_exited(body):
+	if body.has_method("entity"):
+		potion_is_in_range = false
