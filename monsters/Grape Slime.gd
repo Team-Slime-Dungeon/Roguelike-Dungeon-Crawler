@@ -21,9 +21,16 @@ var player = null
 var monster_type = "Grape Slime"
 var monster_drops = []
 
+var movement_animation = "movement"
 func _ready():
+	var shiny_chance = random.randf_range(0,100)
+	if shiny_chance > 50:
+		movement_animation = "cute_movement"
+	else:
+		movement_animation = "movement"
+		
 	if not $GrapeAnim.is_playing():
-		$GrapeAnim.play("movement")
+		$GrapeAnim.play(movement_animation)
 
 func _physics_process(delta):
 
@@ -71,7 +78,7 @@ func _on_hurt_box_area_entered(area):
 		if currentHealth > 0:
 			HurtTimer1.start()
 			await HurtTimer1.timeout
-			$GrapeAnim.play("movement")
+			$GrapeAnim.play(movement_animation)
 		elif currentHealth <= 0:
 			deathTimer.start()
 			$GrapeAnim.play("death")
