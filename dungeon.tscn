@@ -15,6 +15,12 @@
 [ext_resource type="Script" path="res://BackgroundSound.gd" id="14_1o1d0"]
 [ext_resource type="PackedScene" uid="uid://8mujy3eharaw" path="res://potion_1.tscn" id="14_4maq5"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_4noh4"]
+radius = 8.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_b827w"]
+radius = 8.0
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yqjvn"]
 texture = ExtResource("2_nq54f")
 texture_region_size = Vector2i(64, 32)
@@ -419,15 +425,27 @@ sources/1 = SubResource("TileSetAtlasSource_alqgh")
 sources/2 = SubResource("TileSetAtlasSource_jple6")
 sources/3 = SubResource("TileSetAtlasSource_djfqb")
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_4noh4"]
-radius = 8.0
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_b827w"]
-radius = 8.0
-
 [node name="Dungeon" type="Node2D"]
 scale = Vector2(0.5, 0.5)
 script = ExtResource("1_ifql2")
+
+[node name="Staircase" type="StaticBody2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Staircase"]
+texture = ExtResource("2_nq54f")
+hframes = 3
+vframes = 10
+frame = 13
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Staircase"]
+visible = false
+shape = SubResource("CircleShape2D_4noh4")
+
+[node name="Staircase_hitbox" type="Area2D" parent="Staircase"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Staircase/Staircase_hitbox"]
+visible = false
+shape = SubResource("CircleShape2D_b827w")
 
 [node name="TileMap" type="TileMap" parent="."]
 show_behind_parent = true
@@ -591,24 +609,7 @@ offset_right = 281.0
 offset_bottom = 117.0
 
 [node name="Cassandra" parent="." instance=ExtResource("11_ai3vm")]
-
-[node name="Staircase" type="StaticBody2D" parent="."]
-
-[node name="Sprite2D" type="Sprite2D" parent="Staircase"]
-texture = ExtResource("2_nq54f")
-hframes = 3
-vframes = 10
-frame = 13
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Staircase"]
-visible = false
-shape = SubResource("CircleShape2D_4noh4")
-
-[node name="Staircase_hitbox" type="Area2D" parent="Staircase"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Staircase/Staircase_hitbox"]
-visible = false
-shape = SubResource("CircleShape2D_b827w")
+z_index = 3
 
 [node name="BackgroundSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("13_7lc74")
@@ -616,6 +617,7 @@ script = ExtResource("14_1o1d0")
 
 [node name="Potion1" parent="." instance=ExtResource("14_4maq5")]
 
+[connection signal="area_entered" from="Staircase/Staircase_hitbox" to="." method="_on_staircase_hitbox_area_entered"]
 [connection signal="pressed" from="Debug_Hud/Seed/New Seed" to="." method="_on_new_seed_pressed"]
 [connection signal="pressed" from="Debug_Hud/out_zoom" to="Debug_Hud" method="_on_out_zoom_pressed"]
 [connection signal="pressed" from="Debug_Hud/in_zoom" to="Debug_Hud" method="_on_in_zoom_pressed"]
@@ -625,4 +627,3 @@ script = ExtResource("14_1o1d0")
 [connection signal="pressed" from="Debug_Hud/up" to="Debug_Hud" method="_on_up_pressed"]
 [connection signal="pressed" from="Debug_Hud/down" to="Debug_Hud" method="_on_down_pressed"]
 [connection signal="pressed" from="Debug_Hud/shake" to="Debug_Hud" method="_on_shake_pressed"]
-[connection signal="area_entered" from="Staircase/Staircase_hitbox" to="." method="_on_staircase_hitbox_area_entered"]
