@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://c3afge3ds2qu5"]
+
+[ext_resource type="PackedScene" uid="uid://b1esj2q3hv7jy" path="res://InventoryTesting/Playerequip_inv/playerequip.tscn" id="1_b68c0"]
+[ext_resource type="PackedScene" uid="uid://cul7b22epo42i" path="res://InventoryTesting/inventory_gui.tscn" id="2_pa0hx"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Playerequip" parent="." instance=ExtResource("1_b68c0")]
+visible = false
+layout_mode = 1
+
+[node name="Inventory_gui" parent="." instance=ExtResource("2_pa0hx")]
+visible = false
+layout_mode = 1
+offset_left = 622.0
+offset_top = 161.0
+offset_right = -425.0
+offset_bottom = -391.0

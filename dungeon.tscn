@@ -8,9 +8,9 @@
 [ext_resource type="Script" path="res://debug_UI.gd" id="6_grh6y"]
 [ext_resource type="Texture2D" uid="uid://2uvs3oud5cvk" path="res://debug_buttons.png" id="6_jqwbb"]
 [ext_resource type="PackedScene" uid="uid://eb8v1h7u5ytm" path="res://Health Functions/hearts_container.tscn" id="6_tho0w"]
+[ext_resource type="PackedScene" uid="uid://c3afge3ds2qu5" path="res://InventoryTesting/MainInventory.tscn" id="7_fy3ef"]
 [ext_resource type="PackedScene" uid="uid://crcqnnl6ies46" path="res://cassandra_scene.tscn" id="11_ai3vm"]
 [ext_resource type="AudioStream" uid="uid://dhiy4c1nn72yc" path="res://Music/background sound.mp3" id="13_7lc74"]
-[ext_resource type="PackedScene" uid="uid://cul7b22epo42i" path="res://InventoryTesting/inventory_gui.tscn" id="13_87dgk"]
 [ext_resource type="PackedScene" uid="uid://dryac8f57oat6" path="res://Pause Menu/pause_menu.tscn" id="13_cipy3"]
 [ext_resource type="Script" path="res://BackgroundSound.gd" id="14_1o1d0"]
 [ext_resource type="PackedScene" uid="uid://8mujy3eharaw" path="res://potion_1.tscn" id="14_4maq5"]
@@ -441,6 +441,7 @@ layer_0/y_sort_enabled = true
 [node name="GUI" type="CanvasLayer" parent="."]
 
 [node name="Pause_Menu" parent="GUI" instance=ExtResource("13_cipy3")]
+visible = false
 offset_left = -1.25
 offset_top = -1.25
 offset_right = -1.25
@@ -458,8 +459,7 @@ grow_horizontal = 0
 grow_vertical = 0
 text = "Current Floor Here"
 
-[node name="Inventory_gui" parent="GUI" instance=ExtResource("13_87dgk")]
-visible = false
+[node name="Main Inventory" parent="GUI" instance=ExtResource("7_fy3ef")]
 
 [node name="Debug_Hud" type="CanvasLayer" parent="."]
 script = ExtResource("6_grh6y")
