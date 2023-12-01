@@ -1,21 +1,22 @@
-[gd_scene load_steps=7 format=3 uid="uid://bd775fqojwp4p"]
+[gd_scene load_steps=7 format=3 uid="uid://qdbllnpxqkkl"]
 
 [ext_resource type="Script" path="res://bg.gd" id="1_ejel4"]
-[ext_resource type="Texture2D" uid="uid://dnxkof7ves7p7" path="res://untitled folder/BG2.png" id="3_snr3c"]
-[ext_resource type="Texture2D" uid="uid://damjn23mhquhc" path="res://OrnagePebleblur.png" id="3_vbcwp"]
-[ext_resource type="Texture2D" uid="uid://c7yrt6nwqmtkl" path="res://PinkPebleblur.png" id="4_gfjps"]
-[ext_resource type="Texture2D" uid="uid://bmibfbkky4wiv" path="res://untitled folder/RedPebleblur.png" id="6_05e5j"]
-[ext_resource type="Texture2D" uid="uid://chvae17wd1yqx" path="res://PurplePebleblur.png" id="6_o1gid"]
+[ext_resource type="Texture2D" path="res://MenuAssets/Untitled_Artwork 4.png" id="2_f32jh"]
+[ext_resource type="Texture2D" uid="uid://damjn23mhquhc" path="res://MenuAssets/OrnagePebleblur.png" id="3_vbcwp"]
+[ext_resource type="Texture2D" uid="uid://c7yrt6nwqmtkl" path="res://MenuAssets/PinkPebleblur.png" id="4_gfjps"]
+[ext_resource type="Texture2D" uid="uid://bmibfbkky4wiv" path="res://MenuAssets/RedPebleblur.png" id="6_05e5j"]
+[ext_resource type="Texture2D" uid="uid://chvae17wd1yqx" path="res://MenuAssets/PurplePebleblur.png" id="6_o1gid"]
 
 [node name="Bg" type="ParallaxBackground"]
 script = ExtResource("1_ejel4")
 
 [node name="Bg" type="Sprite2D" parent="."]
-position = Vector2(577.5, 320.625)
-scale = Vector2(1.12956, 1.1336)
-texture = ExtResource("3_snr3c")
+position = Vector2(574.5, 320.73)
+scale = Vector2(0.647222, 0.617117)
+texture = ExtResource("2_f32jh")
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="."]
+visible = false
 modulate = Color(1, 1, 1, 0.623529)
 motion_mirroring = Vector2(1150, 2.08165e-12)
 
@@ -35,6 +36,7 @@ scale = Vector2(0.661677, 0.661677)
 texture = ExtResource("3_vbcwp")
 
 [node name="ParallaxLayer2" type="ParallaxLayer" parent="."]
+visible = false
 modulate = Color(1, 1, 1, 0.8)
 motion_mirroring = Vector2(1150, 2.08165e-12)
 
