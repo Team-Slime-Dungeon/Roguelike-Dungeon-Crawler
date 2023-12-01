@@ -1,21 +1,23 @@
-[gd_scene load_steps=14 format=3 uid="uid://dk3ustog51xob"]
+[gd_scene load_steps=22 format=3 uid="uid://btsxsxswd7hs0"]
 
 [ext_resource type="Script" path="res://mainmenu.gd" id="1_230jb"]
 [ext_resource type="Texture2D" uid="uid://c32cji1hifxob" path="res://MenuAssets/270.png" id="3_f50f4"]
-[ext_resource type="PackedScene" uid="uid://bd775fqojwp4p" path="res://bg.tscn" id="3_kn0gk"]
+[ext_resource type="PackedScene" uid="uid://qdbllnpxqkkl" path="res://bg.tscn" id="3_kn0gk"]
 [ext_resource type="Texture2D" uid="uid://dbvs8l4bnadih" path="res://MenuAssets/270-219.png.png" id="4_efpxw"]
 [ext_resource type="Texture2D" uid="uid://dcvb624n1ed76" path="res://MenuAssets/New Piskel (4).png" id="5_biqbo"]
 [ext_resource type="Texture2D" uid="uid://d1de8tcjv7x4b" path="res://MenuAssets/0179.png" id="6_hpig8"]
 [ext_resource type="FontFile" uid="uid://b1dyomvma53nt" path="res://PixelifySans-Regular.ttf" id="7_2mmw6"]
 [ext_resource type="Script" path="res://Resolutions.gd" id="8_ws277"]
+[ext_resource type="Texture2D" path="res://MenuAssets/2d_fire_00000.png" id="9_q1weh"]
+[ext_resource type="Texture2D" path="res://MenuAssets/fire_00000.png" id="10_x848q"]
 
 [sub_resource type="Animation" id="Animation_l35mj"]
 resource_name = "Bring back"
 length = 10.0
 tracks/0/type = "value"
 tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("TextureButton:visible")
+tracks/0/enabled = false
+tracks/0/path = NodePath("NewGmButt:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -26,7 +28,7 @@ tracks/0/keys = {
 }
 tracks/1/type = "value"
 tracks/1/imported = false
-tracks/1/enabled = true
+tracks/1/enabled = false
 tracks/1/path = NodePath("ExitButton:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
@@ -38,8 +40,8 @@ tracks/1/keys = {
 }
 tracks/2/type = "value"
 tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("TextureButton:position")
+tracks/2/enabled = false
+tracks/2/path = NodePath("NewGmButt:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -50,7 +52,7 @@ tracks/2/keys = {
 }
 tracks/3/type = "value"
 tracks/3/imported = false
-tracks/3/enabled = true
+tracks/3/enabled = false
 tracks/3/path = NodePath("ExitButton:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
@@ -113,8 +115,8 @@ tracks/7/keys = {
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D3:frame")
+tracks/0/enabled = false
+tracks/0/path = NodePath("NewGamePart:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -125,8 +127,8 @@ tracks/0/keys = {
 }
 tracks/1/type = "value"
 tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("TextureButton:visible")
+tracks/1/enabled = false
+tracks/1/path = NodePath("NewGmButt:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -137,8 +139,8 @@ tracks/1/keys = {
 }
 tracks/2/type = "value"
 tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D3:visible")
+tracks/2/enabled = false
+tracks/2/path = NodePath("NewGamePart:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -149,8 +151,8 @@ tracks/2/keys = {
 }
 tracks/3/type = "value"
 tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Sprite2D4:frame")
+tracks/3/enabled = false
+tracks/3/path = NodePath("exit:frame")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -161,7 +163,7 @@ tracks/3/keys = {
 }
 tracks/4/type = "value"
 tracks/4/imported = false
-tracks/4/enabled = true
+tracks/4/enabled = false
 tracks/4/path = NodePath("ExitButton:visible")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
@@ -173,8 +175,8 @@ tracks/4/keys = {
 }
 tracks/5/type = "value"
 tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("Sprite2D4:visible")
+tracks/5/enabled = false
+tracks/5/path = NodePath("exit:visible")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -185,8 +187,8 @@ tracks/5/keys = {
 }
 tracks/6/type = "value"
 tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("TextureButton:position")
+tracks/6/enabled = false
+tracks/6/path = NodePath("NewGmButt:position")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -197,7 +199,7 @@ tracks/6/keys = {
 }
 tracks/7/type = "value"
 tracks/7/imported = false
-tracks/7/enabled = true
+tracks/7/enabled = false
 tracks/7/path = NodePath("ExitButton:position")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
@@ -273,8 +275,8 @@ resource_name = "Remove"
 length = 10.0
 tracks/0/type = "value"
 tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("TextureButton:visible")
+tracks/0/enabled = false
+tracks/0/path = NodePath("NewGmButt:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -285,7 +287,7 @@ tracks/0/keys = {
 }
 tracks/1/type = "value"
 tracks/1/imported = false
-tracks/1/enabled = true
+tracks/1/enabled = false
 tracks/1/path = NodePath("ExitButton:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
@@ -297,8 +299,8 @@ tracks/1/keys = {
 }
 tracks/2/type = "value"
 tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("TextureButton:position")
+tracks/2/enabled = false
+tracks/2/path = NodePath("NewGmButt:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -309,7 +311,7 @@ tracks/2/keys = {
 }
 tracks/3/type = "value"
 tracks/3/imported = false
-tracks/3/enabled = true
+tracks/3/enabled = false
 tracks/3/path = NodePath("ExitButton:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
@@ -385,8 +387,8 @@ resource_name = "dust"
 length = 6.0
 tracks/0/type = "value"
 tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D3:frame")
+tracks/0/enabled = false
+tracks/0/path = NodePath("NewGamePart:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -397,8 +399,8 @@ tracks/0/keys = {
 }
 tracks/1/type = "value"
 tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("TextureButton:visible")
+tracks/1/enabled = false
+tracks/1/path = NodePath("NewGmButt:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -409,8 +411,8 @@ tracks/1/keys = {
 }
 tracks/2/type = "value"
 tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D3:visible")
+tracks/2/enabled = false
+tracks/2/path = NodePath("NewGamePart:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -421,8 +423,8 @@ tracks/2/keys = {
 }
 tracks/3/type = "value"
 tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Sprite2D4:frame")
+tracks/3/enabled = false
+tracks/3/path = NodePath("exit:frame")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -433,7 +435,7 @@ tracks/3/keys = {
 }
 tracks/4/type = "value"
 tracks/4/imported = false
-tracks/4/enabled = true
+tracks/4/enabled = false
 tracks/4/path = NodePath("ExitButton:visible")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
@@ -445,8 +447,8 @@ tracks/4/keys = {
 }
 tracks/5/type = "value"
 tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("Sprite2D4:visible")
+tracks/5/enabled = false
+tracks/5/path = NodePath("exit:visible")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -462,6 +464,154 @@ _data = {
 "RESET": SubResource("Animation_esr5p"),
 "Remove": SubResource("Animation_h7t3o"),
 "dust": SubResource("Animation_ejvhq")
+}
+
+[sub_resource type="Animation" id="Animation_sf0xc"]
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D5:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [28, 0]
+}
+
+[sub_resource type="Animation" id="Animation_5is2j"]
+resource_name = "fire"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D5:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 28]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_c7g80"]
+_data = {
+"RESET": SubResource("Animation_sf0xc"),
+"fire": SubResource("Animation_5is2j")
+}
+
+[sub_resource type="Animation" id="Animation_v35go"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("fireparticle:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("fireparticle2:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("fireparticle:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("fireparticle2:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_cj4pa"]
+resource_name = "particle"
+length = 7.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("fireparticle:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 92]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("fireparticle2:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(2.7, 7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1, 91]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("fireparticle:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("fireparticle2:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 2.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_koo2c"]
+_data = {
+"RESET": SubResource("Animation_v35go"),
+"particle": SubResource("Animation_cj4pa")
 }
 
 [node name="Control" type="Control"]
@@ -481,8 +631,8 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = 660.0
-offset_right = 14976.0
-offset_bottom = 9084.0
+offset_right = 4469.0
+offset_bottom = 3174.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 0.854902, 0.588235, 1)
@@ -600,15 +750,17 @@ hframes = 6
 vframes = 13
 frame = 74
 
-[node name="Sprite2D3" type="Sprite2D" parent="."]
-position = Vector2(325, 308)
+[node name="NewGamePart" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(232.956, 331)
 scale = Vector2(0.538101, 0.48936)
 texture = ExtResource("3_f50f4")
 hframes = 9
 vframes = 25
-frame = 222
+frame = 215
 
-[node name="TextureButton" type="TextureButton" parent="."]
+[node name="NewGmButt" type="TextureButton" parent="."]
+visible = false
 custom_minimum_size = Vector2(400, 30)
 layout_mode = 0
 offset_left = 27.0
@@ -619,43 +771,101 @@ scale = Vector2(0.54, 0.54)
 auto_translate = false
 texture_normal = ExtResource("4_efpxw")
 
-[node name="Sprite2D4" type="Sprite2D" parent="."]
-position = Vector2(329, 413)
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_6od4r")
+}
+
+[node name="exit" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(245, 406)
 scale = Vector2(0.538, 0.443)
 texture = ExtResource("5_biqbo")
 hframes = 8
 vframes = 23
 frame = 176
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_6od4r")
-}
-
 [node name="ExitButton" type="TextureButton" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 239.0
 offset_top = 420.0
-offset_right = 469.0
+offset_right = 489.0
 offset_bottom = 521.0
 scale = Vector2(0.5, 0.5)
 texture_normal = ExtResource("6_hpig8")
 
 [node name="SettingsBut" type="Button" parent="."]
-visible = false
 layout_mode = 0
-offset_left = 241.0
-offset_top = 514.0
-offset_right = 384.0
-offset_bottom = 560.0
+offset_left = 172.0
+offset_top = 447.0
+offset_right = 373.0
+offset_bottom = 510.0
 theme_override_fonts/font = ExtResource("7_2mmw6")
-theme_override_font_sizes/font_size = 31
+theme_override_font_sizes/font_size = 45
 text = "Settings
+"
+
+[node name="Sprite2D5" type="Sprite2D" parent="."]
+position = Vector2(709, 293)
+scale = Vector2(0.227574, 0.227574)
+texture = ExtResource("9_q1weh")
+hframes = 7
+vframes = 5
+frame = 28
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_c7g80")
+}
+
+[node name="fireparticle" type="Sprite2D" parent="."]
+position = Vector2(575.5, 318.875)
+scale = Vector2(0.608854, 0.692824)
+texture = ExtResource("10_x848q")
+hframes = 7
+vframes = 14
+
+[node name="fireparticle2" type="Sprite2D" parent="."]
+position = Vector2(655, 325)
+scale = Vector2(0.714818, 0.774537)
+texture = ExtResource("10_x848q")
+hframes = 7
+vframes = 14
+frame = 1
+
+[node name="AnimationPlayer3" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_koo2c")
+}
+
+[node name="NewGameButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 147.0
+offset_top = 350.0
+offset_right = 388.0
+offset_bottom = 418.0
+theme_override_fonts/font = ExtResource("7_2mmw6")
+theme_override_font_sizes/font_size = 45
+text = "New Game
+"
+
+[node name="ExitButton2" type="Button" parent="."]
+layout_mode = 0
+offset_left = 228.0
+offset_top = 543.0
+offset_right = 327.0
+offset_bottom = 606.0
+theme_override_fonts/font = ExtResource("7_2mmw6")
+theme_override_font_sizes/font_size = 45
+text = "Exit
 "
 
 [connection signal="item_selected" from="CanvasLayer2/Control/ResolutionButton" to="CanvasLayer2/Control/Label" method="_on_OptionButton_item_selected"]
 [connection signal="toggled" from="CanvasLayer2/Control/CheckButton" to="CanvasLayer2/Control/Label" method="_on_check_button_toggled"]
 [connection signal="pressed" from="CanvasLayer2/Control/Button" to="." method="_on_button_Back_pressed"]
-[connection signal="pressed" from="TextureButton" to="." method="_on_texture_button_pressed"]
+[connection signal="pressed" from="NewGmButt" to="." method="_on_texture_button_pressed"]
 [connection signal="pressed" from="ExitButton" to="." method="_on_exit_button_pressed"]
 [connection signal="pressed" from="SettingsBut" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="NewGameButton" to="." method="_on_texture_button_pressed"]
+[connection signal="pressed" from="ExitButton2" to="." method="_on_exit_button_pressed"]
