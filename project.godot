@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 GameData="*res://InventoryTesting/Singleton/GameData.gd"
 PlayerData="*res://InventoryTesting/Singleton/PlayerData.gd"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
+MusicController="*res://music_controller.tscn"
 
 [display]
 
@@ -129,6 +130,11 @@ reproduce={
 interact={
 "deadzone": 0.5,
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":70,"key_label":0,"unicode":102,"echo":false,"script":null)
+]
+}
+dash={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194325,"key_label":0,"unicode":0,"echo":false,"script":null)
 ]
 }
 
