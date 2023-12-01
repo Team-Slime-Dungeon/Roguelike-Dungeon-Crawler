@@ -15,6 +15,7 @@ signal healthChanged
 @export var ghost_node : PackedScene
 @onready var ghost_timer = $GhostTimer
 @onready var deathTimer4 = $deathTimer4
+
 var SPEED
 const walking_speed = 100
 const running_speed = 250
@@ -30,7 +31,6 @@ func _ready():
 	
 #func _process(delta):
 #	update_animation_parameter()
-
 
 func get_input():
 	if (is_attacking == true or is_talking == true):
@@ -49,8 +49,6 @@ func get_input():
 		
 	velocity = input_dir * SPEED
 	
-	
-
 func update_animation_parameter():
 	#idle animation plays if velocity equals zero, otherwise walking animation plays
 	if(velocity == Vector2.ZERO):
@@ -86,10 +84,7 @@ func _unhandled_input(event):
 				DialogueManager.show_example_dialogue_balloon(load("res://Dialogue/main.dialogue"), "start")
 				is_talking = true
 				return
-		
-
-	
-				
+					
 func _physics_process(delta):
 	handleCollision()
 
@@ -97,8 +92,7 @@ func _physics_process(delta):
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	get_input()
 	#move_and_collide(velocity * delta)
-	move_and_slide()
-	
+	move_and_slide()	
 	update_animation_parameter()
 	
 func handleCollision():
@@ -106,8 +100,6 @@ func handleCollision():
 		var collision = get_slide_collision(i)
 		var collider = collision.get_collider()
 		#print_debug(collider.name)
-
-
 
 func _on_hurtbox_area_entered(area):
 	if area.name == "hitBox" or area.name =="hitBox2":
@@ -120,12 +112,18 @@ func _on_hurtbox_area_entered(area):
 			get_tree().change_scene_to_file("res://game_over_screen.tscn")
 			dead_sound.play()
 		healthChanged.emit(currentHealth)
-		knockback(area.get_parent().velocity)
+
+		# Ensure the enemy is valid and still spawned
+		if is_instance_valid(area):
+			if area.get_parent().currentHealth > 0:
+				knockback(area.get_parent().velocity)
+				
 		effects.play("hurtBlink")
 		hurtsound1.play()
 		HurtTimer.start()
 		await HurtTimer.timeout
 		effects.play("RESET")
+		
 func knockback(enemyVelocity: Vector2):
 	var totalKnockback = Vector2(0, 0)
 	var knockbackDirection = (enemyVelocity - velocity).normalized() * knockbackPower
@@ -144,17 +142,21 @@ func add_ghost():
 	var ghost = ghost_node.instantiate()
 	ghost.set_property(position, $CassandraSprite.scale)
 	get_tree().current_scene.add_child(ghost)
+	
 func dash():
 	ghost_timer.start()
  
 	var tween = get_tree().create_tween()
-	tween.tween_property(self, "position", position + velocity * 1.5, 0.35)
- 
+	
+	tween.tween_property(self, "position", position + velocity*1.5, 0.35)
+
 	await tween.finished
 	ghost_timer.stop()
+	
 func _input(event):
 	if event.is_action_pressed("dash"):
 		dash()
+
 func _on_detection_area_body_entered(body):
 	if body.has_method("entity"):
 		potion_is_in_range = true
@@ -163,7 +165,6 @@ func _on_detection_area_body_entered(body):
 func _on_detection_area_body_exited(body):
 	if body.has_method("entity"):
 		potion_is_in_range = false
-
 
 func _on_ghost_timer_timeout():
 	add_ghost()
