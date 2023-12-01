@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://b7gaaddd3b0tl"]
+
+[ext_resource type="Texture2D" uid="uid://bqs2ydffkjk73" path="res://player/cassandra_walk.png" id="1_0b5od"]
+[ext_resource type="Script" path="res://Ghost.gd" id="2_pnmny"]
+
+[node name="Ghost" type="Sprite2D"]
+modulate = Color(0.380392, 0.380392, 0.380392, 1)
+show_behind_parent = true
+position = Vector2(104, -23)
+texture = ExtResource("1_0b5od")
+offset = Vector2(60, -2)
+hframes = 6
+vframes = 4
+frame = 6
+script = ExtResource("2_pnmny")

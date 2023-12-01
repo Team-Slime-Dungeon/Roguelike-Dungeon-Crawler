@@ -10,7 +10,11 @@ signal healthChanged
 @onready var hurtsound1 = $hurtsound1
 @onready var animation_tree = $AnimationTree
 @onready var weapon = $CassandraSprite/weapon
-
+@onready var dead_sound = $dead_sound
+@onready var gameovertimer = $GameOverTimer
+@export var ghost_node : PackedScene
+@onready var ghost_timer = $GhostTimer
+@onready var deathTimer4 = $deathTimer4
 var SPEED
 const walking_speed = 100
 const running_speed = 250
@@ -104,11 +108,17 @@ func handleCollision():
 		#print_debug(collider.name)
 
 
+
 func _on_hurtbox_area_entered(area):
 	if area.name == "hitBox" or area.name =="hitBox2":
 		currentHealth -= 1
 		if currentHealth < 0:
-			currentHealth = maxHealth
+			MusicController.play_music()
+			effects.play("death")
+			deathTimer4.start()
+			await deathTimer4.timeout
+			get_tree().change_scene_to_file("res://game_over_screen.tscn")
+			dead_sound.play()
 		healthChanged.emit(currentHealth)
 		knockback(area.get_parent().velocity)
 		effects.play("hurtBlink")
@@ -130,8 +140,21 @@ func knockback(enemyVelocity: Vector2):
 	# Calculate the knockback from the second enemy and add it to totalKnockback.
 	# Apply the total knockback to the player's velocity.
 	# Perform the movement and sliding.
-
-
+func add_ghost():
+	var ghost = ghost_node.instantiate()
+	ghost.set_property(position, $CassandraSprite.scale)
+	get_tree().current_scene.add_child(ghost)
+func dash():
+	ghost_timer.start()
+ 
+	var tween = get_tree().create_tween()
+	tween.tween_property(self, "position", position + velocity * 1.5, 0.35)
+ 
+	await tween.finished
+	ghost_timer.stop()
+func _input(event):
+	if event.is_action_pressed("dash"):
+		dash()
 func _on_detection_area_body_entered(body):
 	if body.has_method("entity"):
 		potion_is_in_range = true
@@ -140,3 +163,7 @@ func _on_detection_area_body_entered(body):
 func _on_detection_area_body_exited(body):
 	if body.has_method("entity"):
 		potion_is_in_range = false
+
+
+func _on_ghost_timer_timeout():
+	add_ghost()
