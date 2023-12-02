@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://bei5vixshv60i"]
+
+[ext_resource type="Script" path="res://SoundManager.gd" id="1_c4wnv"]
+[ext_resource type="AudioStream" uid="uid://sftq56hwsqbu" path="res://Music/dead_sound2.mp3" id="2_secw7"]
+
+[node name="MusicController" type="Node"]
+script = ExtResource("1_c4wnv")
+
+[node name="dead" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_secw7")

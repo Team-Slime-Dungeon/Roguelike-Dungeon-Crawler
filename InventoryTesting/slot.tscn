@@ -4,11 +4,13 @@
 
 [node name="Slot" type="Panel"]
 self_modulate = Color(1, 1, 1, 0)
-custom_minimum_size = Vector2(20, 20)
+custom_minimum_size = Vector2(2, 2)
 offset_right = 20.0
 offset_bottom = 20.0
+scale = Vector2(4.09675, 4.09675)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(5, 5)
 texture = ExtResource("1_bcx10")
 centered = false
 vframes = 2

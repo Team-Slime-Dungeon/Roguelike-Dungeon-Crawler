@@ -10,13 +10,20 @@ signal healthChanged
 @onready var hurtsound1 = $hurtsound1
 @onready var animation_tree = $AnimationTree
 @onready var weapon = $CassandraSprite/weapon
+@onready var dead_sound = $dead_sound
+@onready var gameovertimer = $GameOverTimer
+@export var ghost_node : PackedScene
+@onready var ghost_timer = $GhostTimer
+@onready var deathTimer4 = $deathTimer4
 
 var SPEED
 const walking_speed = 100
 const running_speed = 250
 var input_dir
-var is_attacking = false
-
+var is_attacking: bool = false
+var potion_is_in_range: bool = false
+var is_talking: bool = false
+var is_dashing = false
 func _ready():
 	#activate animation tree
 	animation_tree.active = true
@@ -25,9 +32,8 @@ func _ready():
 #func _process(delta):
 #	update_animation_parameter()
 
-
 func get_input():
-	if (is_attacking == true):
+	if (is_attacking == true or is_talking == true):
 		input_dir = Vector2(0,0)
 	else:
 		input_dir = Input.get_vector("ui_left","ui_right","ui_up","ui_down")
@@ -42,7 +48,7 @@ func get_input():
 		SPEED = walking_speed
 		
 	velocity = input_dir * SPEED
-
+	
 func update_animation_parameter():
 	#idle animation plays if velocity equals zero, otherwise walking animation plays
 	if(velocity == Vector2.ZERO):
@@ -70,7 +76,15 @@ func update_animation_parameter():
 		animation_tree["parameters/idle/blend_position"] = input_dir
 		animation_tree["parameters/walk/blend_position"] = input_dir
 
-	
+func _unhandled_input(event):
+	#if player is in range of potion and presses 'f', dialogue balloon will load
+		is_talking = false
+		if potion_is_in_range == true:
+			if Input.is_action_pressed("interact"):
+				DialogueManager.show_example_dialogue_balloon(load("res://Dialogue/main.dialogue"), "start")
+				is_talking = true
+				return
+					
 func _physics_process(delta):
 	handleCollision()
 
@@ -78,8 +92,7 @@ func _physics_process(delta):
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	get_input()
 	#move_and_collide(velocity * delta)
-	move_and_slide()
-	
+	move_and_slide()	
 	update_animation_parameter()
 	
 func handleCollision():
@@ -88,19 +101,29 @@ func handleCollision():
 		var collider = collision.get_collider()
 		#print_debug(collider.name)
 
-
 func _on_hurtbox_area_entered(area):
 	if area.name == "hitBox" or area.name =="hitBox2":
 		currentHealth -= 1
 		if currentHealth < 0:
-			currentHealth = maxHealth
+			MusicController.play_music()
+			effects.play("death")
+			deathTimer4.start()
+			await deathTimer4.timeout
+			get_tree().change_scene_to_file("res://game_over_screen.tscn")
+			dead_sound.play()
 		healthChanged.emit(currentHealth)
-		knockback(area.get_parent().velocity)
+
+		# Ensure the enemy is valid and still spawned
+		if is_instance_valid(area):
+			if area.get_parent().currentHealth > 0:
+				knockback(area.get_parent().velocity)
+				
 		effects.play("hurtBlink")
 		hurtsound1.play()
 		HurtTimer.start()
 		await HurtTimer.timeout
 		effects.play("RESET")
+		
 func knockback(enemyVelocity: Vector2):
 	var totalKnockback = Vector2(0, 0)
 	var knockbackDirection = (enemyVelocity - velocity).normalized() * knockbackPower
@@ -115,3 +138,45 @@ func knockback(enemyVelocity: Vector2):
 	# Calculate the knockback from the second enemy and add it to totalKnockback.
 	# Apply the total knockback to the player's velocity.
 	# Perform the movement and sliding.
+func add_ghost():
+	var ghost = ghost_node.instantiate()
+	ghost.set_property(position, $CassandraSprite.scale)
+	get_tree().current_scene.add_child(ghost)
+	
+func dash():
+	ghost_timer.start()
+ 
+	var tween = get_tree().create_tween()
+	
+
+	await tween.finished
+	ghost_timer.stop()
+func _process(delta):
+	if is_dashing: 
+		dash()
+
+func _input(event):
+	if event.is_action_pressed("dash"):
+		is_dashing = false
+		dash_pressed()
+		#dash()
+	elif event.is_action_released("dash"):
+		is_dashing = true
+		ondash_released()
+func dash_pressed():
+	dash()
+
+func ondash_released():
+	return
+
+func _on_detection_area_body_entered(body):
+	if body.has_method("entity"):
+		potion_is_in_range = true
+
+
+func _on_detection_area_body_exited(body):
+	if body.has_method("entity"):
+		potion_is_in_range = false
+
+func _on_ghost_timer_timeout():
+	add_ghost()

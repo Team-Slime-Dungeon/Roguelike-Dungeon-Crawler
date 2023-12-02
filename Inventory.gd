@@ -12,10 +12,11 @@ var item_effect2 = 5
 
 var Item_List = {
 # Item ID [Item Name // Item_Max_Stack // Item Attack // Item Defense // Item Effect1 // Item Effect2]
-	0 : ["Fist",		1, 		1,				0,				null, null ],
+	0 : ["Coin",		99, 	0,				0,				null, null ],
 	1 : ["Basic Sword",	1,		2,				0,				null, null ],
 	2 : ["Steel Sword", 1,		3,				0,				null, null ],
-	3 : ["Bronze Helmet", 1,	0,				5,				null, null]
+	3 : ["Bronze Helmet", 1,	0,				5,				null, null ],
+	10: ["Blue Flower",    1,	0,				0, 				null, null]
 }
 # Called when the node enters the scene tree for the first time.
 func _ready(loaded_inventory={}):	
@@ -23,7 +24,7 @@ func _ready(loaded_inventory={}):
 		print("Inventory Loaded!")
 		Inventory = loaded_inventory
 	else:
-		Inventory = {}
+		Inventory = {0:0}
 		
 func _save_inventory():
 	# Takes the current inventory and returns it as a dictionary of { Item ID: Amount }

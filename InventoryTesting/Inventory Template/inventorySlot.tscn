@@ -1,15 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://dgbwvumsubegd"]
+[gd_scene load_steps=3 format=3 uid="uid://dgbwvumsubegd"]
 
 [ext_resource type="Texture2D" uid="uid://du8e8dicpwnj3" path="res://InventoryTesting/InventoryBackgroundPics/inventorySlot_1.png" id="1_d2kyo"]
-
+[ext_resource type="Script" path="res://InventoryTesting/Inventory Template/InventorySlot.gd" id="2_4fwxr"]
 
 [node name="Inv1" type="TextureRect"]
-custom_minimum_size = Vector2(16, 16)
+custom_minimum_size = Vector2(16, 17)
 offset_left = 413.0
 offset_top = 152.0
 offset_right = 429.0
 offset_bottom = 168.0
-scale = Vector2(11.0843, 11.0843)
+scale = Vector2(3.5295, 3.5295)
 texture = ExtResource("1_d2kyo")
 expand_mode = 1
 
@@ -24,3 +24,5 @@ offset_right = -2.00511
 offset_bottom = -1.87699
 grow_horizontal = 2
 grow_vertical = 2
+expand_mode = 3
+script = ExtResource("2_4fwxr")

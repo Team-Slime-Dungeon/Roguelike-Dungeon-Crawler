@@ -1,7 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://cul7b22epo42i"]
+[gd_scene load_steps=4 format=3 uid="uid://cul7b22epo42i"]
 
 [ext_resource type="Script" path="res://InventoryTesting/inventory_gui.gd" id="1_ap1sc"]
 [ext_resource type="Texture2D" uid="uid://bjm174k3ups8r" path="res://InventoryTesting/InventoryBackgroundPics/InventoryRect.png" id="2_78r4j"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_0nd11"]
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
 
 [node name="Inventory_gui" type="Control"]
 custom_minimum_size = Vector2(20, 20)
@@ -9,19 +13,27 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 338.0
-offset_top = 95.0
-offset_right = -698.0
-offset_bottom = -456.0
+offset_left = 669.0
+offset_top = 157.0
+offset_right = -378.0
+offset_bottom = -395.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(4.48342, 4.48342)
+scale = Vector2(3.87969, 3.87969)
+size_flags_vertical = 4
 script = ExtResource("1_ap1sc")
+
+[node name="Control" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
 [node name="Background" type="NinePatchRect" parent="."]
 layout_mode = 0
-offset_right = 116.0
-offset_bottom = 97.0
+offset_left = -12.3341
+offset_top = -0.822273
+offset_right = 103.666
+offset_bottom = 96.1777
 texture = ExtResource("2_78r4j")
 patch_margin_left = 6
 patch_margin_top = 6
@@ -41,7 +53,9 @@ theme_override_constants/margin_right = 3
 theme_override_constants/margin_bottom = 7
 
 [node name="V" type="VBoxContainer" parent="Background/M"]
+layout_direction = 1
 layout_mode = 2
+size_flags_horizontal = 0
 
 [node name="Header" type="HBoxContainer" parent="Background/M/V"]
 custom_minimum_size = Vector2(20, 10)
@@ -57,11 +71,15 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -8.0
-offset_bottom = 8.0
+offset_left = 25.212
+offset_top = -2.21841
+offset_right = 25.212
+offset_bottom = 13.7816
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(0.480511, 0.480511)
 text = "   Inventory"
+label_settings = SubResource("LabelSettings_0nd11")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Background/M/V"]
 layout_mode = 2
@@ -72,4 +90,6 @@ size_flags_stretch_ratio = 0.0
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme_override_constants/h_separation = 5
+theme_override_constants/v_separation = 5
 columns = 5

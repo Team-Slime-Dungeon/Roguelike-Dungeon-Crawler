@@ -1,10 +1,13 @@
 extends Control
 @onready var ani = get_node("AnimationPlayer")
-
+@onready var ani2 = get_node("AnimationPlayer2")
+@onready var ani3 = get_node("AnimationPlayer3")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	ani.play("dust")
+	#ani.play("dust")
+	ani2.play("fire")
+	ani3.play("particle")
 	pass # Replace with function body.
 
 
