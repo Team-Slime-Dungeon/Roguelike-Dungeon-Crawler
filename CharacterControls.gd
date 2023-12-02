@@ -23,7 +23,7 @@ var input_dir
 var is_attacking: bool = false
 var potion_is_in_range: bool = false
 var is_talking: bool = false
-
+var is_dashing = false
 func _ready():
 	#activate animation tree
 	animation_tree.active = true
@@ -148,14 +148,26 @@ func dash():
  
 	var tween = get_tree().create_tween()
 	
-	tween.tween_property(self, "position", position + velocity*1.5, 0.35)
 
 	await tween.finished
 	ghost_timer.stop()
-	
+func _process(delta):
+	if is_dashing: 
+		dash()
+
 func _input(event):
 	if event.is_action_pressed("dash"):
-		dash()
+		is_dashing = false
+		dash_pressed()
+		#dash()
+	elif event.is_action_released("dash"):
+		is_dashing = true
+		ondash_released()
+func dash_pressed():
+	dash()
+
+func ondash_released():
+	return
 
 func _on_detection_area_body_entered(body):
 	if body.has_method("entity"):
