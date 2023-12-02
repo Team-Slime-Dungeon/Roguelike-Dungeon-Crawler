@@ -458,13 +458,6 @@ layer_0/y_sort_enabled = true
 
 [node name="GUI" type="CanvasLayer" parent="."]
 
-[node name="Pause_Menu" parent="GUI" instance=ExtResource("13_cipy3")]
-visible = false
-offset_left = -1.25
-offset_top = -1.25
-offset_right = -1.25
-offset_bottom = -1.25
-
 [node name="Current_Floor" type="Label" parent="GUI"]
 anchors_preset = 3
 anchor_left = 1.0
@@ -478,6 +471,13 @@ grow_vertical = 0
 text = "Current Floor Here"
 
 [node name="Main Inventory" parent="GUI" instance=ExtResource("7_fy3ef")]
+
+[node name="Pause_Menu" parent="GUI" instance=ExtResource("13_cipy3")]
+visible = false
+offset_left = -1.25
+offset_top = -1.25
+offset_right = 3.75
+offset_bottom = 3.75
 
 [node name="Debug_Hud" type="CanvasLayer" parent="."]
 script = ExtResource("6_grh6y")
