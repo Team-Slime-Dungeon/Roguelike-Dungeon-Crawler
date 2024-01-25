@@ -45,7 +45,7 @@ func _on_save_quit_pressed():
 func _on_settings_pressed():
 	center_container.hide()
 	check_setting.show()
-	print("Settings should pop up here")
+	#print("Settings should pop up here")
 
 func _on_back_pressed():
 	check_setting.hide()

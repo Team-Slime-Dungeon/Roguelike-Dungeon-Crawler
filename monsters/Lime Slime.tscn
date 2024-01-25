@@ -272,6 +272,8 @@ _data = {
 }
 
 [node name="Lime Slime" type="CharacterBody2D"]
+z_index = 1
+y_sort_enabled = true
 script = ExtResource("1_5uou6")
 
 [node name="SlimeCollision" type="CollisionShape2D" parent="."]

@@ -1,0 +1,266 @@
+[gd_scene load_steps=11 format=3 uid="uid://bcepbfmr2laak"]
+
+[ext_resource type="Script" path="res://monsters/Big_Slime.gd" id="1_ocesv"]
+[ext_resource type="Texture2D" uid="uid://dkwqbtk5cs0qk" path="res://monsters/Big Slime.png" id="1_rdr84"]
+
+[sub_resource type="Animation" id="Animation_ave0w"]
+resource_name = "Color_Change"
+length = 5.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2, 3, 4, 5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(0.54902, 1, 0, 1), Color(0, 0.745098, 1, 1), Color(0.745098, 0, 0.882353, 1), Color(0.984314, 0.572549, 0, 1), Color(0.976471, 0.972549, 0.34902, 1), Color(0.556863, 1, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_bdc1i"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xniei"]
+_data = {
+"Color_Change": SubResource("Animation_ave0w"),
+"RESET": SubResource("Animation_bdc1i")
+}
+
+[sub_resource type="Animation" id="Animation_q5u2x"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Big Slime Eyes:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Big Slime Eyes:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-1, -30)]
+}
+
+[sub_resource type="Animation" id="Animation_gu7xg"]
+resource_name = "death"
+length = 8.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2, 2.5, 3.5, 4, 4.5, 5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [1, 2, 1, 2, 1, 2, 2, 1, 1, 1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Big Slime Eyes:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.3, 1.9, 2.3, 4),
+"transitions": PackedFloat32Array(1, 5.65686, 1, 5.65686, 1, 5.65686, 5.65686),
+"update": 1,
+"values": [Vector2(-1, -25), Vector2(-1, -20), Vector2(-1, -25), Vector2(-1, -20), Vector2(-1, -25), Vector2(-1, -20), Vector2(-1, -30)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Big Slime Eyes:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.4, 3.9, 5.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [18, 12, 13, 1]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 4.3, 4.9, 5.2, 5.9, 6.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 0), Vector2(-200, -300), Vector2(-200, 130), Vector2(-200, 0), Vector2(-300, 800)]
+}
+
+[sub_resource type="Animation" id="Animation_mbpae"]
+resource_name = "mourning"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [1, 2, 1, 2, 1, 2, 1, 2, 1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Big Slime Eyes:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.6, 2.2, 2.7),
+"transitions": PackedFloat32Array(1, 5.65686, 1, 5.65686, 1, 5.65686),
+"update": 1,
+"values": [Vector2(-1, -25), Vector2(-1, -20), Vector2(-1, -25), Vector2(-1, -20), Vector2(-1, -25), Vector2(-1, -20)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Big Slime Eyes:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.8, 1.4, 2, 2.5, 3, 3.5, 4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 18, 19, 18, 12, 18, 12, 18]
+}
+
+[sub_resource type="Animation" id="Animation_6nk1e"]
+resource_name = "movement"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [1, 2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Big Slime Eyes:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 5.65686),
+"update": 1,
+"values": [Vector2(-1, -25), Vector2(-1, -20)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Big Slime Eyes:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0bu2w"]
+_data = {
+"RESET": SubResource("Animation_q5u2x"),
+"death": SubResource("Animation_gu7xg"),
+"mourning": SubResource("Animation_mbpae"),
+"movement": SubResource("Animation_6nk1e")
+}
+
+[node name="Big Slime" type="CharacterBody2D"]
+script = ExtResource("1_ocesv")
+
+[node name="Big Slime Body" type="Sprite2D" parent="."]
+texture = ExtResource("1_rdr84")
+hframes = 3
+vframes = 2
+frame = 1
+
+[node name="Big Slime Eyes" type="Sprite2D" parent="Big Slime Body"]
+position = Vector2(-1, -30)
+texture = ExtResource("1_rdr84")
+offset = Vector2(-1, 30)
+hframes = 6
+vframes = 4
+
+[node name="ColorChange" type="AnimationPlayer" parent="Big Slime Body"]
+libraries = {
+"": SubResource("AnimationLibrary_xniei")
+}
+
+[node name="BigAnim" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Big Slime Body")
+libraries = {
+"": SubResource("AnimationLibrary_0bu2w")
+}
+
+[node name="MourningTimer" type="Timer" parent="."]
+wait_time = 5.0
+
+[node name="DeathTimer" type="Timer" parent="."]
+wait_time = 8.0

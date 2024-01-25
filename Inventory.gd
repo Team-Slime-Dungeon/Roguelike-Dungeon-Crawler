@@ -1,5 +1,5 @@
 class_name inventory extends Node2D
-var Equipped_Item = 0
+var Held_Item = 0
 var Inventory = {}
 
 # Item list Slots for convenience
@@ -12,11 +12,11 @@ var item_effect2 = 5
 
 var Item_List = {
 # Item ID [Item Name // Item_Max_Stack // Item Attack // Item Defense // Item Effect1 // Item Effect2]
-	0 : ["Coin",		99, 	0,				0,				null, null ],
-	1 : ["Basic Sword",	1,		2,				0,				null, null ],
-	2 : ["Steel Sword", 1,		3,				0,				null, null ],
-	3 : ["Bronze Helmet", 1,	0,				5,				null, null ],
-	10: ["Blue Flower",    1,	0,				0, 				null, null]
+	0 : ["Coin",			99,		0,				0,				null, null ],
+	1 : ["Basic Sword",		1,		2,				0,				null, null ],
+	2 : ["Steel Sword", 	1,		3,				0,				null, null ],
+	3 : ["Bronze Helmet",	1,		0,				5,				null, null ],
+	10: ["Blue Mushroom",	99,		0,				0, 				null, null ]
 }
 # Called when the node enters the scene tree for the first time.
 func _ready(loaded_inventory={}):	
@@ -25,10 +25,10 @@ func _ready(loaded_inventory={}):
 		Inventory = loaded_inventory
 	else:
 		Inventory = {0:0}
-		
-func _save_inventory():
+
+func _save_inventory(print=false):
 	# Takes the current inventory and returns it as a dictionary of { Item ID: Amount }
-	print(Inventory)
+	if print: print(Inventory)
 	return Inventory
 
 func _load_inventory(loaded_inventory):
@@ -42,7 +42,11 @@ func _print_inventory():
 	for item_id in Inventory:
 		print("| ", Item_List[item_id][item_name], "	x ", Inventory[item_id])
 	print("|================================|\n")
-
+	
+func _get_coins():
+	print(Inventory[0])
+	return Inventory[0]
+	
 func _add_item(item_id, amount):
 	var add_amount = amount
 	# If item ID is in inventory
@@ -115,7 +119,7 @@ func _delete_item(item_id):
 		print("Error: Item ID [",item_id,"] is not in inventory, cannot be deleted.")
 		
 func get_item_name(item_id):
-	# If the item exists in the inventory
+	# If the item exists
 	if Item_List.has(item_id):
 		# Return the item's name as a string
 		return Item_List[item_id][item_name]
@@ -123,6 +127,16 @@ func get_item_name(item_id):
 		print("Error: Item does not exist.")
 	# Item didn't exist, return item name as "None"
 	return "None" 
+
+func get_item_amount(item_id):
+	# If the item exists in the inventory
+	if Inventory.has(item_id):
+		# Return the item's amount
+		return Inventory[item_id]
+	else:
+		print("Error: Item not in inventory.")
+	# Item didn't exist, return item name as "None"
+	return 0
 
 func get_item_attack(item_id):
 	# If the item exists in the inventory
@@ -140,6 +154,7 @@ func get_item_defense(item_id):
 	else:
 		print("Error: Item does not exist.")
 	return 0
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

@@ -17,7 +17,7 @@ func _process(delta):
 
 
 func _on_texture_button_pressed():
-	get_tree().change_scene_to_file("res://dungeon.tscn")
+	get_tree().change_scene_to_file("res://Story/Intro/intro.tscn")
 	print("pressed")
 	pass # Replace with function body.
 

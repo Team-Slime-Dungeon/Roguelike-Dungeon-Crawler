@@ -2,7 +2,7 @@ extends CharacterBody2D
 var collision_count = 0
 
 signal healthChanged
-@export var maxHealth = 3
+@export var maxHealth = 10
 @onready var currentHealth: int = maxHealth
 @export var knockbackPower: int = 500
 @onready var effects = $Effects
@@ -16,6 +16,10 @@ signal healthChanged
 @onready var ghost_timer = $GhostTimer
 @onready var deathTimer4 = $deathTimer4
 
+var cutscene_speed = walking_speed
+var cutscene_location
+var cutscene_action = false
+var input_blocked = false
 var SPEED
 const walking_speed = 100
 const running_speed = 250
@@ -24,31 +28,78 @@ var is_attacking: bool = false
 var potion_is_in_range: bool = false
 var is_talking: bool = false
 var is_dashing = false
+
 func _ready():
 	#activate animation tree
 	animation_tree.active = true
 	input_dir = Vector2(1,0)
 	
+		
 #func _process(delta):
+	if cutscene_action:
+		move_character(cutscene_location)
 #	update_animation_parameter()
 
-func get_input():
-	if (is_attacking == true or is_talking == true):
-		input_dir = Vector2(0,0)
-	else:
-		input_dir = Input.get_vector("ui_left","ui_right","ui_up","ui_down")
+func block_inputs(state = false):
+		input_blocked = state
+
+func move_character(location, speed=walking_speed):
+	print("At: ",position,"moving to: ", location)
 	
-	SPEED = walking_speed
-	
-	if(Input.is_action_pressed("running")):
-		#update SPEED when shift is pressed
-		SPEED = running_speed
-	else:
-		#SPEED remanins walking speed if shift is not pressed
-		SPEED = walking_speed
+	if int(round(position.x)) == int(round(location.x)) and int(round(position.y)) == int(round(location.y)):
+		print("At place!")
+		velocity = Vector2.ZERO
+		cutscene_action = false
+		input_dir = Vector2.ZERO
 		
-	velocity = input_dir * SPEED
+	else:
+		cutscene_action = true
+		#print(int(round(position)),"//",int(round(location.x)))
+		
+		if int(round(position.x)) != int(round(location.x)):
+			if position.x > location.x:
+				velocity.x = -speed#Vector2(-speed,0)
+				print("Moving Left")
+				input_dir = Vector2(-speed,0)
+			if position.x < location.x:
+				velocity.x = speed#Vector2(speed,0)
+				print("Moving Right")
+				input_dir = Vector2(speed,0)
+		else:
+			velocity.x = 0
+		
+		if int(round(position.y)) != int(round(location.y)):
+			if position.y < location.y:
+				velocity.y = speed# Vector2(0,-speed)
+				print("moving down")
+				input_dir = Vector2(0,speed)
+			if position.y > location.y:
+				velocity.y = -speed#Vector2(0,speed)
+				input_dir = Vector2(0,-speed)
+				print("moving up")
+		else:
+			velocity.y = 0
+		cutscene_location = location
+		cutscene_speed = speed
+
+func get_input():
+	if input_blocked != true:
+		if (is_attacking == true or is_talking == true):
+			input_dir = Vector2(0,0)
+		else:
+			input_dir = Input.get_vector("ui_left","ui_right","ui_up","ui_down")
 	
+		SPEED = walking_speed
+	
+		if(Input.is_action_pressed("running")):
+			#update SPEED when shift is pressed
+			SPEED = running_speed
+		else:
+			#SPEED remanins walking speed if shift is not pressed
+			SPEED = walking_speed
+		
+		velocity = input_dir * SPEED
+
 func update_animation_parameter():
 	#idle animation plays if velocity equals zero, otherwise walking animation plays
 	if(velocity == Vector2.ZERO):
@@ -103,7 +154,11 @@ func handleCollision():
 
 func _on_hurtbox_area_entered(area):
 	if area.name == "hitBox" or area.name =="hitBox2":
-		currentHealth -= 1
+		if $"../GUI/CheckButton".is_pressed(): 
+			currentHealth = maxHealth
+		else:
+			currentHealth -= 1
+		
 		if currentHealth < 0:
 			MusicController.play_music()
 			effects.play("death")
@@ -151,7 +206,10 @@ func dash():
 
 	await tween.finished
 	ghost_timer.stop()
+	
 func _process(delta):
+	if cutscene_action:
+		move_character(cutscene_location,cutscene_speed)
 	if is_dashing: 
 		dash()
 
@@ -180,3 +238,5 @@ func _on_detection_area_body_exited(body):
 
 func _on_ghost_timer_timeout():
 	add_ghost()
+
+
