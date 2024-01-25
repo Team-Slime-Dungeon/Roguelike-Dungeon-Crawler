@@ -1,7 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://jnyuyvdvhfaw"]
+[gd_scene load_steps=7 format=3 uid="uid://jnyuyvdvhfaw"]
 
-[ext_resource type="Script" path="res://equipment/coin_animation.gd" id="1_eywqj"]
 [ext_resource type="Texture2D" uid="uid://bskmqnyq030t3" path="res://equipment/Coin.png" id="1_m0fhw"]
+[ext_resource type="Script" path="res://equipment/coin.gd" id="1_njeoj"]
 
 [sub_resource type="Animation" id="Animation_ibn84"]
 resource_name = "Coin_Spin"
@@ -41,12 +41,13 @@ _data = {
 "RESET": SubResource("Animation_i6rt3")
 }
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_vb56e"]
+
 [node name="Coin" type="CharacterBody2D"]
 z_index = 1
 z_as_relative = false
-script = ExtResource("1_eywqj")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(120, 95)
+script = ExtResource("1_njeoj")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_m0fhw")
@@ -56,3 +57,12 @@ hframes = 5
 libraries = {
 "": SubResource("AnimationLibrary_ou2bp")
 }
+
+[node name="Player_Detection" type="Area2D" parent="."]
+
+[node name="Collision" type="CollisionShape2D" parent="Player_Detection"]
+scale = Vector2(0.780432, 0.780432)
+shape = SubResource("CircleShape2D_vb56e")
+
+[connection signal="area_entered" from="Player_Detection" to="." method="_on_player_detection_area_entered"]
+[connection signal="body_entered" from="Player_Detection" to="." method="_on_player_detection_body_entered"]

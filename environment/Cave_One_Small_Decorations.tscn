@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://d2bgl46y0a2i6"]
+
+[ext_resource type="Script" path="res://environment/Cave One Small Decorations.gd" id="1_2y6vs"]
+[ext_resource type="Texture2D" uid="uid://cq3pqyik8ux37" path="res://environment/enrivonment_decor.png" id="2_mphbc"]
+
+[node name="Cave_One_Small_Decorations" type="CharacterBody2D"]
+z_index = 1
+y_sort_enabled = true
+position = Vector2(1.42206, 2.54971)
+script = ExtResource("1_2y6vs")
+
+[node name="Decoration_Image" type="Sprite2D" parent="."]
+position = Vector2(-0.422058, -0.549713)
+texture = ExtResource("2_mphbc")
+hframes = 3
+vframes = 6

@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://btsxsxswd7hs0"]
+[gd_scene load_steps=26 format=3 uid="uid://btsxsxswd7hs0"]
 
 [ext_resource type="Script" path="res://mainmenu.gd" id="1_230jb"]
 [ext_resource type="Texture2D" uid="uid://c32cji1hifxob" path="res://MenuAssets/270.png" id="3_f50f4"]
@@ -8,8 +8,10 @@
 [ext_resource type="Texture2D" uid="uid://d1de8tcjv7x4b" path="res://MenuAssets/0179.png" id="6_hpig8"]
 [ext_resource type="FontFile" uid="uid://b1dyomvma53nt" path="res://PixelifySans-Regular.ttf" id="7_2mmw6"]
 [ext_resource type="Script" path="res://Resolutions.gd" id="8_ws277"]
-[ext_resource type="Texture2D" path="res://MenuAssets/2d_fire_00000.png" id="9_q1weh"]
-[ext_resource type="Texture2D" path="res://MenuAssets/fire_00000.png" id="10_x848q"]
+[ext_resource type="Texture2D" uid="uid://djmr3jx8q42ux" path="res://MenuAssets/2d_fire_00000.png" id="9_q1weh"]
+[ext_resource type="Texture2D" uid="uid://cokpmf8ymwndc" path="res://MenuAssets/fire_00000.png" id="10_x848q"]
+[ext_resource type="Shader" path="res://MainMenuStart.gdshader" id="11_hp4dv"]
+[ext_resource type="Texture2D" uid="uid://24dst4l36g52" path="res://title.png" id="11_vflqt"]
 
 [sub_resource type="Animation" id="Animation_l35mj"]
 resource_name = "Bring back"
@@ -614,6 +616,17 @@ _data = {
 "particle": SubResource("Animation_cj4pa")
 }
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_483su"]
+resource_name = "Label1"
+shader = ExtResource("11_hp4dv")
+shader_parameter/height = 3.0
+shader_parameter/speed = 3.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_diu3d"]
+shader = ExtResource("11_hp4dv")
+shader_parameter/height = 3.0
+shader_parameter/speed = 3.0
+
 [node name="Control" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -631,8 +644,8 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = 660.0
-offset_right = 4469.0
-offset_bottom = 3174.0
+offset_right = 30965.0
+offset_bottom = 18078.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 0.854902, 0.588235, 1)
@@ -797,10 +810,10 @@ texture_normal = ExtResource("6_hpig8")
 
 [node name="SettingsBut" type="Button" parent="."]
 layout_mode = 0
-offset_left = 172.0
-offset_top = 447.0
-offset_right = 373.0
-offset_bottom = 510.0
+offset_left = 152.0
+offset_top = 432.0
+offset_right = 360.0
+offset_bottom = 495.0
 theme_override_fonts/font = ExtResource("7_2mmw6")
 theme_override_font_sizes/font_size = 45
 text = "Settings
@@ -841,10 +854,10 @@ libraries = {
 
 [node name="NewGameButton" type="Button" parent="."]
 layout_mode = 0
-offset_left = 147.0
-offset_top = 350.0
-offset_right = 388.0
-offset_bottom = 418.0
+offset_left = 136.0
+offset_top = 352.0
+offset_right = 377.0
+offset_bottom = 420.0
 theme_override_fonts/font = ExtResource("7_2mmw6")
 theme_override_font_sizes/font_size = 45
 text = "New Game
@@ -852,14 +865,29 @@ text = "New Game
 
 [node name="ExitButton2" type="Button" parent="."]
 layout_mode = 0
-offset_left = 228.0
-offset_top = 543.0
-offset_right = 327.0
-offset_bottom = 606.0
+offset_left = 200.0
+offset_top = 506.0
+offset_right = 312.0
+offset_bottom = 569.0
 theme_override_fonts/font = ExtResource("7_2mmw6")
 theme_override_font_sizes/font_size = 45
 text = "Exit
 "
+
+[node name="MainTitle" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_483su")
+position = Vector2(361.774, 162.594)
+scale = Vector2(4.5, 4.5)
+texture = ExtResource("11_vflqt")
+vframes = 3
+
+[node name="DemoTitle" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_diu3d")
+position = Vector2(358, 279)
+scale = Vector2(4.5, 4.5)
+texture = ExtResource("11_vflqt")
+vframes = 6
+frame = 2
 
 [connection signal="item_selected" from="CanvasLayer2/Control/ResolutionButton" to="CanvasLayer2/Control/Label" method="_on_OptionButton_item_selected"]
 [connection signal="toggled" from="CanvasLayer2/Control/CheckButton" to="CanvasLayer2/Control/Label" method="_on_check_button_toggled"]

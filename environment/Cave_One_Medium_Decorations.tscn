@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://cyufg505q3vne"]
+
+[ext_resource type="Script" path="res://environment/Cave_One_Medium_Decorations.gd" id="1_0q4ks"]
+[ext_resource type="Texture2D" uid="uid://ddgsrvdsp3w3y" path="res://environment/Cave One Medium Decorations.png" id="1_65gjw"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_euj8t"]
+radius = 27.1662
+
+[node name="Cave_One_Medium_Decorations" type="CharacterBody2D"]
+z_index = 1
+script = ExtResource("1_0q4ks")
+
+[node name="Decoration_Images" type="Sprite2D" parent="."]
+z_index = 1
+z_as_relative = false
+texture = ExtResource("1_65gjw")
+hframes = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_euj8t")

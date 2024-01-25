@@ -323,6 +323,8 @@ _data = {
 }
 
 [node name="Mango Slime" type="CharacterBody2D"]
+z_index = 1
+y_sort_enabled = true
 script = ExtResource("1_aeg12")
 
 [node name="SlimeCollision" type="CollisionShape2D" parent="."]
