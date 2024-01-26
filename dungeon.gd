@@ -32,6 +32,8 @@ var dungeon_terrain = dungeon_terrains[0]
 var monster_spawn_ID = 0
 var monster_spawns = []
 
+var coin_count = 0
+
 var item_spawns = []
 var item_spawn_ID = 0
 
@@ -73,7 +75,7 @@ func _ready():
 	
 	$Cassandra.global_position = Vector2(0,0) # returns player to root room
 	#$TileMap/Staircase_Area.position = Vector2(node_pos[staircase_pos])
-	$GUI/Current_Floor.set_text("Floor " + str(current_floor))
+	$GUI/Current_Floor.set_text("Floor: " + str(current_floor))
 	
 	# debug info
 	$Debug_Hud.visible = debug
@@ -101,6 +103,9 @@ func _process(delta):
 			Items.Player_Inventory._add_item(item.ID, item.amount)
 			Items.Player_Inventory._print_inventory()
 			item.clear_item()
+
+	# Grabs current coin total
+	$GUI/Coin_Counter.set_text("Coin: " + str(Items.Player_Inventory._get_coins()))
 
 func _on_staircase_hitbox_area_entered(area): if area == $Cassandra/hurtbox: _ready() 
 func _on_new_seed_pressed(): _ready() #debug

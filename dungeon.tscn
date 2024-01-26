@@ -664,11 +664,19 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -145.0
+offset_left = -147.0
 offset_top = -26.0
+offset_right = -2.0
 grow_horizontal = 0
 grow_vertical = 0
 text = "Current Floor Here"
+
+[node name="Coin_Counter" type="Label" parent="GUI"]
+offset_left = 1005.0
+offset_top = 593.0
+offset_right = 1150.0
+offset_bottom = 616.0
+text = "Money Count Here"
 
 [node name="Main Inventory" parent="GUI" instance=ExtResource("7_fy3ef")]
 

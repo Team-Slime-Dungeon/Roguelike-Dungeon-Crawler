@@ -17,5 +17,5 @@ func clear_item():
 func _on_player_detection_body_entered(body):
 	if body.name == "Cassandra": 
 		print("Cassandra found a Coin!")
-		emit_signal("coin_collected") #Collects coin and emits signal
+		emit_signal("coin_collected", amount) #Collects coin and emits signal
 		picked_up = true
