@@ -2,19 +2,29 @@ extends CharacterBody2D
 var collision_count = 0
 
 signal healthChanged
-@export var maxHealth = 10
+@export var maxHealth = 2
 @onready var currentHealth: int = maxHealth
+
+# This is for testing, will probably need to move with inventory system
+signal armorChanged
+@export var maxArmor = 6.0
+@onready var currentArmor: float = maxArmor
+
 @export var knockbackPower: int = 500
-@onready var effects = $Effects
-@onready var HurtTimer = $HurtTimer
-@onready var hurtsound1 = $hurtsound1
+
 @onready var animation_tree = $AnimationTree
+@onready var effects = $Effects
 @onready var weapon = $CassandraSprite/weapon
-@onready var dead_sound = $dead_sound
+
+@onready var HurtTimer = $HurtTimer
 @onready var gameovertimer = $GameOverTimer
-@export var ghost_node : PackedScene
 @onready var ghost_timer = $GhostTimer
 @onready var deathTimer4 = $deathTimer4
+
+@onready var dead_sound = $dead_sound
+@onready var hurtsound1 = $hurtsound1
+
+@export var ghost_node : PackedScene
 
 var cutscene_speed = walking_speed
 var cutscene_location
@@ -33,15 +43,13 @@ func _ready():
 	#activate animation tree
 	animation_tree.active = true
 	input_dir = Vector2(1,0)
-	
-		
+
 #func _process(delta):
 	if cutscene_action:
 		move_character(cutscene_location)
 #	update_animation_parameter()
 
-func block_inputs(state = false):
-		input_blocked = state
+func block_inputs(state = false): input_blocked = state
 
 func move_character(location, speed=walking_speed):
 	print("At: ",position,"moving to: ", location)
@@ -65,8 +73,7 @@ func move_character(location, speed=walking_speed):
 				velocity.x = speed#Vector2(speed,0)
 				print("Moving Right")
 				input_dir = Vector2(speed,0)
-		else:
-			velocity.x = 0
+		else: velocity.x = 0
 		
 		if int(round(position.y)) != int(round(location.y)):
 			if position.y < location.y:
@@ -77,8 +84,7 @@ func move_character(location, speed=walking_speed):
 				velocity.y = -speed#Vector2(0,speed)
 				input_dir = Vector2(0,-speed)
 				print("moving up")
-		else:
-			velocity.y = 0
+		else: velocity.y = 0
 		cutscene_location = location
 		cutscene_speed = speed
 
@@ -86,8 +92,7 @@ func get_input():
 	if input_blocked != true:
 		if (is_attacking == true or is_talking == true):
 			input_dir = Vector2(0,0)
-		else:
-			input_dir = Input.get_vector("ui_left","ui_right","ui_up","ui_down")
+		else: input_dir = Input.get_vector("ui_left","ui_right","ui_up","ui_down")
 	
 		SPEED = walking_speed
 	
@@ -95,7 +100,7 @@ func get_input():
 			#update SPEED when shift is pressed
 			SPEED = running_speed
 		else:
-			#SPEED remanins walking speed if shift is not pressed
+			#SPEED remains walking speed if shift is not pressed
 			SPEED = walking_speed
 		
 		velocity = input_dir * SPEED
@@ -154,12 +159,15 @@ func handleCollision():
 
 func _on_hurtbox_area_entered(area):
 	if area.name == "hitBox" or area.name =="hitBox2":
-		if $"../GUI/CheckButton".is_pressed(): 
-			currentHealth = maxHealth
-		else:
-			currentHealth -= 1
-		
-		if currentHealth < 0:
+		if $"../Debug_Hud/CheckButton".is_pressed(): currentHealth = maxHealth
+		elif currentArmor > 0.0: 
+			currentArmor -= 1.0
+			armorChanged.emit(currentArmor) # Damage armor icon
+		else: currentHealth -= 1
+
+		if currentHealth <= 0:
+			# Clear money
+			Items.Player_Inventory._minus_item(0, Items.Player_Inventory._get_coins())
 			MusicController.play_music()
 			effects.play("death")
 			deathTimer4.start()
@@ -167,18 +175,23 @@ func _on_hurtbox_area_entered(area):
 			get_tree().change_scene_to_file("res://game_over_screen.tscn")
 			dead_sound.play()
 		healthChanged.emit(currentHealth)
-
 		# Ensure the enemy is valid and still spawned
 		if is_instance_valid(area):
 			if area.get_parent().currentHealth > 0:
 				knockback(area.get_parent().velocity)
-				
+
 		effects.play("hurtBlink")
 		hurtsound1.play()
 		HurtTimer.start()
 		await HurtTimer.timeout
 		effects.play("RESET")
-		
+
+		# Hit and recover 
+		$RegenTimer.start()
+		await $RegenTimer.timeout
+		currentHealth = maxHealth
+		healthChanged.emit(currentHealth)
+
 func knockback(enemyVelocity: Vector2):
 	var totalKnockback = Vector2(0, 0)
 	var knockbackDirection = (enemyVelocity - velocity).normalized() * knockbackPower
@@ -193,6 +206,7 @@ func knockback(enemyVelocity: Vector2):
 	# Calculate the knockback from the second enemy and add it to totalKnockback.
 	# Apply the total knockback to the player's velocity.
 	# Perform the movement and sliding.
+	
 func add_ghost():
 	var ghost = ghost_node.instantiate()
 	ghost.set_property(position, $CassandraSprite.scale)
@@ -200,10 +214,7 @@ func add_ghost():
 	
 func dash():
 	ghost_timer.start()
- 
 	var tween = get_tree().create_tween()
-	
-
 	await tween.finished
 	ghost_timer.stop()
 	
@@ -221,16 +232,13 @@ func _input(event):
 	elif event.is_action_released("dash"):
 		is_dashing = true
 		ondash_released()
-func dash_pressed():
-	dash()
 
-func ondash_released():
-	return
+func dash_pressed(): dash()
+func ondash_released(): return
 
 func _on_detection_area_body_entered(body):
 	if body.has_method("entity"):
 		potion_is_in_range = true
-
 
 func _on_detection_area_body_exited(body):
 	if body.has_method("entity"):

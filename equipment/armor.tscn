@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://cusrk15vjg27t"]
+
+[ext_resource type="Script" path="res://equipment/armor.gd" id="1_8mvp1"]
+[ext_resource type="Texture2D" uid="uid://bxs3ep6kgj7dl" path="res://equipment/armoricon.png" id="1_clb0n"]
+
+[node name="ArmorGUI" type="Panel"]
+self_modulate = Color(1, 1, 1, 0)
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_8mvp1")
+
+[node name="ArmorIcon" type="Sprite2D" parent="."]
+position = Vector2(0, 20)
+scale = Vector2(2, 2)
+texture = ExtResource("1_clb0n")
+offset = Vector2(10, 0)
+hframes = 6

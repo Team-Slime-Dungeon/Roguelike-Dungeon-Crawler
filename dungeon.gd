@@ -3,6 +3,7 @@ extends Node2D
 var debug = true
 
 var healthSetupCompleted = false
+var armorSetup = false
 
 var random = RandomNumberGenerator.new()
 var node_pos = [] # keeps track of the root for each room
@@ -32,8 +33,6 @@ var dungeon_terrain = dungeon_terrains[0]
 var monster_spawn_ID = 0
 var monster_spawns = []
 
-var coin_count = 0
-
 var item_spawns = []
 var item_spawn_ID = 0
 
@@ -50,7 +49,7 @@ var monster_list = [
 
 func _ready():
 	current_floor += 1 # when entering the dungeon scene, you have descended once
-
+	
 	# Selects the tileset for the current floor
 	if current_floor <= 5:
 		dungeon_floor = dungeon_floor_tiles[0]
@@ -74,7 +73,6 @@ func _ready():
 	generate_monsters()
 	
 	$Cassandra.global_position = Vector2(0,0) # returns player to root room
-	#$TileMap/Staircase_Area.position = Vector2(node_pos[staircase_pos])
 	$GUI/Current_Floor.set_text("Floor: " + str(current_floor))
 	
 	# debug info
@@ -90,7 +88,12 @@ func _ready():
 		$Debug_Hud/HeartsContainer.updateHearts($Cassandra.currentHealth)
 		$Cassandra.healthChanged.connect($Debug_Hud/HeartsContainer.updateHearts)
 		healthSetupCompleted = true   
-		
+
+	if not armorSetup:
+		$GUI/Armor_Durability.setArmor($Cassandra.maxArmor)
+		$GUI/Armor_Durability.updateArmor($Cassandra.currentArmor)
+		$Cassandra.armorChanged.connect($GUI/Armor_Durability.updateArmor)
+		armorSetup = true
 
 func _process(delta):
 	for monster in monster_spawns:
