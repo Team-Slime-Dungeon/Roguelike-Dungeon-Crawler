@@ -18,7 +18,7 @@ var death_location = null
 
 var motion = Vector2.ZERO
 var player = null
-var monster_type = "Slime Mold"
+var monster_type = "Slime"
 var monster_drops = []
 var Body_Color
 var Eye_Color
@@ -28,16 +28,46 @@ func _ready():
 	if not $SlimeAnim.is_playing():
 		$SlimeAnim.play("movement")
 	
-	Body_Color = Color(randf_range(0,1.0),randf_range(0,1.0),randf_range(0,1.0))
-	#Eye_Color = Color(.2,.2,.2)#(255,255,255)#Color(randf(),randf(),randf())
-	Detail_Color  = Color(randf_range(0,1.0),randf_range(0,1.0),randf_range(0,1.0))
-	
-	set_color(Body_Color,Eye_Color,Detail_Color)
+	var Body_Color_Vals = [randf_range(.25,1),randf_range(.25,1),randf_range(.25,1)]
+	var Detail_Color_Vals = [Body_Color_Vals[0]/randi_range(1,3),Body_Color_Vals[1]/randi_range(1,3),Body_Color_Vals[2]/randi_range(1,3)]
+		
+	Body_Color = Color(Body_Color_Vals[0],Body_Color_Vals[1],Body_Color_Vals[2])
+	Detail_Color  = Color(Detail_Color_Vals[0],Detail_Color_Vals[1],Detail_Color_Vals[2])
 
-func set_color(a,b,c):
-	$Body.modulate = a
-	#$Body/Details/Eyes.modulate = b
-	$Body/Details.modulate = c
+	# Eye Color Coloring, if needed uncomment later
+	#var color_sum = 0
+	#for i in Body_Color_Vals:
+	#	color_sum += i
+
+	# Lighter Color Eyes when the slime body is below minimum value
+	#if color_sum < 1.0:
+	#	$Eyes.modulate = Detail_Color
+	# Darker Color Eyes
+	#else:
+	$Eyes.modulate = Color(0,0,0)
+
+	set_color(Body_Color,Detail_Color)
+	
+	# Slime Drop Typing
+	if (Body_Color_Vals[0] > Body_Color_Vals[1] + Body_Color_Vals[2]):
+		#print("Strongly Red")
+		monster_type = "Red Slime"
+#		monster_drops = []
+	elif (Body_Color_Vals[1] > Body_Color_Vals[0] + Body_Color_Vals[2]):
+		#print("Strongly Green")
+		monster_type = "Green Slime"
+#		monster_drops = []
+	elif (Body_Color_Vals[2] > Body_Color_Vals[0] + Body_Color_Vals[1]):
+		#print("Strongly Blue")
+		monster_type = "Blue Slime"
+		monster_drops = [10]
+
+func set_color(body_color=null,detail_color=null):
+	if body_color != null:
+		$Body.modulate = body_color
+
+	if detail_color != null:
+		$Details.modulate = detail_color
 
 func _physics_process(delta):		
 	if player_chase:
@@ -85,7 +115,7 @@ func _on_hurt_box_area_entered(area):
 			HurtTimer1.start()
 			await HurtTimer1.timeout
 			$SlimeAnim.play("movement")
-			set_color(Body_Color,Eye_Color,Detail_Color)
+			set_color(Body_Color,Detail_Color)
 		elif currentHealth <= 0:
 			deathTimer.start()
 			$SlimeAnim.play("death")
