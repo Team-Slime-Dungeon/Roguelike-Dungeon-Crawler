@@ -18,17 +18,30 @@ var death_location = null
 
 var motion = Vector2.ZERO
 var player = null
-var monster_type = "Lemon Slime"
+var monster_type = "Slime Mold"
 var monster_drops = []
+var Body_Color
+var Eye_Color
+var Detail_Color
 
-func _ready():
-	if not $LemonAnim.is_playing():
-		$LemonAnim.play("movement")
-		
-func _physics_process(delta):
+func _ready(): 
+	if not $SlimeAnim.is_playing():
+		$SlimeAnim.play("movement")
 	
-	if player_chase: 
-		velocity = (player.position + Vector2(16,16) - self.position) + velocity / chase_speed
+	Body_Color = Color(randf_range(0,1.0),randf_range(0,1.0),randf_range(0,1.0))
+	#Eye_Color = Color(.2,.2,.2)#(255,255,255)#Color(randf(),randf(),randf())
+	Detail_Color  = Color(randf_range(0,1.0),randf_range(0,1.0),randf_range(0,1.0))
+	
+	set_color(Body_Color,Eye_Color,Detail_Color)
+
+func set_color(a,b,c):
+	$Body.modulate = a
+	#$Body/Details/Eyes.modulate = b
+	$Body/Details.modulate = c
+
+func _physics_process(delta):		
+	if player_chase:
+		velocity = (player.position + Vector2(16,16) - self.position) + velocity / chase_speed			
 	else: 
 		move_timer += delta
 	
@@ -63,18 +76,19 @@ func get_direction():
 		5: return null
 
 func _on_hurt_box_area_entered(area):
-	if area.name == "weapon":
+	if area.name == "weapon" or area.name == "Shuriken":
 		#print_debug(currentHealth)
 		currentHealth -= 1
-		$LemonAnim.play("hit")
+		$SlimeAnim.play("hit")
 		slimehitsound.play()
 		if currentHealth > 0:
 			HurtTimer1.start()
 			await HurtTimer1.timeout
-			$LemonAnim.play("movement")
+			$SlimeAnim.play("movement")
+			set_color(Body_Color,Eye_Color,Detail_Color)
 		elif currentHealth <= 0:
 			deathTimer.start()
-			$LemonAnim.play("death")
+			$SlimeAnim.play("death")
 			await deathTimer.timeout
 			slimedeathsound.play()
 

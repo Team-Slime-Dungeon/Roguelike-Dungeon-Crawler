@@ -40,11 +40,7 @@ var decorative_spawns = []
 var deco_spawn_ID = 0
 
 var monster_list = [
-	preload("res://monsters/Lime Slime.tscn"),
-	preload("res://monsters/Blueberry Slime.tscn"), 
-	preload("res://monsters/Lemon Slime.tscn"),
-	preload("res://monsters/Mango Slime.tscn"),  
-	preload("res://monsters/Grape Slime.tscn")
+	preload("res://monsters/Slime.tscn"),
 	]
 
 func _ready():

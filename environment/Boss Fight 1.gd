@@ -42,6 +42,7 @@ func _ready():
 	if fight_state == 0:
 		print("===Setting up fight (Animation Prep)===")
 		$Cassandra/Camera2D.offset = Vector2(100,-100)
+		$Cassandra.update_camera_scale(1)
 		$Cassandra.block_inputs(true)
 		$Cassandra.move_character(Vector2(-430,130))
 		fight_state = 1
@@ -273,6 +274,7 @@ func _process(delta):
 		print("BOSS DEFEATED!!!!")
 		$Cassandra.block_inputs(true)
 		$Cassandra.move_character(Vector2(-425,130),50)
+		$Cassandra.update_camera_scale(2)
 		fight_state = 7
 		_ready()
 		# Boss death animation
