@@ -1,0 +1,53 @@
+[gd_scene load_steps=4 format=3 uid="uid://dgf0o8xv2h8i4"]
+
+[ext_resource type="Script" path="res://Dialogue/dialogue.gd" id="1_a0g38"]
+[ext_resource type="Texture2D" uid="uid://du8e8dicpwnj3" path="res://InventoryTesting/InventoryBackgroundPics/inventorySlot_1.png" id="1_l1h8a"]
+[ext_resource type="FontFile" uid="uid://b1dyomvma53nt" path="res://PixelifySans-Regular.ttf" id="2_pwqgi"]
+
+[node name="Dialogue" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_a0g38")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+z_index = 5
+z_as_relative = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.187
+anchor_top = 0.156
+anchor_right = 0.187
+anchor_bottom = 0.156
+offset_left = -123.424
+offset_top = -60.088
+offset_right = 122.576
+offset_bottom = 59.912
+texture = ExtResource("1_l1h8a")
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+
+[node name="Name" type="RichTextLabel" parent="NinePatchRect"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 7.0
+offset_right = 151.0
+offset_bottom = 41.0
+theme_override_fonts/normal_font = ExtResource("2_pwqgi")
+theme_override_font_sizes/normal_font_size = 20
+text = "Name:"
+
+[node name="Text" type="RichTextLabel" parent="NinePatchRect"]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 33.0
+offset_right = 236.0
+offset_bottom = 117.0
+theme_override_fonts/normal_font = ExtResource("2_pwqgi")
+theme_override_font_sizes/normal_font_size = 17
+text = "Chatting..."

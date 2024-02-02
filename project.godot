@@ -23,7 +23,6 @@ config/icon="res://icon.svg"
 Items="*res://Items.gd"
 GameData="*res://InventoryTesting/Singleton/GameData.gd"
 PlayerData="*res://InventoryTesting/Singleton/PlayerData.gd"
-DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 MusicController="*res://music_controller.tscn"
 
 [display]
@@ -32,7 +31,7 @@ window/stretch/mode="viewport"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg", "res://addons/gut/plugin.cfg")
+enabled=PackedStringArray("res://addons/gut/plugin.cfg")
 
 [input]
 

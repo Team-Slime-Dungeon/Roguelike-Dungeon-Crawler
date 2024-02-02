@@ -161,14 +161,7 @@ func update_animation_parameter():
 		animation_tree["parameters/idle/blend_position"] = input_dir
 		animation_tree["parameters/walk/blend_position"] = input_dir
 
-func _unhandled_input(event):
-	#if player is in range of potion and presses 'f', dialogue balloon will load
-		is_talking = false
-		if potion_is_in_range == true:
-			if Input.is_action_pressed("interact"):
-				DialogueManager.show_example_dialogue_balloon(load("res://Dialogue/main.dialogue"), "start")
-				is_talking = true
-				return
+
 					
 func _physics_process(delta):
 	handleCollision()
