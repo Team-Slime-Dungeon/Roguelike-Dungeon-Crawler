@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cihbkt56sxtcy"
-path="res://.godot/imported/rubio.png-1987f61b26fd3f0b4014d01711f46ac9.ctex"
+uid="uid://bxs3ep6kgj7dl"
+path="res://.godot/imported/armoricon.png-93957afe806426c8a4afe4f0f3acf24c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://companions/rubio.png"
-dest_files=["res://.godot/imported/rubio.png-1987f61b26fd3f0b4014d01711f46ac9.ctex"]
+source_file="res://equipment/armoricon.png"
+dest_files=["res://.godot/imported/armoricon.png-93957afe806426c8a4afe4f0f3acf24c.ctex"]
 
 [params]
 

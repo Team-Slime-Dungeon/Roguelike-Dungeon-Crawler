@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cihbkt56sxtcy"
-path="res://.godot/imported/rubio.png-1987f61b26fd3f0b4014d01711f46ac9.ctex"
+uid="uid://db1hxdrm8mtmg"
+path="res://.godot/imported/Sheild Slot.png-c7551687a70f96072edec7c49235d80e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://companions/rubio.png"
-dest_files=["res://.godot/imported/rubio.png-1987f61b26fd3f0b4014d01711f46ac9.ctex"]
+source_file="res://InventoryTesting/InventoryBackgroundPics/Sheild Slot.png"
+dest_files=["res://.godot/imported/Sheild Slot.png-c7551687a70f96072edec7c49235d80e.ctex"]
 
 [params]
 

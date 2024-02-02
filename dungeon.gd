@@ -3,6 +3,7 @@ extends Node2D
 var debug = true
 
 var healthSetupCompleted = false
+var armorSetup = false
 
 var random = RandomNumberGenerator.new()
 var node_pos = [] # keeps track of the root for each room
@@ -39,16 +40,12 @@ var decorative_spawns = []
 var deco_spawn_ID = 0
 
 var monster_list = [
-	preload("res://monsters/Lime Slime.tscn"),
-	preload("res://monsters/Blueberry Slime.tscn"), 
-	preload("res://monsters/Lemon Slime.tscn"),
-	preload("res://monsters/Mango Slime.tscn"),  
-	preload("res://monsters/Grape Slime.tscn")
+	preload("res://monsters/Slime.tscn"),
 	]
 
 func _ready():
 	current_floor += 1 # when entering the dungeon scene, you have descended once
-
+	
 	# Selects the tileset for the current floor
 	if current_floor <= 5:
 		dungeon_floor = dungeon_floor_tiles[0]
@@ -72,8 +69,7 @@ func _ready():
 	generate_monsters()
 	
 	$Cassandra.global_position = Vector2(0,0) # returns player to root room
-	#$TileMap/Staircase_Area.position = Vector2(node_pos[staircase_pos])
-	$GUI/Current_Floor.set_text("Floor " + str(current_floor))
+	$GUI/Current_Floor.set_text("Floor: " + str(current_floor))
 	
 	# debug info
 	$Debug_Hud.visible = debug
@@ -88,7 +84,12 @@ func _ready():
 		$Debug_Hud/HeartsContainer.updateHearts($Cassandra.currentHealth)
 		$Cassandra.healthChanged.connect($Debug_Hud/HeartsContainer.updateHearts)
 		healthSetupCompleted = true   
-		
+
+	if not armorSetup:
+		$GUI/Armor_Durability.setArmor($Cassandra.maxArmor)
+		$GUI/Armor_Durability.updateArmor($Cassandra.currentArmor)
+		$Cassandra.armorChanged.connect($GUI/Armor_Durability.updateArmor)
+		armorSetup = true
 
 func _process(delta):
 	for monster in monster_spawns:
@@ -101,6 +102,9 @@ func _process(delta):
 			Items.Player_Inventory._add_item(item.ID, item.amount)
 			Items.Player_Inventory._print_inventory()
 			item.clear_item()
+
+	# Grabs current coin total
+	$GUI/Coin_Counter.set_text("Coin: " + str(Items.Player_Inventory._get_coins()))
 
 func _on_staircase_hitbox_area_entered(area): if area == $Cassandra/hurtbox: _ready() 
 func _on_new_seed_pressed(): _ready() #debug

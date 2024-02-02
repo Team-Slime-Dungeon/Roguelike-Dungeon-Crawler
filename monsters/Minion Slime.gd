@@ -93,7 +93,7 @@ func get_direction():
 		5: return null
 
 func _on_hurt_box_area_entered(area):
-	if area.name == "weapon":
+	if area.name == "weapon" or area.name == "Shuriken":
 		#print_debug(currentHealth)
 		currentHealth -= 1
 		$MinionAnim.play(hit_animation)

@@ -11,7 +11,10 @@ func _get_drag_data(_pos):
 	
 	var control = Control.new()
 	control.add_child(drag_texture)
-	#drag_texture.rect_position = -0.5 * drag_texture.get_minimum_size()
+	
+	#Makes the texture allign with the mouse
+	drag_texture.position = -0.5 * drag_texture.get_minimum_size()
+	
 	set_drag_preview(control)
 	
 	return data

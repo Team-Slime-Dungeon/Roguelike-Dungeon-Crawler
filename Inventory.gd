@@ -44,7 +44,7 @@ func _print_inventory():
 	print("|================================|\n")
 	
 func _get_coins():
-	print(Inventory[0])
+	#print(Inventory[0])
 	return Inventory[0]
 	
 func _add_item(item_id, amount):

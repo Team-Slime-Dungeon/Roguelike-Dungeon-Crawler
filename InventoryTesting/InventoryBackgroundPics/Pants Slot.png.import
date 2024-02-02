@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cihbkt56sxtcy"
-path="res://.godot/imported/rubio.png-1987f61b26fd3f0b4014d01711f46ac9.ctex"
+uid="uid://d1437p0f7h6qc"
+path="res://.godot/imported/Pants Slot.png-1e86346f1454c6c97f29741b7ad7efcd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://companions/rubio.png"
-dest_files=["res://.godot/imported/rubio.png-1987f61b26fd3f0b4014d01711f46ac9.ctex"]
+source_file="res://InventoryTesting/InventoryBackgroundPics/Pants Slot.png"
+dest_files=["res://.godot/imported/Pants Slot.png-1e86346f1454c6c97f29741b7ad7efcd.ctex"]
 
 [params]
 

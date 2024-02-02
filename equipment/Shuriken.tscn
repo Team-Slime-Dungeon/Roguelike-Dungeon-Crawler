@@ -1,0 +1,68 @@
+[gd_scene load_steps=7 format=3 uid="uid://bjaha1xoh6xn0"]
+
+[ext_resource type="Script" path="res://equipment/Shuriken.gd" id="1_a22jb"]
+[ext_resource type="Texture2D" uid="uid://o0us27snqty0" path="res://equipment/Shuriken.png" id="2_qvgw0"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_s020h"]
+
+[sub_resource type="Animation" id="Animation_a5re6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Shuriken_Image:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_lt30l"]
+resource_name = "Shuriken_Throw"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Shuriken_Image:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [1, 0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2pl6o"]
+_data = {
+"RESET": SubResource("Animation_a5re6"),
+"Shuriken_Throw": SubResource("Animation_lt30l")
+}
+
+[node name="Shuriken" type="CharacterBody2D"]
+z_index = 3
+collision_layer = 16
+collision_mask = 16
+script = ExtResource("1_a22jb")
+
+[node name="Shuriken_Image" type="Sprite2D" parent="."]
+z_index = 3
+texture = ExtResource("2_qvgw0")
+hframes = 2
+
+[node name="Shuriken" type="Area2D" parent="Shuriken_Image"]
+collision_layer = 17
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Shuriken_Image/Shuriken"]
+shape = SubResource("CircleShape2D_s020h")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_2pl6o")
+}
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_s020h")

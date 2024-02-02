@@ -2,19 +2,29 @@ extends CharacterBody2D
 var collision_count = 0
 
 signal healthChanged
-@export var maxHealth = 10
+@export var maxHealth = 2
 @onready var currentHealth: int = maxHealth
+
+# This is for testing, will probably need to move with inventory system
+signal armorChanged
+@export var maxArmor = 6.0
+@onready var currentArmor: float = maxArmor
+
 @export var knockbackPower: int = 500
-@onready var effects = $Effects
-@onready var HurtTimer = $HurtTimer
-@onready var hurtsound1 = $hurtsound1
+
 @onready var animation_tree = $AnimationTree
+@onready var effects = $Effects
 @onready var weapon = $CassandraSprite/weapon
-@onready var dead_sound = $dead_sound
+
+@onready var HurtTimer = $HurtTimer
 @onready var gameovertimer = $GameOverTimer
-@export var ghost_node : PackedScene
 @onready var ghost_timer = $GhostTimer
 @onready var deathTimer4 = $deathTimer4
+
+@onready var dead_sound = $dead_sound
+@onready var hurtsound1 = $hurtsound1
+
+@export var ghost_node : PackedScene
 
 var cutscene_speed = walking_speed
 var cutscene_location
@@ -24,70 +34,75 @@ var SPEED
 const walking_speed = 100
 const running_speed = 250
 var input_dir
+var last_input = Vector2(0,0)
 var is_attacking: bool = false
 var potion_is_in_range: bool = false
 var is_talking: bool = false
 var is_dashing = false
+var projectile_spawns = []
+var projectile_ID = 0
+var camera_scale = 2
 
 func _ready():
 	#activate animation tree
 	animation_tree.active = true
 	input_dir = Vector2(1,0)
-	
-		
+
 #func _process(delta):
 	if cutscene_action:
 		move_character(cutscene_location)
 #	update_animation_parameter()
 
-func block_inputs(state = false):
-		input_blocked = state
+func block_inputs(state = false): input_blocked = state
+
+func update_camera_scale(new_scale):
+	camera_scale = new_scale
+	print(camera_scale)
 
 func move_character(location, speed=walking_speed):
-	print("At: ",position,"moving to: ", location)
-	
-	if int(round(position.x)) == int(round(location.x)) and int(round(position.y)) == int(round(location.y)):
-		print("At place!")
-		velocity = Vector2.ZERO
-		cutscene_action = false
-		input_dir = Vector2.ZERO
+	if input_blocked:
+		print("At: ",position,"moving to: ", location)
 		
-	else:
-		cutscene_action = true
-		#print(int(round(position)),"//",int(round(location.x)))
-		
-		if int(round(position.x)) != int(round(location.x)):
-			if position.x > location.x:
-				velocity.x = -speed#Vector2(-speed,0)
-				print("Moving Left")
-				input_dir = Vector2(-speed,0)
-			if position.x < location.x:
-				velocity.x = speed#Vector2(speed,0)
-				print("Moving Right")
-				input_dir = Vector2(speed,0)
+		if int(round(position.x)) == int(round(location.x)) and int(round(position.y)) == int(round(location.y)):
+			print("At place!")
+			velocity = Vector2.ZERO
+			cutscene_action = false
+			input_dir = Vector2.ZERO
+			position = location
+			
 		else:
-			velocity.x = 0
-		
-		if int(round(position.y)) != int(round(location.y)):
-			if position.y < location.y:
-				velocity.y = speed# Vector2(0,-speed)
-				print("moving down")
-				input_dir = Vector2(0,speed)
-			if position.y > location.y:
-				velocity.y = -speed#Vector2(0,speed)
-				input_dir = Vector2(0,-speed)
-				print("moving up")
-		else:
-			velocity.y = 0
-		cutscene_location = location
-		cutscene_speed = speed
+			cutscene_action = true
+			#print(int(round(position)),"//",int(round(location.x)))
+			
+			if int(round(position.x)) != int(round(location.x)):
+				if position.x > location.x:
+					velocity.x = -speed#Vector2(-speed,0)
+					print("Moving Left")
+					input_dir = Vector2(-speed,0)
+				if position.x < location.x:
+					velocity.x = speed#Vector2(speed,0)
+					print("Moving Right")
+					input_dir = Vector2(speed,0)
+			else: velocity.x = 0
+			
+			if int(round(position.y)) != int(round(location.y)):
+				if position.y < location.y:
+					velocity.y = speed# Vector2(0,-speed)
+					print("moving down")
+					input_dir = Vector2(0,speed)
+				if position.y > location.y:
+					velocity.y = -speed#Vector2(0,speed)
+					input_dir = Vector2(0,-speed)
+					print("moving up")
+			else: velocity.y = 0
+			cutscene_location = location
+			cutscene_speed = speed
 
 func get_input():
 	if input_blocked != true:
 		if (is_attacking == true or is_talking == true):
 			input_dir = Vector2(0,0)
-		else:
-			input_dir = Input.get_vector("ui_left","ui_right","ui_up","ui_down")
+		else: input_dir = Input.get_vector("ui_left","ui_right","ui_up","ui_down")
 	
 		SPEED = walking_speed
 	
@@ -95,11 +110,15 @@ func get_input():
 			#update SPEED when shift is pressed
 			SPEED = running_speed
 		else:
-			#SPEED remanins walking speed if shift is not pressed
+			#SPEED remains walking speed if shift is not pressed
 			SPEED = walking_speed
 		
 		velocity = input_dir * SPEED
-
+		
+	# Update old direction
+	if input_dir != Vector2(0,0):
+		last_input = input_dir
+		
 func update_animation_parameter():
 	#idle animation plays if velocity equals zero, otherwise walking animation plays
 	if(velocity == Vector2.ZERO):
@@ -116,6 +135,21 @@ func update_animation_parameter():
 		animation_tree["parameters/conditions/attack"] = true
 		weapon.visible = true
 		is_attacking = true
+	elif(Input.is_action_just_released("ranged_attack")):
+		animation_tree["parameters/conditions/attack"] = true
+		is_attacking = true
+		
+		var tossed_item = preload("res://equipment/Shuriken.tscn")
+		var new_projectile_spawn = tossed_item.instantiate()
+		var new_projectile_location = position / camera_scale#2#Vector2i(position)# / 2
+		
+		# Manages all the item spawns to remove them when the floor is cleared.
+		projectile_spawns.append(new_projectile_spawn)
+		add_child(new_projectile_spawn)
+		projectile_spawns[projectile_ID].global_position = new_projectile_location
+		projectile_spawns[projectile_ID]._set_dir(last_input)
+
+		projectile_ID += 1
 	else:
 		animation_tree["parameters/conditions/attack"] = false
 		weapon.visible = false
@@ -127,14 +161,7 @@ func update_animation_parameter():
 		animation_tree["parameters/idle/blend_position"] = input_dir
 		animation_tree["parameters/walk/blend_position"] = input_dir
 
-func _unhandled_input(event):
-	#if player is in range of potion and presses 'f', dialogue balloon will load
-		is_talking = false
-		if potion_is_in_range == true:
-			if Input.is_action_pressed("interact"):
-				DialogueManager.show_example_dialogue_balloon(load("res://Dialogue/main.dialogue"), "start")
-				is_talking = true
-				return
+
 					
 func _physics_process(delta):
 	handleCollision()
@@ -143,8 +170,8 @@ func _physics_process(delta):
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	get_input()
 	#move_and_collide(velocity * delta)
-	move_and_slide()	
 	update_animation_parameter()
+	move_and_slide()	
 	
 func handleCollision():
 	for i in get_slide_collision_count():
@@ -154,12 +181,15 @@ func handleCollision():
 
 func _on_hurtbox_area_entered(area):
 	if area.name == "hitBox" or area.name =="hitBox2":
-		if $"../GUI/CheckButton".is_pressed(): 
-			currentHealth = maxHealth
-		else:
-			currentHealth -= 1
-		
-		if currentHealth < 0:
+		if $"../Debug_Hud/CheckButton".is_pressed(): currentHealth = maxHealth
+		elif currentArmor > 0.0: 
+			currentArmor -= 1.0
+			armorChanged.emit(currentArmor) # Damage armor icon
+		else: currentHealth -= 1
+
+		if currentHealth <= 0:
+			# Clear money
+			Items.Player_Inventory._minus_item(0, Items.Player_Inventory._get_coins())
 			MusicController.play_music()
 			effects.play("death")
 			deathTimer4.start()
@@ -167,18 +197,23 @@ func _on_hurtbox_area_entered(area):
 			get_tree().change_scene_to_file("res://game_over_screen.tscn")
 			dead_sound.play()
 		healthChanged.emit(currentHealth)
-
 		# Ensure the enemy is valid and still spawned
 		if is_instance_valid(area):
 			if area.get_parent().currentHealth > 0:
 				knockback(area.get_parent().velocity)
-				
+
 		effects.play("hurtBlink")
 		hurtsound1.play()
 		HurtTimer.start()
 		await HurtTimer.timeout
 		effects.play("RESET")
-		
+
+		# Hit and recover 
+		$RegenTimer.start()
+		await $RegenTimer.timeout
+		currentHealth = maxHealth
+		healthChanged.emit(currentHealth)
+
 func knockback(enemyVelocity: Vector2):
 	var totalKnockback = Vector2(0, 0)
 	var knockbackDirection = (enemyVelocity - velocity).normalized() * knockbackPower
@@ -193,6 +228,7 @@ func knockback(enemyVelocity: Vector2):
 	# Calculate the knockback from the second enemy and add it to totalKnockback.
 	# Apply the total knockback to the player's velocity.
 	# Perform the movement and sliding.
+	
 func add_ghost():
 	var ghost = ghost_node.instantiate()
 	ghost.set_property(position, $CassandraSprite.scale)
@@ -200,10 +236,7 @@ func add_ghost():
 	
 func dash():
 	ghost_timer.start()
- 
 	var tween = get_tree().create_tween()
-	
-
 	await tween.finished
 	ghost_timer.stop()
 	
@@ -221,16 +254,13 @@ func _input(event):
 	elif event.is_action_released("dash"):
 		is_dashing = true
 		ondash_released()
-func dash_pressed():
-	dash()
 
-func ondash_released():
-	return
+func dash_pressed(): dash()
+func ondash_released(): return
 
 func _on_detection_area_body_entered(body):
 	if body.has_method("entity"):
 		potion_is_in_range = true
-
 
 func _on_detection_area_body_exited(body):
 	if body.has_method("entity"):

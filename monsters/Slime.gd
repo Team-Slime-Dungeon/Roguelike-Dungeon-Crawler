@@ -18,17 +18,60 @@ var death_location = null
 
 var motion = Vector2.ZERO
 var player = null
-var monster_type = "Lemon Slime"
+var monster_type = "Slime"
 var monster_drops = []
+var Body_Color
+var Eye_Color
+var Detail_Color
 
-func _ready():
-	if not $LemonAnim.is_playing():
-		$LemonAnim.play("movement")
-		
-func _physics_process(delta):
+func _ready(): 
+	if not $SlimeAnim.is_playing():
+		$SlimeAnim.play("movement")
 	
-	if player_chase: 
-		velocity = (player.position + Vector2(16,16) - self.position) + velocity / chase_speed
+	var Body_Color_Vals = [randf_range(.25,1),randf_range(.25,1),randf_range(.25,1)]
+	var Detail_Color_Vals = [Body_Color_Vals[0]/randi_range(1,3),Body_Color_Vals[1]/randi_range(1,3),Body_Color_Vals[2]/randi_range(1,3)]
+		
+	Body_Color = Color(Body_Color_Vals[0],Body_Color_Vals[1],Body_Color_Vals[2])
+	Detail_Color  = Color(Detail_Color_Vals[0],Detail_Color_Vals[1],Detail_Color_Vals[2])
+
+	# Eye Color Coloring, if needed uncomment later
+	#var color_sum = 0
+	#for i in Body_Color_Vals:
+	#	color_sum += i
+
+	# Lighter Color Eyes when the slime body is below minimum value
+	#if color_sum < 1.0:
+	#	$Eyes.modulate = Detail_Color
+	# Darker Color Eyes
+	#else:
+	$Eyes.modulate = Color(0,0,0)
+
+	set_color(Body_Color,Detail_Color)
+	
+	# Slime Drop Typing
+	if (Body_Color_Vals[0] > Body_Color_Vals[1] + Body_Color_Vals[2]):
+		#print("Strongly Red")
+		monster_type = "Red Slime"
+#		monster_drops = []
+	elif (Body_Color_Vals[1] > Body_Color_Vals[0] + Body_Color_Vals[2]):
+		#print("Strongly Green")
+		monster_type = "Green Slime"
+#		monster_drops = []
+	elif (Body_Color_Vals[2] > Body_Color_Vals[0] + Body_Color_Vals[1]):
+		#print("Strongly Blue")
+		monster_type = "Blue Slime"
+		monster_drops = [10]
+
+func set_color(body_color=null,detail_color=null):
+	if body_color != null:
+		$Body.modulate = body_color
+
+	if detail_color != null:
+		$Details.modulate = detail_color
+
+func _physics_process(delta):		
+	if player_chase:
+		velocity = (player.position + Vector2(16,16) - self.position) + velocity / chase_speed			
 	else: 
 		move_timer += delta
 	
@@ -63,18 +106,19 @@ func get_direction():
 		5: return null
 
 func _on_hurt_box_area_entered(area):
-	if area.name == "weapon":
+	if area.name == "weapon" or area.name == "Shuriken":
 		#print_debug(currentHealth)
 		currentHealth -= 1
-		$LemonAnim.play("hit")
+		$SlimeAnim.play("hit")
 		slimehitsound.play()
 		if currentHealth > 0:
 			HurtTimer1.start()
 			await HurtTimer1.timeout
-			$LemonAnim.play("movement")
+			$SlimeAnim.play("movement")
+			set_color(Body_Color,Detail_Color)
 		elif currentHealth <= 0:
 			deathTimer.start()
-			$LemonAnim.play("death")
+			$SlimeAnim.play("death")
 			await deathTimer.timeout
 			slimedeathsound.play()
 

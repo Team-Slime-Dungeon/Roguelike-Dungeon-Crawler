@@ -1,10 +1,16 @@
-[gd_scene load_steps=8 format=3 uid="uid://b1esj2q3hv7jy"]
+[gd_scene load_steps=14 format=3 uid="uid://b1esj2q3hv7jy"]
 
 [ext_resource type="Script" path="res://InventoryTesting/Playerequip_inv/playerequip.gd" id="1_ayy1h"]
 [ext_resource type="Texture2D" uid="uid://bjm174k3ups8r" path="res://InventoryTesting/InventoryBackgroundPics/InventoryRect.png" id="1_i7n4k"]
 [ext_resource type="Texture2D" uid="uid://du8e8dicpwnj3" path="res://InventoryTesting/InventoryBackgroundPics/inventorySlot_1.png" id="2_iwjme"]
 [ext_resource type="Texture2D" uid="uid://bqflv0u6g24vc" path="res://InventoryTesting/Item Test/weapon_1.png" id="3_5gpdh"]
 [ext_resource type="Script" path="res://InventoryTesting/Playerequip_inv/EquipSlot.gd" id="4_jlapi"]
+[ext_resource type="Texture2D" uid="uid://2naux51lpiuw" path="res://InventoryTesting/InventoryBackgroundPics/Helmet Slot.png" id="4_pjmww"]
+[ext_resource type="Texture2D" uid="uid://dui8kdpinatde" path="res://InventoryTesting/InventoryBackgroundPics/Shirt Slot.png" id="5_ima1j"]
+[ext_resource type="Texture2D" uid="uid://d1437p0f7h6qc" path="res://InventoryTesting/InventoryBackgroundPics/Pants Slot.png" id="6_a5fsq"]
+[ext_resource type="Texture2D" uid="uid://bwyyx2co7jydq" path="res://InventoryTesting/InventoryBackgroundPics/Boot Slot.png" id="7_35duv"]
+[ext_resource type="Texture2D" uid="uid://db1hxdrm8mtmg" path="res://InventoryTesting/InventoryBackgroundPics/Sheild Slot.png" id="10_4xr3t"]
+[ext_resource type="Texture2D" uid="uid://eli43xhhn4vd" path="res://InventoryTesting/InventoryBackgroundPics/Key Slots.png" id="11_d8olr"]
 
 [sub_resource type="FontFile" id="FontFile_bxnrm"]
 subpixel_positioning = 0
@@ -132,17 +138,20 @@ size_flags_vertical = 0
 texture = ExtResource("2_iwjme")
 
 [node name="Icon" type="TextureRect" parent="Background/V/Main/Left/Hat"]
+self_modulate = Color(1, 1, 1, 0.466667)
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 1.76099
-offset_top = 2.15886
-offset_right = 1.76099
-offset_bottom = 2.15886
+offset_left = 3.53835
+offset_top = 3.50227
+offset_right = -0.461655
+offset_bottom = -0.497728
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.793107, 0.793107)
+texture = ExtResource("4_pjmww")
+expand_mode = 1
 
 [node name="Shirt" type="TextureRect" parent="Background/V/Main/Left"]
 custom_minimum_size = Vector2(17, 17)
@@ -152,17 +161,20 @@ size_flags_vertical = 0
 texture = ExtResource("2_iwjme")
 
 [node name="Icon" type="TextureRect" parent="Background/V/Main/Left/Shirt"]
+self_modulate = Color(1, 1, 1, 0.466667)
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 1.76099
-offset_top = 2.15886
-offset_right = 1.76099
-offset_bottom = 2.15886
+offset_left = 2.6247
+offset_top = 4.72171
+offset_right = 0.624701
+offset_bottom = 2.72171
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.793107, 0.793107)
+texture = ExtResource("5_ima1j")
+expand_mode = 1
 
 [node name="Pants" type="TextureRect" parent="Background/V/Main/Left"]
 custom_minimum_size = Vector2(17, 17)
@@ -172,17 +184,20 @@ size_flags_vertical = 0
 texture = ExtResource("2_iwjme")
 
 [node name="Icon" type="TextureRect" parent="Background/V/Main/Left/Pants"]
+self_modulate = Color(1, 1, 1, 0.466667)
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 1.76099
-offset_top = 2.15886
-offset_right = 1.76099
-offset_bottom = 2.15886
+offset_left = 3.84289
+offset_top = 4.3946
+offset_right = -1.15711
+offset_bottom = -0.605404
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.793107, 0.793107)
+texture = ExtResource("6_a5fsq")
+expand_mode = 1
 
 [node name="Shoes" type="TextureRect" parent="Background/V/Main/Left"]
 custom_minimum_size = Vector2(17, 17)
@@ -192,17 +207,20 @@ size_flags_vertical = 0
 texture = ExtResource("2_iwjme")
 
 [node name="Icon" type="TextureRect" parent="Background/V/Main/Left/Shoes"]
+self_modulate = Color(1, 1, 1, 0.466667)
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 1.76099
-offset_top = 2.15886
-offset_right = 1.76099
-offset_bottom = 2.15886
+offset_left = 4.14744
+offset_top = 5.30471
+offset_right = -0.85256
+offset_bottom = 0.30471
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.793107, 0.793107)
+texture = ExtResource("7_35duv")
+expand_mode = 1
 
 [node name="Middle" type="Control" parent="Background/V/Main"]
 layout_mode = 2
@@ -278,6 +296,7 @@ size_flags_vertical = 0
 texture = ExtResource("2_iwjme")
 
 [node name="Icon" type="TextureRect" parent="Background/V/Main/Middle/HBoxContainer/OffHand"]
+self_modulate = Color(1, 1, 1, 0.466667)
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -289,6 +308,8 @@ offset_bottom = 2.15886
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.793107, 0.793107)
+texture = ExtResource("10_4xr3t")
+expand_mode = 1
 
 [node name="Right" type="VBoxContainer" parent="Background/V/Main"]
 custom_minimum_size = Vector2(20, 106)
@@ -307,17 +328,20 @@ size_flags_vertical = 0
 texture = ExtResource("2_iwjme")
 
 [node name="Icon" type="TextureRect" parent="Background/V/Main/Right/Other"]
+self_modulate = Color(1, 1, 1, 0.466667)
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 1.76099
-offset_top = 2.15886
+offset_top = 4.01473
 offset_right = 1.76099
-offset_bottom = 2.15886
+offset_bottom = 4.01473
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.793107, 0.793107)
+texture = ExtResource("11_d8olr")
+expand_mode = 1
 
 [node name="Other2" type="TextureRect" parent="Background/V/Main/Right"]
 custom_minimum_size = Vector2(17, 17)
@@ -327,17 +351,20 @@ size_flags_vertical = 0
 texture = ExtResource("2_iwjme")
 
 [node name="Icon" type="TextureRect" parent="Background/V/Main/Right/Other2"]
+self_modulate = Color(1, 1, 1, 0.466667)
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 1.76099
-offset_top = 2.15886
+offset_top = 3.70542
 offset_right = 1.76099
-offset_bottom = 2.15886
+offset_bottom = 3.70542
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.793107, 0.793107)
+texture = ExtResource("11_d8olr")
+expand_mode = 1
 
 [node name="Other3" type="TextureRect" parent="Background/V/Main/Right"]
 custom_minimum_size = Vector2(17, 17)
@@ -347,17 +374,20 @@ size_flags_vertical = 0
 texture = ExtResource("2_iwjme")
 
 [node name="Icon" type="TextureRect" parent="Background/V/Main/Right/Other3"]
+self_modulate = Color(1, 1, 1, 0.466667)
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 1.76099
-offset_top = 2.15886
-offset_right = 1.76099
-offset_bottom = 2.15886
+offset_left = 2.06554
+offset_top = 3.70542
+offset_right = 2.06554
+offset_bottom = 3.70542
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.793107, 0.793107)
+texture = ExtResource("11_d8olr")
+expand_mode = 1
 
 [node name="Other4" type="TextureRect" parent="Background/V/Main/Right"]
 custom_minimum_size = Vector2(17, 17)
@@ -367,17 +397,20 @@ size_flags_vertical = 0
 texture = ExtResource("2_iwjme")
 
 [node name="Icon" type="TextureRect" parent="Background/V/Main/Right/Other4"]
+self_modulate = Color(1, 1, 1, 0.466667)
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 1.76099
-offset_top = 2.15886
-offset_right = 1.76099
-offset_bottom = 2.15886
+offset_left = 1.72087
+offset_top = 4.68609
+offset_right = 1.72087
+offset_bottom = 4.68609
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.793107, 0.793107)
+texture = ExtResource("11_d8olr")
+expand_mode = 1
 
 [node name="MarginContainer2" type="MarginContainer" parent="Background/V/Main"]
 custom_minimum_size = Vector2(5, 0)
