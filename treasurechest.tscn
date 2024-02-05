@@ -1,17 +1,20 @@
-[gd_scene load_steps=9 format=3 uid="uid://c3n1nyy8irk2p"]
+[gd_scene load_steps=10 format=3 uid="uid://c3n1nyy8irk2p"]
 
 [ext_resource type="Script" path="res://treasurechest.gd" id="1_k6vfe"]
 [ext_resource type="Texture2D" uid="uid://bgsye565mw1kh" path="res://treasurechest.png" id="1_ydmvs"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ep8ny"]
-size = Vector2(84, 79)
+size = Vector2(52, 41)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_m6qf0"]
+radius = 14.0
 
 [sub_resource type="Animation" id="Animation_dj44j"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("treasurechest/Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -23,7 +26,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:position")
+tracks/1/path = NodePath("treasurechest/Sprite2D:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -35,7 +38,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:visible")
+tracks/2/path = NodePath("treasurechest/Sprite2D:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -51,7 +54,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("treasurechest/Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -67,7 +70,7 @@ length = 0.4
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("treasurechest/Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -79,7 +82,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:position")
+tracks/1/path = NodePath("treasurechest/Sprite2D:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -91,7 +94,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:visible")
+tracks/2/path = NodePath("treasurechest/Sprite2D:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -107,7 +110,7 @@ length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("treasurechest/Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -119,7 +122,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:visible")
+tracks/1/path = NodePath("treasurechest/Sprite2D:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -137,7 +140,7 @@ _data = {
 "vanish": SubResource("Animation_4rp1q")
 }
 
-[node name="treasurechest" type="Node2D"]
+[node name="treasurechest" type="StaticBody2D"]
 script = ExtResource("1_k6vfe")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -146,17 +149,22 @@ texture_filter = 1
 texture = ExtResource("1_ydmvs")
 hframes = 2
 
-[node name="Area2D" type="Area2D" parent="Sprite2D"]
+[node name="Interact" type="Area2D" parent="Sprite2D"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Area2D"]
-position = Vector2(-3, 1.5)
+[node name="Interact" type="CollisionShape2D" parent="Sprite2D/Interact"]
+position = Vector2(-3, 3.5)
 shape = SubResource("RectangleShape2D_ep8ny")
 
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(-4, 6)
+shape = SubResource("CircleShape2D_m6qf0")
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../..")
 libraries = {
 "": SubResource("AnimationLibrary_q4ktc")
 }
 
-[connection signal="body_entered" from="Sprite2D/Area2D" to="." method="_on_area_2d_body_entered"]
-[connection signal="body_exited" from="Sprite2D/Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="body_entered" from="Sprite2D/Interact" to="." method="_on_interact_body_entered"]
+[connection signal="body_exited" from="Sprite2D/Interact" to="." method="_on_interact_body_exited"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

@@ -355,6 +355,7 @@ func generate_rooms():
 		# Node #,  Layout Mode, Spawn Chance, Bloom chance
 		generate_decorations(node_num, 0, 3) # Mode 0: Whole floor spread
 		generate_decorations(node_num, 1, 5,7) # Mode 1: Bloomed spread
+
 func spawn_chests():
 	#var chest_scene = [preload("res://treasurechest.tscn")]
 	var chests_spawned = 0
@@ -366,12 +367,11 @@ func spawn_chests():
 		var room = node_pos[room_index]
 		var size = room_size[room_index]
 		var chest_pos = room + Vector2i(random.randi_range(1, size[1] - 2), random.randi_range(1, size[1] - 2))
-		
-		if place_chest_at_location(chest_pos):
-			chests_spawned += 1
+		if place_chest_at_location(chest_pos): chests_spawned += 1
 		attempts += 1
-	if chests_spawned < 2:
-		print("Warning: Could only spawn", chests_spawned, "chests.")
+		
+	if chests_spawned < 2: print("Warning: Could only spawn", chests_spawned, "chests.")
+
 func place_chest_at_location(location):
 	if location in floor_pos:
 		var chest_instance = chest_scene.instantiate()
@@ -380,6 +380,7 @@ func place_chest_at_location(location):
 		chest_spawns.append(chest_instance)
 		return true
 	return false
+
 func generate_decorations(node_num,pad_mode=0,spawn_chance=1,bloom_chance=0):
 	var node = node_pos[node_num]
 	var size = room_size[node_num]
