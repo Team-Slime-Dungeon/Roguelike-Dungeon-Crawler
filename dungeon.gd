@@ -44,6 +44,10 @@ var chest_scene = preload("res://treasurechest.tscn")
 var monster_list = [
 	preload("res://monsters/Slime.tscn"),
 	]
+var  item_scenes = { 
+		0: preload("res://equipment/coin.tscn"), 
+		10: preload("res://equipment/Blue Mushroom.tscn") 
+	}
 
 func _ready():
 	current_floor += 1 # when entering the dungeon scene, you have descended once
@@ -69,7 +73,7 @@ func _ready():
 	
 	generate_entity() # generate staircase, items
 	generate_monsters()
-	
+	spawn_chests()
 	
 	$Cassandra.global_position = Vector2(0,0) # returns player to root room
 	$GUI/Current_Floor.set_text("Floor: " + str(current_floor))
@@ -93,7 +97,7 @@ func _ready():
 		$GUI/Armor_Durability.updateArmor($Cassandra.currentArmor)
 		$Cassandra.armorChanged.connect($GUI/Armor_Durability.updateArmor)
 		armorSetup = true
-	spawn_chests()
+	
 
 func _process(delta):
 	for monster in monster_spawns:
@@ -106,6 +110,11 @@ func _process(delta):
 			Items.Player_Inventory._add_item(item.ID, item.amount)
 			Items.Player_Inventory._print_inventory()
 			item.clear_item()
+
+	for chest in chest_spawns:
+		if is_instance_valid(chest) and chest.chest_opened != false:
+			generate_treasure(chest)
+			chest.clear_chest()
 
 	# Grabs current coin total
 	$GUI/Coin_Counter.set_text("Coin: " + str(Items.Player_Inventory._get_coins()))
@@ -141,10 +150,7 @@ func generate_loot(monster):
 	# The item scenes sorted by Item_ID. 
 	# !! Must have a valid ID (Use the main item table in Inventory.gd !!
 	
-	var  item_scenes = { 
-		0: preload("res://equipment/coin.tscn"), 
-		10: preload("res://equipment/Blue Mushroom.tscn") 
-	}
+	# table moved to global
 	
 	# This gets the current level sets and sets the loot table to the correct table
 	var current_level = 1
@@ -367,6 +373,7 @@ func spawn_chests():
 		var room = node_pos[room_index]
 		var size = room_size[room_index]
 		var chest_pos = room + Vector2i(random.randi_range(1, size[1] - 2), random.randi_range(1, size[1] - 2))
+		print(chest_pos)
 		if place_chest_at_location(chest_pos): chests_spawned += 1
 		attempts += 1
 		
@@ -380,6 +387,11 @@ func place_chest_at_location(location):
 		chest_spawns.append(chest_instance)
 		return true
 	return false
+
+func generate_treasure(chest):
+	# Insert treasure based on current floor and rarity.
+	# For now, gives coin.
+	Items.Player_Inventory._add_item(0, 10)
 
 func generate_decorations(node_num,pad_mode=0,spawn_chance=1,bloom_chance=0):
 	var node = node_pos[node_num]
