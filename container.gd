@@ -14,10 +14,22 @@ func _process(delta):
 		chest_opened = true
 		$CrateAnim.play("treasure_open")
 
-func _on_crate_anim_animation_finished(animation):
+func _on_chest_anim_animation_finished(animation):
 	if animation == "treasure_open":
 		$CrateAnim.play("treasure_break")
 	elif animation == "treasure_break":
+		death_location = get_position()
+
+func _on_crate_anim_animation_finished(animation):
+	if animation == "crate_open":
+		$CrateAnim.play("crate_break")
+	elif animation == "crate_break":
+		death_location = get_position()
+
+func _on_vase_anim_animation_finished(animation):
+	if animation == "vase_open":
+		$CrateAnim.play("vase_break")
+	elif animation == "vase_break":
 		death_location = get_position()
 
 func _on_area_2d_body_entered(body):
@@ -30,6 +42,12 @@ func _on_area_2d_body_exited(body):
 		
 func clear_chest():
 	queue_free()
+
+
+
+
+
+
 
 
 

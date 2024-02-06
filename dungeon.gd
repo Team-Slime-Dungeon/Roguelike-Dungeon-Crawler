@@ -384,7 +384,7 @@ func spawn_chests():
 
 
 func place_chest_at_location(location):
-	var chestscene = preload("res://crate.tscn")
+	var chestscene = preload("res://container.tscn")
 	
 	if location in floor_pos:
 		var spawnedChest = chestscene.instantiate()
