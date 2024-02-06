@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bgsye565mw1kh"
-path="res://.godot/imported/treasurechest.png-bb69d20e12f8e5f9363ac3ba80ef80dc.ctex"
+path="res://.godot/imported/treasurechest.png-2e557c5d87dd2f8b32978a84af2df625.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://treasurechest.png"
-dest_files=["res://.godot/imported/treasurechest.png-bb69d20e12f8e5f9363ac3ba80ef80dc.ctex"]
+source_file="res://environment/treasurechest.png"
+dest_files=["res://.godot/imported/treasurechest.png-2e557c5d87dd2f8b32978a84af2df625.ctex"]
 
 [params]
 

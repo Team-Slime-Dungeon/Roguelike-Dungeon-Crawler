@@ -5,8 +5,6 @@ var debug = true
 
 var healthSetupCompleted = false
 var armorSetup = false
-var chest_spawns = []
-var chest_spawn_ID = 0 
 var random = RandomNumberGenerator.new()
 var node_pos = [] # keeps track of the root for each room
 var room_size = [] # Sister array for node_pos, keeps room sizes for spawning
@@ -40,7 +38,10 @@ var item_spawn_ID = 0
 
 var decorative_spawns = []
 var deco_spawn_ID = 0
-var chest_scene = preload("res://treasurechest.tscn")
+
+var chest_spawns = []
+var chest_spawn_ID = 0
+
 var monster_list = [
 	preload("res://monsters/Slime.tscn"),
 	]
@@ -112,10 +113,11 @@ func _process(delta):
 			item.clear_item()
 
 	for chest in chest_spawns:
-		if is_instance_valid(chest) and chest.chest_opened != false:
-			generate_treasure(chest)
+		if is_instance_valid(chest) and chest.death_location != null:
+			#generate_treasure(chest)
+			generate_loot(chest)
 			chest.clear_chest()
-
+			
 	# Grabs current coin total
 	$GUI/Coin_Counter.set_text("Coin: " + str(Items.Player_Inventory._get_coins()))
 
@@ -378,13 +380,21 @@ func spawn_chests():
 		attempts += 1
 		
 	if chests_spawned < 2: print("Warning: Could only spawn", chests_spawned, "chests.")
+	print("Chests Spawned: ", chests_spawned)
+
 
 func place_chest_at_location(location):
+	var chestscene = preload("res://crate.tscn")
+	
 	if location in floor_pos:
-		var chest_instance = chest_scene.instantiate()
-		add_child(chest_instance)
-		chest_instance.global_position = $TileMap.map_to_local(location) / 2
-		chest_spawns.append(chest_instance)
+		var spawnedChest = chestscene.instantiate()
+		chest_spawns.append(spawnedChest)
+		
+		add_child(spawnedChest)
+		
+		chest_spawns[chest_spawn_ID].global_position = $TileMap.map_to_local(location) / 2
+
+		chest_spawn_ID += 1
 		return true
 	return false
 
@@ -530,10 +540,12 @@ func clear_room():
 			if is_instance_valid(decorative_spawns[i]): decorative_spawns[i].queue_free()
 			
 	if chest_spawns != []:
-		for i in chest_spawns.size() - 1:
-			if is_instance_valid(chest_spawns[i]):
-				chest_spawns[i].queue_free()
-
+	#	for i in chest_spawns.size() - 1:
+	#		if is_instance_valid(chest_spawns[i]):
+	#			chest_spawns[i].queue_free()
+		for i in len(chest_spawns):
+			if is_instance_valid(chest_spawns[i]): chest_spawns[i].queue_free()
+			
 	# Reset the monster spawn system
 	monster_spawns = []
 	monster_spawn_ID = 0
