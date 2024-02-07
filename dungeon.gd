@@ -388,8 +388,13 @@ func place_chest_at_location(location):
 	
 	if location in floor_pos:
 		var spawnedChest = chestscene.instantiate()
-		chest_spawns.append(spawnedChest)
 		
+		# Will randomly pick from container types and set
+		var container_list = ["Crate","Chest","Vase"]
+		var container_type = container_list[randi() % container_list.size()]
+		spawnedChest.set_container(container_type)
+		
+		chest_spawns.append(spawnedChest)
 		add_child(spawnedChest)
 		
 		chest_spawns[chest_spawn_ID].global_position = $TileMap.map_to_local(location) / 2
