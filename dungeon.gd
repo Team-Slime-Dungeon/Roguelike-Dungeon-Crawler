@@ -47,7 +47,8 @@ var monster_list = [
 	]
 var  item_scenes = { 
 		0: preload("res://equipment/coin.tscn"), 
-		10: preload("res://equipment/Blue Mushroom.tscn") 
+		51: preload("res://equipment/treasure_spawns.tscn"),
+		71: preload("res://equipment/Blue Mushroom.tscn"),
 	}
 
 func _ready():
