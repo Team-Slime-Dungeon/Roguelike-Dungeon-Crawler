@@ -276,7 +276,7 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u0aqh"]
-size = Vector2(64, 48)
+size = Vector2(34, 33)
 
 [node name="container" type="CharacterBody2D"]
 z_index = 2
@@ -287,7 +287,6 @@ script = ExtResource("1_52hx8")
 texture_filter = 1
 texture = ExtResource("2_kljpc")
 hframes = 2
-frame = 1
 
 [node name="chest_anim" type="AnimationPlayer" parent="."]
 libraries = {
@@ -317,11 +316,12 @@ libraries = {
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(0, -0.3)
+position = Vector2(-4, 5.2)
 shape = SubResource("RectangleShape2D_u0aqh")
 
 [connection signal="animation_finished" from="chest_anim" to="." method="_on_chest_anim_animation_finished"]
 [connection signal="animation_finished" from="crate_anim" to="." method="_on_crate_anim_animation_finished"]
 [connection signal="animation_finished" from="vase_anim" to="." method="_on_vase_anim_animation_finished"]
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

@@ -5,7 +5,7 @@ var monster_drops = []
 var death_location = null
 var chest_opened = false
 var player_in_area = false
-
+var container_open_count = {}  # Tracks how many times a container has been opened
 var container_type = "None"
 
 # Animation Placeholders
@@ -57,9 +57,23 @@ func _process(delta):
 	if container_type == "None":
 		set_container()
 		 
-	if Input.is_action_just_pressed("interact") and !chest_opened and player_in_area:
+	if container_type == "Chest" and Input.is_action_just_pressed("interact") and !chest_opened and player_in_area:
 		chest_opened = true
 		animation_player.play(open_anim)
+		
+func handle_container_interaction(area_name, container_name):
+	if container_name in ["Crate", "Vase"]:
+		if container_open_count.get(container_name) == null:
+			container_open_count[container_name] = 0
+		# Check the interaction count to determine the animation
+		if container_open_count[container_name] == 0:
+			# Play the "open" animation for the first interaction
+			animation_player.play(container_name.to_lower() + "_open")
+			container_open_count[container_name] += 1  # Increment the interaction count
+		elif container_open_count[container_name] == 1:
+			# Play the "break" animation for the second interaction
+			animation_player.play(container_name.to_lower() + "_break")
+			container_open_count[container_name] += 1  # Increment the interaction count
 
 func _on_chest_anim_animation_finished(animation):
 	if animation == "treasure_open":
@@ -68,18 +82,24 @@ func _on_chest_anim_animation_finished(animation):
 		death_location = get_position()
 
 func _on_crate_anim_animation_finished(animation):
-	if animation == "crate_open":
-		animation_player.play("crate_break")
-	elif animation == "crate_break":
+	#if animation == "crate_open":
+		#animation_player.play("crate_break")
+	if animation == "crate_break":
 		death_location = get_position()
 
 func _on_vase_anim_animation_finished(animation):
-	if animation == "vase_open":
-		animation_player.play("vase_break")
-	elif animation == "vase_break":
+	#if animation == "vase_open":
+		#animation_player.play("vase_break")
+	if animation == "vase_break":
 		death_location = get_position()
+		
+func _on_area_2d_area_entered(area):
+	var area_name = area.name
+	if area_name == "weapon" or area_name == "Shuriken":
+		handle_container_interaction(area_name, container_type)
 
 func _on_area_2d_body_entered(body):
+	
 	if body.name == "Cassandra": player_in_area = true
 		
 func _on_area_2d_body_exited(body):
@@ -87,10 +107,6 @@ func _on_area_2d_body_exited(body):
 		
 func clear_chest():
 	queue_free()
-
-
-
-
 
 
 
