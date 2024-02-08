@@ -46,7 +46,6 @@ _data = {
 [node name="Coin" type="CharacterBody2D"]
 z_index = 1
 z_as_relative = false
-position = Vector2(120, 95)
 script = ExtResource("1_njeoj")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

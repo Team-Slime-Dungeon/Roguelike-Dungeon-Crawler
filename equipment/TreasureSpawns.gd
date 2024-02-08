@@ -6,7 +6,7 @@ var ID = -1
 
 var total_items = 13
 var loot_probability = [6,7,9,10,11,10,9,8,7,7,6,5,5]
-
+#var loot_probability = [0,0,0,0,0,0,0,0,0,0,0,0,0] # Blank for custom probability setting
 var picked_up = false
 var amount = 1
 
@@ -14,15 +14,20 @@ func _ready():
 	# If no loot is set at creation this will randomize according the the probability table and return a random item
 	if current_loot == -1:
 		current_loot = get_random_index()
+		#print("Current Loot:", current_loot)
 		ID = set_loot(current_loot)
 
 func get_random_index():
 	var random_number = randi_range(1,100)
-	
+
 	for index in range(len(loot_probability)):
-		if random_number > 0:
+		if random_number > 0 and index < len(loot_probability)-1:
 			random_number -= loot_probability[index]
+		elif index == len(loot_probability)-1:
+			#print("Last number")
+			return index
 		else:
+			#print("Found index:", index - 1)
 			return index -1
 
 func set_loot(index = 0):

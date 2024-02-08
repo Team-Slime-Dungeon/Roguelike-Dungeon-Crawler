@@ -34,7 +34,7 @@ var Item_List = {
 	54: ["Ancient Tome",	99,		0,				0, 				null, null ],
 	55: ["Ruby",			99,		0,				0, 				null, null ],
 	56: ["Old Earring",		99,		0,				0, 				null, null ],
-	57: ["Ancient Coins",		99,		0,				0, 				null, null ],
+	57: ["Ancient Coins",	99,		0,				0, 				null, null ],
 	58: ["Pearl Necklace",	99,		0,				0, 				null, null ],
 	59: ["Sapphire",		99,		0,				0, 				null, null ],
 	60: ["Emerald",			99,		0,				0, 				null, null ],
