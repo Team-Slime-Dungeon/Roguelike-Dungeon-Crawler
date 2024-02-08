@@ -43,10 +43,19 @@ var projectile_spawns = []
 var projectile_ID = 0
 var camera_scale = 2
 
+@onready var weapon_sprite = $CassandraSprite/weapon
+#gets the weapon texture from the equipped slots
+var new_texuture
+
 func _ready():
 	#activate animation tree
 	animation_tree.active = true
 	input_dir = Vector2(1,0)
+	
+	#updates the weapon sprite with the equipped weapon sprite
+	new_texuture =EquipSlot._get_weapon_texture()
+	weapon_sprite.texture = new_texuture
+	
 
 #func _process(delta):
 	if cutscene_action:
