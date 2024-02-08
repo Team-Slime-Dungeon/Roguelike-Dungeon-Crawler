@@ -19,7 +19,7 @@ var death_location = null
 var motion = Vector2.ZERO
 var player = null
 var monster_type = "Slime"
-var monster_drops = []
+var monster_drops = [0,0,0,0]
 var Body_Color
 var Eye_Color
 var Detail_Color
@@ -60,7 +60,7 @@ func _ready():
 	elif (Body_Color_Vals[2] > Body_Color_Vals[0] + Body_Color_Vals[1]):
 		#print("Strongly Blue")
 		monster_type = "Blue Slime"
-		monster_drops = [10]
+		monster_drops = [0,0,71,71]
 
 func set_color(body_color=null,detail_color=null):
 	if body_color != null:

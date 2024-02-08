@@ -45,7 +45,7 @@ func _process(delta):
 				move(delta)
 	
 	if Input.is_action_just_pressed("interact"):
-		print("Chatting...")
+		#print("Chatting...")
 		$Dialogue.start()
 		is_roaming = false
 		is_chatting = true

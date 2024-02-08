@@ -10,14 +10,42 @@ var item_defense = 3
 var item_effect1 = 4
 var item_effect2 = 5
 
+# Indexes for item categories for outside use
+var weapon_start_index = 1
+var weapon_end_index = 50
+
+var treasure_start_index = 51
+var treasure_end_index = 100
+
 var Item_List = {
 # Item ID [Item Name // Item_Max_Stack // Item Attack // Item Defense // Item Effect1 // Item Effect2]
 	0 : ["Coin",			99,		0,				0,				null, null ],
+	
+	# Weapons and Equipment IDs 1 - 50
 	1 : ["Basic Sword",		1,		2,				0,				null, null ],
 	2 : ["Steel Sword", 	1,		3,				0,				null, null ],
 	3 : ["Bronze Helmet",	1,		0,				5,				null, null ],
-	10: ["Blue Mushroom",	99,		0,				0, 				null, null ]
+	
+	# Treasures IDs 51 - 100. 51 will spawn a random item, 52 on can be found inside 51
+	51: ["Random Treasure",	0,		0,				0, 				null, null ],
+	
+	52: ["Ruby Necklace",	99,		0,				0, 				null, null ],
+	53: ["Emerald Crown",	99,		0,				0, 				null, null ],
+	54: ["Ancient Tome",	99,		0,				0, 				null, null ],
+	55: ["Ruby",			99,		0,				0, 				null, null ],
+	56: ["Old Earring",		99,		0,				0, 				null, null ],
+	57: ["Ancient Coins",	99,		0,				0, 				null, null ],
+	58: ["Pearl Necklace",	99,		0,				0, 				null, null ],
+	59: ["Sapphire",		99,		0,				0, 				null, null ],
+	60: ["Emerald",			99,		0,				0, 				null, null ],
+	61: ["Topaz",			99,		0,				0, 				null, null ],
+	62: ["Sacred Technology",99999,	0,				0, 				null, null ], # I actually have that many
+	63: ["Diamond",			99,		0,				0, 				null, null ],
+	64: ["Petrified Egg",	99,		0,				0, 				null, null ],
+
+	71: ["Blue Mushroom",	99,		0,				0, 				null, null ],
 }
+
 # Called when the node enters the scene tree for the first time.
 func _ready(loaded_inventory={}):	
 	if loaded_inventory != {}:

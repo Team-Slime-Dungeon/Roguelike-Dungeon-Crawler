@@ -4,7 +4,7 @@ extends CharacterBody2D
 
 signal Blue_Mushroom_Collected
 var picked_up = false
-var ID = 10
+var ID = 71
 var amount = 1
 
 func _process(_delta):

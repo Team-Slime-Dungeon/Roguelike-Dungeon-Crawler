@@ -1,10 +1,10 @@
 extends Node2D
 
 var debug = true
+#random.seed = OS.get_unix_time() # Or any other seed value
 
 var healthSetupCompleted = false
 var armorSetup = false
-
 var random = RandomNumberGenerator.new()
 var node_pos = [] # keeps track of the root for each room
 var room_size = [] # Sister array for node_pos, keeps room sizes for spawning
@@ -39,9 +39,17 @@ var item_spawn_ID = 0
 var decorative_spawns = []
 var deco_spawn_ID = 0
 
+var chest_spawns = []
+var chest_spawn_ID = 0
+
 var monster_list = [
 	preload("res://monsters/Slime.tscn"),
 	]
+var  item_scenes = { 
+		0: preload("res://equipment/coin.tscn"), 
+		51: preload("res://equipment/treasure_spawns.tscn"),
+		71: preload("res://equipment/Blue Mushroom.tscn"),
+	}
 
 func _ready():
 	current_floor += 1 # when entering the dungeon scene, you have descended once
@@ -67,6 +75,7 @@ func _ready():
 	
 	generate_entity() # generate staircase, items
 	generate_monsters()
+	spawn_chests()
 	
 	$Cassandra.global_position = Vector2(0,0) # returns player to root room
 	$GUI/Current_Floor.set_text("Floor: " + str(current_floor))
@@ -90,6 +99,7 @@ func _ready():
 		$GUI/Armor_Durability.updateArmor($Cassandra.currentArmor)
 		$Cassandra.armorChanged.connect($GUI/Armor_Durability.updateArmor)
 		armorSetup = true
+	
 
 func _process(delta):
 	for monster in monster_spawns:
@@ -103,6 +113,12 @@ func _process(delta):
 			Items.Player_Inventory._print_inventory()
 			item.clear_item()
 
+	for chest in chest_spawns:
+		if is_instance_valid(chest) and chest.death_location != null:
+			#generate_treasure(chest)
+			generate_loot(chest)
+			chest.clear_chest()
+			
 	# Grabs current coin total
 	$GUI/Coin_Counter.set_text("Coin: " + str(Items.Player_Inventory._get_coins()))
 
@@ -137,10 +153,7 @@ func generate_loot(monster):
 	# The item scenes sorted by Item_ID. 
 	# !! Must have a valid ID (Use the main item table in Inventory.gd !!
 	
-	var  item_scenes = { 
-		0: preload("res://equipment/coin.tscn"), 
-		10: preload("res://equipment/Blue Mushroom.tscn") 
-	}
+	# table moved to global
 	
 	# This gets the current level sets and sets the loot table to the correct table
 	var current_level = 1
@@ -352,6 +365,50 @@ func generate_rooms():
 		generate_decorations(node_num, 0, 3) # Mode 0: Whole floor spread
 		generate_decorations(node_num, 1, 5,7) # Mode 1: Bloomed spread
 
+func spawn_chests():
+	#var chest_scene = [preload("res://treasurechest.tscn")]
+	var chests_spawned = 0
+	var attempts = 0
+	var max_attempts = node_pos.size() * 2 # Prevent infinite loops
+	
+	while chests_spawned < 2 and attempts < max_attempts:
+		var room_index = random.randi_range(0, node_pos.size() - 1)
+		var room = node_pos[room_index]
+		var size = room_size[room_index]
+		var chest_pos = room + Vector2i(random.randi_range(1, size[1] - 2), random.randi_range(1, size[1] - 2))
+		print(chest_pos)
+		if place_chest_at_location(chest_pos): chests_spawned += 1
+		attempts += 1
+		
+	if chests_spawned < 2: print("Warning: Could only spawn", chests_spawned, "chests.")
+	print("Chests Spawned: ", chests_spawned)
+
+
+func place_chest_at_location(location):
+	var chestscene = preload("res://container.tscn")
+	
+	if location in floor_pos:
+		var spawnedChest = chestscene.instantiate()
+		
+		# Will randomly pick from container types and set
+		var container_list = ["Crate","Chest","Vase"]
+		var container_type = container_list[randi() % container_list.size()]
+		spawnedChest.set_container(container_type)
+		
+		chest_spawns.append(spawnedChest)
+		add_child(spawnedChest)
+		
+		chest_spawns[chest_spawn_ID].global_position = $TileMap.map_to_local(location) / 2
+
+		chest_spawn_ID += 1
+		return true
+	return false
+
+func generate_treasure(chest):
+	# Insert treasure based on current floor and rarity.
+	# For now, gives coin.
+	Items.Player_Inventory._add_item(0, 10)
+
 func generate_decorations(node_num,pad_mode=0,spawn_chance=1,bloom_chance=0):
 	var node = node_pos[node_num]
 	var size = room_size[node_num]
@@ -487,7 +544,14 @@ func clear_room():
 	if decorative_spawns != []:
 		for i in len(decorative_spawns):
 			if is_instance_valid(decorative_spawns[i]): decorative_spawns[i].queue_free()
-
+			
+	if chest_spawns != []:
+	#	for i in chest_spawns.size() - 1:
+	#		if is_instance_valid(chest_spawns[i]):
+	#			chest_spawns[i].queue_free()
+		for i in len(chest_spawns):
+			if is_instance_valid(chest_spawns[i]): chest_spawns[i].queue_free()
+			
 	# Reset the monster spawn system
 	monster_spawns = []
 	monster_spawn_ID = 0
@@ -498,6 +562,8 @@ func clear_room():
 	decorative_spawns = []
 	deco_spawn_ID = 0
 	
+	chest_spawns = [] # Reset the array tracking chest spawns
+	chest_spawn_ID = 0 # Reset the ID if you're using it
 	$TileMap.clear()
 	
 	if current_floor == 6:
