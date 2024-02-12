@@ -65,7 +65,8 @@ func _ready():
 		dungeon_terrain = dungeon_terrains[1]
 
 	# Inventory Creation
-	Items.Player_Inventory._print_inventory()	
+	#Items.Player_Inventory._add_item(3, 1) # Test helmets
+	Items.Player_Inventory._print_inventory()
 
 	clear_room() # clean up for new floor
 	
@@ -566,7 +567,7 @@ func clear_room():
 	chest_spawn_ID = 0 # Reset the ID if you're using it
 	$TileMap.clear()
 	
-	if current_floor == 6:
-		get_tree().change_scene_to_file("res://environment/Boss Fight 1.tscn")
+	#if current_floor == 6:
+		#get_tree().change_scene_to_file("res://environment/Boss Fight 1.tscn")
 		
 	# Create function that removes all remaining entities

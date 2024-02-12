@@ -197,8 +197,9 @@ func _on_hurtbox_area_entered(area):
 		else: currentHealth -= 1
 
 		if currentHealth <= 0:
-			# Clear money
-			Items.Player_Inventory._minus_item(0, Items.Player_Inventory._get_coins())
+			# Clear inventory upon death
+			#Items.Player_Inventory._minus_item(0, Items.Player_Inventory._get_coins())
+			Items.Player_Inventory._load_inventory({0:0})
 			MusicController.play_music()
 			effects.play("death")
 			deathTimer4.start()

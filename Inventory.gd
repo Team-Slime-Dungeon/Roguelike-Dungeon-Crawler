@@ -51,12 +51,11 @@ func _ready(loaded_inventory={}):
 	if loaded_inventory != {}:
 		print("Inventory Loaded!")
 		Inventory = loaded_inventory
-	else:
-		Inventory = {0:0}
+	else: Inventory = {0:0}
 
-func _save_inventory(print=false):
+func _save_inventory():
 	# Takes the current inventory and returns it as a dictionary of { Item ID: Amount }
-	if print: print(Inventory)
+	print(Inventory)
 	return Inventory
 
 func _load_inventory(loaded_inventory):
@@ -183,7 +182,4 @@ func get_item_defense(item_id):
 		print("Error: Item does not exist.")
 	return 0
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+func _process(delta): pass
