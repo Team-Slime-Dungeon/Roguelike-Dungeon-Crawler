@@ -22,7 +22,7 @@ var Item_List = {
 	0 : ["Coin",			99,		0,				0,				null, null ],
 	
 	# Weapons and Equipment IDs 1 - 50
-	1 : ["Weapon_2",		1,		2,				0,				null, null ],
+	1 : ["weapon_2",		1,		2,				0,				null, null ],
 	2 : ["Steel Sword", 	1,		3,				0,				null, null ],
 	3 : ["Bronze Helmet",	1,		0,				5,				null, null ],
 	
