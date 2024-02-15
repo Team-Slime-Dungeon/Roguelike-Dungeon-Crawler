@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://dupui5txto5pt"]
+
+[ext_resource type="Texture2D" uid="uid://ckei3uymdwjm" path="res://environment/Merchant Shop.png" id="1_jasct"]
+[ext_resource type="Script" path="res://environment/Merchant_Shop.gd" id="1_yto45"]
+[ext_resource type="Texture2D" uid="uid://bhl1ehdu2bk71" path="res://environment/ShopKeeper.png" id="2_38hyp"]
+
+[node name="Merchant_Shop" type="CharacterBody2D"]
+position = Vector2(146, 92)
+script = ExtResource("1_yto45")
+
+[node name="Shop" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_jasct")
+
+[node name="Shopkeeper" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0, -30)
+texture = ExtResource("2_38hyp")
