@@ -67,6 +67,20 @@ func _ready():
 	# Inventory Creation
 	#Items.Player_Inventory._add_item(3, 1) # Test helmets
 	Items.Player_Inventory._print_inventory()
+	
+	Items.Player_Inventory._print_inv_dic()
+	Items.Player_Inventory._add_item(2,1)
+	Items.Player_Inventory._print_inv_dic()
+	Items.Player_Inventory._print_inventory()
+	
+	#print("#1Stats are now ", Items.Player_Inventory.get_equip_weapon_stats())
+	#print("Equip weapon 2 and add weapon 1 to inventory")
+	Items.Player_Inventory.equip_weapon(2)
+	Items.Player_Inventory._print_inv_dic()
+	
+	#print("#2Stats are now ", Items.Player_Inventory.get_equip_weapon_stats())
+	
+	Items.Player_Inventory._print_inventory()	
 
 	clear_room() # clean up for new floor
 	
