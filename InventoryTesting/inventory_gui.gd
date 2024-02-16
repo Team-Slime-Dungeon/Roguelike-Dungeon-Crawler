@@ -19,11 +19,12 @@ func _ready():
 
 
 func initialize_empty_slots():
-	# Create 15 empty inventory slots
+	# Create 16 empty inventory slots
 	for i in range(16):
 		var inv_slot_new = template_inv_slot.instantiate()
 		gridcontainer.add_child(inv_slot_new, true)
 		inv_slots.append(inv_slot_new)
+
 
 func make_inventory():
 	#Uses PlayerData info and turns them into New Slots which will use the Slot template instance
@@ -65,6 +66,7 @@ func clear_items():
 			#if is_instance_valid(inv_slots[i]): inv_slots[i].queue_free()
 		
 		#inv_slots = []
+		
 	#Clears all the slots of the inventory gui screen
 	for inv_slot in inv_slots:
 		inv_slot.get_node("Item_Icon").set_texture(null)
@@ -89,8 +91,6 @@ func _input(event):
 
 		inventory_visible = !inventory_visible  # Toggle the visibility flag
 		set_visible(inventory_visible)
-
-
 
 
 
