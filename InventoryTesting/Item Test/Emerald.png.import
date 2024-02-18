@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ddxoyvim1ulaq"
-path="res://.godot/imported/environment4.png-6d2e7655c0fe1c20ca8a12d626e3b475.ctex"
+uid="uid://ca0m7c434xll"
+path="res://.godot/imported/Emerald.png-a7277a196b4ee2720680888b5020af65.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://environment/environment4.png"
-dest_files=["res://.godot/imported/environment4.png-6d2e7655c0fe1c20ca8a12d626e3b475.ctex"]
+source_file="res://InventoryTesting/Item Test/Emerald.png"
+dest_files=["res://.godot/imported/Emerald.png-a7277a196b4ee2720680888b5020af65.ctex"]
 
 [params]
 

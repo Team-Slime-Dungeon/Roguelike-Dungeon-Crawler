@@ -1,5 +1,22 @@
 extends TextureRect
 
+var icon_texture = load("res://InventoryTesting/Item Test/weapon_2.png")
+@onready var icon = $"."
+
+func _ready():
+	_set_weapon_texture()
+	#var icon_texture = load("res://InventoryTesting/Item Test/" + item_name + ".png")
+	#icon.set_texture(icon_texture)		
+	
+#sets the weapon texture from the Inventory.gd
+func _set_weapon_texture():
+	var item_name = Items.Player_Inventory.get_item_name(1)
+	var icon_texture = load("res://InventoryTesting/Item Test/" + item_name + ".png")
+	icon.set_texture(icon_texture)	
+	
+#returns the equipped weapon's texture	
+func _get_weapon_texture():
+	return icon.get_texture()
 func _get_drag_data(_pos):
 	var data = {}
 	data ["origin_texture"] = texture

@@ -1,9 +1,8 @@
-[gd_scene load_steps=14 format=3 uid="uid://b1esj2q3hv7jy"]
+[gd_scene load_steps=13 format=3 uid="uid://b1esj2q3hv7jy"]
 
 [ext_resource type="Script" path="res://InventoryTesting/Playerequip_inv/playerequip.gd" id="1_ayy1h"]
 [ext_resource type="Texture2D" uid="uid://bjm174k3ups8r" path="res://InventoryTesting/InventoryBackgroundPics/InventoryRect.png" id="1_i7n4k"]
 [ext_resource type="Texture2D" uid="uid://du8e8dicpwnj3" path="res://InventoryTesting/InventoryBackgroundPics/inventorySlot_1.png" id="2_iwjme"]
-[ext_resource type="Texture2D" uid="uid://bqflv0u6g24vc" path="res://InventoryTesting/Item Test/weapon_1.png" id="3_5gpdh"]
 [ext_resource type="Script" path="res://InventoryTesting/Playerequip_inv/EquipSlot.gd" id="4_jlapi"]
 [ext_resource type="Texture2D" uid="uid://2naux51lpiuw" path="res://InventoryTesting/InventoryBackgroundPics/Helmet Slot.png" id="4_pjmww"]
 [ext_resource type="Texture2D" uid="uid://dui8kdpinatde" path="res://InventoryTesting/InventoryBackgroundPics/Shirt Slot.png" id="5_ima1j"]
@@ -284,7 +283,6 @@ offset_bottom = 2.15886
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.793107, 0.793107)
-texture = ExtResource("3_5gpdh")
 expand_mode = 1
 script = ExtResource("4_jlapi")
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://c8fm5k1pu6l4i"]
+[gd_scene load_steps=28 format=3 uid="uid://c8fm5k1pu6l4i"]
 
 [ext_resource type="Script" path="res://dungeon.gd" id="1_ifql2"]
 [ext_resource type="Texture2D" uid="uid://cdejfmb3r8r6b" path="res://environment/cave1.png" id="2_nq54f"]
@@ -7,12 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://domoj1a0tcvuy" path="res://environment/funguscavewalls1.png" id="5_rqtvc"]
 [ext_resource type="Script" path="res://debug_UI.gd" id="6_grh6y"]
 [ext_resource type="Texture2D" uid="uid://2uvs3oud5cvk" path="res://debug_buttons.png" id="6_jqwbb"]
-[ext_resource type="Texture2D" uid="uid://ckjqqsspj0ido" path="res://environment/environment2.png" id="6_q7vb6"]
 [ext_resource type="PackedScene" uid="uid://eb8v1h7u5ytm" path="res://Health Functions/hearts_container.tscn" id="6_tho0w"]
-[ext_resource type="Texture2D" uid="uid://5tprsmptqmp7" path="res://environment/environment3.png" id="7_57w46"]
 [ext_resource type="PackedScene" uid="uid://c3afge3ds2qu5" path="res://InventoryTesting/MainInventory.tscn" id="7_fy3ef"]
-[ext_resource type="Texture2D" uid="uid://ddxoyvim1ulaq" path="res://environment/environment4.png" id="8_s1a01"]
-[ext_resource type="Texture2D" uid="uid://cy2mdrxn17p2h" path="res://environment/environment5.png" id="9_tc1io"]
 [ext_resource type="PackedScene" uid="uid://crcqnnl6ies46" path="res://cassandra_scene.tscn" id="11_ai3vm"]
 [ext_resource type="Script" path="res://Armor_Durability.gd" id="12_7qrgi"]
 [ext_resource type="FontFile" uid="uid://b1dyomvma53nt" path="res://PixelifySans-Regular.ttf" id="12_m8q2w"]
@@ -418,7 +414,6 @@ texture_region_size = Vector2i(64, 64)
 3:2/0/physics_layer_0/angular_velocity = 0.0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ng13s"]
-texture = ExtResource("6_q7vb6")
 texture_region_size = Vector2i(64, 32)
 0:0/0 = 0
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
@@ -464,7 +459,6 @@ texture_region_size = Vector2i(64, 32)
 2:4/0/physics_layer_0/angular_velocity = 0.0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kajtr"]
-texture = ExtResource("7_57w46")
 texture_region_size = Vector2i(64, 32)
 0:0/0 = 0
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
@@ -510,7 +504,6 @@ texture_region_size = Vector2i(64, 32)
 2:4/0/physics_layer_0/angular_velocity = 0.0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0xid3"]
-texture = ExtResource("8_s1a01")
 texture_region_size = Vector2i(64, 32)
 0:0/0 = 0
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
@@ -556,7 +549,6 @@ texture_region_size = Vector2i(64, 32)
 2:4/0/physics_layer_0/angular_velocity = 0.0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mow3y"]
-texture = ExtResource("9_tc1io")
 texture_region_size = Vector2i(64, 32)
 0:0/0 = 0
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)

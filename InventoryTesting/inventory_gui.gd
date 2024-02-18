@@ -24,14 +24,14 @@ func make_inventory():
 		#if PlayerData.inv_data[i]["Item"] != null:
 			#Defines Item Name by Checking item_data in GameData and Grabs the Item ID from the PlayerData in inv_data and grabs the Item ID which is used to grab the Name of item
 		#	var item_name = GameData.item_data[str(PlayerData.inv_data[i]["Item"])]["Name"]
-		var item_name = Items.Player_Inventory.get_item_name(i)
-
-		#Loads The PNG of Weapon Into the Icon Texture
-		var icon_texture = load("res://InventoryTesting/Item Test/" + item_name + ".png")	
-		inv_slot_new.get_node("Item_Icon").set_texture(icon_texture)
-		#Adds the new instance into the grid containter and into the list that manages all of the spawned items
-		gridcontainer.add_child(inv_slot_new, true)
-		inv_slots.append(inv_slot_new)
+		if i != 0: # Skips loading coin into first slot
+			var item_name = Items.Player_Inventory.get_item_name(i)
+			#Loads The PNG of Weapon Into the Icon Texture
+			var icon_texture = load("res://InventoryTesting/Item Test/" + item_name + ".png")	
+			inv_slot_new.get_node("Item_Icon").set_texture(icon_texture)
+			#Adds the new instance into the grid containter and into the list that manages all of the spawned items
+			gridcontainer.add_child(inv_slot_new, true)
+			inv_slots.append(inv_slot_new)
 
 func clear_items():	
 	# Clears all of the slots of the inventory gui screen

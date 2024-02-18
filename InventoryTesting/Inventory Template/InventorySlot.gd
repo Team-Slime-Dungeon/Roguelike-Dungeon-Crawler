@@ -15,8 +15,6 @@ func _get_drag_data(_pos):
 	
 	return data
 	
-func _can_drop_data(at_position, data):
-	return true
+func _can_drop_data(at_position, data): return true
 	
-func _drop_data(at_position, data):
-	texture = data["origin_texture"]
+func _drop_data(at_position, data): texture = data["origin_texture"]

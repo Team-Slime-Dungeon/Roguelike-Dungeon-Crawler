@@ -4,31 +4,59 @@ var Inventory = {}
 
 # Item list Slots for convenience
 var item_name = 0
-var item_maxstack = 1
-var item_attack = 2
-var item_defense = 3
-var item_effect1 = 4
-var item_effect2 = 5
+var item_price = 1
+var item_maxstack = 2
+var item_attack = 3
+var item_defense = 4
+var item_effect1 = 5
+var item_effect2 = 6
+
+# Indexes for item categories for outside use
+var weapon_start_index = 1
+var weapon_end_index = 50
+
+var treasure_start_index = 51
+var treasure_end_index = 100
 
 var Item_List = {
-# Item ID [Item Name // Item_Max_Stack // Item Attack // Item Defense // Item Effect1 // Item Effect2]
-	0 : ["Coin",			99,		0,				0,				null, null ],
-	1 : ["Basic Sword",		1,		2,				0,				null, null ],
-	2 : ["Steel Sword", 	1,		3,				0,				null, null ],
-	3 : ["Bronze Helmet",	1,		0,				5,				null, null ],
-	10: ["Blue Mushroom",	99,		0,				0, 				null, null ]
+# Item ID [Item Name // Price // Item_Max_Stack // Item Attack // Item Defense // Item Effect1 // Item Effect2]
+	0 : ["Coin",			1,		99,					0,				0,				null,			 null ],
+	
+	# Weapons and Equipment IDs 1 - 50
+	1 : ["weapon_2",		20,		1,		2,				0,				null, null ],
+	2 : ["Steel Sword",		30,		1,		3,				0,				null, null ],
+	3 : ["Bronze Helmet", 	30,		1,		0,				5,				null, null ],
+	
+	# Treasures IDs 51 - 100. 51 will spawn a random item, 52 on can be found inside 51
+	51: ["Random Treasure",	20,		0,		0,				0, 				null, null ],
+	
+	52: ["Ruby Necklace",	10,		99,		0,				0, 				null, null ],
+	53: ["Emerald Crown",	20,		99,		0,				0, 				null, null ],
+	54: ["Ancient Tome",	25,		99,		0,				0, 				null, null ],
+	55: ["Ruby",			30,		99,		0,				0, 				null, null ],
+	56: ["Old Earring",		35,		99,		0,				0, 				null, null ],
+	57: ["Ancient Coins",	40,		99,		0,				0, 				null, null ],
+	58: ["Pearl Necklace",	45, 	99,		0,				0, 				null, null ],
+	59: ["Sapphire",		50,		99,		0,				0, 				null, null ],
+	60: ["Emerald",			65,		99,		0,				0, 				null, null ],
+	61: ["Topaz",			75,		99,		0,				0, 				null, null ],
+	62: ["Sacred Technology", 89,	999,	0,				0, 				null, null ], # I actually have that many
+	63: ["Diamond",			90,		99,		0,				0, 				null, null ],
+	64: ["Petrified Egg",	100,	99,		0,				0, 				null, null ],
+
+	71: ["Blue Mushroom",	3,		 99,		0,				0, 				null, null ],
 }
+
 # Called when the node enters the scene tree for the first time.
 func _ready(loaded_inventory={}):	
 	if loaded_inventory != {}:
 		print("Inventory Loaded!")
 		Inventory = loaded_inventory
-	else:
-		Inventory = {0:0}
+	else: Inventory = {0:0}
 
-func _save_inventory(print=false):
+func _save_inventory():
 	# Takes the current inventory and returns it as a dictionary of { Item ID: Amount }
-	if print: print(Inventory)
+	print(Inventory)
 	return Inventory
 
 func _load_inventory(loaded_inventory):
@@ -46,7 +74,15 @@ func _print_inventory():
 func _get_coins():
 	#print(Inventory[0])
 	return Inventory[0]
-	
+
+func _get_item_price(item_id, amount=1):
+	if Item_List.has(item_id):
+		# return the item's attack as an int
+		var temp_price = Item_List[item_id][item_price]
+		return (temp_price * amount)
+	else:
+		print("Error: Item has no price or does not exist.")
+
 func _add_item(item_id, amount):
 	var add_amount = amount
 	# If item ID is in inventory
@@ -155,7 +191,4 @@ func get_item_defense(item_id):
 		print("Error: Item does not exist.")
 	return 0
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+func _process(delta): pass

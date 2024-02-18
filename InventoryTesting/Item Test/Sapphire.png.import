@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cy2mdrxn17p2h"
-path="res://.godot/imported/environment5.png-14ac7eeb62ad2e00861cb1844a464bb9.ctex"
+uid="uid://b31p8ge2oalo5"
+path="res://.godot/imported/Sapphire.png-30e3c825877211f9d029c678c3c75327.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://environment/environment5.png"
-dest_files=["res://.godot/imported/environment5.png-14ac7eeb62ad2e00861cb1844a464bb9.ctex"]
+source_file="res://InventoryTesting/Item Test/Sapphire.png"
+dest_files=["res://.godot/imported/Sapphire.png-30e3c825877211f9d029c678c3c75327.ctex"]
 
 [params]
 
