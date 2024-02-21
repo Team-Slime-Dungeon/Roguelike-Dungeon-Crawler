@@ -1,7 +1,6 @@
 extends Node2D
 
 var debug = true
-#random.seed = OS.get_unix_time() # Or any other seed value
 
 var healthSetupCompleted = false
 var armorSetup = false
@@ -21,6 +20,34 @@ var staircase_pos = 0 # selected element in node_pos
 var current_floor = 0 # starting floor
 var kink_probability = 0.5
 var descend = false # check if player stepped on a staircase
+
+var colorDict = {
+	1: [.334, .7, .2], # Forest 1
+	2: [.537, .722, .282], # Forest 2
+	3: [.459, .506, .173], # Forest 3
+	4: [.478, .384, .165], # Forest 4
+	5: [.502, .267, .161], # Forest Boss
+	6: [.365, .353, .447], # Cave 1
+	7: [.369, .345, .435], # Cave 2
+	8: [.376, .341, .427], # Cave 3
+	9: [.38, .333, .42], #Cave 4
+	10: [.388, .329, .412], # Cave Boss
+	11: [.357, .286, .263], # Prison 1
+	12: [.376, .286, .259], # Prison 2
+	13: [.396, .286, .259], # Prison 3
+	14: [.416, .286, .255], # Prison 4
+	15: [.435, .29, .255], # Prison Boss
+	16: [.263, .322, .357], # Dungeon 1
+	17: [.259, .31, .376], # Dungeon 2
+	18: [.259, .298, .396], # Dungeon 3
+	19: [.255, .286, .416], # Dungeon 4
+	20: [.255, .278, .435], # Dungeon Boss
+	21: [.475, .467, .435], # Ancient 1
+	22: [.451, .439, .4], # Ancient 2
+	23: [.431, .416, .365], # Ancient 3
+	24: [.412, .392, .329], # Ancient 4
+	25: [.392, .369, .298], # Ancient Boss
+}
 
 var dungeon_floor_tiles = [0,2] # IDs for the dungeon floors
 var dungeon_wall_tiles = [1,3] # IDs for the dungeon walls
@@ -71,6 +98,15 @@ func _ready():
 	Items.Player_Inventory._print_inventory()
 
 	clear_room() # clean up for new floor
+	
+	# Color tiles for all 25 floors
+	if current_floor > 0 and current_floor <= 25:
+		$TileMap.modulate = Color(
+			colorDict[current_floor][0],
+			colorDict[current_floor][1],
+			colorDict[current_floor][2],
+		)
+	else: $TileMap.modulate = Color(0, 0, 0)
 	
 	floor_structure() # fill in int
 	generate_hallways()
