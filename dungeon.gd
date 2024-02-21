@@ -106,6 +106,12 @@ func _ready():
 			colorDict[current_floor][1],
 			colorDict[current_floor][2],
 		)
+		$Staircase/Sprite2D.modulate = Color(
+			colorDict[current_floor][0],
+			colorDict[current_floor][1],
+			colorDict[current_floor][2],
+		)
+		
 	else: $TileMap.modulate = Color(0, 0, 0)
 	
 	floor_structure() # fill in int
