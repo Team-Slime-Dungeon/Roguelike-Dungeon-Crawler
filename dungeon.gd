@@ -44,6 +44,8 @@ var chest_spawn_ID = 0
 
 var monster_list = [
 	preload("res://monsters/Slime.tscn"),
+	preload("res://monsters/Bushmo.tscn"),
+
 	]
 var  item_scenes = { 
 		0: preload("res://equipment/coin.tscn"), 
@@ -416,11 +418,11 @@ func generate_decorations(node_num,pad_mode=0,spawn_chance=1,bloom_chance=0):
 	var size_type = ""
 	# Scenes for different sized decorations
 	var small_decorations = [preload("res://environment/Cave_One_Small_Decorations.tscn")]
-	var medium_decorations = [preload("res://environment/Cave_One_Medium_Decorations.tscn")]
+	var medium_decorations = [preload("res://environment/Cave_One_Medium_Decorations.tscn"), preload("res://environment/Merchant_Shop.tscn")]
 	var large_decorations = []
 	
 	var medium_attempts = 1
-	
+
 	if size[1] < 7:
 		print("Small room",node,size)
 		size_type = "Small"
@@ -476,6 +478,7 @@ func generate_decorations(node_num,pad_mode=0,spawn_chance=1,bloom_chance=0):
 				var chosen = pads[0]
 				if chosen in pads:
 ####### TODO: Change so instead it adds area around chosen pad for bloom instead of removing
+					medium_decorations.shuffle()
 					if decoration_check(spawn_chance, chosen, medium_decorations[0]):
 						pads.erase(chosen)
 					
@@ -544,8 +547,11 @@ func clear_room():
 	
 	if decorative_spawns != []:
 		for i in len(decorative_spawns):
-			if is_instance_valid(decorative_spawns[i]): decorative_spawns[i].queue_free()
-			
+			if is_instance_valid(decorative_spawns[i]): 
+				if "spawns_objects" in decorative_spawns[i]:
+					decorative_spawns[i].clear_spawns()
+				decorative_spawns[i].queue_free()
+
 	if chest_spawns != []:
 	#	for i in chest_spawns.size() - 1:
 	#		if is_instance_valid(chest_spawns[i]):
@@ -567,7 +573,10 @@ func clear_room():
 	chest_spawn_ID = 0 # Reset the ID if you're using it
 	$TileMap.clear()
 	
+	#for i in range(-100, 100): # higher wall generation
+	#	for j in range(-100, 100):
+	#		$TileMap.set_cell(0, Vector2i(i,j), 1, Vector2i(3, 0))
+	
 	#if current_floor == 6:
 		#get_tree().change_scene_to_file("res://environment/Boss Fight 1.tscn")
 		
-	# Create function that removes all remaining entities

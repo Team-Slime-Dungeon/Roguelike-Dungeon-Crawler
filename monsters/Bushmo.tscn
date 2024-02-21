@@ -1,0 +1,162 @@
+[gd_scene load_steps=13 format=3 uid="uid://duj082xp6qb8d"]
+
+[ext_resource type="Script" path="res://Bushmo.gd" id="1_qc27y"]
+[ext_resource type="Texture2D" uid="uid://cenumr145qc44" path="res://monsters/Bushmo.png" id="2_ynuqj"]
+
+[sub_resource type="Animation" id="Animation_y4ql2"]
+resource_name = "Idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Bushmo_Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_w4mjv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Bushmo_Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_aq8te"]
+resource_name = "retreat"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Bushmo_Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [2, 1, 2, 1, 0]
+}
+
+[sub_resource type="Animation" id="Animation_lv3c5"]
+resource_name = "walking"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Bushmo_Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [1, 2]
+}
+
+[sub_resource type="Animation" id="Animation_ti5cr"]
+resource_name = "hurt"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Bushmo_Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Bushmo_Body:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 0.0588235, 0, 1), Color(1, 0.380392, 0.290196, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_g3wt6"]
+_data = {
+"Idle": SubResource("Animation_y4ql2"),
+"RESET": SubResource("Animation_w4mjv"),
+"hurt": SubResource("Animation_ti5cr"),
+"retreat": SubResource("Animation_aq8te"),
+"walking": SubResource("Animation_lv3c5")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fl8a8"]
+radius = 92.0054
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dqru8"]
+radius = 18.0278
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_w5y3n"]
+radius = 18.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_26pw2"]
+radius = 16.0312
+
+[node name="Bushmo" type="CharacterBody2D"]
+z_index = 1
+texture_filter = 1
+position = Vector2(3, -2)
+script = ExtResource("1_qc27y")
+
+[node name="Bushmo_Body" type="Sprite2D" parent="."]
+modulate = Color(1, 0.139216, 0.072549, 1)
+texture = ExtResource("2_ynuqj")
+hframes = 3
+
+[node name="BushmoAnim" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_g3wt6")
+}
+
+[node name="detectionarea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="detectionarea"]
+position = Vector2(5, 2)
+shape = SubResource("CircleShape2D_fl8a8")
+
+[node name="hurtBox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hurtBox"]
+position = Vector2(-1, 1)
+shape = SubResource("CircleShape2D_dqru8")
+
+[node name="hitBox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitBox"]
+position = Vector2(-1, 0)
+shape = SubResource("CircleShape2D_w5y3n")
+
+[node name="Bushmo_Collision" type="CollisionShape2D" parent="."]
+position = Vector2(-4, 2)
+shape = SubResource("CircleShape2D_26pw2")
+
+[node name="HurtTimer1" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="deathTimer" type="Timer" parent="."]
+wait_time = 0.1
+
+[connection signal="body_entered" from="detectionarea" to="." method="_on_detectionarea_body_entered"]
+[connection signal="body_exited" from="detectionarea" to="." method="_on_detectionarea_body_exited"]
+[connection signal="area_entered" from="hurtBox" to="." method="_on_hurt_box_area_entered"]
