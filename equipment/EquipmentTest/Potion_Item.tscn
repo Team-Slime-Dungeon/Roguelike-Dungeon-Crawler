@@ -4,23 +4,22 @@
 [ext_resource type="Texture2D" uid="uid://bu44jexqa7uja" path="res://equipment/EquipmentTest/potions.png" id="2_klyuq"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8av4y"]
+radius = 11.0
+height = 32.0
 
 [node name="Potion_Item" type="CharacterBody2D"]
-position = Vector2(64, 29)
-scale = Vector2(3.93991, 3.93991)
+z_index = 3
+scale = Vector2(0.75, 0.75)
 script = ExtResource("1_nksnd")
 
 [node name="PotionSheet" type="Sprite2D" parent="."]
 texture = ExtResource("2_klyuq")
 hframes = 4
-frame = 3
 
 [node name="Player_Detection" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player_Detection"]
-position = Vector2(0, 1)
-scale = Vector2(0.518849, 0.518849)
 shape = SubResource("CapsuleShape2D_8av4y")
 
-[connection signal="body_entered" from="Player_Detection" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_entered" from="Player_Detection" to="." method="_on_player_detection_body_entered"]
+[connection signal="body_exited" from="Player_Detection" to="." method="_on_player_detection_body_exited"]

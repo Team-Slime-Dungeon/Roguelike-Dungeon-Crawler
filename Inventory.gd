@@ -20,7 +20,7 @@ var treasure_end_index = 100
 
 var Item_List = {
 # Item ID [Item Name // Price // Item_Max_Stack // Item Attack // Item Defense // Item Effect1 // Item Effect2]
-	0 : ["Coin",			1,		99,					0,				0,				null,			 null ],
+	0 : ["Coin",			1,		99,					0,				0,			null,			 null ],
 	
 	# Weapons and Equipment IDs 1 - 50
 	1 : ["weapon_2",		20,		1,		2,				0,				null, null ],
@@ -43,8 +43,22 @@ var Item_List = {
 	62: ["Sacred Technology", 89,	999,	0,				0, 				null, null ], # I actually have that many
 	63: ["Diamond",			90,		99,		0,				0, 				null, null ],
 	64: ["Petrified Egg",	100,	99,		0,				0, 				null, null ],
-
+	
+	# Monster Drops
 	71: ["Blue Mushroom",	3,		 99,		0,				0, 				null, null ],
+	
+	#Potions
+	90: ["Red Potion",		3,		 99,		0,				0, 				"HP+5", null ],
+	91: ["Purple Potion",	5,		 99,		0,				0, 				"Nothing", null ],
+	92: ["Blue Potion",		3,		 99,		0,				0, 				"Something", null ],
+	93: ["Green Potion",	5,		 99,		0,				0, 				"Who Knows", null ],
+}
+
+var Item_Scenes = {
+	71: preload("res://equipment/Blue Mushroom.tscn"),
+	# Multi Use Scenes (Contain more than one)
+	51: preload("res://equipment/treasure_spawns.tscn"),
+	90: preload("res://equipment/EquipmentTest/Potion_Item.tscn"),
 }
 
 # Called when the node enters the scene tree for the first time.
@@ -83,6 +97,16 @@ func _get_item_price(item_id, amount=1):
 	else:
 		print("Error: Item has no price or does not exist.")
 
+func _pay_for_item(item_id,amount=1):
+	var price_total = _get_item_price(item_id,amount)
+	if _get_coins() >= price_total:
+		_add_item(item_id,amount)
+		_minus_item(0,price_total)
+		return true
+	else:
+		print("Sorry, not enough coins!")
+		return false
+		
 func _add_item(item_id, amount):
 	var add_amount = amount
 	# If item ID is in inventory
