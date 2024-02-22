@@ -26,22 +26,20 @@ var Detail_Color
 
 func _ready(): 
 	if not $BushmoAnim.is_playing():
-		$BushmoAnim.play("Idle")
+		$BushmoAnim.play("idle")
 	
 	var Body_Color_Vals = [randf_range(.5,1),randf_range(0,.5),randf_range(0,.5)]
 	Body_Color = Color(0,Body_Color_Vals[0],0)
-
 	set_color(Body_Color)
-
 
 func set_color(body_color=null,detail_color=null):
 	if body_color != null:
-		$Bushmo_Body.modulate = body_color
+		$Texture.modulate = body_color
 
-func _physics_process(delta):		
+func _physics_process(delta):
 	if player_chase:
 		velocity = (player.position + Vector2(16,16) - self.position) + velocity / chase_speed
-		$BushmoAnim.play("walking")			
+		$BushmoAnim.play("walking")
 	
 	move_and_slide() # Need for collision
 	
@@ -58,16 +56,16 @@ func _on_hurt_box_area_entered(area):
 	if area.name == "weapon" or area.name == "Shuriken":
 		#print_debug(currentHealth)
 		currentHealth -= 1
-		$BushmoAnim.play("hurt")
+		$BushmoAnim.play("hit")
 		#slimehitsound.play()
 		if currentHealth > 0:
 			HurtTimer1.start()
 			await HurtTimer1.timeout
-			$BushmoAnim.play("Idle")
+			$BushmoAnim.play("idle")
 			set_color(Body_Color)
 		elif currentHealth <= 0:
 			deathTimer.start()
-			$BushmoAnim.play("retreat")
+			$BushmoAnim.play("death")
 			await deathTimer.timeout
 			#slimedeathsound.play()
 
