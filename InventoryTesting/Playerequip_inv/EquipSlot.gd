@@ -2,11 +2,17 @@ extends TextureRect
 
 @onready var icon = $"."
 
+var is_occupied = false 
+
 func _ready():
 	#_set_weapon_texture("weapon_1")
 	_set_weapon_texture()
 		
 			
+	
+func update_slot_state():
+	# Update `is_occupied` based on the current texture
+	is_occupied = texture != null
 	
 #sets the weapon texture from the Inventory.gd
 func _set_weapon_texture():	
@@ -27,9 +33,16 @@ func _set_weapon_texture():
 #returns the equipped weapon's texture	
 func _get_weapon_texture():
 	return icon.get_texture()
+	
 func _get_drag_data(_pos):
+	
+	var equip_slot = get_parent().get_name()
+	
 	var data = {}
 	data ["origin_texture"] = texture
+	data ["origin_slot"] = self
+	data["is_empty"] = !is_occupied
+	
 	
 	var drag_texture = TextureRect.new()
 	drag_texture.expand = true
@@ -47,9 +60,17 @@ func _get_drag_data(_pos):
 	return data
 	
 func _can_drop_data(at_position, data):
-	return true
-	return false
-	
+	return !is_occupied and data.has("origin_texture")
+
 func _drop_data(at_position, data):
-	
-	pass
+	if _can_drop_data(at_position, data):
+		texture = data["origin_texture"]
+		is_occupied = true
+		
+		# Clear the origin slot if it's different from the target slot
+		if data["origin_slot"] != self:
+			data["origin_slot"].clear_slot()
+
+func clear_slot():
+	texture = null
+	is_occupied = false

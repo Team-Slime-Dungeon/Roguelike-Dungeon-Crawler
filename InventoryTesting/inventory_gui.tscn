@@ -53,7 +53,7 @@ tab_focus_mode = 0
 layout_mode = 2
 focus_mode = 1
 
-[node name="Background" type="NinePatchRect" parent="Tabs/Inventory"]
+[node name="ItemBackground" type="NinePatchRect" parent="Tabs/Inventory"]
 self_modulate = Color(1, 1, 1, 0.466667)
 layout_mode = 1
 anchors_preset = 15
@@ -67,7 +67,7 @@ patch_margin_top = 6
 patch_margin_right = 6
 patch_margin_bottom = 6
 
-[node name="Scroll" type="ScrollContainer" parent="Tabs/Inventory/Background"]
+[node name="Scroll" type="ScrollContainer" parent="Tabs/Inventory/ItemBackground"]
 layout_mode = 2
 offset_left = 120.0
 offset_top = 8.0
@@ -76,7 +76,7 @@ offset_bottom = 151.0
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.0
 
-[node name="Grid" type="GridContainer" parent="Tabs/Inventory/Background/Scroll"]
+[node name="Grid" type="GridContainer" parent="Tabs/Inventory/ItemBackground/Scroll"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
