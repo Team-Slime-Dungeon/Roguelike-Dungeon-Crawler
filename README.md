@@ -18,7 +18,7 @@
 ## Features
 * Color Blind Accessibility
 * Procedurally Generated Dungeon
-* Monster AI
+* Large variety of monsters with exciting AI and loot
 
 ## Short Demo
 
