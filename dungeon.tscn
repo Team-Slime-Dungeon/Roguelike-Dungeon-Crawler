@@ -518,7 +518,6 @@ visible = false
 shape = SubResource("CircleShape2D_b827w")
 
 [node name="FloorTiles" type="TileMap" parent="."]
-visible = false
 tile_set = SubResource("TileSet_d3wdv")
 format = 2
 
