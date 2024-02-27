@@ -1,10 +1,11 @@
--introduction to the game
+## Introduction to the game
 
--instructions
+## Instructions
 
--requirements
+## Requirements
 
--background of Development
+## Development Background
 
--maybe sm small information of the engine used and what project was and fornwhat it was like (Project 1 2024 Comp 490
+## Engine information
+  -maybe sm small information of the engine used and what project was and fornwhat it was like (Project 1 2024 Comp 490
 
