@@ -7,9 +7,11 @@
 
   Controls:
   * WASD - Movement
-  * Left Mouse - Attack
+  * Left Mouse - Attack, Advance Text
   * Right Mouse - Projectile
   * F - Interact (Open chests, talk to NPCs, Buy from Shop)
+  * E - Open/Close Inventory
+  * Shift - Dashw
   * ESC - Menu
 
 ## Requirements
