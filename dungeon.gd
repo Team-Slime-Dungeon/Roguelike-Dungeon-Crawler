@@ -106,6 +106,11 @@ func _ready():
 			colorDict[current_floor][1],
 			colorDict[current_floor][2],
 		)
+		$FloorTiles.modulate = Color(
+			colorDict[current_floor][2],
+			colorDict[current_floor][1],
+			colorDict[current_floor][0],
+		)
 		$Staircase/Sprite2D.modulate = Color(
 			colorDict[current_floor][0],
 			colorDict[current_floor][1],
@@ -397,8 +402,9 @@ func generate_rooms():
 				elif ((j == size-1) or (k == -size)):
 					if !(Vector2i(i.x+j,i.y+k)) in hall_pos:
 						$TileMap.set_cell(0, Vector2i(i.x+j, i.y+k), dungeon_walls, Vector2i(0, 0))
-				# Stores tile location to be connected
-				else: 
+				# Stores tile location to be connected and draws a tile at the floor location
+				else:
+					$FloorTiles.set_cell(0, Vector2i(i.x+j, i.y+k), 0, Vector2i(2, 4))
 					floor_pos.append(Vector2i(i.x+j,i.y+k))
 					
 	# Draws all of the saved tiles and connects them together using terrains
@@ -614,6 +620,7 @@ func clear_room():
 	chest_spawns = [] # Reset the array tracking chest spawns
 	chest_spawn_ID = 0 # Reset the ID if you're using it
 	$TileMap.clear()
+	$FloorTiles.clear()
 	
 	#for i in range(-100, 100): # higher wall generation
 	#	for j in range(-100, 100):
