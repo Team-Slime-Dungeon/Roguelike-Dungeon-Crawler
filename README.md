@@ -5,9 +5,9 @@
   Simple download the excecutable file for your operating system and play the game. The game is compatible with Windows and Linux.
 
 ## Requirements
-  Computer
-  Screen
-  Keyboard + Mouse
+ * Computer
+ * Screen
+ * Keyboard + Mouse
 
 ## Development Background
   
