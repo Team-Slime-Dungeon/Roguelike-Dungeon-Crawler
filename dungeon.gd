@@ -1,7 +1,6 @@
 extends Node2D
 
 var debug = true
-#random.seed = OS.get_unix_time() # Or any other seed value
 
 var healthSetupCompleted = false
 var armorSetup = false
@@ -21,6 +20,34 @@ var staircase_pos = 0 # selected element in node_pos
 var current_floor = 0 # starting floor
 var kink_probability = 0.5
 var descend = false # check if player stepped on a staircase
+
+var colorDict = {
+	1: [.334, .7, .2], # Forest 1
+	2: [.537, .722, .282], # Forest 2
+	3: [.459, .506, .173], # Forest 3
+	4: [.478, .384, .165], # Forest 4
+	5: [.502, .267, .161], # Forest Boss
+	6: [.365, .353, .447], # Cave 1
+	7: [.369, .345, .435], # Cave 2
+	8: [.376, .341, .427], # Cave 3
+	9: [.38, .333, .42], #Cave 4
+	10: [.388, .329, .412], # Cave Boss
+	11: [.357, .286, .263], # Prison 1
+	12: [.376, .286, .259], # Prison 2
+	13: [.396, .286, .259], # Prison 3
+	14: [.416, .286, .255], # Prison 4
+	15: [.435, .29, .255], # Prison Boss
+	16: [.263, .322, .357], # Dungeon 1
+	17: [.259, .31, .376], # Dungeon 2
+	18: [.259, .298, .396], # Dungeon 3
+	19: [.255, .286, .416], # Dungeon 4
+	20: [.255, .278, .435], # Dungeon Boss
+	21: [.475, .467, .435], # Ancient 1
+	22: [.451, .439, .4], # Ancient 2
+	23: [.431, .416, .365], # Ancient 3
+	24: [.412, .392, .329], # Ancient 4
+	25: [.392, .369, .298], # Ancient Boss
+}
 
 var dungeon_floor_tiles = [0,2] # IDs for the dungeon floors
 var dungeon_wall_tiles = [1,3] # IDs for the dungeon walls
@@ -44,6 +71,8 @@ var chest_spawn_ID = 0
 
 var monster_list = [
 	preload("res://monsters/Slime.tscn"),
+	preload("res://monsters/Bushmo.tscn"),
+
 	]
 var  item_scenes = { 
 		0: preload("res://equipment/coin.tscn"), 
@@ -83,6 +112,26 @@ func _ready():
 	Items.Player_Inventory._print_inventory()	
 
 	clear_room() # clean up for new floor
+	
+	# Color tiles for all 25 floors
+	if current_floor > 0 and current_floor <= 25:
+		$TileMap.modulate = Color(
+			colorDict[current_floor][0],
+			colorDict[current_floor][1],
+			colorDict[current_floor][2],
+		)
+		$FloorTiles.modulate = Color(
+			colorDict[current_floor][2],
+			colorDict[current_floor][1],
+			colorDict[current_floor][0],
+		)
+		$Staircase/Sprite2D.modulate = Color(
+			colorDict[current_floor][0],
+			colorDict[current_floor][1],
+			colorDict[current_floor][2],
+		)
+		
+	else: $TileMap.modulate = Color(0, 0, 0)
 	
 	floor_structure() # fill in int
 	generate_hallways()
@@ -367,8 +416,9 @@ func generate_rooms():
 				elif ((j == size-1) or (k == -size)):
 					if !(Vector2i(i.x+j,i.y+k)) in hall_pos:
 						$TileMap.set_cell(0, Vector2i(i.x+j, i.y+k), dungeon_walls, Vector2i(0, 0))
-				# Stores tile location to be connected
-				else: 
+				# Stores tile location to be connected and draws a tile at the floor location
+				else:
+					$FloorTiles.set_cell(0, Vector2i(i.x+j, i.y+k), 0, Vector2i(2, 4))
 					floor_pos.append(Vector2i(i.x+j,i.y+k))
 					
 	# Draws all of the saved tiles and connects them together using terrains
@@ -430,11 +480,11 @@ func generate_decorations(node_num,pad_mode=0,spawn_chance=1,bloom_chance=0):
 	var size_type = ""
 	# Scenes for different sized decorations
 	var small_decorations = [preload("res://environment/Cave_One_Small_Decorations.tscn")]
-	var medium_decorations = [preload("res://environment/Cave_One_Medium_Decorations.tscn")]
+	var medium_decorations = [preload("res://environment/Cave_One_Medium_Decorations.tscn"), preload("res://environment/Merchant_Shop.tscn")]
 	var large_decorations = []
 	
 	var medium_attempts = 1
-	
+
 	if size[1] < 7:
 		print("Small room",node,size)
 		size_type = "Small"
@@ -490,6 +540,7 @@ func generate_decorations(node_num,pad_mode=0,spawn_chance=1,bloom_chance=0):
 				var chosen = pads[0]
 				if chosen in pads:
 ####### TODO: Change so instead it adds area around chosen pad for bloom instead of removing
+					medium_decorations.shuffle()
 					if decoration_check(spawn_chance, chosen, medium_decorations[0]):
 						pads.erase(chosen)
 					
@@ -558,8 +609,11 @@ func clear_room():
 	
 	if decorative_spawns != []:
 		for i in len(decorative_spawns):
-			if is_instance_valid(decorative_spawns[i]): decorative_spawns[i].queue_free()
-			
+			if is_instance_valid(decorative_spawns[i]): 
+				if "spawns_objects" in decorative_spawns[i]:
+					decorative_spawns[i].clear_spawns()
+				decorative_spawns[i].queue_free()
+
 	if chest_spawns != []:
 	#	for i in chest_spawns.size() - 1:
 	#		if is_instance_valid(chest_spawns[i]):
@@ -580,8 +634,12 @@ func clear_room():
 	chest_spawns = [] # Reset the array tracking chest spawns
 	chest_spawn_ID = 0 # Reset the ID if you're using it
 	$TileMap.clear()
+	$FloorTiles.clear()
+	
+	#for i in range(-100, 100): # higher wall generation
+	#	for j in range(-100, 100):
+	#		$TileMap.set_cell(0, Vector2i(i,j), 1, Vector2i(3, 0))
 	
 	#if current_floor == 6:
 		#get_tree().change_scene_to_file("res://environment/Boss Fight 1.tscn")
 		
-	# Create function that removes all remaining entities

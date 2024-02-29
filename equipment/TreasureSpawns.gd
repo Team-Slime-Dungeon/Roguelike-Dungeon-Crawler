@@ -8,7 +8,9 @@ var total_items = 13
 var loot_probability = [6,7,9,10,11,10,9,8,7,7,6,5,5]
 #var loot_probability = [0,0,0,0,0,0,0,0,0,0,0,0,0] # Blank for custom probability setting
 var picked_up = false
+var shop_item = false
 var amount = 1
+
 
 func _ready():
 	# If no loot is set at creation this will randomize according the the probability table and return a random item

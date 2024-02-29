@@ -1,0 +1,199 @@
+[gd_scene load_steps=12 format=3 uid="uid://dupui5txto5pt"]
+
+[ext_resource type="Texture2D" uid="uid://ckei3uymdwjm" path="res://environment/Merchant Shop.png" id="1_jasct"]
+[ext_resource type="Script" path="res://environment/Merchant_Shop.gd" id="1_yto45"]
+[ext_resource type="Texture2D" uid="uid://bhl1ehdu2bk71" path="res://environment/ShopKeeper.png" id="2_38hyp"]
+[ext_resource type="Texture2D" uid="uid://drgu3jqr7i7uf" path="res://environment/Sale Sign.png" id="4_3306w"]
+[ext_resource type="Texture2D" uid="uid://0qda10rutxrx" path="res://environment/Cat Hats.png" id="4_qlnmb"]
+
+[sub_resource type="Animation" id="Animation_y3kyg"]
+resource_name = "Idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Shop/Shopkeeper:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Shop/Shopkeeper:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.2, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(5, 0), Vector2(-5, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Shop/Cat_Hat:offset")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.2, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(5, 0), Vector2(-5, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_cgkj2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Shop/Shopkeeper:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Shop/Shopkeeper:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_j47y5"]
+resource_name = "Shop_Purchase"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Shop/Shopkeeper:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [1, 0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Shop/Shopkeeper:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.2, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, -5), Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Shop/Cat_Hat:offset")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.2, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, -5), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_o6ori"]
+resource_name = "Shop_Purchase_Fail"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Shop/Shopkeeper:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [2, 0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Shop/Shopkeeper:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.2, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, -5), Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Shop/Cat_Hat:offset")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.2, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, -5), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6fsw4"]
+_data = {
+"Idle": SubResource("Animation_y3kyg"),
+"RESET": SubResource("Animation_cgkj2"),
+"Shop_Purchase": SubResource("Animation_j47y5"),
+"Shop_Purchase_Fail": SubResource("Animation_o6ori")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hvfgk"]
+radius = 16.0
+height = 46.0
+
+[node name="Merchant_Shop" type="CharacterBody2D"]
+z_index = 1
+texture_filter = 1
+position = Vector2(67, 50)
+script = ExtResource("1_yto45")
+
+[node name="Shop" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_jasct")
+
+[node name="Shopkeeper" type="Sprite2D" parent="Shop"]
+position = Vector2(0, -30)
+texture = ExtResource("2_38hyp")
+hframes = 3
+
+[node name="Cat_Hat" type="Sprite2D" parent="Shop"]
+position = Vector2(0, -45)
+texture = ExtResource("4_qlnmb")
+hframes = 4
+
+[node name="Sale_Signs" type="Sprite2D" parent="Shop"]
+position = Vector2(0, -5)
+texture = ExtResource("4_3306w")
+
+[node name="ShopAnimation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_6fsw4")
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -23)
+shape = SubResource("CapsuleShape2D_hvfgk")
+
+[connection signal="animation_finished" from="ShopAnimation" to="." method="_on_shop_animation_animation_finished"]
