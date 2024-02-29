@@ -25,3 +25,12 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.69395, 0.69395)
 script = ExtResource("2_4fwxr")
+
+[node name="count" type="Label" parent="Item_Icon"]
+visible = false
+layout_mode = 0
+offset_left = 24.1604
+offset_top = 10.8722
+offset_right = 42.1604
+offset_bottom = 33.8722
+theme_override_colors/font_color = Color(0, 0, 0, 1)

@@ -36,9 +36,20 @@ func make_inventory():
 			
 		if i != 0: # Skips loading coin into the first slot
 			var item_name = Items.Player_Inventory.get_item_name(i)
+			var item_count = Items.Player_Inventory.get_item_amount(i)
+			var item_id = i
+			var inventory_slot = inv_slots[index].get_name()
 			# Loads The PNG of Weapon Into the Icon Texture
 			var icon_texture = load("res://InventoryTesting/Item Test/" + item_name + ".png")
 			inv_slots[index].get_node("Item_Icon").set_texture(icon_texture)
+			inv_slots[index].get_node("Item_Icon/count").text = str(item_count)
+			inv_slots[index].get_node("Item_Icon/count").visible = true
+			inv_slots[index].set_meta("item_name", item_name)
+			inv_slots[index].set_meta("item_id", item_id)
+			inv_slots[index].set_meta("item_count", item_count)
+			inv_slots[index].set_meta("original_slot", inventory_slot)
+			print("Item Added: ", item_name, " in slot: ", inventory_slot, " ID: ", item_id)
+			#slot.set_meta("original_slot", slot.get_name())
 			#Moves to the next slot
 			index += 1
 

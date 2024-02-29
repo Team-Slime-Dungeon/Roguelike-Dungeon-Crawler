@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cul7b22epo42i"]
+[gd_scene load_steps=12 format=3 uid="uid://cul7b22epo42i"]
 
 [ext_resource type="Script" path="res://InventoryTesting/inventory_gui.gd" id="1_ap1sc"]
 [ext_resource type="Texture2D" uid="uid://dfnshdf6xxgdp" path="res://InventoryTesting/InventoryBackgroundPics/inventoryframe.png" id="2_02nu5"]
@@ -8,6 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://eli43xhhn4vd" path="res://InventoryTesting/InventoryBackgroundPics/Key Slots.png" id="6_gswts"]
 [ext_resource type="Script" path="res://InventoryTesting/Playerequip_inv/EquipSlot.gd" id="6_yi8ey"]
 [ext_resource type="Texture2D" uid="uid://dui8kdpinatde" path="res://InventoryTesting/InventoryBackgroundPics/Shirt Slot.png" id="7_vbc0q"]
+[ext_resource type="Script" path="res://InventoryTesting/trashingbutton.gd" id="9_gicqq"]
+[ext_resource type="Texture2D" uid="uid://jmrtyy66elth" path="res://trashcanpic.webp" id="10_cf7rm"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_tbsgo"]
 texture = ExtResource("2_7alty")
@@ -198,3 +200,19 @@ patch_margin_left = 6
 patch_margin_top = 6
 patch_margin_right = 6
 patch_margin_bottom = 6
+
+[node name="trashingbutton" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 67.0
+offset_top = 79.0
+offset_right = 101.0
+offset_bottom = 104.0
+script = ExtResource("9_gicqq")
+
+[node name="Sprite2D" type="Sprite2D" parent="trashingbutton"]
+position = Vector2(15.8942, 12.0125)
+scale = Vector2(0.0503975, 0.043418)
+texture = ExtResource("10_cf7rm")
+
+[connection signal="mouse_entered" from="trashingbutton" to="trashingbutton" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="trashingbutton" to="trashingbutton" method="_on_mouse_exited"]
