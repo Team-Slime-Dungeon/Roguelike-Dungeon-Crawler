@@ -24,7 +24,7 @@ var Item_List = {
 	
 	# Weapons and Equipment IDs 1 - 50
 	1 : ["weapon_2",		20,		1,		2,				0,				null, null ],
-	2 : ["Steel Sword",		30,		1,		3,				0,				null, null ],
+	2 : ["weapon_1",		30,		1,		3,				0,				null, null ],
 	3 : ["Bronze Helmet", 	30,		1,		0,				5,				null, null ],
 	
 	# Treasures IDs 51 - 100. 51 will spawn a random item, 52 on can be found inside 51
