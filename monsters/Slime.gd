@@ -12,7 +12,7 @@ var max_speed = 20
 var death_location = null
 
 #Debug Step back in case it has crashes it can be turned off here by making it false
-var allow_step_back = false
+var allow_step_back = true
 
 @onready var HurtTimer1 = $HurtTimer1
 @onready var deathTimer = $deathTimer
