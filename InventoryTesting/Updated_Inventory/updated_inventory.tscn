@@ -1,0 +1,61 @@
+[gd_scene load_steps=3 format=3 uid="uid://b2nnqal4yx242"]
+
+[ext_resource type="Script" path="res://InventoryTesting/Updated_Inventory/updated_inventory.gd" id="1_002hw"]
+[ext_resource type="Texture2D" uid="uid://du8e8dicpwnj3" path="res://InventoryTesting/InventoryBackgroundPics/inventorySlot_1.png" id="1_lncg1"]
+
+[node name="UpdatedInventory" type="Control"]
+layout_direction = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_002hw")
+
+[node name="TabContainer" type="TabContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.44
+anchor_top = 0.301
+anchor_right = 0.909
+anchor_bottom = 0.866
+offset_top = -0.0480194
+offset_right = -0.168091
+offset_bottom = -0.16803
+theme_override_font_sizes/font_size = 24
+tab_alignment = 1
+
+[node name="Inventory" type="TabBar" parent="TabContainer"]
+layout_mode = 2
+
+[node name="Background" type="NinePatchRect" parent="TabContainer/Inventory"]
+layout_mode = 0
+offset_left = 223.12
+offset_top = 41.0
+offset_right = 516.12
+offset_bottom = 295.0
+
+[node name="Scroll" type="ScrollContainer" parent="TabContainer/Inventory/Background"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Grid" type="GridContainer" parent="TabContainer/Inventory/Background/Scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.0
+columns = 3
+
+[node name="Companion" type="TabBar" parent="TabContainer"]
+visible = false
+layout_mode = 2
+max_tab_width = 6
+
+[node name="Sprite2D" type="Sprite2D" parent="TabContainer/Companion"]
+position = Vector2(408, 170)
+texture = ExtResource("1_lncg1")

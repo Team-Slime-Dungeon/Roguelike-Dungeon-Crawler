@@ -61,6 +61,11 @@ var Item_Scenes = {
 	90: preload("res://equipment/EquipmentTest/Potion_Item.tscn"),
 }
 
+#Dictionary for currently equipped weapon
+var equip_weapon_stats = {
+0:["weapon_1",		1,		2,				0,				null, null ]
+}
+
 # Called when the node enters the scene tree for the first time.
 func _ready(loaded_inventory={}):	
 	if loaded_inventory != {}:
@@ -214,5 +219,44 @@ func get_item_defense(item_id):
 	else:
 		print("Error: Item does not exist.")
 	return 0
+#searches item list by item name and returns corresponding item id
+func get_Item_Id_By_Name(Item_Name):
+	for i in Item_List:
+		if Item_List[i][0]==Item_Name:
+			return i
+			
+func equip_weapon(old_weapon_id):
+	#equipped weapon is stored in equip_weapon_stats
+	#gets the weapon's item via a search through the item list by item name
+	var current_weapon_id = get_Item_Id_By_Name(equip_weapon_stats[0][0])
+	var temp = current_weapon_id
+	current_weapon_id = old_weapon_id
+	#checks if the weapon id that you want to swap exists in the inventory
+	#the temp id's value is set with the old weapon's value
+	#deletes the old weapon id from inventory
+	if Inventory.has(old_weapon_id):
+		Inventory[temp] = Inventory[old_weapon_id]
+		Inventory.erase(old_weapon_id)
+		print("Cassandra has swapped weapons!")
+		set_equip_weapon_stats(current_weapon_id)
+		
+		
+		print("the current equipped weapon now is ", get_current_weapon())
+		EquipSlot._set_weapon_texture()
+	else:
+		print("Error: Weapon cannot be swapped, Weapon does not exist in Inventory" )
 
+func _print_inv_dic():
+	print(Inventory)
+	
+func set_equip_weapon_stats(weapon_id):
+	equip_weapon_stats[0] = Item_List[weapon_id]
+	#return equip_weapon_stats	
+	
+func get_equip_weapon_stats():
+	return equip_weapon_stats
+	
+func get_current_weapon():
+	return equip_weapon_stats[0][0]
+	
 func _process(delta): pass
