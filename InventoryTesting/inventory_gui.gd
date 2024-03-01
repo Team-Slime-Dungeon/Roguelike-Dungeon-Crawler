@@ -39,7 +39,11 @@ func make_inventory():
 			# Loads The PNG of Weapon Into the Icon Texture
 			var icon_texture = load("res://InventoryTesting/Item Test/" + item_name + ".png")
 			inv_slots[index].get_node("Item_Icon").set_texture(icon_texture)
+			#print("the texture in the inventory gui is: ", icon_texture)
+			#var icon_texture2 = load("res://InventoryTesting/Item Test/weapon_2.png")
+			#print("the 2nd texture in the inventory gui is: ", icon_texture2)
 			#Moves to the next slot
+			#print("item name is ", item_name)
 			index += 1
 
 func clear_items():	

@@ -23,7 +23,7 @@ var Item_List = {
 	
 	# Weapons and Equipment IDs 1 - 50
 	1 : ["weapon_1",		1,		2,				0,				null, null ],
-	2 : ["Weapon_2", 	1,		3,				0,				null, null ],
+	2 : ["weapon_2", 	1,		3,				0,				null, null ],
 	3 : ["Bronze Helmet",	1,		0,				5,				null, null ],
 	
 	# Treasures IDs 51 - 100. 51 will spawn a random item, 52 on can be found inside 51
@@ -47,10 +47,8 @@ var Item_List = {
 }
 
 #Dictionary for currently equipped weapon
-var equip_weapon_stats = {
-0:["weapon_1",		1,		2,				0,				null, null ]
-}
-
+var equip_weapon_stats = {}
+signal texture_has_changed(icon_texture)
 # Called when the node enters the scene tree for the first time.
 func _ready(loaded_inventory={}):	
 	if loaded_inventory != {}:
@@ -192,27 +190,20 @@ func get_Item_Id_By_Name(Item_Name):
 		if Item_List[i][0]==Item_Name:
 			return i
 			
-func equip_weapon(old_weapon_id):
-	#equipped weapon is stored in equip_weapon_stats
-	#gets the weapon's item via a search through the item list by item name
-	var current_weapon_id = get_Item_Id_By_Name(equip_weapon_stats[0][0])
-	var temp = current_weapon_id
-	current_weapon_id = old_weapon_id
-	#checks if the weapon id that you want to swap exists in the inventory
-	#the temp id's value is set with the old weapon's value
-	#deletes the old weapon id from inventory
-	if Inventory.has(old_weapon_id):
-		Inventory[temp] = Inventory[old_weapon_id]
-		Inventory.erase(old_weapon_id)
-		print("Cassandra has swapped weapons!")
+func equip_weapon(new_weapon_id):
+	var current_weapon_id
+	if equip_weapon_stats == {}:
+		current_weapon_id = new_weapon_id
 		set_equip_weapon_stats(current_weapon_id)
-		
-		
-		print("the current equipped weapon now is ", get_current_weapon())
-		EquipSlot._set_weapon_texture()
-	else:
-		print("Error: Weapon cannot be swapped, Weapon does not exist in Inventory" )
-
+		Inventory.erase(new_weapon_id)
+		var weapon_name = get_item_name(current_weapon_id)
+		emit_signal("texture_has_changed", weapon_name)
+func _delete_equip(weapon_id):
+	var weapon_name = null
+	if equip_weapon_stats != {}:
+		#equip_weapon_stats.erase(weapon_id)
+		equip_weapon_stats = {}
+		emit_signal("texture_has_changed", weapon_name)
 func _print_inv_dic():
 	print(Inventory)
 	
@@ -224,6 +215,9 @@ func get_equip_weapon_stats():
 	return equip_weapon_stats
 	
 func get_current_weapon():
-	return equip_weapon_stats[0][0]
+	if equip_weapon_stats == {}:
+		return equip_weapon_stats
+	else:
+		return equip_weapon_stats[0][0]
 	
 func _process(delta): pass

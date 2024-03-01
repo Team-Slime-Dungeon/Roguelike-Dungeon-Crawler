@@ -51,17 +51,20 @@ func _ready():
 	#activate animation tree
 	animation_tree.active = true
 	input_dir = Vector2(1,0)
-	
-	#updates the weapon sprite with the equipped weapon sprite
-	new_texuture =EquipSlot._get_weapon_texture()
-	weapon_sprite.texture = new_texuture
-	
+	Items.Player_Inventory.connect("texture_has_changed", Callable(self, "_on_texture_has_changed"))
 
 #func _process(delta):
 	if cutscene_action:
 		move_character(cutscene_location)
 #	update_animation_parameter()
-
+func _on_texture_has_changed(item_name):
+	if item_name == null:
+		weapon.texture = null
+	else:
+		new_texuture = load("res://InventoryTesting/Item Test/" + item_name + ".png")
+		weapon.texture = new_texuture
+	print("signal has been recieved")
+	
 func block_inputs(state = false): input_blocked = state
 
 func update_camera_scale(new_scale):
