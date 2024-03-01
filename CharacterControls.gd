@@ -63,7 +63,7 @@ func _on_texture_has_changed(item_name):
 	else:
 		new_texuture = load("res://InventoryTesting/Item Test/" + item_name + ".png")
 		weapon.texture = new_texuture
-	print("signal has been recieved")
+	#print("signal has been recieved")
 	
 func block_inputs(state = false): input_blocked = state
 

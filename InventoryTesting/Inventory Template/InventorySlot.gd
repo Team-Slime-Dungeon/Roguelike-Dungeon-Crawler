@@ -2,12 +2,7 @@ extends TextureRect
 
 # Track if the slot is occupied
 var is_occupied = false 
-var weapon1_texture = load("res://InventoryTesting/Item Test/weapon_1.png")	
-var weapon2_texture = load("res://InventoryTesting/Item Test/weapon_2.png")	
-var practice ={
-	1:["weapon_1", weapon1_texture],
-	2:["weapon_2", weapon2_texture]
-	}
+
 
 func _ready():
 	# Initialize slot state if needed
@@ -53,30 +48,25 @@ func _drop_data(at_position, data):
 		if data["origin_slot"] != self:
 			data["origin_slot"].clear_slot()
 		var item_texture = texture
-		if search_texture(item_texture) == true:
-			var item_id = get_item_id_by_texture(item_texture)
-			#print("Item name is" ,item_name)
-			#var item_id = Items.Player_Inventory.get_Item_Id_By_Name(item_name)
+		
+		#conditional checks to see if the texture being dropped into slot is a weapon 
+		#problem: if you choose to move a weapon into any slot it'll delete the equipped weapon regardless of your intentions
+		#example: weapon_1 is equipped, but you move weapon_2 in any of the slots in the main inventory will delete the weapon in the equipped slot
+		if Items.Player_Inventory.search_texture(item_texture) == true:
+			var item_id = Items.Player_Inventory.get_item_id_by_texture(item_texture)
+			
+			#deletes the weapon from the equipped dictionary
 			Items.Player_Inventory._delete_equip(item_id)
-			#texture = null
+			#adds the weapon back into the main inventory
 			Items.Player_Inventory._add_item(item_id, 1)
 			print("The current inventory is: ")
 			Items.Player_Inventory._print_inventory()
-			#print("Current Equip is: ", Items.Player_Inventory.get_current_weapon() )
+			
 			var current_weapon = Items.Player_Inventory.get_current_weapon()
 			print("Current weapon is: ", current_weapon)
-			#print("Equip Stats: ",Items.Player_Inventory.get_equip_weapon_stats())
-func get_item_id_by_texture(item_texture):
-	for i in practice:
-		if practice[i][1]==item_texture:
-			print("printed statement: ",practice[i][1])
-			return i
-func search_texture(item_texture):
-	
-	for i in practice:
-		if practice[i][1] == item_texture:
-			print("Search: ",practice[i][1])
-			return true
+			
+
+
 			
 
 func clear_slot():

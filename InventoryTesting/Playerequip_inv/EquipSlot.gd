@@ -4,12 +4,6 @@ extends TextureRect
 
 var is_occupied = false 
 
-var weapon1_texture = load("res://InventoryTesting/Item Test/weapon_1.png")	
-var weapon2_texture = load("res://InventoryTesting/Item Test/weapon_2.png")	
-var practice ={
-	1:["weapon_1", weapon1_texture],
-	2:["weapon_2", weapon2_texture]
-	}
 func update_slot_state():
 	# Update `is_occupied` based on the current texture
 	is_occupied = texture != null
@@ -57,9 +51,13 @@ func _drop_data(at_position, data):
 		if data["origin_slot"] != self:
 			data["origin_slot"].clear_slot()
 	
-	
+	#gets the the icon's textures
+	#gets the weapon's id by it associated texture
+	#equips the weapon (adds it the equip weapon stats list) and deletes the weapon from the main inventory
+	#prints out the current weapon
+	#prints out the new inventory
 	var item_texture = icon.get_texture()
-	var equip_weapon_id = get_item_id_by_texture(item_texture)
+	var equip_weapon_id = Items.Player_Inventory.get_item_id_by_texture(item_texture)
 	Items.Player_Inventory.equip_weapon(equip_weapon_id)	
 	var current_weapon = Items.Player_Inventory.get_current_weapon()
 	print("The current weapon is ", current_weapon)
@@ -67,13 +65,7 @@ func _drop_data(at_position, data):
 	
 	
 	
-	
-	
-func get_item_id_by_texture(item_texture):
-	for i in practice:
-		if practice[i][1]==item_texture:
-			print("printed statement: ",practice[i][1])
-			return i
+
 			
 func clear_slot():
 	texture = null

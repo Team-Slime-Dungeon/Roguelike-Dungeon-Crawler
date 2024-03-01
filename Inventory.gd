@@ -48,7 +48,17 @@ var Item_List = {
 
 #Dictionary for currently equipped weapon
 var equip_weapon_stats = {}
+#signal for changing the weapon sprite in the cassandra scene
 signal texture_has_changed(icon_texture)
+var weapon1_texture = load("res://InventoryTesting/Item Test/weapon_1.png")	
+var weapon2_texture = load("res://InventoryTesting/Item Test/weapon_2.png")	
+#dictionary with the weapon textures
+var weapon_texture_list ={
+	1:["weapon_1", weapon1_texture],
+	2:["weapon_2", weapon2_texture]
+	}
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready(loaded_inventory={}):	
 	if loaded_inventory != {}:
@@ -219,5 +229,20 @@ func get_current_weapon():
 		return equip_weapon_stats
 	else:
 		return equip_weapon_stats[0][0]
+		
+func get_item_id_by_texture(item_texture):
+	for i in weapon_texture_list:
+		if weapon_texture_list[i][1]==item_texture:
+			#print("printed statement: ",weapon_texture_list[i][1])
+			return i
+			
+func search_texture(item_texture):
+	for i in weapon_texture_list:
+		if weapon_texture_list[i][1] == item_texture:
+			#print("Search: ",weapon_texture_list[i][1])
+			return true
+		
+func get_weapon_texture_list():
+	return weapon_texture_list
 	
 func _process(delta): pass
