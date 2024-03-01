@@ -480,8 +480,8 @@ func generate_decorations(node_num,pad_mode=0,spawn_chance=1,bloom_chance=0):
 	var size_type = ""
 	# Scenes for different sized decorations
 	var small_decorations = [preload("res://environment/Cave_One_Small_Decorations.tscn")]
-	var medium_decorations = [preload("res://environment/Cave_One_Medium_Decorations.tscn"), preload("res://environment/Merchant_Shop.tscn")]
-	var large_decorations = []
+	var medium_decorations = [preload("res://environment/Cave_One_Medium_Decorations.tscn"), preload("res://monsters/Treant.tscn")]
+	var large_decorations = [preload("res://environment/Merchant_Shop.tscn")]
 	
 	var medium_attempts = 1
 
