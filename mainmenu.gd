@@ -18,7 +18,7 @@ func _process(delta):
 
 func _on_texture_button_pressed():
 	get_tree().change_scene_to_file("res://Story/Intro/intro.tscn")
-	print("pressed")
+	#print("pressed")
 	pass # Replace with function body.
 
 
@@ -28,10 +28,12 @@ func _on_exit_button_pressed():
 
 
 func _on_button_pressed():
-	ani.play("Remove")
+	#ani.play("Remove")
+	$Sets.show()
 	pass # Replace with function body.
 
 
 func _on_button_Back_pressed():
-	ani.play("Bring back")
+	#ani.play("Bring back")
+	$Sets.hide()
 	pass # Replace with function body.

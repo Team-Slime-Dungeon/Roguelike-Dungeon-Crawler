@@ -1,9 +1,11 @@
-[gd_scene load_steps=26 format=3 uid="uid://btsxsxswd7hs0"]
+[gd_scene load_steps=29 format=3 uid="uid://btsxsxswd7hs0"]
 
 [ext_resource type="Script" path="res://mainmenu.gd" id="1_230jb"]
+[ext_resource type="Shader" path="res://blur.gdshader" id="2_r8def"]
 [ext_resource type="Texture2D" uid="uid://c32cji1hifxob" path="res://MenuAssets/270.png" id="3_f50f4"]
 [ext_resource type="PackedScene" uid="uid://qdbllnpxqkkl" path="res://bg.tscn" id="3_kn0gk"]
 [ext_resource type="Texture2D" uid="uid://dbvs8l4bnadih" path="res://MenuAssets/270-219.png.png" id="4_efpxw"]
+[ext_resource type="Script" path="res://ColorblindOptionsMenu.gd" id="5_6282e"]
 [ext_resource type="Texture2D" uid="uid://dcvb624n1ed76" path="res://MenuAssets/New Piskel (4).png" id="5_biqbo"]
 [ext_resource type="Texture2D" uid="uid://d1de8tcjv7x4b" path="res://MenuAssets/0179.png" id="6_hpig8"]
 [ext_resource type="FontFile" uid="uid://b1dyomvma53nt" path="res://PixelifySans-Regular.ttf" id="7_2mmw6"]
@@ -12,6 +14,11 @@
 [ext_resource type="Texture2D" uid="uid://cokpmf8ymwndc" path="res://MenuAssets/fire_00000.png" id="10_x848q"]
 [ext_resource type="Shader" path="res://MainMenuStart.gdshader" id="11_hp4dv"]
 [ext_resource type="Texture2D" uid="uid://24dst4l36g52" path="res://title.png" id="11_vflqt"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u0t1y"]
+shader = ExtResource("2_r8def")
+shader_parameter/blur = 5.0
+shader_parameter/brightness = 0.709
 
 [sub_resource type="Animation" id="Animation_l35mj"]
 resource_name = "Bring back"
@@ -636,6 +643,150 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_230jb")
 
+[node name="Sets" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="Sets"]
+material = SubResource("ShaderMaterial_u0t1y")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="Sets"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 107.0
+offset_top = 38.0
+offset_right = 147.0
+offset_bottom = 78.0
+
+[node name="ResolutionButton" type="OptionButton" parent="Sets/Control"]
+layout_mode = 0
+offset_left = 365.0
+offset_top = 161.0
+offset_right = 592.0
+offset_bottom = 181.0
+
+[node name="Label" type="Label" parent="Sets/Control"]
+visible = false
+layout_mode = 0
+offset_left = 130.0
+offset_top = 149.0
+offset_right = 357.0
+offset_bottom = 195.0
+theme_override_colors/font_color = Color(0.796078, 0.741176, 0.92549, 1)
+theme_override_fonts/font = ExtResource("7_2mmw6")
+theme_override_font_sizes/font_size = 35
+text = "Resolution :"
+script = ExtResource("8_ws277")
+
+[node name="CheckButton" type="CheckButton" parent="Sets/Control"]
+layout_mode = 0
+offset_left = 359.0
+offset_top = 235.0
+offset_right = 586.0
+offset_bottom = 259.0
+
+[node name="Label2" type="Label" parent="Sets/Control"]
+layout_mode = 0
+offset_left = 129.0
+offset_top = 217.0
+offset_right = 356.0
+offset_bottom = 263.0
+theme_override_colors/font_color = Color(0.796078, 0.741176, 0.92549, 1)
+theme_override_fonts/font = ExtResource("7_2mmw6")
+theme_override_font_sizes/font_size = 35
+text = "Fullscreen :"
+script = ExtResource("8_ws277")
+
+[node name="Label3" type="Label" parent="Sets/Control"]
+layout_mode = 0
+offset_left = 83.0
+offset_top = 51.0
+offset_right = 310.0
+offset_bottom = 127.0
+theme_override_colors/font_color = Color(0.796078, 0.741176, 0.92549, 1)
+theme_override_constants/shadow_offset_x = 34
+theme_override_constants/shadow_offset_y = 18
+theme_override_constants/outline_size = 4
+theme_override_constants/shadow_outline_size = 26
+theme_override_constants/line_spacing = 13
+theme_override_fonts/font = ExtResource("7_2mmw6")
+theme_override_font_sizes/font_size = 60
+text = "Options"
+script = ExtResource("8_ws277")
+
+[node name="Button" type="Button" parent="Sets/Control"]
+layout_mode = 0
+offset_left = 480.0
+offset_top = 448.0
+offset_right = 530.0
+offset_bottom = 479.0
+theme_override_fonts/font = ExtResource("7_2mmw6")
+theme_override_font_sizes/font_size = 34
+text = "BACK
+"
+
+[node name="HSlider" type="HSlider" parent="Sets/Control"]
+layout_mode = 0
+offset_left = 395.0
+offset_top = 317.0
+offset_right = 564.0
+offset_bottom = 337.0
+
+[node name="Label4" type="Label" parent="Sets/Control"]
+layout_mode = 0
+offset_left = 135.0
+offset_top = 293.0
+offset_right = 362.0
+offset_bottom = 339.0
+theme_override_colors/font_color = Color(0.796078, 0.741176, 0.92549, 1)
+theme_override_fonts/font = ExtResource("7_2mmw6")
+theme_override_font_sizes/font_size = 35
+text = "Volume :"
+script = ExtResource("8_ws277")
+
+[node name="ClrBldLabel" type="Label" parent="Sets/Control"]
+layout_mode = 0
+offset_left = 90.0
+offset_top = 360.0
+offset_right = 361.0
+offset_bottom = 406.0
+theme_override_colors/font_color = Color(0.796078, 0.741176, 0.92549, 1)
+theme_override_fonts/font = ExtResource("7_2mmw6")
+theme_override_font_sizes/font_size = 35
+text = "Color Blind Mode :	
+"
+
+[node name="Mode" type="Label" parent="Sets/Control"]
+layout_mode = 0
+offset_left = 582.0
+offset_top = 376.0
+offset_right = 622.0
+offset_bottom = 399.0
+text = "Mod
+"
+script = ExtResource("5_6282e")
+
+[node name="<" type="Button" parent="Sets/Control"]
+layout_mode = 0
+offset_left = 385.0
+offset_top = 370.0
+offset_right = 488.0
+offset_bottom = 401.0
+text = "<
+"
+
+[node name=">" type="Button" parent="Sets/Control"]
+layout_mode = 0
+offset_left = 733.0
+offset_top = 370.0
+offset_right = 834.0
+offset_bottom = 401.0
+text = ">"
+
 [node name="CanvasLayer2" type="CanvasLayer" parent="."]
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer2"]
@@ -891,6 +1042,11 @@ texture = ExtResource("11_vflqt")
 vframes = 6
 frame = 2
 
+[connection signal="item_selected" from="Sets/Control/ResolutionButton" to="Sets/Control/Label" method="_on_OptionButton_item_selected"]
+[connection signal="toggled" from="Sets/Control/CheckButton" to="Sets/Control/Label" method="_on_check_button_toggled"]
+[connection signal="pressed" from="Sets/Control/Button" to="." method="_on_button_Back_pressed"]
+[connection signal="pressed" from="Sets/Control/<" to="Sets/Control/Mode" method="_Lbuttonspressed"]
+[connection signal="pressed" from="Sets/Control/>" to="Sets/Control/Mode" method="_Rbuttonspressed"]
 [connection signal="item_selected" from="CanvasLayer2/Control/ResolutionButton" to="CanvasLayer2/Control/Label" method="_on_OptionButton_item_selected"]
 [connection signal="toggled" from="CanvasLayer2/Control/CheckButton" to="CanvasLayer2/Control/Label" method="_on_check_button_toggled"]
 [connection signal="pressed" from="CanvasLayer2/Control/Button" to="." method="_on_button_Back_pressed"]
