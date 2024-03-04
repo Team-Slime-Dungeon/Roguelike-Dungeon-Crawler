@@ -1,8 +1,13 @@
 extends CharacterBody2D
+
 var monster_type = "CONTAINER"
 var monster_drops = []
 
+var shop_item = false
 var death_location = null
+
+var amount = 1
+
 var chest_opened = false
 var player_in_area = false
 var container_open_count = {}  # Tracks how many times a container has been opened
@@ -82,14 +87,10 @@ func _on_chest_anim_animation_finished(animation):
 		death_location = get_position()
 
 func _on_crate_anim_animation_finished(animation):
-	#if animation == "crate_open":
-		#animation_player.play("crate_break")
 	if animation == "crate_break":
 		death_location = get_position()
 
 func _on_vase_anim_animation_finished(animation):
-	#if animation == "vase_open":
-		#animation_player.play("vase_break")
 	if animation == "vase_break":
 		death_location = get_position()
 		
@@ -99,7 +100,6 @@ func _on_area_2d_area_entered(area):
 		handle_container_interaction(area_name, container_type)
 
 func _on_area_2d_body_entered(body):
-	
 	if body.name == "Cassandra": player_in_area = true
 		
 func _on_area_2d_body_exited(body):

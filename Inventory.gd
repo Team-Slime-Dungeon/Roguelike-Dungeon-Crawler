@@ -4,11 +4,12 @@ var Inventory = {}
 
 # Item list Slots for convenience
 var item_name = 0
-var item_maxstack = 1
-var item_attack = 2
-var item_defense = 3
-var item_effect1 = 4
-var item_effect2 = 5
+var item_price = 1
+var item_maxstack = 2
+var item_attack = 3
+var item_defense = 4
+var item_effect1 = 5
+var item_effect2 = 6
 
 # Indexes for item categories for outside use
 var weapon_start_index = 1
@@ -18,32 +19,47 @@ var treasure_start_index = 51
 var treasure_end_index = 100
 
 var Item_List = {
-# Item ID [Item Name // Item_Max_Stack // Item Attack // Item Defense // Item Effect1 // Item Effect2]
-	0 : ["Coin",			99,		0,				0,				null, null ],
+# Item ID [Item Name // Price // Item_Max_Stack // Item Attack // Item Defense // Item Effect1 // Item Effect2]
+	0 : ["Coin",			1,		99,					0,				0,			null,			 null ],
 	
 	# Weapons and Equipment IDs 1 - 50
 	1 : ["weapon_1",		1,		2,				0,				null, null ],
 	2 : ["weapon_2", 	1,		3,				0,				null, null ],
 	3 : ["Bronze Helmet",	1,		0,				5,				null, null ],
+
 	
 	# Treasures IDs 51 - 100. 51 will spawn a random item, 52 on can be found inside 51
-	51: ["Random Treasure",	0,		0,				0, 				null, null ],
+	51: ["Random Treasure",	20,		0,		0,				0, 				null, null ],
 	
-	52: ["Ruby Necklace",	99,		0,				0, 				null, null ],
-	53: ["Emerald Crown",	99,		0,				0, 				null, null ],
-	54: ["Ancient Tome",	99,		0,				0, 				null, null ],
-	55: ["Ruby",			99,		0,				0, 				null, null ],
-	56: ["Old Earring",		99,		0,				0, 				null, null ],
-	57: ["Ancient Coins",	99,		0,				0, 				null, null ],
-	58: ["Pearl Necklace",	99,		0,				0, 				null, null ],
-	59: ["Sapphire",		99,		0,				0, 				null, null ],
-	60: ["Emerald",			99,		0,				0, 				null, null ],
-	61: ["Topaz",			99,		0,				0, 				null, null ],
-	62: ["Sacred Technology",99999,	0,				0, 				null, null ], # I actually have that many
-	63: ["Diamond",			99,		0,				0, 				null, null ],
-	64: ["Petrified Egg",	99,		0,				0, 				null, null ],
+	52: ["Ruby Necklace",	10,		99,		0,				0, 				null, null ],
+	53: ["Emerald Crown",	20,		99,		0,				0, 				null, null ],
+	54: ["Ancient Tome",	25,		99,		0,				0, 				null, null ],
+	55: ["Ruby",			30,		99,		0,				0, 				null, null ],
+	56: ["Old Earring",		35,		99,		0,				0, 				null, null ],
+	57: ["Ancient Coins",	40,		99,		0,				0, 				null, null ],
+	58: ["Pearl Necklace",	45, 	99,		0,				0, 				null, null ],
+	59: ["Sapphire",		50,		99,		0,				0, 				null, null ],
+	60: ["Emerald",			65,		99,		0,				0, 				null, null ],
+	61: ["Topaz",			75,		99,		0,				0, 				null, null ],
+	62: ["Sacred Technology", 89,	999,	0,				0, 				null, null ], # I actually have that many
+	63: ["Diamond",			90,		99,		0,				0, 				null, null ],
+	64: ["Petrified Egg",	100,	99,		0,				0, 				null, null ],
+	
+	# Monster Drops
+	71: ["Blue Mushroom",	3,		 99,		0,				0, 				null, null ],
+	
+	#Potions
+	90: ["Red Potion",		3,		 99,		0,				0, 				"HP+5", null ],
+	91: ["Purple Potion",	5,		 99,		0,				0, 				"Nothing", null ],
+	92: ["Blue Potion",		3,		 99,		0,				0, 				"Something", null ],
+	93: ["Green Potion",	5,		 99,		0,				0, 				"Who Knows", null ],
+}
 
-	71: ["Blue Mushroom",	99,		0,				0, 				null, null ],
+var Item_Scenes = {
+	71: preload("res://equipment/Blue Mushroom.tscn"),
+	# Multi Use Scenes (Contain more than one)
+	51: preload("res://equipment/treasure_spawns.tscn"),
+	90: preload("res://equipment/EquipmentTest/Potion_Item.tscn"),
 }
 
 #Dictionary for currently equipped weapon
@@ -86,7 +102,25 @@ func _print_inventory():
 func _get_coins():
 	#print(Inventory[0])
 	return Inventory[0]
-	
+
+func _get_item_price(item_id, amount=1):
+	if Item_List.has(item_id):
+		# return the item's attack as an int
+		var temp_price = Item_List[item_id][item_price]
+		return (temp_price * amount)
+	else:
+		print("Error: Item has no price or does not exist.")
+
+func _pay_for_item(item_id,amount=1):
+	var price_total = _get_item_price(item_id,amount)
+	if _get_coins() >= price_total:
+		_add_item(item_id,amount)
+		_minus_item(0,price_total)
+		return true
+	else:
+		print("Sorry, not enough coins!")
+		return false
+		
 func _add_item(item_id, amount):
 	var add_amount = amount
 	# If item ID is in inventory
