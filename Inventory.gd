@@ -23,9 +23,10 @@ var Item_List = {
 	0 : ["Coin",			1,		99,					0,				0,			null,			 null ],
 	
 	# Weapons and Equipment IDs 1 - 50
-	1 : ["weapon_2",		20,		1,		2,				0,				null, null ],
-	2 : ["weapon_1",		30,		1,		3,				0,				null, null ],
-	3 : ["Bronze Helmet", 	30,		1,		0,				5,				null, null ],
+	1 : ["weapon_1",		1,		2,				0,				null, null ],
+	2 : ["weapon_2", 	1,		3,				0,				null, null ],
+	3 : ["Bronze Helmet",	1,		0,				5,				null, null ],
+
 	
 	# Treasures IDs 51 - 100. 51 will spawn a random item, 52 on can be found inside 51
 	51: ["Random Treasure",	20,		0,		0,				0, 				null, null ],
@@ -62,9 +63,17 @@ var Item_Scenes = {
 }
 
 #Dictionary for currently equipped weapon
-var equip_weapon_stats = {
-0:["weapon_1",		1,		2,				0,				null, null ]
-}
+var equip_weapon_stats = {}
+#signal for changing the weapon sprite in the cassandra scene
+signal texture_has_changed(icon_texture)
+var weapon1_texture = load("res://InventoryTesting/Item Test/weapon_1.png")	
+var weapon2_texture = load("res://InventoryTesting/Item Test/weapon_2.png")	
+#dictionary with the weapon textures
+var weapon_texture_list ={
+	1:["weapon_1", weapon1_texture],
+	2:["weapon_2", weapon2_texture]
+	}
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready(loaded_inventory={}):	
@@ -225,27 +234,20 @@ func get_Item_Id_By_Name(Item_Name):
 		if Item_List[i][0]==Item_Name:
 			return i
 			
-func equip_weapon(old_weapon_id):
-	#equipped weapon is stored in equip_weapon_stats
-	#gets the weapon's item via a search through the item list by item name
-	var current_weapon_id = get_Item_Id_By_Name(equip_weapon_stats[0][0])
-	var temp = current_weapon_id
-	current_weapon_id = old_weapon_id
-	#checks if the weapon id that you want to swap exists in the inventory
-	#the temp id's value is set with the old weapon's value
-	#deletes the old weapon id from inventory
-	if Inventory.has(old_weapon_id):
-		Inventory[temp] = Inventory[old_weapon_id]
-		Inventory.erase(old_weapon_id)
-		print("Cassandra has swapped weapons!")
+func equip_weapon(new_weapon_id):
+	var current_weapon_id
+	if equip_weapon_stats == {}:
+		current_weapon_id = new_weapon_id
 		set_equip_weapon_stats(current_weapon_id)
-		
-		
-		print("the current equipped weapon now is ", get_current_weapon())
-		EquipSlot._set_weapon_texture()
-	else:
-		print("Error: Weapon cannot be swapped, Weapon does not exist in Inventory" )
-
+		Inventory.erase(new_weapon_id)
+		var weapon_name = get_item_name(current_weapon_id)
+		emit_signal("texture_has_changed", weapon_name)
+func _delete_equip(weapon_id):
+	var weapon_name = null
+	if equip_weapon_stats != {}:
+		#equip_weapon_stats.erase(weapon_id)
+		equip_weapon_stats = {}
+		emit_signal("texture_has_changed", weapon_name)
 func _print_inv_dic():
 	print(Inventory)
 	
@@ -257,6 +259,24 @@ func get_equip_weapon_stats():
 	return equip_weapon_stats
 	
 func get_current_weapon():
-	return equip_weapon_stats[0][0]
+	if equip_weapon_stats == {}:
+		return equip_weapon_stats
+	else:
+		return equip_weapon_stats[0][0]
+		
+func get_item_id_by_texture(item_texture):
+	for i in weapon_texture_list:
+		if weapon_texture_list[i][1]==item_texture:
+			#print("printed statement: ",weapon_texture_list[i][1])
+			return i
+			
+func search_texture(item_texture):
+	for i in weapon_texture_list:
+		if weapon_texture_list[i][1] == item_texture:
+			#print("Search: ",weapon_texture_list[i][1])
+			return true
+		
+func get_weapon_texture_list():
+	return weapon_texture_list
 	
 func _process(delta): pass

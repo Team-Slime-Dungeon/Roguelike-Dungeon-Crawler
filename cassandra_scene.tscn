@@ -1,10 +1,9 @@
-[gd_scene load_steps=66 format=3 uid="uid://crcqnnl6ies46"]
+[gd_scene load_steps=65 format=3 uid="uid://crcqnnl6ies46"]
 
 [ext_resource type="Script" path="res://CharacterControls.gd" id="1_fqxek"]
 [ext_resource type="Texture2D" uid="uid://bqs2ydffkjk73" path="res://player/cassandra_walk.png" id="2_afcbe"]
 [ext_resource type="PackedScene" uid="uid://b7gaaddd3b0tl" path="res://ghost.tscn" id="2_kvsod"]
 [ext_resource type="Texture2D" uid="uid://twm2jnwj5f57" path="res://player/cassandra_special.png" id="3_b4sfe"]
-[ext_resource type="Texture2D" uid="uid://hau6lcqggcfx" path="res://equipment/weapon_1.png" id="3_bd4h4"]
 [ext_resource type="AudioStream" uid="uid://dxchpyeihgda" path="res://Music/Roblox-death-sound.mp3" id="4_c7vi2"]
 [ext_resource type="AudioStream" uid="uid://dgciggvlghb1k" path="res://Music/dead_sound.mp3" id="5_0snku"]
 
@@ -994,7 +993,6 @@ frame = 1
 [node name="weapon" type="Sprite2D" parent="CassandraSprite"]
 visible = false
 z_index = 3
-texture = ExtResource("3_bd4h4")
 
 [node name="weapon" type="Area2D" parent="CassandraSprite/weapon"]
 
