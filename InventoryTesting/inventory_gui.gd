@@ -60,6 +60,7 @@ func clear_items():
 	#Clears all the slots of the inventory gui screen
 	for inv_slot in inv_slots:
 		inv_slot.get_node("Item_Icon").set_texture(null)
+		inv_slot.get_node("Item_Icon/count").visible = false
 
 #Makes sure it hides inventory when paused
 func _on_pause_toggled(is_paused):
