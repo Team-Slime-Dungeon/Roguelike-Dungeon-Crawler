@@ -77,6 +77,9 @@ func _on_resume_chase():
 func enemy_clear():
 	queue_free()
 
+func item_clear():
+	queue_free()
+	
 func _on_detectionarea_body_entered(body):
 	if body.name == "Cassandra":
 		player = body

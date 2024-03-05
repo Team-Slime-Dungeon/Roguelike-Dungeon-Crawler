@@ -95,21 +95,12 @@ func _ready():
 
 	# Inventory Creation
 	#Items.Player_Inventory._add_item(3, 1) # Test helmets
-	Items.Player_Inventory._print_inventory()
+	#Items.Player_Inventory._print_inventory()
 	
-	Items.Player_Inventory._print_inv_dic()
+	
 	Items.Player_Inventory._add_item(2,1)
-	Items.Player_Inventory._print_inv_dic()
-	Items.Player_Inventory._print_inventory()
+	Items.Player_Inventory._add_item(1,1)
 	
-	#print("#1Stats are now ", Items.Player_Inventory.get_equip_weapon_stats())
-	#print("Equip weapon 2 and add weapon 1 to inventory")
-	Items.Player_Inventory.equip_weapon(2)
-	Items.Player_Inventory._print_inv_dic()
-	
-	#print("#2Stats are now ", Items.Player_Inventory.get_equip_weapon_stats())
-	
-	Items.Player_Inventory._print_inventory()	
 
 	clear_room() # clean up for new floor
 	
@@ -480,8 +471,8 @@ func generate_decorations(node_num,pad_mode=0,spawn_chance=1,bloom_chance=0):
 	var size_type = ""
 	# Scenes for different sized decorations
 	var small_decorations = [preload("res://environment/Cave_One_Small_Decorations.tscn")]
-	var medium_decorations = [preload("res://environment/Cave_One_Medium_Decorations.tscn"), preload("res://environment/Merchant_Shop.tscn")]
-	var large_decorations = []
+	var medium_decorations = [preload("res://environment/Cave_One_Medium_Decorations.tscn"), preload("res://monsters/Treant.tscn")]
+	var large_decorations = [preload("res://environment/Merchant_Shop.tscn")]
 	
 	var medium_attempts = 1
 
