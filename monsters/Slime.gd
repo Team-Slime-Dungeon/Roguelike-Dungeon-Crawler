@@ -11,6 +11,9 @@ var currentHealth: int = 3
 var max_speed = 20
 var death_location = null
 
+#Debug Step back in case it has crashes it can be turned off here by making it false
+var allow_step_back = true
+
 @onready var HurtTimer1 = $HurtTimer1
 @onready var deathTimer = $deathTimer
 @onready var slimedeathsound = $slimedeathsound
@@ -69,7 +72,7 @@ func set_color(body_color=null,detail_color=null):
 	if detail_color != null:
 		$Details.modulate = detail_color
 
-func _physics_process(delta):		
+func _physics_process(delta):	
 	if player_chase:
 		velocity = (player.position + Vector2(16,16) - self.position) + velocity / chase_speed			
 	else: 
@@ -138,3 +141,32 @@ func _on_detectionarea_1_body_exited(body):
 	velocity.x = 0
 	velocity.y = 0
 #	print("Player lost.")
+
+
+func _on_hit_box_area_entered(area):
+	#If the player gets hurt and if allow_step_back is true
+	if area.name == "hurtbox" and allow_step_back:
+		step_back()
+
+func step_back():
+	if player != null:
+		#Makes sure player is still valid and not crash
+		if is_instance_valid(player):
+			# Calculate a direction away from the player and apply a step back
+			var direction_away = (self.position - player.position).normalized()
+			$SlimeAnim.play("movement")
+			#Adjust distance for step back
+			self.position += direction_away * 30 
+			# Pause Chasing for a bit
+			player_chase = false
+			var resume_chase_timer = Timer.new()
+			add_child(resume_chase_timer)
+			# Wait before Resuming Chase
+			resume_chase_timer.wait_time = 0.5 
+			resume_chase_timer.one_shot = true
+			resume_chase_timer.connect("timeout", Callable(self, "aresume_chase"))
+			resume_chase_timer.start()
+
+func resume_chase():
+	#Resume Chasing
+	player_chase = true 

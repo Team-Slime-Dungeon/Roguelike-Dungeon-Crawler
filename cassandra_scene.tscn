@@ -1,4 +1,5 @@
-[gd_scene load_steps=65 format=3 uid="uid://crcqnnl6ies46"]
+
+[gd_scene load_steps=67 format=3 uid="uid://crcqnnl6ies46"]
 
 [ext_resource type="Script" path="res://CharacterControls.gd" id="1_fqxek"]
 [ext_resource type="Texture2D" uid="uid://bqs2ydffkjk73" path="res://player/cassandra_walk.png" id="2_afcbe"]
@@ -6,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://twm2jnwj5f57" path="res://player/cassandra_special.png" id="3_b4sfe"]
 [ext_resource type="AudioStream" uid="uid://dxchpyeihgda" path="res://Music/Roblox-death-sound.mp3" id="4_c7vi2"]
 [ext_resource type="AudioStream" uid="uid://dgciggvlghb1k" path="res://Music/dead_sound.mp3" id="5_0snku"]
+[ext_resource type="Script" path="res://Camera2D.gd" id="6_1bvtx"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jfoj0"]
 radius = 2.7177
@@ -1040,6 +1042,7 @@ shape = SubResource("CircleShape2D_ja0t6")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2, 2)
+script = ExtResource("6_1bvtx")
 
 [node name="hurtbox" type="Area2D" parent="."]
 z_index = 1

@@ -71,6 +71,9 @@ func _on_hurt_box_area_entered(area):
 
 			death_location = get_position()
 
+func _on_resume_chase():
+	player_chase = true # Resume chasing
+
 func enemy_clear():
 	queue_free()
 
