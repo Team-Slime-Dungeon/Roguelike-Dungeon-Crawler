@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cul7b22epo42i"]
+[gd_scene load_steps=13 format=3 uid="uid://cul7b22epo42i"]
 
 [ext_resource type="Script" path="res://InventoryTesting/inventory_gui.gd" id="1_ap1sc"]
 [ext_resource type="Texture2D" uid="uid://dfnshdf6xxgdp" path="res://InventoryTesting/InventoryBackgroundPics/inventoryframe.png" id="2_02nu5"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://dui8kdpinatde" path="res://InventoryTesting/InventoryBackgroundPics/Shirt Slot.png" id="7_vbc0q"]
 [ext_resource type="Script" path="res://InventoryTesting/trashingbutton.gd" id="9_gicqq"]
 [ext_resource type="Texture2D" uid="uid://jmrtyy66elth" path="res://trashcanpic.webp" id="10_cf7rm"]
+[ext_resource type="Script" path="res://InventoryTesting/unequipbutton.gd" id="11_o5mek"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_tbsgo"]
 texture = ExtResource("2_7alty")
@@ -214,5 +215,24 @@ position = Vector2(15.8942, 12.0125)
 scale = Vector2(0.0503975, 0.043418)
 texture = ExtResource("10_cf7rm")
 
+[node name="unequipbutton" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 35.0
+offset_top = 83.0
+offset_right = 71.0
+offset_bottom = 94.0
+script = ExtResource("11_o5mek")
+
+[node name="Label" type="Label" parent="unequipbutton"]
+layout_mode = 0
+offset_left = -4.55919
+offset_top = -2.07235
+offset_right = 33.4408
+offset_bottom = 11.9276
+theme_override_font_sizes/font_size = 9
+text = "Unequip"
+
 [connection signal="mouse_entered" from="trashingbutton" to="trashingbutton" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="trashingbutton" to="trashingbutton" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="unequipbutton" to="unequipbutton" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="unequipbutton" to="unequipbutton" method="_on_mouse_exited"]
