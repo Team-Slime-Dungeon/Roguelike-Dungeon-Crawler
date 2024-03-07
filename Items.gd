@@ -1,9 +1,7 @@
 extends Node
 @onready var Player_Inventory = inventory.new()
 
-func _ready(): 
-	Player_Inventory._ready()
-	
+func _ready(): Player_Inventory._ready()
 
 # Universal Item Handler
 # This will handle spawning enemies and objects and will also handle deleting them.

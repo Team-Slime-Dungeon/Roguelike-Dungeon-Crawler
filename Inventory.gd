@@ -1,4 +1,5 @@
 class_name inventory extends Node2D
+
 var Held_Item = 0
 var Inventory = {}
 
@@ -19,47 +20,40 @@ var treasure_start_index = 51
 var treasure_end_index = 100
 
 var Item_List = {
-# Item ID [Item Name // Price // Item_Max_Stack // Item Attack // Item Defense // Item Effect1 // Item Effect2]
-	0 : ["Coin",			1,		99,					0,				0,			null,			 null ],
-	
+# ID [Name, Price, Item_Max_Stack, Item Attack, Item Defense, Item Effect1, Item Effect2]
+	0 : ["coin", 1, 999, 0, 0, null, null ],
 	# Weapons and Equipment IDs 1 - 50
-	1 : ["weapon_2",		20,		1,		2,				0,				null, null ],
-	2 : ["weapon_1",		30,		1,		3,				0,				null, null ],
-	3 : ["Bronze Helmet", 	30,		1,		0,				5,				null, null ],
+	1 : ["sword1", 20, 1, 2, 0, null, null ],
+	2 : ["sword2", 30, 1, 3, 0, null, null ],
+	3 : ["sword3", 30, 1, 4, 0, null, null ],
 	
 	# Treasures IDs 51 - 100. 51 will spawn a random item, 52 on can be found inside 51
-	51: ["Random Treasure",	20,		0,		0,				0, 				null, null ],
-	
-	52: ["Ruby Necklace",	10,		99,		0,				0, 				null, null ],
-	53: ["Emerald Crown",	20,		99,		0,				0, 				null, null ],
-	54: ["Ancient Tome",	25,		99,		0,				0, 				null, null ],
-	55: ["Ruby",			30,		99,		0,				0, 				null, null ],
-	56: ["Old Earring",		35,		99,		0,				0, 				null, null ],
-	57: ["Ancient Coins",	40,		99,		0,				0, 				null, null ],
-	58: ["Pearl Necklace",	45, 	99,		0,				0, 				null, null ],
-	59: ["Sapphire",		50,		99,		0,				0, 				null, null ],
-	60: ["Emerald",			65,		99,		0,				0, 				null, null ],
-	61: ["Topaz",			75,		99,		0,				0, 				null, null ],
-	62: ["Sacred Technology", 89,	999,	0,				0, 				null, null ], # I actually have that many
-	63: ["Diamond",			90,		99,		0,				0, 				null, null ],
-	64: ["Petrified Egg",	100,	99,		0,				0, 				null, null ],
+	51: ["Random Treasure", 20, 0, 0, 0, null, null ],
+	52: ["Ruby Necklace", 10, 99, 0, 0, null, null ],
+	53: ["Emerald Crown", 20, 99, 0, 0, null, null ],
+	54: ["Ancient Tome", 25, 99, 0, 0, null, null ],
+	55: ["Ruby", 30, 99, 0, 0, null, null ],
+	56: ["Old Earring", 35, 99, 0, 0, null, null ],
+	57: ["Ancient Coins", 40, 99, 0, 0, null, null ],
+	58: ["Pearl Necklace", 45, 99, 0, 0, null, null ],
+	59: ["Sapphire", 50, 99, 0, 0, null, null ],
+	60: ["Emerald", 65, 99, 0, 0, null, null ],
+	61: ["Topaz", 75, 99, 0, 0, null, null ],
+	62: ["Sacred Technology", 89, 999, 0, 0, null, null ], # I actually have that many
+	63: ["Diamond", 90, 99, 0, 0, null, null ],
+	64: ["Petrified Egg", 100, 99, 0, 0, null, null ],
 	
 	# Monster Drops
-	71: ["Blue Mushroom",	3,		 99,		0,				0, 				null, null ],
+	71: ["Blue Mushroom", 3,  99, 0, 0, null, null ],
 	
 	#Potions
-	90: ["Red Potion",		3,		 99,		0,				0, 				"HP+5", null ],
-	91: ["Purple Potion",	5,		 99,		0,				0, 				"Nothing", null ],
-	92: ["Blue Potion",		3,		 99,		0,				0, 				"Something", null ],
-	93: ["Green Potion",	5,		 99,		0,				0, 				"Who Knows", null ],
+	90: ["Red Potion", 3,  99, 0, 0, "HP+5", null ],
+	91: ["Purple Potion", 5,  99, 0, 0, "Nothing", null ],
+	92: ["Blue Potion", 3,  99, 0, 0, "Something", null ],
+	93: ["Green Potion", 5, 99, 0, 0, "Who Knows", null ],
 }
 
-var Item_Scenes = {
-	71: preload("res://equipment/Blue Mushroom.tscn"),
-	# Multi Use Scenes (Contain more than one)
-	51: preload("res://equipment/treasure_spawns.tscn"),
-	90: preload("res://equipment/EquipmentTest/Potion_Item.tscn"),
-}
+var Item_Scenes = preload("res://equipment/items.tscn")
 
 #Dictionary for currently equipped weapon
 var equip_weapon_stats = {}

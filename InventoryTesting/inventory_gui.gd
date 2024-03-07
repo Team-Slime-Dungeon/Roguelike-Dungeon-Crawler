@@ -27,29 +27,26 @@ func initialize_empty_slots():
 	
 
 func make_inventory():
-			
 	# Use PlayerData info and turns them into New Slots which will use the Slot template instance
 	var index = 0 # Start filling from the first slot
-	for i in Items.Player_Inventory.Inventory.keys():
+	for id in Items.Player_Inventory.Inventory.keys():
 		if index >= inv_slots.size():
 			break # Prevents adding more items than slots available
 			
-		if i != 0: # Skips loading coin into the first slot
-			var item_name = Items.Player_Inventory.get_item_name(i)
-			var item_count = Items.Player_Inventory.get_item_amount(i)
-			var item_id = i
+		if id != 0: # Skips loading coin into the first slot
+			var item_name = Items.Player_Inventory.get_item_name(id)
+			var item_count = Items.Player_Inventory.get_item_amount(id)
 			var inventory_slot = inv_slots[index].get_name()
 			# Loads The PNG of Weapon Into the Icon Texture
 			var icon_texture = load("res://InventoryTesting/Item Test/" + item_name + ".png")
 			inv_slots[index].get_node("Item_Icon").set_texture(icon_texture)
-
 			inv_slots[index].get_node("Item_Icon/count").text = str(item_count)
 			inv_slots[index].get_node("Item_Icon/count").visible = true
 			inv_slots[index].set_meta("item_name", item_name)
-			inv_slots[index].set_meta("item_id", item_id)
+			inv_slots[index].set_meta("item_id", id)
 			inv_slots[index].set_meta("item_count", item_count)
 			inv_slots[index].set_meta("original_slot", inventory_slot)
-			print("Item Added: ", item_name, " in slot: ", inventory_slot, " ID: ", item_id)
+			print("Item Added: ", item_name, " in slot: ", inventory_slot, " ID: ", id)
 			#slot.set_meta("original_slot", slot.get_name())
 
 			#Moves to the next slot

@@ -4,25 +4,20 @@ extends TextureRect
 
 var is_occupied = false 
 
-func update_slot_state():
+#func update_slot_state():
 	# Update `is_occupied` based on the current texture
-	is_occupied = texture != null
-	
-	
-	
+#	is_occupied = texture != null
+
 #returns the equipped weapon's texture	
-func _get_weapon_texture():
-	return icon.get_texture()
-	
+#func _get_weapon_texture():
+#	return icon.get_texture()
+
 func _get_drag_data(_pos):
-	
 	var equip_slot = get_parent().get_name()
-	
 	var data = {}
 	data ["origin_texture"] = texture
 	data ["origin_slot"] = self
 	data["is_empty"] = !is_occupied
-	
 	
 	var drag_texture = TextureRect.new()
 	drag_texture.expand = true
@@ -36,7 +31,6 @@ func _get_drag_data(_pos):
 	drag_texture.position = -0.5 * drag_texture.get_minimum_size()
 	
 	set_drag_preview(control)
-	
 	return data
 	
 func _can_drop_data(at_position, data):
@@ -57,16 +51,12 @@ func _drop_data(at_position, data):
 	#prints out the current weapon
 	#prints out the new inventory
 	var item_texture = icon.get_texture()
-	var equip_weapon_id = Items.Player_Inventory.get_item_id_by_texture(item_texture)
-	Items.Player_Inventory.equip_weapon(equip_weapon_id)	
-	var current_weapon = Items.Player_Inventory.get_current_weapon()
-	print("The current weapon is ", current_weapon)
+	#var equip_weapon_id = Items.Player_Inventory.get_item_id_by_texture(item_texture)
+	#Items.Player_Inventory.equip_weapon(equip_weapon_id)	
+	#var current_weapon = Items.Player_Inventory.get_current_weapon()
+	#print("The current weapon is ", current_weapon)
 	Items.Player_Inventory._print_inventory()
-	
-	
-	
 
-			
 func clear_slot():
 	texture = null
 	is_occupied = false

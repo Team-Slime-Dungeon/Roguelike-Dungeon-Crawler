@@ -74,11 +74,8 @@ var monster_list = [
 	preload("res://monsters/Bushmo.tscn"),
 
 	]
-var  item_scenes = { 
-		0: preload("res://equipment/coin.tscn"), 
-		51: preload("res://equipment/treasure_spawns.tscn"),
-		71: preload("res://equipment/Blue Mushroom.tscn"),
-	}
+	
+var  item_scene = preload("res://equipment/items.tscn")
 
 func _ready():
 	current_floor += 1 # when entering the dungeon scene, you have descended once
@@ -94,12 +91,11 @@ func _ready():
 		dungeon_terrain = dungeon_terrains[1]
 
 	# Inventory Creation
-	#Items.Player_Inventory._add_item(3, 1) # Test helmets
-	#Items.Player_Inventory._print_inventory()
+	Items.Player_Inventory._add_item(1, 1) 
+	Items.Player_Inventory._print_inventory()
 	
 	
-	Items.Player_Inventory._add_item(2,1)
-	Items.Player_Inventory._add_item(1,1)
+	
 	
 
 	clear_room() # clean up for new floor
@@ -248,8 +244,7 @@ func generate_loot(monster):
 		
 		if new_item_map_location in floor_pos or new_item_map_location in hall_pos:
 			# get item scene information and create it from slain monster location
-			var new_item = item_scenes[loot_ID]
-			var new_item_spawn = new_item.instantiate()
+			var new_item_spawn = item_scene.instantiate()
 			var new_item_location = Vector2i(monster.death_location) / 2
 			
 			# Manages all the item spawns to remove them when the floor is cleared.
