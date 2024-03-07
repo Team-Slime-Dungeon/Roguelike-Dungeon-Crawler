@@ -1,25 +1,28 @@
 extends TextureRect
 
-var icon_texture = load("res://InventoryTesting/Item Test/weapon_2.png")
 @onready var icon = $"."
 
-func _ready():
-	_set_weapon_texture()
-	#var icon_texture = load("res://InventoryTesting/Item Test/" + item_name + ".png")
-	#icon.set_texture(icon_texture)		
+var is_occupied = false 
+
+func update_slot_state():
+	# Update `is_occupied` based on the current texture
+	is_occupied = texture != null
 	
-#sets the weapon texture from the Inventory.gd
-func _set_weapon_texture():
-	var item_name = Items.Player_Inventory.get_item_name(1)
-	var icon_texture = load("res://InventoryTesting/Item Test/" + item_name + ".png")
-	icon.set_texture(icon_texture)	
+	
 	
 #returns the equipped weapon's texture	
 func _get_weapon_texture():
 	return icon.get_texture()
+	
 func _get_drag_data(_pos):
+	
+	var equip_slot = get_parent().get_name()
+	
 	var data = {}
 	data ["origin_texture"] = texture
+	data ["origin_slot"] = self
+	data["is_empty"] = !is_occupied
+	
 	
 	var drag_texture = TextureRect.new()
 	drag_texture.expand = true
@@ -37,9 +40,33 @@ func _get_drag_data(_pos):
 	return data
 	
 func _can_drop_data(at_position, data):
-	return true
-	return false
-	
+	return !is_occupied and data.has("origin_texture")
+
 func _drop_data(at_position, data):
+	if _can_drop_data(at_position, data):
+		texture = data["origin_texture"]
+		is_occupied = true
+		
+		# Clear the origin slot if it's different from the target slot
+		if data["origin_slot"] != self:
+			data["origin_slot"].clear_slot()
 	
-	pass
+	#gets the the icon's textures
+	#gets the weapon's id by it associated texture
+	#equips the weapon (adds it the equip weapon stats list) and deletes the weapon from the main inventory
+	#prints out the current weapon
+	#prints out the new inventory
+	var item_texture = icon.get_texture()
+	var equip_weapon_id = Items.Player_Inventory.get_item_id_by_texture(item_texture)
+	Items.Player_Inventory.equip_weapon(equip_weapon_id)	
+	var current_weapon = Items.Player_Inventory.get_current_weapon()
+	print("The current weapon is ", current_weapon)
+	Items.Player_Inventory._print_inventory()
+	
+	
+	
+
+			
+func clear_slot():
+	texture = null
+	is_occupied = false

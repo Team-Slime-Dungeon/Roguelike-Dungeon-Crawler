@@ -492,6 +492,7 @@ shape = SubResource("CapsuleShape2D_e2sfr")
 visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hitBox"]
+visible = false
 position = Vector2(0, 6)
 shape = SubResource("CapsuleShape2D_7h6dx")
 
@@ -530,14 +531,14 @@ libraries = {
 }
 
 [node name="Body" type="Sprite2D" parent="."]
-modulate = Color(1, 0.380392, 0.290196, 1)
+modulate = Color(1, 0.139216, 0.072549, 1)
 texture_filter = 1
 texture = ExtResource("4_ryy2i")
 hframes = 9
 frame = 1
 
 [node name="Details" type="Sprite2D" parent="."]
-modulate = Color(0.682353, 0.223529, 0, 1)
+modulate = Color(0.632353, 0.132353, 0, 1)
 texture_filter = 1
 texture = ExtResource("4_ryy2i")
 hframes = 9
@@ -550,6 +551,7 @@ texture = ExtResource("4_ryy2i")
 hframes = 18
 vframes = 2
 
+[connection signal="area_entered" from="hitBox" to="." method="_on_hit_box_area_entered"]
 [connection signal="area_entered" from="hurtBox" to="." method="_on_hurt_box_area_entered"]
 [connection signal="body_entered" from="detectionarea1" to="." method="_on_detectionarea_1_body_entered"]
 [connection signal="body_exited" from="detectionarea1" to="." method="_on_detectionarea_1_body_exited"]

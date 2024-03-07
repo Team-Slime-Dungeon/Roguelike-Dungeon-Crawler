@@ -5,7 +5,6 @@
 
 [node name="Cave_One_Small_Decorations" type="CharacterBody2D"]
 z_index = 1
-y_sort_enabled = true
 position = Vector2(1.42206, 2.54971)
 script = ExtResource("1_2y6vs")
 

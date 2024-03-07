@@ -17,7 +17,7 @@ signal armorChanged
 @onready var weapon = $CassandraSprite/weapon
 
 @onready var HurtTimer = $HurtTimer
-@onready var gameovertimer = $GameOverTimer
+#@onready var gameovertimer = $GameOverTimer
 @onready var ghost_timer = $GhostTimer
 @onready var deathTimer4 = $deathTimer4
 
@@ -51,17 +51,20 @@ func _ready():
 	#activate animation tree
 	animation_tree.active = true
 	input_dir = Vector2(1,0)
-	
-	#updates the weapon sprite with the equipped weapon sprite
-	new_texuture =EquipSlot._get_weapon_texture()
-	weapon_sprite.texture = new_texuture
-	
+	Items.Player_Inventory.connect("texture_has_changed", Callable(self, "_on_texture_has_changed"))
 
 #func _process(delta):
 	if cutscene_action:
 		move_character(cutscene_location)
 #	update_animation_parameter()
-
+func _on_texture_has_changed(item_name):
+	if item_name == null:
+		weapon.texture = null
+	else:
+		new_texuture = load("res://InventoryTesting/Item Test/" + item_name + ".png")
+		weapon.texture = new_texuture
+	#print("signal has been recieved")
+	
 func block_inputs(state = false): input_blocked = state
 
 func update_camera_scale(new_scale):
@@ -194,7 +197,30 @@ func _on_hurtbox_area_entered(area):
 		elif currentArmor > 0.0: 
 			currentArmor -= 1.0
 			armorChanged.emit(currentArmor) # Damage armor icon
-		else: currentHealth -= 1
+			
+			# Shake Intensity
+			var armor_ratio = currentArmor / maxArmor
+			var base_intensity = 1.0  # Base for Full Armor
+			var max_intensity = 5.0  # Base For Aromr Almost Gone
+			var shake_intensity = base_intensity + (1.0 - armor_ratio) * (max_intensity - base_intensity)
+			
+			# Shake Duration
+			var base_duration = 0.1 # Base for Full Armor
+			var max_duration = 0.5 # Base For Aromr Almost Gone
+			var shake_duration = base_duration + (1.0 - armor_ratio) * (max_duration - base_duration)
+			
+			print("Armor intensity: ", shake_intensity, " and duration: ", shake_duration) #Debug
+			
+			$Camera2D.start_shake(shake_duration, shake_intensity)
+			
+		else: 
+			currentHealth -= 1
+			if currentHealth >= 0:
+				# Fixed Shake for health damage with no Armor
+				var health_shake_intensity = 6.5
+				var health_shake_duration = 0.5
+				print("Health intensity: ", health_shake_intensity, " and duration: ", health_shake_duration) #Debug
+				$Camera2D.start_shake(health_shake_duration, health_shake_intensity)
 
 		if currentHealth <= 0:
 			# Clear inventory upon death
@@ -207,6 +233,9 @@ func _on_hurtbox_area_entered(area):
 			get_tree().change_scene_to_file("res://game_over_screen.tscn")
 			dead_sound.play()
 		healthChanged.emit(currentHealth)
+		
+		#$Camera2D.start_shake(0.5, 10.0)
+		
 		# Ensure the enemy is valid and still spawned
 		if is_instance_valid(area):
 			if area.get_parent().currentHealth > 0:

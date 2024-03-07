@@ -1,0 +1,142 @@
+[gd_scene load_steps=12 format=3 uid="uid://cmqp6yirv57h5"]
+
+[ext_resource type="Script" path="res://monsters/Treant.gd" id="1_gahgx"]
+[ext_resource type="Texture2D" uid="uid://c6a3y57pjbcqt" path="res://monsters/treant.png" id="2_vunaf"]
+
+[sub_resource type="Animation" id="Animation_bbnad"]
+resource_name = "Attack_Left"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [7, 8]
+}
+
+[sub_resource type="Animation" id="Animation_03olg"]
+resource_name = "Attack_Right"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [10, 11]
+}
+
+[sub_resource type="Animation" id="Animation_siq5i"]
+resource_name = "Idle_Left"
+length = 3.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.5, 2.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [6, 7]
+}
+
+[sub_resource type="Animation" id="Animation_5lo0f"]
+resource_name = "Idle_Right"
+length = 3.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.5, 2.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [9, 10]
+}
+
+[sub_resource type="Animation" id="Animation_rylxs"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [7]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_g5n7y"]
+_data = {
+"Attack_Left": SubResource("Animation_bbnad"),
+"Attack_Right": SubResource("Animation_03olg"),
+"Idle_Left": SubResource("Animation_siq5i"),
+"Idle_Right": SubResource("Animation_5lo0f"),
+"RESET": SubResource("Animation_rylxs")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s85ja"]
+size = Vector2(78.875, 70.625)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tla4q"]
+size = Vector2(12.5, 38.25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vvamn"]
+size = Vector2(40, 20)
+
+[node name="Treant" type="CharacterBody2D"]
+z_index = 1
+script = ExtResource("1_gahgx")
+
+[node name="Body" type="Sprite2D" parent="."]
+position = Vector2(17, 32)
+texture = ExtResource("2_vunaf")
+hframes = 6
+vframes = 2
+frame = 7
+
+[node name="TreantAnim" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_g5n7y")
+}
+
+[node name="detectionarea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="detectionarea"]
+position = Vector2(14, 37)
+shape = SubResource("RectangleShape2D_s85ja")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(17, 37)
+shape = SubResource("RectangleShape2D_tla4q")
+
+[node name="hitBox" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitBox"]
+position = Vector2(15, 35)
+shape = SubResource("RectangleShape2D_vvamn")
+debug_color = Color(0.815686, 0, 0.160784, 0.419608)
+
+[connection signal="body_entered" from="detectionarea" to="." method="_on_detectionarea_body_entered"]
+[connection signal="body_exited" from="detectionarea" to="." method="_on_detectionarea_body_exited"]

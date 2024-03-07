@@ -20,11 +20,11 @@ var treasure_end_index = 100
 
 var Item_List = {
 # Item ID [Item Name // Price // Item_Max_Stack // Item Attack // Item Defense // Item Effect1 // Item Effect2]
-	0 : ["Coin",			1,		99,					0,				0,				null,			 null ],
+	0 : ["Coin",			1,		99,					0,				0,			null,			 null ],
 	
 	# Weapons and Equipment IDs 1 - 50
 	1 : ["weapon_2",		20,		1,		2,				0,				null, null ],
-	2 : ["Steel Sword",		30,		1,		3,				0,				null, null ],
+	2 : ["weapon_1",		30,		1,		3,				0,				null, null ],
 	3 : ["Bronze Helmet", 	30,		1,		0,				5,				null, null ],
 	
 	# Treasures IDs 51 - 100. 51 will spawn a random item, 52 on can be found inside 51
@@ -43,9 +43,36 @@ var Item_List = {
 	62: ["Sacred Technology", 89,	999,	0,				0, 				null, null ], # I actually have that many
 	63: ["Diamond",			90,		99,		0,				0, 				null, null ],
 	64: ["Petrified Egg",	100,	99,		0,				0, 				null, null ],
-
+	
+	# Monster Drops
 	71: ["Blue Mushroom",	3,		 99,		0,				0, 				null, null ],
+	
+	#Potions
+	90: ["Red Potion",		3,		 99,		0,				0, 				"HP+5", null ],
+	91: ["Purple Potion",	5,		 99,		0,				0, 				"Nothing", null ],
+	92: ["Blue Potion",		3,		 99,		0,				0, 				"Something", null ],
+	93: ["Green Potion",	5,		 99,		0,				0, 				"Who Knows", null ],
 }
+
+var Item_Scenes = {
+	71: preload("res://equipment/Blue Mushroom.tscn"),
+	# Multi Use Scenes (Contain more than one)
+	51: preload("res://equipment/treasure_spawns.tscn"),
+	90: preload("res://equipment/EquipmentTest/Potion_Item.tscn"),
+}
+
+#Dictionary for currently equipped weapon
+var equip_weapon_stats = {}
+#signal for changing the weapon sprite in the cassandra scene
+signal texture_has_changed(icon_texture)
+var weapon1_texture = load("res://InventoryTesting/Item Test/weapon_1.png")	
+var weapon2_texture = load("res://InventoryTesting/Item Test/weapon_2.png")	
+#dictionary with the weapon textures
+var weapon_texture_list ={
+	1:["weapon_1", weapon1_texture],
+	2:["weapon_2", weapon2_texture]
+	}
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready(loaded_inventory={}):	
@@ -83,6 +110,16 @@ func _get_item_price(item_id, amount=1):
 	else:
 		print("Error: Item has no price or does not exist.")
 
+func _pay_for_item(item_id,amount=1):
+	var price_total = _get_item_price(item_id,amount)
+	if _get_coins() >= price_total:
+		_add_item(item_id,amount)
+		_minus_item(0,price_total)
+		return true
+	else:
+		print("Sorry, not enough coins!")
+		return false
+		
 func _add_item(item_id, amount):
 	var add_amount = amount
 	# If item ID is in inventory
@@ -190,5 +227,55 @@ func get_item_defense(item_id):
 	else:
 		print("Error: Item does not exist.")
 	return 0
-
+#searches item list by item name and returns corresponding item id
+func get_Item_Id_By_Name(Item_Name):
+	for i in Item_List:
+		if Item_List[i][0]==Item_Name:
+			return i
+			
+func equip_weapon(new_weapon_id):
+	var current_weapon_id
+	if equip_weapon_stats == {}:
+		current_weapon_id = new_weapon_id
+		set_equip_weapon_stats(current_weapon_id)
+		Inventory.erase(new_weapon_id)
+		var weapon_name = get_item_name(current_weapon_id)
+		emit_signal("texture_has_changed", weapon_name)
+func _delete_equip(weapon_id):
+	var weapon_name = null
+	if equip_weapon_stats != {}:
+		#equip_weapon_stats.erase(weapon_id)
+		equip_weapon_stats = {}
+		emit_signal("texture_has_changed", weapon_name)
+func _print_inv_dic():
+	print(Inventory)
+	
+func set_equip_weapon_stats(weapon_id):
+	equip_weapon_stats[0] = Item_List[weapon_id]
+	#return equip_weapon_stats	
+	
+func get_equip_weapon_stats():
+	return equip_weapon_stats
+	
+func get_current_weapon():
+	if equip_weapon_stats == {}:
+		return equip_weapon_stats
+	else:
+		return equip_weapon_stats[0][0]
+		
+func get_item_id_by_texture(item_texture):
+	for i in weapon_texture_list:
+		if weapon_texture_list[i][1]==item_texture:
+			#print("printed statement: ",weapon_texture_list[i][1])
+			return i
+			
+func search_texture(item_texture):
+	for i in weapon_texture_list:
+		if weapon_texture_list[i][1] == item_texture:
+			#print("Search: ",weapon_texture_list[i][1])
+			return true
+		
+func get_weapon_texture_list():
+	return weapon_texture_list
+	
 func _process(delta): pass

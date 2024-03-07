@@ -3,6 +3,14 @@ extends Control
 #Pause Value
 var check_setting
 var center_container
+@onready var mainVolume = $"../HSlider"
+@onready var fullscreenToggle = $"../Settings/Fullscreen2"
+var indexRes
+var fullScr = false
+var a1
+var a2
+var a3
+const SAVE_PATH = "res://entity.ini"
 var is_paused = false : 
 	
 	#Checks to see if it is paused
@@ -49,5 +57,15 @@ func _on_settings_pressed():
 
 func _on_back_pressed():
 	check_setting.hide()
+	#_on_save_settings_pressed()
 	center_container.show()
 	
+func _on_save_settings_pressed():
+	var config := ConfigFile.new()
+	config.load(SAVE_PATH)
+	config.set_value(name, "Resolution", $Settings/Resolution2.get_item_index)
+	config.set_value(name, "FullScreen", $Settings/Fullscreen2.button_pressed)
+	config.set_value(name, "mainVolume", $Settings/HSlider.value)
+	#config.set_value(name, "ColorBlind", "Test")
+	config.save(SAVE_PATH)
+	pass # Replace with function body.	

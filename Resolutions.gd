@@ -1,10 +1,21 @@
 extends Control
 
 @onready var ResOptionButton = $"../ResolutionButton"
+
+#------- Below additional setting Not implemented
 #onready var FullscreenToggle = $Options/FullscreenContainer/FullScreenToggle
 #onready var VsyncToggle = $Options/VsyncContainer/VSYNCHECK
 #onready var FXAAToggle = $Options/FXAAContainer/FXAACheck
 #onready var MSAASlider = $Options/MSAA/MSAASlider
+#----------------------------------
+@onready var mainVolume = $"../HSlider"
+@onready var fullscreenToggle = $"../CheckButton"
+var indexRes
+var fullScr = false
+var a1
+var a2
+var a3
+const SAVE_PATH = "res://entity.ini"
 
 var Resolutions: Dictionary = {"3840x2160":Vector2i(3840,2160),
 								"2560x1440":Vector2i(2560,1440),
@@ -18,7 +29,10 @@ var Resolutions: Dictionary = {"3840x2160":Vector2i(3840,2160),
 								"800x600": Vector2i(800,600)}
 
 func _ready():
-	AddResolutions()
+	AddResolutions() 
+	#loadSettings() calls to Load settings, Uncommenting with load settings
+	
+	#------- Below additional setting Not implemented
 	#FullscreenToggle.pressed = OS.is_window_fullscreen()
 	#VsyncToggle.set_pressed_no_signal(OS.is_vsync_enabled())
 	#FXAAToggle.set_pressed_no_signal(get_viewport().get_use_fxaa())
@@ -49,3 +63,26 @@ func _on_check_button_toggled(button_pressed):
 		
 	
 	pass # Replace with function body.
+
+func _on_save_settings_pressed():
+	var config := ConfigFile.new()
+	config.load(SAVE_PATH)
+	config.set_value(name, "Resolution", indexRes)
+	config.set_value(name, "FullScreen", fullscreenToggle.button_pressed)
+	config.set_value(name, "mainVolume", mainVolume.value)
+	config.save(SAVE_PATH)
+	pass # Replace with function body.
+	
+func loadSettings():
+	var config := ConfigFile.new()
+	
+	config.load(SAVE_PATH)
+	for i in config.get_sections():
+		a1 = config.get_value(i, "Resolution")
+		a2 = config.get_value(i, "FullScreen")
+		a3 = config.get_value(i, "mainVolume")
+	
+	print(a1)
+	_on_check_button_toggled(a2)
+	_on_OptionButton_item_selected(a1)
+	mainVolume.value = a3
