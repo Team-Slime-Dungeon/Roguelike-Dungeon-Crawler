@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://cihbkt56sxtcy" path="res://companions/rubio.png" id="1_a3l42"]
 [ext_resource type="Script" path="res://rubio.gd" id="1_sj4rq"]
-[ext_resource type="PackedScene" path="res://Dialogue/dialogue.tscn" id="3_6va54"]
+[ext_resource type="PackedScene" uid="uid://dgf0o8xv2h8i4" path="res://Dialogue/dialogue.tscn" id="3_6va54"]
 
 [sub_resource type="Animation" id="Animation_gssks"]
 resource_name = "Idle"

@@ -5,12 +5,14 @@ const speed = 30
 var current_state = IDLE 
 var is_roaming = true
 var is_chatting = false
+var has_chatted = false
 
 var player
 var player_in_chat_zone = false
 var dir = Vector2.RIGHT
 var start_pos
 
+var follow_distance = 30
 
 enum{
 	IDLE, 
@@ -25,7 +27,7 @@ func _ready():
 func _process(delta):
 	if current_state == 0 or current_state == 1:
 		$AnimationPlayer.play("Idle_Right")
-	elif current_state == 2 and !is_chatting:
+	elif current_state == 2 and !is_chatting and !has_chatted:
 		if (dir.x == -1):
 			$AnimationPlayer.play("Walk_Left")
 		if (dir.x == 1):
@@ -50,7 +52,27 @@ func _process(delta):
 		is_roaming = false
 		is_chatting = true
 		$AnimationPlayer.play("Idle_Right")
+	
+	#rubio follows player if player has chatted with rubio
+	if has_chatted:
+		#dir = (Global.player_position - global_position).normalized()
+		is_roaming = false
+		var distance = Global.player_position.distance_to(global_position)
+		#print("distance is ", distance)
 		
+		
+		if distance > follow_distance:
+			velocity = global_position.direction_to(Global.player_position) * 100
+			move_and_slide()
+			if (dir.x == -1):
+				$AnimationPlayer.play("Walk_Left")
+			if (dir.x == 1):
+				$AnimationPlayer.play("Walk_Right")
+			if (dir.y== -1):
+				$AnimationPlayer.play("Walk_Left")
+			if (dir.y == 1):
+				$AnimationPlayer.play("Walk_Right")
+			
 		
 func choose(array):
 	array.shuffle()
@@ -82,3 +104,4 @@ func _on_timer_timeout():
 func _on_dialogue_dialogue_finished():
 	is_chatting = false
 	is_roaming = true
+	has_chatted = true

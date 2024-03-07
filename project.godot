@@ -25,6 +25,7 @@ GameData="*res://InventoryTesting/Singleton/GameData.gd"
 PlayerData="*res://InventoryTesting/Singleton/PlayerData.gd"
 MusicController="*res://music_controller.tscn"
 EquipSlot="*res://InventoryTesting/Playerequip_inv/EquipSlot.gd"
+Global="*res://Global.gd"
 
 [display]
 

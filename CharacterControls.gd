@@ -114,7 +114,9 @@ func get_input():
 	if input_blocked != true:
 		if (is_attacking == true or is_talking == true):
 			input_dir = Vector2(0,0)
-		else: input_dir = Input.get_vector("ui_left","ui_right","ui_up","ui_down")
+		else: 
+			input_dir = Input.get_vector("ui_left","ui_right","ui_up","ui_down")
+			Global.player_position = global_position
 	
 		SPEED = walking_speed
 	
