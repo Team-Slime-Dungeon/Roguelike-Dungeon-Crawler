@@ -94,7 +94,7 @@ func _ready():
 		dungeon_terrain = dungeon_terrains[1]
 
 	# Inventory Creation
-	#Items.Player_Inventory._add_item(3, 1) # Test helmets
+	Items.Player_Inventory._add_item(1, 1) 
 	#Items.Player_Inventory._print_inventory()
 
 	clear_room() # clean up for new floor
