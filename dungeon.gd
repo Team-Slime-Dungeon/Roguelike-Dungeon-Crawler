@@ -104,7 +104,7 @@ func _ready():
 		dungeon_edges = dungeon_edge_tiles[2]
 
 	# Inventory Creation
-	#Items.Player_Inventory._add_item(3, 1) # Test helmets
+	Items.Player_Inventory._add_item(1, 1) 
 	#Items.Player_Inventory._print_inventory()
 
 	clear_room() # clean up for new floor
