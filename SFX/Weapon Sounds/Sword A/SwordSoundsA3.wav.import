@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cld7k2eg1kndx"
+path="res://.godot/imported/SwordSoundsA3.wav-a9d11b450990426ae9397bde855d6898.sample"
+
+[deps]
+
+source_file="res://SFX/Weapon Sounds/Sword A/SwordSoundsA3.wav"
+dest_files=["res://.godot/imported/SwordSoundsA3.wav-a9d11b450990426ae9397bde855d6898.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://csiy5d86tj03r"
+path="res://.godot/imported/SwordSoundsC2.wav-2b18033db0e6a8ca6e63089cbd4a1036.sample"
+
+[deps]
+
+source_file="res://SFX/Weapon Sounds/Sword C/SwordSoundsC2.wav"
+dest_files=["res://.godot/imported/SwordSoundsC2.wav-2b18033db0e6a8ca6e63089cbd4a1036.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0
