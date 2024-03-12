@@ -19,6 +19,8 @@ var allow_step_back = true
 @onready var slimedeathsound = $slimedeathsound
 @onready var slimehitsound  = $slimehitsound
 
+@onready var tween = get_tree().create_tween()
+
 var motion = Vector2.ZERO
 var player = null
 var monster_type = "Slime"
@@ -73,7 +75,7 @@ func set_color(body_color=null,detail_color=null):
 		$Details.modulate = detail_color
 
 func _physics_process(delta):	
-	if player_chase:
+	if player_chase and is_instance_valid(player):
 		velocity = (player.position + Vector2(16,16) - self.position) + velocity / chase_speed			
 	else: 
 		move_timer += delta
@@ -133,7 +135,9 @@ func enemy_clear():
 
 func _on_detectionarea_1_body_entered(body):
 	player = body
-	player_chase = true
+# Wait for 0.2 seconds before chasing
+	await get_tree().create_timer(0.2).timeout
+	player_chase = true 
 
 func _on_detectionarea_1_body_exited(body):
 	player = null
@@ -149,23 +153,28 @@ func _on_hit_box_area_entered(area):
 		step_back()
 
 func step_back():
-	if player != null:
-		#Makes sure player is still valid and not crash
-		if is_instance_valid(player):
-			# Calculate a direction away from the player and apply a step back
-			var direction_away = (self.position - player.position).normalized()
-			$SlimeAnim.play("movement")
-			#Adjust distance for step back
-			self.position += direction_away * 30 
-			# Pause Chasing for a bit
-			player_chase = false
-			var resume_chase_timer = Timer.new()
-			add_child(resume_chase_timer)
-			# Wait before Resuming Chase
-			resume_chase_timer.wait_time = 0.5 
-			resume_chase_timer.one_shot = true
-			resume_chase_timer.connect("timeout", Callable(self, "aresume_chase"))
-			resume_chase_timer.start()
+  # Check if player exists and is valid
+	if player != null and is_instance_valid(player):
+	# Calculate direction to slide away from player
+		var slide_direction = (self.position - player.position).normalized()
+	# Reduce slide distance to avoid getting stuck on edges
+		var slide_amount = slide_direction * 30  
+	# Slime's speed and direction for the slide
+		self.velocity = slide_amount
+		
+		# Make Slime Slide
+		move_and_slide()
+		
+	# Pause Chasing for a bit
+		player_chase = false
+		var resume_chase_timer = Timer.new()
+		add_child(resume_chase_timer)
+		
+	# Wait before Resuming Chase
+		resume_chase_timer.wait_time = 0.5 
+		resume_chase_timer.one_shot = true
+		resume_chase_timer.connect("timeout", Callable(self, "resume_chase"))
+		resume_chase_timer.start()
 
 func resume_chase():
 	#Resume Chasing
