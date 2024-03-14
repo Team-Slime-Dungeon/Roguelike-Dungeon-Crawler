@@ -6,6 +6,7 @@ var current_state = IDLE
 var is_roaming = true
 var is_chatting = false
 var has_chatted = false
+var is_following = false
 
 var player
 var player_in_chat_zone = false
@@ -25,17 +26,18 @@ func _ready():
 	start_pos = position
 	
 func _process(delta):
-	if current_state == 0 or current_state == 1:
-		$AnimationPlayer.play("Idle_Right")
-	elif current_state == 2 and !is_chatting and !has_chatted:
-		if (dir.x == -1):
-			$AnimationPlayer.play("Walk_Left")
-		if (dir.x == 1):
-			$AnimationPlayer.play("Walk_Right")
-		if (dir.y== -1):
-			$AnimationPlayer.play("Walk_Left")
-		if (dir.y == 1):
-			$AnimationPlayer.play("Walk_Right")
+	if has_chatted == false:
+		if current_state == 0 or current_state == 1:
+			$AnimationPlayer.play("Idle_Right")
+		elif current_state == 2 and !is_chatting:
+			if (dir.x == -1):
+				$AnimationPlayer.play("Walk_Left")
+			if (dir.x == 1):
+				$AnimationPlayer.play("Walk_Right")
+			if (dir.y== -1):
+				$AnimationPlayer.play("Walk_Left")
+			if (dir.y == 1):
+				$AnimationPlayer.play("Walk_Right")
 	
 	if is_roaming:
 		match current_state:
@@ -46,7 +48,7 @@ func _process(delta):
 			MOVE:
 				move(delta)
 	
-	if Input.is_action_just_pressed("interact"):
+	if Input.is_action_just_pressed("interact") and player_in_chat_zone == true:
 		#print("Chatting...")
 		$Dialogue.start()
 		is_roaming = false
@@ -59,13 +61,15 @@ func _process(delta):
 		is_roaming = false
 		var distance = Global.player_position.distance_to(global_position)
 		#print("distance is ", distance)
-		
+		dir = Global.player_direction
 		
 		if distance > follow_distance:
 			velocity = global_position.direction_to(Global.player_position) * 100
-			move_and_slide()
+			
+			
 			if (dir.x == -1):
 				$AnimationPlayer.play("Walk_Left")
+				
 			if (dir.x == 1):
 				$AnimationPlayer.play("Walk_Right")
 			if (dir.y== -1):
@@ -73,6 +77,7 @@ func _process(delta):
 			if (dir.y == 1):
 				$AnimationPlayer.play("Walk_Right")
 			
+			move_and_slide()
 		
 func choose(array):
 	array.shuffle()
@@ -84,15 +89,16 @@ func move(delta):
 		
 
 func _on_chat_detection_area_body_entered(body):
-	if body.has_method("player"):
+	if body.name =="Cassandra":
 		player = body
 		player_in_chat_zone = true
+		#print("Player is in chat area")
 
 
 func _on_chat_detection_area_body_exited(body):
-	if body.has_method("player"):
+	if body.name =="Cassandra":
 		player_in_chat_zone = false
-
+		#print("Player has left chat area")
 	
 
 
@@ -105,3 +111,5 @@ func _on_dialogue_dialogue_finished():
 	is_chatting = false
 	is_roaming = true
 	has_chatted = true
+	Global.companion_following = true
+	

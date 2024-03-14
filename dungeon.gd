@@ -140,6 +140,12 @@ func _ready():
 	$Cassandra.global_position = Vector2(0,0) # returns player to root room
 	$GUI/Current_Floor.set_text("Floor: " + str(current_floor))
 	
+	if current_floor == 1 or Global.companion_following == true:
+		$Rubio.global_position = Vector2(0,0)
+		$Rubio.visible = true
+	else:
+		$Rubio.visible = false
+		
 	# debug info
 	$Debug_Hud.visible = debug
 	$Debug_Hud/Seed.set_text("Debug " 

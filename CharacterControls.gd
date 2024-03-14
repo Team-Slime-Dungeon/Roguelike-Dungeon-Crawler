@@ -117,6 +117,7 @@ func get_input():
 		else: 
 			input_dir = Input.get_vector("ui_left","ui_right","ui_up","ui_down")
 			Global.player_position = global_position
+			Global.player_direction = input_dir
 	
 		SPEED = walking_speed
 	
