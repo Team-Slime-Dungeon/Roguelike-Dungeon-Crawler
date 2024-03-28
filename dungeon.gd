@@ -20,6 +20,7 @@ var staircase_pos = 0 # selected element in node_pos
 var current_floor = 0 # starting floor
 var kink_probability = 0.5
 var descend = false # check if player stepped on a staircase
+var merchant_spawned = false # check to see if a merchant has spawned
 
 var colorDict = {
 	1: [.334, .7, .2], # Forest 1
@@ -49,13 +50,15 @@ var colorDict = {
 	25: [.392, .369, .298], # Ancient Boss
 }
 
-var dungeon_floor_tiles = [0,2] # IDs for the dungeon floors
-var dungeon_wall_tiles = [1,3] # IDs for the dungeon walls
-var dungeon_terrains = [0,1] # Terrains for the tiles (seperate or they will connect together
+var dungeon_floor_tiles = [0,] # IDs for the dungeon floors
+var dungeon_wall_tiles = [1] # IDs for the dungeon walls
+var dungeon_terrain_tiles = [0,1,2] # Terrains for the tiles (seperate or they will connect together
+var dungeon_edge_tiles = [0,1,2] 
 
 var dungeon_floor = dungeon_floor_tiles[0]
 var dungeon_walls = dungeon_wall_tiles[0]
-var dungeon_terrain = dungeon_terrains[0]
+var dungeon_terrain = dungeon_terrain_tiles[0]
+var dungeon_edges = dungeon_edge_tiles[0]
 
 var monster_spawn_ID = 0
 var monster_spawns = []
@@ -82,16 +85,23 @@ var  item_scenes = {
 
 func _ready():
 	current_floor += 1 # when entering the dungeon scene, you have descended once
-	
+
 	# Selects the tileset for the current floor
 	if current_floor <= 5:
 		dungeon_floor = dungeon_floor_tiles[0]
 		dungeon_walls = dungeon_wall_tiles[0]
-		dungeon_terrain = dungeon_terrains[0]
+		dungeon_terrain = dungeon_terrain_tiles[0]
+		dungeon_edges = dungeon_edge_tiles[0]
+	elif current_floor > 5 and current_floor <= 10:
+		dungeon_floor = dungeon_floor_tiles[0]
+		dungeon_walls = dungeon_wall_tiles[0]
+		dungeon_terrain = dungeon_terrain_tiles[0]
+		dungeon_edges = dungeon_edge_tiles[1]	
 	else:
-		dungeon_floor = dungeon_floor_tiles[1]
-		dungeon_walls = dungeon_wall_tiles[1]
-		dungeon_terrain = dungeon_terrains[1]
+		dungeon_floor = dungeon_floor_tiles[0]
+		dungeon_walls = dungeon_wall_tiles[0]
+		dungeon_terrain = dungeon_terrain_tiles[0]
+		dungeon_edges = dungeon_edge_tiles[2]
 
 	# Inventory Creation
 	Items.Player_Inventory._add_item(1, 1) 
@@ -157,11 +167,11 @@ func _process(delta):
 			generate_loot(monster)
 			monster.enemy_clear()
 			
-	for item in item_spawns:
-		if is_instance_valid(item) and item.picked_up != false:
-			Items.Player_Inventory._add_item(item.ID, item.amount)
+	for spawneditem in item_spawns:
+		if is_instance_valid(spawneditem) and spawneditem.picked_up != false:
+			Items.Player_Inventory._add_item(spawneditem.ID, spawneditem.amount)
 			Items.Player_Inventory._print_inventory()
-			item.clear_item()
+			spawneditem.clear_item()
 
 	for chest in chest_spawns:
 		if is_instance_valid(chest) and chest.death_location != null:
@@ -348,14 +358,14 @@ func generate_hallways():
 				$TileMap.set_cell(0, row_position - perpendicular, dungeon_walls, Vector2i(0, 0))
 			# Create a row of hallway and save it in a list
 			for k in range(0, row_width):
-				$TileMap.set_cell(0, row_position, dungeon_floor, Vector2i(0, 3))
+				$TileMap.set_cell(0, row_position, dungeon_floor, Vector2i(2, 0))
 				hall_pos.append(row_position)
 				row_position += perpendicular
 	
 			#kink probability midway path
 			#additional check for paths too small to get through
 			if i == floor(hall_length / 2) and random.randf() > kink_probability and row_width > 2:
-				$TileMap.set_cell(0, row_position, dungeon_floor, Vector2i(0, 3))
+				$TileMap.set_cell(0, row_position, dungeon_floor, Vector2i(2, 0))
 				$TileMap.set_cell(0, row_position + perpendicular - direction, dungeon_walls, Vector2i(0, 0)) #add wall
 				$TileMap.set_cell(0, (tile_pos - floor(row_width / 2) * perpendicular) - perpendicular + direction, dungeon_walls, Vector2i(0, 0)) #add wall
 				hall_pos.append(row_position)
@@ -404,18 +414,19 @@ func generate_rooms():
 						$TileMap.set_cell(0, Vector2i(i.x+j, i.y+k), dungeon_walls, Vector2i(0, 0))
 				# Stores tile location to be connected and draws a tile at the floor location
 				else:
-					$FloorTiles.set_cell(0, Vector2i(i.x+j, i.y+k), 0, Vector2i(2, 4))
+					$FloorTiles.set_cell(0, Vector2i(i.x+j, i.y+k), 0, Vector2i(1, 0))
 					floor_pos.append(Vector2i(i.x+j,i.y+k))
 					
 	# Draws all of the saved tiles and connects them together using terrains
-	$TileMap.set_cells_terrain_connect(0, floor_pos, 0, dungeon_terrain)
+	$TileMap.set_cells_terrain_connect(0, floor_pos, 0, dungeon_edges)
 
 	# Go through each room and decorate them 
 	for node_num in range(len(node_pos)):
 		# Node #,  Layout Mode, Spawn Chance, Bloom chance
-		generate_decorations(node_num, 0, 3) # Mode 0: Whole floor spread
+		generate_decorations(node_num, 0, 10) # Mode 0: Whole floor spread
 		generate_decorations(node_num, 1, 5,7) # Mode 1: Bloomed spread
-
+		generate_decorations(node_num, 2, 10,75)# Mode 2: large middle for merchants
+		
 func spawn_chests():
 	#var chest_scene = [preload("res://treasurechest.tscn")]
 	var chests_spawned = 0
@@ -464,18 +475,24 @@ func generate_decorations(node_num,pad_mode=0,spawn_chance=1,bloom_chance=0):
 	var node = node_pos[node_num]
 	var size = room_size[node_num]
 	var size_type = ""
-	# Scenes for different sized decorations
-	var small_decorations = [preload("res://environment/Cave_One_Small_Decorations.tscn")]
-	var medium_decorations = [preload("res://environment/Cave_One_Medium_Decorations.tscn"), preload("res://monsters/Treant.tscn")]
-	var large_decorations = [preload("res://environment/Merchant_Shop.tscn")]
+	var merchant_scene = preload("res://environment/Merchant_Shop.tscn")
 	
+	# Scenes for different sized decorations
+	var tiny_decorations = [preload("res://environment/tiny_decorations.tscn")]
+	var small_decorations = [preload("res://environment/Cave_One_Small_Decorations.tscn"),preload("res://environment/tiny_decorations.tscn")]
+	var medium_decorations = [preload("res://environment/Cave_One_Medium_Decorations.tscn"), preload("res://monsters/Treant.tscn")]
+	var large_decorations = [merchant_scene]
+	
+	if merchant_spawned == true:
+		large_decorations.erase(merchant_scene)
+
 	var medium_attempts = 1
 
-	if size[1] < 7:
+	if size[1] < 8:
 		print("Small room",node,size)
 		size_type = "Small"
 
-	elif size[1] >= 7 and size[1] <= 8:
+	elif size[1] >= 8 and size[1] <= 9:
 		print("Medium room",node,size)
 		size_type = "Medium"
 		medium_attempts = 2
@@ -485,7 +502,7 @@ func generate_decorations(node_num,pad_mode=0,spawn_chance=1,bloom_chance=0):
 		medium_attempts = 3
 	
 	# Small decorations, each tile is a spawn zone
-	if pad_mode == 0: 
+	if pad_mode == 0 and small_decorations != []: 
 		var single_spawn_pads = []
 		
 		# Select the floor tiles in the room
@@ -499,7 +516,7 @@ func generate_decorations(node_num,pad_mode=0,spawn_chance=1,bloom_chance=0):
 			decoration_check(spawn_chance, i, small_decorations[0])
 
 	# Medium decorations, 4 spawn zones
-	elif pad_mode == 1:
+	elif pad_mode == 1 and medium_decorations != []:
 		var medium_spawn_pads = [[],[],[],[]]
 		var med_pad_size = size[1] - 1
 
@@ -525,7 +542,7 @@ func generate_decorations(node_num,pad_mode=0,spawn_chance=1,bloom_chance=0):
 			for attempts in range(medium_attempts):
 				var chosen = pads[0]
 				if chosen in pads:
-####### TODO: Change so instead it adds area around chosen pad for bloom instead of removing
+					####### TODO: Change so instead it adds area around chosen pad for bloom instead of removing
 					medium_decorations.shuffle()
 					if decoration_check(spawn_chance, chosen, medium_decorations[0]):
 						pads.erase(chosen)
@@ -543,16 +560,71 @@ func generate_decorations(node_num,pad_mode=0,spawn_chance=1,bloom_chance=0):
 							for location in pads:
 								decoration_check(bloom_chance, location, small_decorations[0])
 
-	# Large decorations, 2 zones L-R
-	elif pad_mode == 2:
+	# Large decoration, tries to avoid walls
+	elif pad_mode == 2 and large_decorations != []:
+		print("Merchant status is:",merchant_spawned)
 		var large_spawn_pads = [[],[]]
-		print("large deco mode LR")
-	
-	# Large decorations, 2 zones U-D
+		var large_pad_size = size[1]-1
+		var large_attempts = 1
+		print("large deco mode")
+
+		# Create the spawning zones
+		for i in range(1,large_pad_size):
+			for j in range(1,large_pad_size):
+				# Top Right
+				var location = node + Vector2i(i-1,j-1)
+				large_spawn_pads[0].append(location)
+				# Bottom Right?
+				location = node + Vector2i(-i+1,j-2)
+				large_spawn_pads[0].append(location)
+
+				# Top Left
+				location = node + Vector2i(i-1,-j)
+				large_spawn_pads[1].append(location)
+				location = node + Vector2i(-i+1,-j)
+				large_spawn_pads[1].append(location)
+		
+		# Attempt to select (medium_attempts) spots and spawn medium sized decorations
+		for pads in large_spawn_pads:
+			pads.shuffle()
+			
+			for attempts in range(large_attempts):
+				var chosen = pads[0]
+				if chosen in pads:
+					####### TODO: Change so instead it adds area around chosen pad for bloom instead of removing
+					large_decorations.shuffle()
+					if large_decorations != []:
+						if decoration_check(spawn_chance, chosen, large_decorations[0]):
+							pads.erase(chosen)
+						
+							if large_decorations[0] == merchant_scene:
+								print("Spawned a new merchant! Stopping other spawns.")
+								merchant_spawned = true
+								large_decorations.erase(merchant_scene)
+				
+							if size_type != "Small":
+								chosen = chosen + Vector2i(0,1)
+								if chosen in pads: pads.erase(chosen)
+								chosen = chosen + Vector2i(-1,0)
+								if chosen in pads: pads.erase(chosen)
+								chosen = chosen + Vector2i(0,-1)
+								if chosen in pads: pads.erase(chosen)
+								
+								chosen = chosen + Vector2i(-1,-1)
+								if chosen in pads: pads.erase(chosen)
+								
+								chosen = chosen + Vector2i(-1,1)
+								if chosen in pads: pads.erase(chosen)
+							# If bloom is enabled it will fill out the remaining selected spots with small decorations
+							if bloom_chance != 0:
+								for location in pads:
+									decoration_check(bloom_chance, location, tiny_decorations[0])
+								
+	# Large decorations, 2 zones
 	elif pad_mode == 3:
 		var large_spawn_pads = [[],[]]
 		print("large deco mode UD")
-	
+
 	# Single giant spawn
 	elif pad_mode == 4:
 		var large_spawn_pads = []
@@ -562,7 +634,6 @@ func generate_decorations(node_num,pad_mode=0,spawn_chance=1,bloom_chance=0):
 func decoration_check(chance, location, decoration_scene):
 	var deco_chance = random.randf_range(0,101)
 	
-
 	if deco_chance <= chance:
 		var decoration = decoration_scene.instantiate()
 	
@@ -619,6 +690,8 @@ func clear_room():
 	
 	chest_spawns = [] # Reset the array tracking chest spawns
 	chest_spawn_ID = 0 # Reset the ID if you're using it
+	
+	merchant_spawned = false
 	$TileMap.clear()
 	$FloorTiles.clear()
 	
