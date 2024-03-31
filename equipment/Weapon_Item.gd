@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 #@onready var _animation_player = $AnimationPlayer
 #Adds the sprite sheet into the variable
-@onready var item_sprite = $PotionSheet
+@onready var item_sprite = $WeaponSheet
 
 #Creates an Index for the Frames
 var item_frame_index = 0
@@ -13,7 +13,7 @@ var shop_item = false
 var text_update = false
 
 var current_item = {}
-var ID = 90
+var ID = 1
 
 func _ready():
 	#set_item_frame(1) #Initializes a potion
@@ -23,12 +23,9 @@ func _set_shop(state = false):
 	shop_item = state
 
 #ID number and Amount based on Frames
-#JUST A TEST ID NUMBER, WILL CHANGE TO PROPER ID LATER
 var item_properties = {
-	0: {"ID": 90, "amount": 1},
-	1: {"ID": 91, "amount": 1},
-	2: {"ID": 92, "amount": 1},
-	3: {"ID": 93, "amount": 1}
+	0: {"ID": 1, "amount": 1},
+	1: {"ID": 2, "amount": 1},
 }
 
 # Remove the item
@@ -55,11 +52,11 @@ func _process(delta):
 				if Items.Player_Inventory._pay_for_item(current_item.ID, 1):
 					get_parent().shop_success()
 				else:
-					get_parent().shop_fail() 
+					get_parent().shop_fail()
 				
 		else:
 			# Collects item and emits signal with the item frame index
-			emit_signal("Potion Collected", current_item.ID, current_item.amount)
+			emit_signal("Weapon Collected", current_item.ID, current_item.amount)
 			picked_up = true
 			
 func set_item_frame(frame_index):
@@ -70,7 +67,7 @@ func set_item_frame(frame_index):
 	current_item = item_properties[frame_index]
 
 func choose_item_randomly():
-	var frame_index = randi() % 4  # Randomly choose an index between 0 and 3
+	var frame_index = randi() % 2  # Randomly choose an index between 0 and 3
 	set_item_frame(frame_index)
 	ID = current_item.ID
 	print("Frame: ", frame_index)#Test Purposes

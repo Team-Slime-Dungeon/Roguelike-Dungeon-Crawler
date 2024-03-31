@@ -183,6 +183,7 @@ position = Vector2(0, -45)
 texture = ExtResource("4_qlnmb")
 offset = Vector2(4.64111, 0)
 hframes = 4
+vframes = 2
 
 [node name="Sale_Signs" type="Sprite2D" parent="Shop"]
 position = Vector2(0, -5)

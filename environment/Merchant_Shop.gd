@@ -1,33 +1,44 @@
 extends CharacterBody2D
 var random = RandomNumberGenerator.new()
 
-var possible_shop_items = [90]#,51,71]
-var spawns_objects = true
-var cat_hats = 4
+# Shop Information
+var shop_type = "None"
+var possible_shop_items = [90]
+var hat_index = 0
 
-var  item_scenes = { 
-		51: preload("res://equipment/treasure_spawns.tscn"),
-		71: preload("res://equipment/Blue Mushroom.tscn"),
-		90: preload("res://equipment/EquipmentTest/Potion_Item.tscn"),
-	}
-# What items the shop keeper has in store
+var spawns_objects = true #flag for scene management
+
+# Possible Shop varieties and their possible inventories. Chosen at random
+var shop_names = ["General Store", "Weapon Shop", "Potion Shop"]
+var shop_inventory = {"General Store":[50,90], "Potion Shop":[90], "Weapon Shop":[50]}
+
+# Stores what items the shop keeper has in their inventory
 var shop_items = []
 
-# Manages the spawns once the shop keeper is cleared
+# Manages the spawned item scenes once the shop keeper is cleared
 var shop_spawns = []
 var shop_spawn_id = 0
 
 func _ready():
-	var hat_chance = randi_range(0,4)
-	$Shop/Cat_Hat.frame = hat_chance
+	# Set shop type based on available shop varieties
+	shop_type = shop_names[randi() % shop_names.size()]
+	possible_shop_items = shop_inventory[shop_type]
+	
+	# Cats Hats (or lack of) will spawn on the shopkeeper's head depending on their job
+	if shop_type == "Weapon Shop": hat_index = 4
+	elif shop_type == "Potion Shop": hat_index = 5
+	else: hat_index = randi_range(0, 2)
+
+	$Shop/Cat_Hat.frame = hat_index
 		
 	if not $ShopAnimation.is_playing():
 		$ShopAnimation.play("Idle")
 		
-	# Generate four random items (or blank spaces)
+	# Generate four random items (or blank spaces). At least one always spawns
 	for i in range(0,4):
 		var random_item_chance = randi_range(0,1)
 		if random_item_chance == 1 or i == 0:
+			# Select items from possible item pool
 			var item_id_chosen = possible_shop_items[randi() % possible_shop_items.size()]
 			shop_items.append(item_id_chosen)
 		else:
