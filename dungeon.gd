@@ -106,6 +106,7 @@ func _ready():
 	# Inventory Creation
 	#Items.Player_Inventory._add_item(3, 1) # Test helmets
 	#Items.Player_Inventory._print_inventory()
+	Items.Player_Inventory._add_item(2,1)
 
 	clear_room() # clean up for new floor
 	
