@@ -1,22 +1,47 @@
-[gd_scene load_steps=4 format=3 uid="uid://cnx0543ydjsbt"]
+[gd_scene load_steps=6 format=3 uid="uid://cnx0543ydjsbt"]
 
 [ext_resource type="Script" path="res://equipment/TreasureSpawns.gd" id="1_okmg1"]
 [ext_resource type="Texture2D" uid="uid://buemvd3vhb4t8" path="res://equipment/treasure.png" id="2_oxson"]
+[ext_resource type="Texture2D" uid="uid://bweyo2ils6aja" path="res://equipment/swords.png" id="3_o5t34"]
+[ext_resource type="Texture2D" uid="uid://by862hcon66fm" path="res://equipment/helmets.png" id="4_fibwn"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_o1yfw"]
-radius = 9.0
+radius = 19.0263
 
 [node name="TreasureSpawns" type="CharacterBody2D"]
 z_index = 1
 script = ExtResource("1_okmg1")
 
 [node name="Treasure" type="Sprite2D" parent="."]
+visible = false
 texture = ExtResource("2_oxson")
 hframes = 13
 
-[node name="Player_Detection" type="Area2D" parent="."]
+[node name="Player_Detection" type="Area2D" parent="Treasure"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player_Detection"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Treasure/Player_Detection"]
 shape = SubResource("CircleShape2D_o1yfw")
 
-[connection signal="body_entered" from="Player_Detection" to="." method="_on_player_detection_body_entered"]
+[node name="Swords" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("3_o5t34")
+hframes = 3
+
+[node name="Player_Detection" type="Area2D" parent="Swords"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Swords/Player_Detection"]
+shape = SubResource("CircleShape2D_o1yfw")
+
+[node name="Helmets" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("4_fibwn")
+hframes = 3
+
+[node name="Player_Detection" type="Area2D" parent="Helmets"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Helmets/Player_Detection"]
+shape = SubResource("CircleShape2D_o1yfw")
+
+[connection signal="body_entered" from="Treasure/Player_Detection" to="." method="_on_player_detection_body_entered"]
+[connection signal="body_entered" from="Swords/Player_Detection" to="." method="_on_player_detection_body_entered"]
+[connection signal="body_entered" from="Helmets/Player_Detection" to="." method="_on_player_detection_body_entered"]

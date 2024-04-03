@@ -4,8 +4,8 @@ var random = RandomNumberGenerator.new()
 var current_loot = -1
 var ID = -1
 
-var total_items = 13
-var loot_probability = [6,7,9,10,11,10,9,8,7,7,6,5,5]
+var total_items = 19
+var loot_probability = [6,7,9,10,11,10,9,8,7,7,6,5,5,5,7,10,5,7,10]
 #var loot_probability = [0,0,0,0,0,0,0,0,0,0,0,0,0] # Blank for custom probability setting
 var picked_up = false
 var shop_item = false
@@ -18,27 +18,33 @@ func _ready():
 		current_loot = get_random_index()
 		#print("Current Loot:", current_loot)
 		ID = set_loot(current_loot)
-
+		
 func get_random_index():
 	var random_number = randi_range(1,100)
-
+	var count = 0
 	for index in range(len(loot_probability)):
-		if random_number > 0 and index < len(loot_probability)-1:
-			random_number -= loot_probability[index]
-		elif index == len(loot_probability)-1:
-			#print("Last number")
+		count += loot_probability[index]
+		if random_number <= count:
 			return index
-		else:
-			#print("Found index:", index - 1)
-			return index -1
+	return len(loot_probability) -1
 
 func set_loot(index = 0):
 	var loot_id = 0
 	var current_loot = index
 	
-	$Treasure.set_frame(index)
+	if index <= 12:
+		$Treasure.set_frame(index)
+		$Treasure.visible = true
+		loot_id = Items.Player_Inventory.treasure_start_index + 1 + index
+	elif index > 12 and index <= 15:
+		$Swords.set_frame(index-12)
+		$Swords.visible = true
+		loot_id = Items.Player_Inventory.weapon_start_index + 1 + index
+	else: 
+		$Helmets.set_frame(index-15)
+		$Helmets.visible = true
+		loot_id = Items.Player_Inventory.helmet_start_index + 1 + index
 	
-	loot_id = Items.Player_Inventory.treasure_start_index + 1 + index
 	#print("Item is a ", Items.Player_Inventory.get_item_name(loot_id))
 	return loot_id
 

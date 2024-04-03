@@ -440,7 +440,7 @@ func spawn_chests():
 	var attempts = 0
 	var max_attempts = node_pos.size() * 2 # Prevent infinite loops
 	
-	while chests_spawned < 2 and attempts < max_attempts:
+	while chests_spawned < 20 and attempts < max_attempts:
 		var room_index = random.randi_range(0, node_pos.size() - 1)
 		var room = node_pos[room_index]
 		var size = room_size[room_index]
