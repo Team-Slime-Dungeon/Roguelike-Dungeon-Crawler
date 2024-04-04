@@ -239,8 +239,12 @@ func generate_loot(monster):
 	var monster_type = "Enemy"
 	if "monster_type" in monster:
 		monster_type = monster.monster_type
-		
-	var current_level_loot = loot_table[current_level] + enemy_loot
+	
+	var current_level_loot = []
+	if enemy_loot != []:
+		current_level_loot = enemy_loot
+	else:
+		current_level_loot = loot_table[current_level] + enemy_loot
 
 	# Draw an item from the loot table at random
 	current_level_loot.shuffle()

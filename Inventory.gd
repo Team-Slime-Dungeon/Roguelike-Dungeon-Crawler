@@ -14,11 +14,12 @@ var item_can_equip = 7
 # Indexes for item categories for outside use
 var weapon_start_index = 1
 var weapon_end_index = 3
-var helmet_start_index = 4
-var helmet_end_index = 6
+
+var helmet_start_index = 14
+var helmet_end_index = 16
 
 var treasure_start_index = 51
-var treasure_end_index = 100
+var treasure_end_index = 64
 
 var Item_List = {
 # Item ID [Item Name // Price // Item_Max_Stack // Item Attack // Item Defense // Item Effect1 // Item Effect2//Equippable?]
@@ -28,9 +29,10 @@ var Item_List = {
 	1 : ["Bronze Sword",	5,		1,		2,				0,				null, null,	true ],
 	2 : ["Silver Sword",	15,		1,		3,				0,				null, null,	true ],
 	3 : ["Gold Sword", 		30,		1,		5,				0,				null, null,	true ],
-	4 : ["Bronze Helmet", 	5,		1,		0,				5,				null, null,	true ],
-	5 : ["Silver Helmet", 	15,		1,		0,				6,				null, null,	true ],
-	6 : ["Gold Helmet", 	30,		1,		0,				7,				null, null,	true ],
+	
+	14 : ["Bronze Helmet", 	5,		1,		0,				5,				null, null,	true ],
+	15 : ["Silver Helmet", 	15,		1,		0,				6,				null, null,	true ],
+	16 : ["Gold Helmet", 	30,		1,		0,				7,				null, null,	true ],
 	
 	#Weapon IDs 1-2. 50 will spawn a random sword
 	50: ["Random Weapon",	20,		0,		0,				0,				null, null, false],

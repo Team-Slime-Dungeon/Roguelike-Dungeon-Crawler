@@ -22,7 +22,7 @@ func _process(_delta):
 var item_properties = {
 	0: {"ID": 0, "amount": 1},
 	1: {"ID": 1, "amount": 1},
-	2: {"ID": 3, "amount": 1},
+	2: {"ID": 2, "amount": 1},
 	3: {"ID": 3, "amount": 1},
 	4: {"ID": 4, "amount": 1},
 	5: {"ID": 5, "amount": 1},
