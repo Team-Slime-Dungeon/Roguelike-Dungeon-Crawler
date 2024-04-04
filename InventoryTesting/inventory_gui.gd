@@ -18,6 +18,8 @@ func _ready():
 	var pause_menu = get_node("../../Pause_Menu")
 	pause_menu.connect("pause_toggled", Callable(self, "_on_pause_toggled"))
 	initialize_empty_slots()
+	
+	
 
 
 func initialize_empty_slots():

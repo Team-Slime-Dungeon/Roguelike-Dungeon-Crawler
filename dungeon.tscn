@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://c8fm5k1pu6l4i"]
+[gd_scene load_steps=24 format=3 uid="uid://c8fm5k1pu6l4i"]
 
 [ext_resource type="Script" path="res://dungeon.gd" id="1_ifql2"]
 [ext_resource type="Texture2D" uid="uid://cdejfmb3r8r6b" path="res://environment/cave1.png" id="2_nq54f"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://2uvs3oud5cvk" path="res://debug_buttons.png" id="6_jqwbb"]
 [ext_resource type="PackedScene" uid="uid://eb8v1h7u5ytm" path="res://Health Functions/hearts_container.tscn" id="6_tho0w"]
 [ext_resource type="PackedScene" uid="uid://c3afge3ds2qu5" path="res://InventoryTesting/MainInventory.tscn" id="7_fy3ef"]
+[ext_resource type="Script" path="res://CoinSprite.gd" id="7_y0ggo"]
 [ext_resource type="PackedScene" uid="uid://crcqnnl6ies46" path="res://cassandra_scene.tscn" id="11_ai3vm"]
 [ext_resource type="Script" path="res://Armor_Durability.gd" id="12_7qrgi"]
 [ext_resource type="FontFile" uid="uid://b1dyomvma53nt" path="res://PixelifySans-Regular.ttf" id="12_m8q2w"]
@@ -595,6 +596,7 @@ offset_top = -26.0
 offset_right = -2.0
 grow_horizontal = 0
 grow_vertical = 0
+theme_override_fonts/font = ExtResource("12_m8q2w")
 text = "Current Floor Here"
 
 [node name="Coin_Counter" type="Label" parent="GUI"]
@@ -604,6 +606,7 @@ offset_right = 1150.0
 offset_bottom = 616.0
 size_flags_horizontal = 8
 size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("12_m8q2w")
 text = "Money Count Here"
 
 [node name="Main Inventory" parent="GUI" instance=ExtResource("7_fy3ef")]
@@ -630,6 +633,13 @@ script = ExtResource("12_7qrgi")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="GUI"]
 layer = 0
+
+[node name="CoinSprite" type="TextureRect" parent="GUI"]
+offset_left = 992.0
+offset_top = 600.0
+offset_right = 1032.0
+offset_bottom = 640.0
+script = ExtResource("7_y0ggo")
 
 [node name="Debug_Hud" type="CanvasLayer" parent="."]
 script = ExtResource("6_grh6y")

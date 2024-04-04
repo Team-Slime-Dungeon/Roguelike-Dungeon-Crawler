@@ -306,7 +306,7 @@ func equip_weapon(new_weapon_id):
 	if equip_weapon_stats == {}:
 		current_weapon_id = new_weapon_id
 		set_equip_weapon_stats(current_weapon_id)
-		Inventory.erase(new_weapon_id)
+		#Inventory.erase(new_weapon_id)
 		var weapon_name = get_item_name(current_weapon_id)
 		emit_signal("texture_has_changed", weapon_name)
 func _delete_equip(weapon_id):

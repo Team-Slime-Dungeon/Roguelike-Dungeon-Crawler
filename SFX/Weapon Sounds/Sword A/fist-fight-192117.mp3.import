@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cagaloq32nskh"
+path="res://.godot/imported/fist-fight-192117.mp3-c1d44c274b1561478ad3f614b8b46cf9.mp3str"
+
+[deps]
+
+source_file="res://SFX/Weapon Sounds/Sword A/fist-fight-192117.mp3"
+dest_files=["res://.godot/imported/fist-fight-192117.mp3-c1d44c274b1561478ad3f614b8b46cf9.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

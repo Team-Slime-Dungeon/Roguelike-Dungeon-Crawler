@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cul7b22epo42i"]
+[gd_scene load_steps=17 format=3 uid="uid://cul7b22epo42i"]
 
 [ext_resource type="Script" path="res://InventoryTesting/inventory_gui.gd" id="1_ap1sc"]
 [ext_resource type="Texture2D" uid="uid://dfnshdf6xxgdp" path="res://InventoryTesting/InventoryBackgroundPics/inventoryframe.png" id="2_02nu5"]
@@ -13,9 +13,18 @@
 [ext_resource type="Texture2D" uid="uid://db1hxdrm8mtmg" path="res://InventoryTesting/InventoryBackgroundPics/Sheild Slot.png" id="10_b5xuv"]
 [ext_resource type="Texture2D" uid="uid://jmrtyy66elth" path="res://trashcanpic.webp" id="10_cf7rm"]
 [ext_resource type="Script" path="res://InventoryTesting/unequipbutton.gd" id="11_o5mek"]
+[ext_resource type="FontFile" uid="uid://bbs1yygn0xhkm" path="res://m3x6.ttf" id="14_qhqyf"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_tbsgo"]
 texture = ExtResource("2_7alty")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_psbq1"]
+bg_color = Color(0.345098, 0.215686, 0.0901961, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+shadow_size = 4
 
 [node name="Inventory_gui" type="Control"]
 custom_minimum_size = Vector2(20, 20)
@@ -121,7 +130,6 @@ texture = ExtResource("5_cjfm8")
 expand_mode = 1
 
 [node name="MainHand" type="TextureRect" parent="Tabs/Inventory/EquipBackground"]
-self_modulate = Color(1, 1, 1, 0.466667)
 layout_mode = 0
 offset_left = 66.0029
 offset_top = 69.2805
@@ -333,13 +341,18 @@ script = ExtResource("11_o5mek")
 
 [node name="Label" type="Label" parent="unequipbutton"]
 layout_mode = 0
-offset_left = -1.84233
-offset_top = -1.76372
-offset_right = 204.158
-offset_bottom = 67.2363
+offset_left = 14.9437
+offset_top = 0.930346
+offset_right = 116.944
+offset_bottom = 50.9303
 scale = Vector2(0.204171, 0.204171)
-theme_override_font_sizes/font_size = 50
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("14_qhqyf")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxFlat_psbq1")
 text = "Unequip"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="mouse_entered" from="trashingbutton" to="trashingbutton" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="trashingbutton" to="trashingbutton" method="_on_mouse_exited"]

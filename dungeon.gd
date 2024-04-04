@@ -199,7 +199,7 @@ func _process(delta):
 			chest.clear_chest()
 			
 	# Grabs current coin total
-	$GUI/Coin_Counter.set_text("Coin: " + str(Items.Player_Inventory._get_coins()))
+	$GUI/Coin_Counter.set_text("x " + str(Items.Player_Inventory._get_coins()))
 
 func _on_staircase_hitbox_area_entered(area): if area == $Cassandra/hurtbox: _ready() 
 func _on_new_seed_pressed(): _ready() #debug

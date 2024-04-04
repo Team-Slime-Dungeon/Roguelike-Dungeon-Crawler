@@ -81,7 +81,7 @@ func _drop_data(at_position, data):
 	##prints out the new inventory
 	var item_texture = icon.get_texture()
 	var equip_weapon_id = Items.Player_Inventory.get_item_id_by_texture(item_texture)
-	Items.Player_Inventory.equip_weapon(equip_weapon_id)
+	Items.Player_Inventory.equip_weapon(item_id)
 	icon.set_meta("equipped_item_id", equip_weapon_id)
 	var current_weapon = Items.Player_Inventory.get_current_weapon()
 	print("The current weapon is ", current_weapon)

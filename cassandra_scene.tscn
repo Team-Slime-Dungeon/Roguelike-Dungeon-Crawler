@@ -1072,6 +1072,8 @@ stream = ExtResource("5_0snku")
 [node name="RegenTimer" type="Timer" parent="."]
 wait_time = 3.0
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
 [connection signal="body_entered" from="detection_area" to="." method="_on_detection_area_body_entered"]
 [connection signal="body_exited" from="detection_area" to="." method="_on_detection_area_body_exited"]
 [connection signal="area_entered" from="hurtbox" to="." method="_on_hurtbox_area_entered"]
