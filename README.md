@@ -72,6 +72,11 @@ Shop System
 ![](https://github.com/Team-Slime-Dungeon/Roguelike-Dungeon-Crawler/blob/JacquelineBranch/GIF/Shop%20System%20Demo.gif)
 <br/>
 
+Inventory System
+<br/>
+![](https://github.com/Team-Slime-Dungeon/Roguelike-Dungeon-Crawler/blob/JacquelineBranch/GIF/Inventory%20System%20Demo.gif)
+<br/>
+
 ## Credits
 * Elizabeth - project lead, artist, dungeon generation, monster code, general coding and cleanup
 * Jesse - Scrum Master, Enemy Design, Environment coder 
