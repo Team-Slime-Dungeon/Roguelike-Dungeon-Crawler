@@ -76,7 +76,7 @@ Shop System
 * Elizabeth - Project Lead, Artist, Dungeon Generation, Monster Code, General Coding and Cleanup
 * Jesse - Scrum Master, Enemy Design, Environment Coder 
 * Kobi - Dungeon Generation Coder, Music/Sound
-* Christian - Inventory GUI, Pause/settings, Item Pickup, General Coding, Enemy Ai Tracking
+* Christian - Inventory GUI, Pause/settings, Item Pickup, General Coding, Enemy AI
 * Jacqueline -  Player Controls, Main Story, Dialogue
 * Javier - Concepts and Designs, Player Coder, Camera Coder
 * Ricardo - Menu, Camera control, Settings UI
