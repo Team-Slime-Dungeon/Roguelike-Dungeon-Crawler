@@ -83,6 +83,9 @@ var  item_scenes = {
 		71: preload("res://equipment/Blue Mushroom.tscn"),
 	}
 
+var rubio_scene = preload("res://rubio.tscn")
+var rubio_spawns = []
+
 func _ready():
 	current_floor += 1 # when entering the dungeon scene, you have descended once
 
@@ -138,14 +141,23 @@ func _ready():
 	generate_monsters()
 	spawn_chests()
 	
+	#if current_floor == 1:
+	generate_npc()
+	#elif Global.companion_following == true:
+		#var rubio_scene = preload("res://rubio.tscn")
+		#var rubio = rubio_scene.instantiate()
+		#add_child(rubio)
+		#rubio.global_position = Vector2(0,0)
+		#print("rubi's postion", rubio.global_position)
+	
 	$Cassandra.global_position = Vector2(0,0) # returns player to root room
 	$GUI/Current_Floor.set_text("Floor: " + str(current_floor))
 	
-	if current_floor == 1 or Global.companion_following == true:
-		$Rubio.global_position = Vector2(0,0)
-		$Rubio.visible = true
-	else:
-		$Rubio.visible = false
+	#if current_floor == 1 or Global.companion_following == true:
+		#$Rubio.global_position = Vector2(0,0)
+		#$Rubio.visible = true
+	#else:
+		#$Rubio.visible = false
 		
 	# debug info
 	$Debug_Hud.visible = debug
@@ -205,6 +217,45 @@ func generate_entity():
 	
 	# converts the tilemap coords to global coords for staircase placement	
 	$Staircase.global_position = $TileMap.map_to_local(node_pos[staircase_pos]) / 2
+	
+func generate_npc():
+	
+	
+	if current_floor == 1:
+		#var rubio_scene = preload("res://rubio.tscn")
+		var rubio = rubio_scene.instantiate()
+		#var rand_tile = floor_pos[randi() % floor_pos.size()]
+		var room_index = random.randi_range(0, node_pos.size() - 1)
+		var room = node_pos[room_index]
+		var size = room_size[room_index]
+		
+		var rand_pos = room + Vector2i(random.randi_range(1, size[1] - 2), random.randi_range(1, size[1] - 2))
+		rubio_spawns.append(rubio)
+		add_child(rubio)
+		
+		rubio.global_position = $TileMap.map_to_local(rand_pos) / 2
+		print("global ", Global.companion_following)
+		#clear_npc(rubio)
+		
+	elif Global.companion_following == true:
+		#var rubio_scene = preload("res://rubio.tscn")
+		var rubio = rubio_scene.instantiate()
+		rubio_spawns.append(rubio)
+		add_child(rubio)
+		
+		#var rubio = rubio_scene.instantiate()
+		rubio.global_position = Vector2(0,0)
+		print("rubi's postion", rubio.global_position)
+	#elif current_floor != 1:
+		#rubio.queue_free()
+		#print("rubio is free!!")
+	
+	#clear_npc(rubio)
+		
+	
+
+
+		
 	
 func generate_loot(monster):
 	# Generates a random item from the loot table depending on your floor. 
@@ -689,6 +740,13 @@ func clear_room():
 		for i in len(chest_spawns):
 			if is_instance_valid(chest_spawns[i]): chest_spawns[i].queue_free()
 			
+		
+	if rubio_spawns != []:
+		for i in len(rubio_spawns):
+			if is_instance_valid(rubio_spawns[i]): rubio_spawns[i].queue_free()
+			
+	rubio_spawns = []
+			
 	# Reset the monster spawn system
 	monster_spawns = []
 	monster_spawn_ID = 0
@@ -705,6 +763,8 @@ func clear_room():
 	merchant_spawned = false
 	$TileMap.clear()
 	$FloorTiles.clear()
+	
+	#rubio_scene.queue_free()
 	
 	#for i in range(-100, 100): # higher wall generation
 	#	for j in range(-100, 100):

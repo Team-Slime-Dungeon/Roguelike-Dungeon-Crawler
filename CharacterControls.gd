@@ -138,20 +138,24 @@ func update_animation_parameter():
 	#idle animation plays if velocity equals zero, otherwise walking animation plays
 	if(velocity == Vector2.ZERO):
 		animation_tree["parameters/conditions/idle"] = true	
-		animation_tree["parameters/conditions/is_moving"] = false	
+		animation_tree["parameters/conditions/is_moving"] = false
+		Global.player_is_idle = true	
 	else:
 		animation_tree["parameters/conditions/idle"] = false	
 		animation_tree["parameters/conditions/is_moving"] = true
+		Global.player_is_idle = false
 	
 	#attack animation plays if LMB is pressed
 	#weapon is set to visible
 	#otherwise attack animation is set to false	
 	if(Input.is_action_pressed("attack")):
 		animation_tree["parameters/conditions/attack"] = true
+		Global.player_is_idle = true
 		weapon.visible = true
 		is_attacking = true
 	elif(Input.is_action_just_released("ranged_attack")):
 		animation_tree["parameters/conditions/attack"] = true
+		Global.player_is_idle = true
 		is_attacking = true
 		
 		var tossed_item = preload("res://equipment/Shuriken.tscn")

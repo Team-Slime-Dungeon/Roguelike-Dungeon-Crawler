@@ -26,27 +26,29 @@ func _ready():
 	start_pos = position
 	
 func _process(delta):
-	if has_chatted == false:
-		if current_state == 0 or current_state == 1:
-			$AnimationPlayer.play("Idle_Right")
-		elif current_state == 2 and !is_chatting:
-			if (dir.x == -1):
-				$AnimationPlayer.play("Walk_Left")
-			if (dir.x == 1):
-				$AnimationPlayer.play("Walk_Right")
-			if (dir.y== -1):
-				$AnimationPlayer.play("Walk_Left")
-			if (dir.y == 1):
-				$AnimationPlayer.play("Walk_Right")
+	#if has_chatted == false:
+		#if current_state == 0 or current_state == 1:
+			#$AnimationPlayer.play("Idle_Right")
+		#elif current_state == 2 and !is_chatting:
+			#if (dir.x == -1):
+				#$AnimationPlayer.play("Walk_Left")
+			#if (dir.x == 1):
+				#$AnimationPlayer.play("Walk_Right")
+			#if (dir.y== -1):
+				#$AnimationPlayer.play("Walk_Left")
+			#if (dir.y == 1):
+				#$AnimationPlayer.play("Walk_Right")
 	
 	if is_roaming:
 		match current_state:
 			IDLE:
 				pass
 			NEW_DIR:
-				dir = choose([Vector2.RIGHT, Vector2.UP, Vector2.LEFT, Vector2.DOWN])
+				#dir = choose([Vector2.RIGHT, Vector2.UP, Vector2.LEFT, Vector2.DOWN])
+				pass
 			MOVE:
-				move(delta)
+				#move(delta)
+				pass
 	
 	if Input.is_action_just_pressed("interact") and player_in_chat_zone == true:
 		#print("Chatting...")
@@ -56,7 +58,7 @@ func _process(delta):
 		$AnimationPlayer.play("Idle_Right")
 	
 	#rubio follows player if player has chatted with rubio
-	if has_chatted:
+	if has_chatted or Global.companion_following == true:
 		#dir = (Global.player_position - global_position).normalized()
 		is_roaming = false
 		var distance = Global.player_position.distance_to(global_position)
@@ -68,14 +70,14 @@ func _process(delta):
 			
 			
 			if (dir.x == -1):
-				$AnimationPlayer.play("Walk_Left")
-				
+				$AnimationPlayer.play("Walk_Left")	
 			if (dir.x == 1):
 				$AnimationPlayer.play("Walk_Right")
 			if (dir.y== -1):
 				$AnimationPlayer.play("Walk_Left")
 			if (dir.y == 1):
 				$AnimationPlayer.play("Walk_Right")
+			
 			
 			move_and_slide()
 		

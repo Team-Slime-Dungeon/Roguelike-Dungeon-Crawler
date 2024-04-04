@@ -37,7 +37,40 @@ The music was created using LMMS, and the sound effects with Audacity.
 * Exciting Game Introduction
 
 ## Short Demo
-[Notes: Will be including a playthrough of the entire game, showcasing all of the game’s features. Screenshots and GIFs will also be provided to elaborate on specific features]
+Procedural Dungeon Generation
+<br/>
+![](https://github.com/Team-Slime-Dungeon/Roguelike-Dungeon-Crawler/blob/JacquelineBranch/GIF/Procedural%20Dungeon%20Generation%20Demo.gif)
+<br/>
+
+Item Spawning/ Treassure Spawning
+<br/>
+![](https://github.com/Team-Slime-Dungeon/Roguelike-Dungeon-Crawler/blob/JacquelineBranch/GIF/Treassure%20Chest%20Demo.gif)
+<br/>
+
+Monster AI
+<br/>
+![](https://github.com/Team-Slime-Dungeon/Roguelike-Dungeon-Crawler/blob/JacquelineBranch/GIF/Monster%20Demo.gif)
+<br/>
+
+Companion System/ Dialogue
+<br/>
+![](https://github.com/Team-Slime-Dungeon/Roguelike-Dungeon-Crawler/blob/JacquelineBranch/GIF/Companion%20Demo.gif)
+<br/>
+
+Main Menu
+<br/>
+![](https://github.com/Team-Slime-Dungeon/Roguelike-Dungeon-Crawler/blob/JacquelineBranch/GIF/Main%20Menu%20Demo.gif)
+<br/>
+
+Inventory System
+<br/>
+![](https://github.com/Team-Slime-Dungeon/Roguelike-Dungeon-Crawler/blob/JacquelineBranch/GIF/Inventory%20System%20Demo.gif)
+<br/>
+
+Shop System
+<br/>
+![](https://github.com/Team-Slime-Dungeon/Roguelike-Dungeon-Crawler/blob/JacquelineBranch/GIF/Shop%20System%20Demo.gif)
+<br/>
 
 ## Credits
 * Elizabeth - project lead, artist, dungeon generation, monster code, general coding and cleanup
