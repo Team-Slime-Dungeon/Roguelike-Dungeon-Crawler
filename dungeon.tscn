@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://c8fm5k1pu6l4i"]
+[gd_scene load_steps=23 format=3 uid="uid://c8fm5k1pu6l4i"]
 
 [ext_resource type="Script" path="res://dungeon.gd" id="1_ifql2"]
 [ext_resource type="Texture2D" uid="uid://cdejfmb3r8r6b" path="res://environment/cave1.png" id="2_nq54f"]
@@ -13,7 +13,6 @@
 [ext_resource type="AudioStream" uid="uid://dhiy4c1nn72yc" path="res://Music/background sound.mp3" id="13_7lc74"]
 [ext_resource type="PackedScene" uid="uid://dryac8f57oat6" path="res://Pause Menu/pause_menu.tscn" id="13_cipy3"]
 [ext_resource type="Script" path="res://BackgroundSound.gd" id="14_1o1d0"]
-[ext_resource type="PackedScene" uid="uid://crkvx1w0r2b1r" path="res://rubio.tscn" id="20_kmpip"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4noh4"]
 radius = 8.0
@@ -621,6 +620,7 @@ scale = Vector2(2, 2)
 focus_mode = 0
 
 [node name="zoom_in" type="Sprite2D" parent="Debug_Hud/in_zoom"]
+visible = false
 position = Vector2(6, 6)
 texture = ExtResource("6_jqwbb")
 hframes = 4
@@ -729,8 +729,6 @@ offset_bottom = 117.0
 [node name="BackgroundSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("13_7lc74")
 script = ExtResource("14_1o1d0")
-
-[node name="Rubio" parent="." instance=ExtResource("20_kmpip")]
 
 [connection signal="area_entered" from="Staircase/Staircase_hitbox" to="." method="_on_staircase_hitbox_area_entered"]
 [connection signal="pressed" from="Debug_Hud/Seed/New Seed" to="." method="_on_new_seed_pressed"]
