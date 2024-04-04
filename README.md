@@ -40,6 +40,7 @@ The music was created using LMMS, and the sound effects with Audacity.
 [Notes: Will be including a playthrough of the entire game, showcasing all of the game’s features. Screenshots and GIFs will also be provided to elaborate on specific features]
 <br/>
 Procedural Dungeon Generation
+<br/>
 ![](https://github.com/Team-Slime-Dungeon/Roguelike-Dungeon-Crawler/blob/JacquelineBranch/GIF/Procedural%20Dungeon%20Generation%20Demo.gif)
 
 ## Credits
