@@ -1,5 +1,5 @@
 ## Introduction to the game
-  Roguelike Dungeon Crawler [name wip] is an upcoming procedurally generated dungeon crawler made in Godot. Can you safely navigate the many floors of the dungeon and the dangers hidden in its depths?
+  Roguelike Dungeon Crawler is an upcoming procedurally generated dungeon crawler made in Godot. Navigate the many floors of the dungeon and face the dangers hidden in its depths. Collect treasure for a high score and complete 25 floors to face off against a great slimey king... 
   
 ## Getting Started
   * Locate and download the latest release for your operating system under releases.
@@ -8,10 +8,10 @@
   Controls:
   * WASD - Movement
   * Left Mouse - Attack, Advance Text
-  * Right Mouse - Projectile
+  * Right Mouse - Projectile Attack
   * F - Interact (Open chests, talk to NPCs, Buy from Shop)
   * E - Open/Close Inventory
-  * Shift - Dashw
+  * Shift - Dash
   * ESC - Menu
 
 ## Requirements
@@ -73,10 +73,10 @@ Shop System
 <br/>
 
 ## Credits
-* Elizabeth - project lead, artist, dungeon generation, monster code, general coding and cleanup
-* Jesse - Scrum Master, Enemy Design, Environment coder 
-* Kobi - Dungeon generation coder, music/sound
-* Christian - Inventory GUI, Pause/settings, Item pickup, General Coding
+* Elizabeth - Project Lead, Artist, Dungeon Generation, Monster Code, General Coding and Cleanup
+* Jesse - Scrum Master, Enemy Design, Environment Coder 
+* Kobi - Dungeon Generation Coder, Music/Sound
+* Christian - Inventory GUI, Pause/settings, Item Pickup, General Coding, Enemy AI
 * Jacqueline -  Player Controls, Main Story, Dialogue
 * Javier - Concepts and Designs, Player Coder, Camera Coder
-* Ricardo - Menu, Camera control, Settings UI, 
+* Ricardo - Menu, Camera control, Settings UI
