@@ -43,7 +43,7 @@ The music was created using LMMS, and the sound effects with Audacity.
 * Elizabeth - project lead, artist, dungeon generation, monster code, general coding and cleanup
 * Jesse - Scrum Master, Enemy Design, Environment coder 
 * Kobi - Dungeon generation coder, music/sound
-* Christian - Inventory GUI, Pause/settings, Item pickup, General Coding
+* Christian - Inventory GUI, Pause/settings, Item pickup, General Coding, Enemy AI
 * Jacqueline -  Player Controls, Main Story, Dialogue
 * Javier - Concepts and Designs, Player Coder, Camera Coder
 * Ricardo - Menu, Camera control, Settings UI, 
