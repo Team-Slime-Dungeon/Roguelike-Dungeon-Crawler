@@ -52,14 +52,9 @@ Monster AI
 ![](https://github.com/Team-Slime-Dungeon/Roguelike-Dungeon-Crawler/blob/JacquelineBranch/GIF/Monster%20Demo.gif)
 <br/>
 
-Companion System
+Companion System/ Dialogue
 <br/>
 ![](https://github.com/Team-Slime-Dungeon/Roguelike-Dungeon-Crawler/blob/JacquelineBranch/GIF/Companion%20Demo.gif)
-<br/>
-
-Dialogue
-<br/>
-![](https://github.com/Team-Slime-Dungeon/Roguelike-Dungeon-Crawler/blob/JacquelineBranch/GIF/Dialogue%20Demo.gif)
 <br/>
 
 Main Menu
