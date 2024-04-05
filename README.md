@@ -1,5 +1,5 @@
 ## Introduction to the game
-  Roguelike Dungeon Crawler [name wip] is an upcoming procedurally generated dungeon crawler made in Godot. Can you safely navigate the many floors of the dungeon and the dangers hidden in its depths?
+  Roguelike Dungeon Crawler is an upcoming procedurally generated dungeon crawler made in Godot. Navigate the many floors of the dungeon and face the dangers hidden in its depths. Collect treasure for a high score and complete 25 floors to face off against a great slimey king... 
   
 ## Getting Started
   * Locate and download the latest release for your operating system under releases.
@@ -8,10 +8,10 @@
   Controls:
   * WASD - Movement
   * Left Mouse - Attack, Advance Text
-  * Right Mouse - Projectile
+  * Right Mouse - Projectile Attack
   * F - Interact (Open chests, talk to NPCs, Buy from Shop)
   * E - Open/Close Inventory
-  * Shift - Dashw
+  * Shift - Dash
   * ESC - Menu
 
 ## Requirements
@@ -37,13 +37,46 @@ The music was created using LMMS, and the sound effects with Audacity.
 * Exciting Game Introduction
 
 ## Short Demo
-[Notes: Will be including a playthrough of the entire game, showcasing all of the game’s features. Screenshots and GIFs will also be provided to elaborate on specific features]
+Procedural Dungeon Generation
+<br/>
+![](https://github.com/Team-Slime-Dungeon/Roguelike-Dungeon-Crawler/blob/JacquelineBranch/GIF/Procedural%20Dungeon%20Generation%20Demo.gif)
+<br/>
+
+Item Spawning/ Treassure Spawning
+<br/>
+![](https://github.com/Team-Slime-Dungeon/Roguelike-Dungeon-Crawler/blob/JacquelineBranch/GIF/Treassure%20Chest%20Demo.gif)
+<br/>
+
+Monster AI
+<br/>
+![](https://github.com/Team-Slime-Dungeon/Roguelike-Dungeon-Crawler/blob/JacquelineBranch/GIF/Monster%20Demo.gif)
+<br/>
+
+Companion System/ Dialogue
+<br/>
+![](https://github.com/Team-Slime-Dungeon/Roguelike-Dungeon-Crawler/blob/JacquelineBranch/GIF/Companion%20Demo.gif)
+<br/>
+
+Main Menu
+<br/>
+![](https://github.com/Team-Slime-Dungeon/Roguelike-Dungeon-Crawler/blob/JacquelineBranch/GIF/Main%20Menu%20Demo.gif)
+<br/>
+
+Inventory System
+<br/>
+![](https://github.com/Team-Slime-Dungeon/Roguelike-Dungeon-Crawler/blob/JacquelineBranch/GIF/Inventory%20System%20Demo.gif)
+<br/>
+
+Shop System
+<br/>
+![](https://github.com/Team-Slime-Dungeon/Roguelike-Dungeon-Crawler/blob/JacquelineBranch/GIF/Shop%20System%20Demo.gif)
+<br/>
 
 ## Credits
-* Elizabeth - project lead, artist, dungeon generation, monster code, general coding and cleanup
-* Jesse - Scrum Master, Enemy Design, Environment coder 
-* Kobi - Dungeon generation coder, music/sound
-* Christian - Inventory GUI, Pause/settings, Item pickup, General Coding, Enemy AI
+* Elizabeth - Project Lead, Artist, Dungeon Generation, Monster Code, General Coding and Cleanup
+* Jesse - Scrum Master, Enemy Design, Environment Coder 
+* Kobi - Dungeon Generation Coder, Music/Sound
+* Christian - Inventory GUI, Pause/settings, Item Pickup, General Coding, Enemy AI
 * Jacqueline -  Player Controls, Main Story, Dialogue
 * Javier - Concepts and Designs, Player Coder, Camera Coder
-* Ricardo - Menu, Camera control, Settings UI, 
+* Ricardo - Menu, Camera control, Settings UI

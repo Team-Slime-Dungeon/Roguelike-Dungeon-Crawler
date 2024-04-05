@@ -1,5 +1,4 @@
-
-[gd_scene load_steps=67 format=3 uid="uid://crcqnnl6ies46"]
+[gd_scene load_steps=66 format=3 uid="uid://crcqnnl6ies46"]
 
 [ext_resource type="Script" path="res://CharacterControls.gd" id="1_fqxek"]
 [ext_resource type="Texture2D" uid="uid://bqs2ydffkjk73" path="res://player/cassandra_walk.png" id="2_afcbe"]
@@ -1072,6 +1071,8 @@ stream = ExtResource("5_0snku")
 
 [node name="RegenTimer" type="Timer" parent="."]
 wait_time = 3.0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 
 [connection signal="body_entered" from="detection_area" to="." method="_on_detection_area_body_entered"]
 [connection signal="body_exited" from="detection_area" to="." method="_on_detection_area_body_exited"]

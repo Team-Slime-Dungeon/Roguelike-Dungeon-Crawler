@@ -11,6 +11,9 @@ var currentHealth: int = 3
 var max_speed = 20
 var death_location = null
 
+#Debug Step back in case it has crashes it can be turned off here by making it false
+var allow_step_back = true
+
 @onready var HurtTimer1 = $HurtTimer1
 @onready var deathTimer = $deathTimer
 #@onready var slimedeathsound = $slimedeathsound
@@ -37,7 +40,7 @@ func set_color(body_color=null,detail_color=null):
 		$Texture.modulate = body_color
 
 func _physics_process(delta):
-	if player_chase:
+	if player_chase and is_instance_valid(player):
 		velocity = (player.position + Vector2(16,16) - self.position) + velocity / chase_speed
 		$BushmoAnim.play("walking")
 	
@@ -71,6 +74,33 @@ func _on_hurt_box_area_entered(area):
 
 			death_location = get_position()
 
+func _on_hit_box_area_entered(area):
+	#If the player gets hurt and if allow_step_back is true
+	if area.name == "hurtbox" and allow_step_back:
+		step_back()
+
+func step_back():
+  # Check if player exists and is valid
+	if player != null and is_instance_valid(player):
+	# Calculate direction to slide away from the player
+		var slide_direction = (self.position - player.position).normalized()
+	# Reduce slide distance slightly to avoid getting stuck on edges
+		var slide_amount = slide_direction * 30 
+	# Set the slime's speed and direction for the slide
+		self.velocity = slide_amount
+		# Make Slime Slide
+		move_and_slide()
+	# Pause Chasing for a bit
+		player_chase = false
+		var resume_chase_timer = Timer.new()
+		add_child(resume_chase_timer)
+		
+	# Wait before Resuming Chase
+		resume_chase_timer.wait_time = 0.5 
+		resume_chase_timer.one_shot = true
+		resume_chase_timer.connect("timeout", Callable(self, "resume_chase"))
+		resume_chase_timer.start()
+
 func _on_resume_chase():
 	player_chase = true # Resume chasing
 
@@ -83,6 +113,8 @@ func item_clear():
 func _on_detectionarea_body_entered(body):
 	if body.name == "Cassandra":
 		player = body
+		# Wait for 0.2 seconds before chasing
+		#await get_tree().create_timer(0.2).timeout
 		player_chase = true
 
 func _on_detectionarea_body_exited(body):

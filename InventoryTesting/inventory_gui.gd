@@ -10,12 +10,16 @@ var inventory_visible = true
 var inv_slots = []
 var last_inv_check
 
+var companion = 1
+
+
 func _ready():
 	#Grab Signal from Pause Menu node
 	var pause_menu = get_node("../../Pause_Menu")
 	pause_menu.connect("pause_toggled", Callable(self, "_on_pause_toggled"))
-	
 	initialize_empty_slots()
+	
+	
 
 
 func initialize_empty_slots():
@@ -72,6 +76,9 @@ func _input(event):
 	if event.is_action_pressed("Inventory"):
 		var inv_check = Items.Player_Inventory.Inventory
 		
+		label_based_on_companion()
+		#set_label_text("Inventory Open")
+		
 		# Updates the inventory if there are any changes (either amounts or in items held)
 		if inv_check != last_inv_check:
 			print("Inventory has changed! (was ",last_inv_check," new one is ", inv_check," )")
@@ -83,4 +90,46 @@ func _input(event):
 		inventory_visible = !inventory_visible  # Toggle the visibility flag
 		set_visible(inventory_visible)
 
+#Function to change the label
+func set_label_text(new_text):
+	var label_node = get_node("Tabs/Companion/Background/Label")
+	if label_node:
+		label_node.text = new_text
+	else:
+		print("Label node not found at path: " + label_node)
+		
+func set_label2_text(new_text):
+	var label_node = get_node("Tabs/Companion/Background/Label2")
+	if label_node:
+		label_node.text = new_text
+	else:
+		print("Label node not found at path: " + label_node)
+		
+func set_label3_text(new_text):
+	var label_node = get_node("Tabs/Companion/Background/Label3")
+	if label_node:
+		label_node.text = new_text
+	else:
+		print("Label node not found at path: " + label_node)
 
+#Funtion to change all labels based on companions
+func label_based_on_companion():
+	if companion == 1:
+		set_label_text("Companion1 Name HP :")
+		set_label2_text("         Effect: \n Some description \n of the companion \n and their abilities")
+		set_label3_text("There is something else that we can add Here im sure")
+		
+	elif companion == 2:
+		set_label_text("Companion2 Name HP :")
+		set_label2_text("         Effect: \n Some description \n of the companion \n and their abilities")
+		set_label3_text("This has changed to make sure it works")
+		
+	elif companion == 3:
+		set_label_text("Companion3 Name HP :")
+		set_label2_text("         Effect: \n Some description \n of the companion \n and their abilities")
+		set_label3_text("Still couldnt figure out what to put down here")
+		
+	else:
+		set_label_text("Companion value error")
+		set_label2_text("Companion value error")
+		set_label3_text("Companion value error")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cul7b22epo42i"]
+[gd_scene load_steps=17 format=3 uid="uid://cul7b22epo42i"]
 
 [ext_resource type="Script" path="res://InventoryTesting/inventory_gui.gd" id="1_ap1sc"]
 [ext_resource type="Texture2D" uid="uid://dfnshdf6xxgdp" path="res://InventoryTesting/InventoryBackgroundPics/inventoryframe.png" id="2_02nu5"]
@@ -8,11 +8,23 @@
 [ext_resource type="Texture2D" uid="uid://eli43xhhn4vd" path="res://InventoryTesting/InventoryBackgroundPics/Key Slots.png" id="6_gswts"]
 [ext_resource type="Script" path="res://InventoryTesting/Playerequip_inv/EquipSlot.gd" id="6_yi8ey"]
 [ext_resource type="Texture2D" uid="uid://dui8kdpinatde" path="res://InventoryTesting/InventoryBackgroundPics/Shirt Slot.png" id="7_vbc0q"]
+[ext_resource type="Texture2D" uid="uid://q7hya32jg06y" path="res://icon.svg" id="9_5fv2j"]
 [ext_resource type="Script" path="res://InventoryTesting/trashingbutton.gd" id="9_gicqq"]
+[ext_resource type="Texture2D" uid="uid://db1hxdrm8mtmg" path="res://InventoryTesting/InventoryBackgroundPics/Sheild Slot.png" id="10_b5xuv"]
 [ext_resource type="Texture2D" uid="uid://jmrtyy66elth" path="res://trashcanpic.webp" id="10_cf7rm"]
+[ext_resource type="Script" path="res://InventoryTesting/unequipbutton.gd" id="11_o5mek"]
+[ext_resource type="FontFile" uid="uid://bbs1yygn0xhkm" path="res://m3x6.ttf" id="14_qhqyf"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_tbsgo"]
 texture = ExtResource("2_7alty")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_psbq1"]
+bg_color = Color(0.345098, 0.215686, 0.0901961, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+shadow_size = 4
 
 [node name="Inventory_gui" type="Control"]
 custom_minimum_size = Vector2(20, 20)
@@ -49,9 +61,11 @@ mouse_force_pass_scroll_events = false
 theme_override_font_sizes/font_size = 10
 theme_override_styles/tab_selected = SubResource("StyleBoxTexture_tbsgo")
 tab_alignment = 1
+current_tab = 1
 tab_focus_mode = 0
 
 [node name="Inventory" type="TabBar" parent="Tabs"]
+visible = false
 layout_mode = 2
 focus_mode = 1
 
@@ -116,7 +130,6 @@ texture = ExtResource("5_cjfm8")
 expand_mode = 1
 
 [node name="MainHand" type="TextureRect" parent="Tabs/Inventory/EquipBackground"]
-self_modulate = Color(1, 1, 1, 0.466667)
 layout_mode = 0
 offset_left = 66.0029
 offset_top = 69.2805
@@ -185,10 +198,10 @@ theme_override_font_sizes/font_size = 35
 text = "Cassandra"
 
 [node name="Companion" type="TabBar" parent="Tabs"]
-visible = false
 layout_mode = 2
 
 [node name="Background" type="NinePatchRect" parent="Tabs/Companion"]
+self_modulate = Color(1, 1, 1, 0.466667)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -200,6 +213,110 @@ patch_margin_left = 6
 patch_margin_top = 6
 patch_margin_right = 6
 patch_margin_bottom = 6
+
+[node name="Companion" type="TextureRect" parent="Tabs/Companion/Background"]
+layout_mode = 0
+offset_left = 115.154
+offset_top = 49.152
+offset_right = 155.154
+offset_bottom = 89.152
+scale = Vector2(1.36165, 1.36165)
+texture = ExtResource("4_ax427")
+
+[node name="CompanionIcon" type="TextureRect" parent="Tabs/Companion/Background/Companion"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.68755
+offset_top = 4.68755
+offset_right = -5.31245
+offset_bottom = -5.31245
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("9_5fv2j")
+expand_mode = 1
+
+[node name="Armor" type="TextureRect" parent="Tabs/Companion/Background"]
+layout_mode = 0
+offset_left = 185.838
+offset_top = 26.683
+offset_right = 225.838
+offset_bottom = 66.683
+texture = ExtResource("4_ax427")
+
+[node name="ArmorIcon" type="TextureRect" parent="Tabs/Companion/Background/Armor"]
+self_modulate = Color(1, 1, 1, 0.588235)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 6.08537
+offset_top = 5.61727
+offset_right = -12.9146
+offset_bottom = -13.3827
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.35192, 1.35192)
+texture = ExtResource("10_b5xuv")
+expand_mode = 1
+
+[node name="KeyItem" type="TextureRect" parent="Tabs/Companion/Background"]
+layout_mode = 0
+offset_left = 185.838
+offset_top = 73.9616
+offset_right = 225.838
+offset_bottom = 113.962
+texture = ExtResource("4_ax427")
+
+[node name="KeyItemIcon" type="TextureRect" parent="Tabs/Companion/Background/KeyItem"]
+self_modulate = Color(1, 1, 1, 0.588235)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 7.12762
+offset_top = 8.53189
+offset_right = -6.87238
+offset_bottom = -5.46812
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_gswts")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="Tabs/Companion/Background"]
+layout_mode = 0
+offset_left = 0.468105
+offset_top = 6.08633
+offset_right = 336.468
+offset_bottom = 46.0863
+scale = Vector2(0.412892, 0.412892)
+theme_override_font_sizes/font_size = 29
+text = "\"Companion Name\" HP: 100"
+
+[node name="Label2" type="Label" parent="Tabs/Companion/Background"]
+layout_mode = 0
+offset_left = 240.606
+offset_top = 22.0019
+offset_right = 446.606
+offset_bottom = 346.002
+scale = Vector2(0.307418, 0.307418)
+theme_override_font_sizes/font_size = 29
+text = "     Effect:
+This can show
+what the 
+companions
+do maybe?"
+
+[node name="Label3" type="Label" parent="Tabs/Companion/Background"]
+layout_mode = 0
+offset_left = 6.08537
+offset_top = 131.539
+offset_right = 401.085
+offset_bottom = 171.539
+scale = Vector2(0.412892, 0.412892)
+theme_override_font_sizes/font_size = 29
+text = "Maybe Somthing down here"
 
 [node name="trashingbutton" type="TextureButton" parent="."]
 layout_mode = 0
@@ -214,5 +331,30 @@ position = Vector2(15.8942, 12.0125)
 scale = Vector2(0.0503975, 0.043418)
 texture = ExtResource("10_cf7rm")
 
+[node name="unequipbutton" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 35.0
+offset_top = 83.0
+offset_right = 71.0
+offset_bottom = 94.0
+script = ExtResource("11_o5mek")
+
+[node name="Label" type="Label" parent="unequipbutton"]
+layout_mode = 0
+offset_left = 14.9437
+offset_top = 0.930346
+offset_right = 116.944
+offset_bottom = 50.9303
+scale = Vector2(0.204171, 0.204171)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("14_qhqyf")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxFlat_psbq1")
+text = "Unequip"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [connection signal="mouse_entered" from="trashingbutton" to="trashingbutton" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="trashingbutton" to="trashingbutton" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="unequipbutton" to="unequipbutton" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="unequipbutton" to="unequipbutton" method="_on_mouse_exited"]
