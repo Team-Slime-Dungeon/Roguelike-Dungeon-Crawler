@@ -23,6 +23,7 @@ var Resolutions: Dictionary = {"3840x2160":Vector2i(3840,2160),
 
 func _ready():
 	AddResolutions()
+	#loadValues() loads the menu value //off for testing
 	#FullscreenToggle.pressed = OS.is_window_fullscreen()
 	#VsyncToggle.set_pressed_no_signal(OS.is_vsync_enabled())
 	#FXAAToggle.set_pressed_no_signal(get_viewport().get_use_fxaa())
@@ -52,11 +53,14 @@ func _on_resolution_2_item_selected(index):
 	var size = ResOptionButton.get_item_text(index)
 	get_window().set_size(Resolutions[size])
 	Centre_Window()
-
-func _on_save_settings_pressed():
+	
+func loadValues():
 	var config := ConfigFile.new()
 	config.load(SAVE_PATH)
-	config.set_value(name, "Resolution", indexRes)
-	config.set_value(name, "FullScreen", fullscreenToggle.button_pressed)
-	config.set_value(name, "mainVolume", mainVolume.value)
-	config.save(SAVE_PATH)
+	
+	for i in config.get_sections():
+		$"../Resolution2".select(config.get_value(i, "Resolution"))
+		#$"../Fullscreen2" = config.get_value(i, "FullScreen")
+		$"../HSlider".value = config.get_value(i, "mainVolume")
+		$"../Mode".count = config.get_value(i, "ColorBlind")
+
