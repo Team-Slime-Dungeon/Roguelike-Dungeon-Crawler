@@ -52,7 +52,7 @@ func _process(delta):
 
 			if Input.is_action_just_pressed("interact"):
 				print("Attempting purchase")
-				if Items.Player_Inventory._pay_for_item(current_item.ID,1):
+				if Items.Player_Inventory._pay_for_item(current_item.ID, 1):
 					get_parent().shop_success()
 				else:
 					get_parent().shop_fail() 

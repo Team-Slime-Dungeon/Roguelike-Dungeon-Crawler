@@ -42,8 +42,16 @@ var is_dashing = false
 var projectile_spawns = []
 var projectile_ID = 0
 var camera_scale = 2
-
+var weapon_sounds = {
+	"Bronze Sword": "res://SFX/Weapon Sounds/Sword A/SwordSoundsA1.wav",
+	"Silver Sword": "res://SFX/Weapon Sounds/Sword A/SwordSoundsA2.wav",
+	"fist": "res://SFX/Weapon Sounds/Sword A/fist-fight-192117.mp3",
+	"Gold Sword": "res://SFX/Weapon Sounds/Sword A/SwordSoundsA3.wav",
+	}
+	
+var current_weapon_sound: AudioStream
 @onready var weapon_sprite = $CassandraSprite/weapon
+@onready var attack_sound_player = $AudioStreamPlayer
 #gets the weapon texture from the equipped slots
 var new_texuture
 
@@ -52,6 +60,7 @@ func _ready():
 	animation_tree.active = true
 	input_dir = Vector2(1,0)
 	Items.Player_Inventory.connect("texture_has_changed", Callable(self, "_on_texture_has_changed"))
+	update_weapon_sound("fist")
 
 #func _process(delta):
 	if cutscene_action:
@@ -60,9 +69,11 @@ func _ready():
 func _on_texture_has_changed(item_name):
 	if item_name == null:
 		weapon.texture = null
+		  # No weapon equipped, use fist sound
 	else:
 		new_texuture = load("res://InventoryTesting/Item Test/" + item_name + ".png")
 		weapon.texture = new_texuture
+		update_weapon_sound(item_name)
 	#print("signal has been recieved")
 	
 func block_inputs(state = false): input_blocked = state
@@ -114,7 +125,10 @@ func get_input():
 	if input_blocked != true:
 		if (is_attacking == true or is_talking == true):
 			input_dir = Vector2(0,0)
-		else: input_dir = Input.get_vector("ui_left","ui_right","ui_up","ui_down")
+		else: 
+			input_dir = Input.get_vector("ui_left","ui_right","ui_up","ui_down")
+			Global.player_position = global_position
+			Global.player_direction = input_dir
 	
 		SPEED = walking_speed
 	
@@ -135,20 +149,25 @@ func update_animation_parameter():
 	#idle animation plays if velocity equals zero, otherwise walking animation plays
 	if(velocity == Vector2.ZERO):
 		animation_tree["parameters/conditions/idle"] = true	
-		animation_tree["parameters/conditions/is_moving"] = false	
+		animation_tree["parameters/conditions/is_moving"] = false
+		Global.player_is_idle = true	
 	else:
 		animation_tree["parameters/conditions/idle"] = false	
 		animation_tree["parameters/conditions/is_moving"] = true
+		Global.player_is_idle = false
 	
 	#attack animation plays if LMB is pressed
 	#weapon is set to visible
 	#otherwise attack animation is set to false	
 	if(Input.is_action_pressed("attack")):
 		animation_tree["parameters/conditions/attack"] = true
+		Global.player_is_idle = true
 		weapon.visible = true
 		is_attacking = true
+		attack_sound_player.play()
 	elif(Input.is_action_just_released("ranged_attack")):
 		animation_tree["parameters/conditions/attack"] = true
+		Global.player_is_idle = true
 		is_attacking = true
 		
 		var tossed_item = preload("res://equipment/Shuriken.tscn")
@@ -308,4 +327,12 @@ func _on_detection_area_body_exited(body):
 func _on_ghost_timer_timeout():
 	add_ghost()
 
+func update_weapon_sound(item_name):
+	if item_name in weapon_sounds:
+		current_weapon_sound = load(weapon_sounds[item_name]) as AudioStream
+	else:
+		current_weapon_sound = load(weapon_sounds["fist"]) as AudioStream  # Load default fist sound if weapon name not found
+	print("Loaded sound for:", item_name)
+	attack_sound_player.stream = current_weapon_sound
+	#attack_sound_player.play()
 

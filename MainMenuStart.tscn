@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://btsxsxswd7hs0"]
+[gd_scene load_steps=30 format=3 uid="uid://btsxsxswd7hs0"]
 
 [ext_resource type="Script" path="res://mainmenu.gd" id="1_230jb"]
 [ext_resource type="Shader" path="res://blur.gdshader" id="2_r8def"]
@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://cokpmf8ymwndc" path="res://MenuAssets/fire_00000.png" id="10_x848q"]
 [ext_resource type="Shader" path="res://MainMenuStart.gdshader" id="11_hp4dv"]
 [ext_resource type="Texture2D" uid="uid://24dst4l36g52" path="res://title.png" id="11_vflqt"]
+[ext_resource type="AudioStream" uid="uid://bys0kjv0rvy3r" path="res://Music/Temp Roguelike Track.wav" id="15_a67p8"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_u0t1y"]
 shader = ExtResource("2_r8def")
@@ -795,8 +796,8 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = 660.0
-offset_right = 50549.0
-offset_bottom = 29094.0
+offset_right = 74741.0
+offset_bottom = 42702.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 0.854902, 0.588235, 1)
@@ -1039,6 +1040,11 @@ scale = Vector2(4.5, 4.5)
 texture = ExtResource("11_vflqt")
 vframes = 6
 frame = 2
+
+[node name="backgroundMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("15_a67p8")
+volume_db = -15.0
+autoplay = true
 
 [connection signal="item_selected" from="Sets/Control/ResolutionButton" to="Sets/Control/Label" method="_on_OptionButton_item_selected"]
 [connection signal="toggled" from="Sets/Control/CheckButton" to="Sets/Control/Label" method="_on_check_button_toggled"]

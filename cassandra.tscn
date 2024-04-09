@@ -19127,15 +19127,17 @@ hframes = 24
 frame = 9
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "idle_right"
 libraries = {
 "": SubResource("AnimationLibrary_brgve")
 }
+autoplay = "idle_right"
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_brgve")
+}
 tree_root = SubResource("AnimationNodeStateMachine_hql2k")
 anim_player = NodePath("../AnimationPlayer")
-active = true
 parameters/attack/blend_position = Vector2(-1.77607, 1.02183)
 parameters/idle/blend_position = Vector2(1.94172, 1.21397)
 parameters/walk/blend_position = Vector2(-1.84049, 1.21397)

@@ -15,6 +15,7 @@ var fullScr = false
 var a1
 var a2
 var a3
+var colorblind
 const SAVE_PATH = "res://entity.ini"
 
 var Resolutions: Dictionary = {"3840x2160":Vector2i(3840,2160),
@@ -30,7 +31,7 @@ var Resolutions: Dictionary = {"3840x2160":Vector2i(3840,2160),
 
 func _ready():
 	AddResolutions() 
-	#loadSettings() calls to Load settings, Uncommenting with load settings
+	#loadSettings() #calls to Load settings, Uncommenting with load settings
 	
 	#------- Below additional setting Not implemented
 	#FullscreenToggle.pressed = OS.is_window_fullscreen()
@@ -67,9 +68,9 @@ func _on_check_button_toggled(button_pressed):
 func _on_save_settings_pressed():
 	var config := ConfigFile.new()
 	config.load(SAVE_PATH)
-	config.set_value(name, "Resolution", indexRes)
-	config.set_value(name, "FullScreen", fullscreenToggle.button_pressed)
-	config.set_value(name, "mainVolume", mainVolume.value)
+	config.set_value("Setting", "Resolution", $"../ResolutionButton".selected)
+	config.set_value("Setting", "FullScreen", fullscreenToggle.button_pressed)
+	config.set_value("Setting", "mainVolume", mainVolume.value)
 	config.save(SAVE_PATH)
 	pass # Replace with function body.
 	
@@ -81,6 +82,8 @@ func loadSettings():
 		a1 = config.get_value(i, "Resolution")
 		a2 = config.get_value(i, "FullScreen")
 		a3 = config.get_value(i, "mainVolume")
+		#SettValues.clrbnd = config.get_value(i, "colorblind")
+		#print(SettValues.clrbnd)
 	
 	print(a1)
 	_on_check_button_toggled(a2)

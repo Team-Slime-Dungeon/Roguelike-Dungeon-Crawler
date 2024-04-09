@@ -10,53 +10,63 @@ var item_attack = 3
 var item_defense = 4
 var item_effect1 = 5
 var item_effect2 = 6
-
+var item_can_equip = 7
 # Indexes for item categories for outside use
 var weapon_start_index = 1
-var weapon_end_index = 50
+var weapon_end_index = 3
+
+var helmet_start_index = 14
+var helmet_end_index = 16
 
 var treasure_start_index = 51
-var treasure_end_index = 100
+var treasure_end_index = 64
 
 var Item_List = {
-# Item ID [Item Name // Price // Item_Max_Stack // Item Attack // Item Defense // Item Effect1 // Item Effect2]
-	0 : ["Coin",			1,		99,					0,				0,			null,			 null ],
+# Item ID [Item Name // Price // Item_Max_Stack // Item Attack // Item Defense // Item Effect1 // Item Effect2//Equippable?]
+	0 : ["Coin",			1,		99,				0,				0,			null,			 null, false ],
 	
 	# Weapons and Equipment IDs 1 - 50
-	1 : ["weapon_2",		20,		1,		2,				0,				null, null ],
-	2 : ["weapon_1",		30,		1,		3,				0,				null, null ],
-	3 : ["Bronze Helmet", 	30,		1,		0,				5,				null, null ],
+	1 : ["Bronze Sword",	5,		1,		2,				0,				null, null,	true ],
+	2 : ["Silver Sword",	15,		1,		3,				0,				null, null,	true ],
+	3 : ["Gold Sword", 		30,		1,		5,				0,				null, null,	true ],
 	
+	14 : ["Bronze Helmet", 	5,		1,		0,				5,				null, null,	true ],
+	15 : ["Silver Helmet", 	15,		1,		0,				6,				null, null,	true ],
+	16 : ["Gold Helmet", 	30,		1,		0,				7,				null, null,	true ],
+	
+	#Weapon IDs 1-2. 50 will spawn a random sword
+	50: ["Random Weapon",	20,		0,		0,				0,				null, null, false],
 	# Treasures IDs 51 - 100. 51 will spawn a random item, 52 on can be found inside 51
-	51: ["Random Treasure",	20,		0,		0,				0, 				null, null ],
+	51: ["Random Treasure",	20,		0,		0,				0, 				null, null, false  ],
 	
-	52: ["Ruby Necklace",	10,		99,		0,				0, 				null, null ],
-	53: ["Emerald Crown",	20,		99,		0,				0, 				null, null ],
-	54: ["Ancient Tome",	25,		99,		0,				0, 				null, null ],
-	55: ["Ruby",			30,		99,		0,				0, 				null, null ],
-	56: ["Old Earring",		35,		99,		0,				0, 				null, null ],
-	57: ["Ancient Coins",	40,		99,		0,				0, 				null, null ],
-	58: ["Pearl Necklace",	45, 	99,		0,				0, 				null, null ],
-	59: ["Sapphire",		50,		99,		0,				0, 				null, null ],
-	60: ["Emerald",			65,		99,		0,				0, 				null, null ],
-	61: ["Topaz",			75,		99,		0,				0, 				null, null ],
-	62: ["Sacred Technology", 89,	999,	0,				0, 				null, null ], # I actually have that many
-	63: ["Diamond",			90,		99,		0,				0, 				null, null ],
-	64: ["Petrified Egg",	100,	99,		0,				0, 				null, null ],
+	52: ["Ruby Necklace",	10,		99,		0,				0, 				null, null, false  ],
+	53: ["Emerald Crown",	20,		99,		0,				0, 				null, null, false  ],
+	54: ["Ancient Tome",	25,		99,		0,				0, 				null, null, false  ],
+	55: ["Ruby",			30,		99,		0,				0, 				null, null, false  ],
+	56: ["Old Earring",		35,		99,		0,				0, 				null, null, false  ],
+	57: ["Ancient Coins",	40,		99,		0,				0, 				null, null, false  ],
+	58: ["Pearl Necklace",	45, 	99,		0,				0, 				null, null , false ],
+	59: ["Sapphire",		50,		99,		0,				0, 				null, null , false ],
+	60: ["Emerald",			65,		99,		0,				0, 				null, null , false ],
+	61: ["Topaz",			75,		99,		0,				0, 				null, null , false ],
+	62: ["Sacred Technology", 89,	999,	0,				0, 				null, null , false ], # I actually have that many
+	63: ["Diamond",			90,		99,		0,				0, 				null, null , false ],
+	64: ["Petrified Egg",	100,	99,		0,				0, 				null, null , false ],
 	
 	# Monster Drops
-	71: ["Blue Mushroom",	3,		 99,		0,				0, 				null, null ],
+	71: ["Blue Mushroom",	3,		 99,		0,				0, 				null, null , false ],
 	
 	#Potions
-	90: ["Red Potion",		3,		 99,		0,				0, 				"HP+5", null ],
-	91: ["Purple Potion",	5,		 99,		0,				0, 				"Nothing", null ],
-	92: ["Blue Potion",		3,		 99,		0,				0, 				"Something", null ],
-	93: ["Green Potion",	5,		 99,		0,				0, 				"Who Knows", null ],
+	90: ["Red Potion",		3,		 9,		0,				0, 				"HP+5", null , false ],
+	91: ["Purple Potion",	5,		 9,		0,				0, 				"Nothing", null , false ],
+	92: ["Blue Potion",		3,		 9,		0,				0, 				"Something", null , false ],
+	93: ["Green Potion",	5,		 9,		0,				0, 				"Who Knows", null , false ],
 }
 
 var Item_Scenes = {
 	71: preload("res://equipment/Blue Mushroom.tscn"),
 	# Multi Use Scenes (Contain more than one)
+	50: preload("res://equipment/Weapon_Item.tscn"),
 	51: preload("res://equipment/treasure_spawns.tscn"),
 	90: preload("res://equipment/EquipmentTest/Potion_Item.tscn"),
 }
@@ -110,16 +120,64 @@ func _get_item_price(item_id, amount=1):
 	else:
 		print("Error: Item has no price or does not exist.")
 
-func _pay_for_item(item_id,amount=1):
+func _pay_for_item(item_id, amount=1, overfill=false):
 	var price_total = _get_item_price(item_id,amount)
+	
+	# Player has enough coins to pay for the item in their inventory
 	if _get_coins() >= price_total:
-		_add_item(item_id,amount)
-		_minus_item(0,price_total)
-		return true
+		# Checks if the player can add the item to their inventory. If item types can hold one (swords) leave this off
+		if _can_add_item(item_id,amount, overfill):
+			_add_item(item_id,amount)
+			_minus_item(0,price_total)
+			return true
+		else:
+			print("You can't carry anymore of those!")
+			return false
+
 	else:
 		print("Sorry, not enough coins!")
 		return false
 		
+func _can_add_item(item_id, amount, overfill=false):
+	var add_amount = amount
+	# If item ID is in inventory
+	if Inventory.has(item_id):
+		# Adding a valid value
+		if add_amount + Inventory[item_id] <= Item_List[item_id][item_maxstack]:
+			return true
+			
+		# Add amount is too large, add to maximum amount
+		else:
+			# if overfill is allowed, by default it isn't so that you can't buy single stack items
+			if overfill == false:
+				return false
+			# if overfill is allowed, meaning you CAN pick up the item but might not need to
+			else:
+				return true
+		
+	# Item is not in inventory, add new item to inventory (if it is valid)
+	else: 
+		# Item is a valid item
+		if Item_List.has(item_id):
+			#print("Checking Item quantity. Trying to add ", add_amount," ", Item_List[item_id][item_name] ," to inventory.")
+			
+			# Item is at a valid adding amount
+			if add_amount <= Item_List[item_id][item_maxstack]:
+				return true
+			
+			# Adding too many items, cut items down to max amount
+			else:
+				#print("Amount too high, adjusted amount.")
+				if overfill == false:
+					return false
+				else:
+					return true
+			
+		# Item is not a valid item
+		else:
+			print("Error: Item does not exist for _can_add_item.")
+			return false
+	
 func _add_item(item_id, amount):
 	var add_amount = amount
 	# If item ID is in inventory
@@ -232,13 +290,23 @@ func get_Item_Id_By_Name(Item_Name):
 	for i in Item_List:
 		if Item_List[i][0]==Item_Name:
 			return i
-			
+
+func is_equippable(item_id):
+	# If the item exists
+	if Item_List.has(item_id):
+		# Return the item's name as a string
+		return Item_List[item_id][item_can_equip]
+	else:
+		print("Error: Item does not exist.")
+	# Item didn't exist, return item name as "None"
+	return false
+
 func equip_weapon(new_weapon_id):
 	var current_weapon_id
 	if equip_weapon_stats == {}:
 		current_weapon_id = new_weapon_id
 		set_equip_weapon_stats(current_weapon_id)
-		Inventory.erase(new_weapon_id)
+		#Inventory.erase(new_weapon_id)
 		var weapon_name = get_item_name(current_weapon_id)
 		emit_signal("texture_has_changed", weapon_name)
 func _delete_equip(weapon_id):
@@ -251,7 +319,8 @@ func _print_inv_dic():
 	print(Inventory)
 	
 func set_equip_weapon_stats(weapon_id):
-	equip_weapon_stats[0] = Item_List[weapon_id]
+	if is_equippable(weapon_id):
+		equip_weapon_stats[0] = Item_List[weapon_id]
 	#return equip_weapon_stats	
 	
 func get_equip_weapon_stats():
