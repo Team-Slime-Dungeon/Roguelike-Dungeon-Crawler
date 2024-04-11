@@ -23,7 +23,7 @@ var Resolutions: Dictionary = {"3840x2160":Vector2i(3840,2160),
 
 func _ready():
 	AddResolutions()
-	#loadValues() loads the menu value //off for testing
+	#loadValues() #loads the menu value //off for testing
 	#FullscreenToggle.pressed = OS.is_window_fullscreen()
 	#VsyncToggle.set_pressed_no_signal(OS.is_vsync_enabled())
 	#FXAAToggle.set_pressed_no_signal(get_viewport().get_use_fxaa())
@@ -62,5 +62,5 @@ func loadValues():
 		$"../Resolution2".select(config.get_value(i, "Resolution"))
 		#$"../Fullscreen2" = config.get_value(i, "FullScreen")
 		$"../HSlider".value = config.get_value(i, "mainVolume")
-		$"../Mode".count = config.get_value(i, "ColorBlind")
+		#$"../Mode".count = config.get_value(i, "ColorBlind")
 

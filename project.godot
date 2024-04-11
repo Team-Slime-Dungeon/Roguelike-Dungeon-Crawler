@@ -26,6 +26,7 @@ PlayerData="*res://InventoryTesting/Singleton/PlayerData.gd"
 MusicController="*res://music_controller.tscn"
 EquipSlot="*res://InventoryTesting/Playerequip_inv/EquipSlot.gd"
 Global="*res://Global.gd"
+SettingVal="*res://Pause Menu/SettingVal.gd"
 
 [display]
 

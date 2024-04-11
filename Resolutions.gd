@@ -31,7 +31,7 @@ var Resolutions: Dictionary = {"3840x2160":Vector2i(3840,2160),
 
 func _ready():
 	AddResolutions() 
-	#loadSettings() #calls to Load settings, Uncommenting with load settings
+	loadSettings() #calls to Load settings, Uncommenting with load settings
 	
 	#------- Below additional setting Not implemented
 	#FullscreenToggle.pressed = OS.is_window_fullscreen()
@@ -59,6 +59,8 @@ func Centre_Window():
 func _on_check_button_toggled(button_pressed):
 	if button_pressed:
 		get_window().set_mode(Window.MODE_FULLSCREEN)
+		if fullscreenToggle.button_pressed == false:
+			fullscreenToggle.button_pressed = true
 	else:
 		get_window().set_mode(Window.MODE_WINDOWED)
 		
@@ -89,3 +91,6 @@ func loadSettings():
 	_on_check_button_toggled(a2)
 	_on_OptionButton_item_selected(a1)
 	mainVolume.value = a3
+	ResOptionButton.select(a1)
+	#$Settings/Resolution2.select(a1))
+	

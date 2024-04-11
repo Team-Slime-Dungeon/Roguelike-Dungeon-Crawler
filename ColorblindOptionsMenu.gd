@@ -2,13 +2,14 @@ extends Label
 
 var arr = ["Protanopia", "Deutranopia", "Tritanopia", "Off"]
 var modeLabel
-var count = 2
+var count = SettingVal.colorMode
 
 var bldMode
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	_loadColBlind(count)
 	#bldMode = $"../../CanvasLayer/ColorRect"
 	#bldMode = get_node("../../../ColorBlind/ColorRectBld")
 	
@@ -39,4 +40,6 @@ func _Rbuttonspressed():
 		count = 3
 	print(count)
 	
+func _loadColBlind(val):
+	set_text(arr[val])
 	

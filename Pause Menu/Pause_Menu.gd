@@ -21,6 +21,7 @@ var is_paused = false :
 		
 		
 func _ready():
+	loadValues()
 	self.is_paused = false
 	center_container = get_node("CenterContainer")
 	check_setting = get_node("Settings")
@@ -70,3 +71,14 @@ func _on_save_settings_pressed():
 	print($Settings/Mode.count)
 	config.save(SAVE_PATH)
 	pass # Replace with function body.	
+
+func loadValues():
+	var config := ConfigFile.new()
+	config.load(SAVE_PATH)
+	
+	for i in config.get_sections():
+		$Settings/Resolution2.select(config.get_value(i, "Resolution"))
+		#$"../Fullscreen2" = config.get_value(i, "FullScreen")
+		$Settings/HSlider.value = config.get_value(i, "mainVolume")
+		#$Settings/Mode.count = config.get_value(i, "ColorBlind")
+		#$Settings/Mode.arr()
