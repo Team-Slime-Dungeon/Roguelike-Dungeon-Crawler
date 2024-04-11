@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cul7b22epo42i"]
+[gd_scene load_steps=18 format=3 uid="uid://cul7b22epo42i"]
 
 [ext_resource type="Script" path="res://InventoryTesting/inventory_gui.gd" id="1_ap1sc"]
 [ext_resource type="Texture2D" uid="uid://dfnshdf6xxgdp" path="res://InventoryTesting/InventoryBackgroundPics/inventoryframe.png" id="2_02nu5"]
@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://db1hxdrm8mtmg" path="res://InventoryTesting/InventoryBackgroundPics/Sheild Slot.png" id="10_b5xuv"]
 [ext_resource type="Texture2D" uid="uid://jmrtyy66elth" path="res://trashcanpic.webp" id="10_cf7rm"]
 [ext_resource type="Script" path="res://InventoryTesting/unequipbutton.gd" id="11_o5mek"]
+[ext_resource type="Texture2D" uid="uid://q4w5jbyxx2f7" path="res://InventoryTesting/Item Test/Coin.png" id="13_u7cjr"]
 [ext_resource type="FontFile" uid="uid://bbs1yygn0xhkm" path="res://m3x6.ttf" id="14_qhqyf"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_tbsgo"]
@@ -330,6 +331,12 @@ script = ExtResource("9_gicqq")
 position = Vector2(15.8942, 12.0125)
 scale = Vector2(0.0503975, 0.043418)
 texture = ExtResource("10_cf7rm")
+
+[node name="Sell" type="Sprite2D" parent="trashingbutton"]
+visible = false
+position = Vector2(15.8942, 10.3546)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("13_u7cjr")
 
 [node name="unequipbutton" type="TextureButton" parent="."]
 layout_mode = 0

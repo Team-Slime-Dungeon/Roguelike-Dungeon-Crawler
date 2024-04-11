@@ -8,6 +8,8 @@ extends CharacterBody2D
 var item_frame_index = 0
 var picked_up = false
 var current_item = {}
+var ID = 52
+var amount = 1
 
 func _ready():
 	#set_item_frame(0) #Initializes an item
@@ -59,5 +61,8 @@ func _on_player_detection_area_entered(area):
 func choose_item_randomly():
 	var frame_index = randi() % 12  # Randomly choose an index between 0 and 11
 	set_item_frame(frame_index) #Sets Frame into item_Index
+	ID = current_item.ID
+	amount = current_item.amount
+	
 	print("Frame: ", frame_index)#Test Purposes
 	print("Item_ID = ", current_item.ID) #Test Purposes

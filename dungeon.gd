@@ -75,13 +75,7 @@ var chest_spawn_ID = 0
 var monster_list = [
 	preload("res://monsters/Slime.tscn"),
 	preload("res://monsters/Bushmo.tscn"),
-
 	]
-var  item_scenes = { 
-		0: preload("res://equipment/coin.tscn"), 
-		51: preload("res://equipment/treasure_spawns.tscn"),
-		71: preload("res://equipment/Blue Mushroom.tscn"),
-	}
 
 var rubio_scene = preload("res://rubio.tscn")
 var rubio_spawns = []
@@ -315,14 +309,14 @@ func generate_loot(monster):
 		
 		if new_item_map_location in floor_pos or new_item_map_location in hall_pos:
 			# get item scene information and create it from slain monster location
-			var new_item = item_scenes[loot_ID]
+			var new_item = Items.Player_Inventory.Item_Scenes[loot_ID]
 			var new_item_spawn = new_item.instantiate()
 			var new_item_location = Vector2i(monster.death_location) / 2
 			
 			# Manages all the item spawns to remove them when the floor is cleared.
 			item_spawns.append(new_item_spawn)
 			add_child(new_item_spawn)
-				
+			
 			item_spawns[item_spawn_ID].global_position = new_item_location
 
 			item_spawn_ID += 1

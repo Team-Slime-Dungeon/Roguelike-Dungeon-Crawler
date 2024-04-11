@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 #@onready var _animation_player = $AnimationPlayer
 #Adds the sprite sheet into the variable
-@onready var item_sprite = $WeaponSheet
+@onready var item_sprite = $HelmetSheet
 
 #Creates an Index for the Frames
 var item_frame_index = 0
@@ -13,7 +13,7 @@ var shop_item = false
 var text_update = false
 
 var current_item = {}
-var ID = 1
+var ID = 14
 var amount = 1
 
 func _ready():
@@ -25,9 +25,9 @@ func _set_shop(state = false):
 
 #ID number and Amount based on Frames
 var item_properties = {
-	0: {"ID": 1, "amount": 1},
-	1: {"ID": 2, "amount": 1},
-	2: {"ID": 3, "amount": 1}
+	0: {"ID": 14, "amount": 1},
+	1: {"ID": 15, "amount": 1},
+	2: {"ID": 16, "amount": 1}
 }
 
 # Remove the item
@@ -58,7 +58,7 @@ func _process(delta):
 				
 		else:
 			# Collects item and emits signal with the item frame index
-			emit_signal("Weapon Collected", current_item.ID, current_item.amount)
+			emit_signal("Helmet Collected", current_item.ID, current_item.amount)
 			picked_up = true
 			
 func set_item_frame(frame_index):
@@ -73,5 +73,6 @@ func choose_item_randomly():
 	set_item_frame(frame_index)
 	ID = current_item.ID
 	amount = current_item.amount
-	#print("Frame: ", frame_index)#Test Purposes
-	#print("Item_ID = ", current_item.ID) #Test Purposes
+	
+#	print("Frame: ", frame_index)#Test Purposes
+#	print("Item_ID = ", current_item.ID) #Test Purposes

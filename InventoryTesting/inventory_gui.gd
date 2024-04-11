@@ -133,3 +133,11 @@ func label_based_on_companion():
 		set_label_text("Companion value error")
 		set_label2_text("Companion value error")
 		set_label3_text("Companion value error")
+
+
+func _on_texture_button_mouse_entered():
+	pass # Replace with function body.
+
+
+func _on_texture_button_mouse_exited():
+	pass # Replace with function body.

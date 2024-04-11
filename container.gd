@@ -25,7 +25,7 @@ func set_container(type="Chest"):
 	# You can set loot here too. If no container type is set all default to chests for now.
 	if type == "Chest":
 		monster_type = "Chest"
-		monster_drops = [51,51,51,51]
+		monster_drops = [51]
 		
 		open_anim = "treasure_open"
 		animation_player = $chest_anim
@@ -36,7 +36,7 @@ func set_container(type="Chest"):
 	
 	elif type == "Crate":
 		monster_type = "Crate"
-		monster_drops = [51,51,51,51]
+		monster_drops = [0,0,0,51]
 		
 		open_anim = "crate_open"
 		animation_player = $crate_anim
@@ -46,7 +46,7 @@ func set_container(type="Chest"):
 		
 	elif type == "Vase":
 		monster_type = "Vase"
-		monster_drops = [0,0,51,71]
+		monster_drops = [0,0,0,0,71]
 
 		open_anim = "vase_open"
 		animation_player = $vase_anim
