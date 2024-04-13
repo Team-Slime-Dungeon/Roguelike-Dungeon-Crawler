@@ -22,6 +22,8 @@ var kink_probability = 0.5
 var descend = false # check if player stepped on a staircase
 var merchant_spawned = false # check to see if a merchant has spawned
 
+@onready var score = preload("res://score.tscn").instantiate()
+
 var colorDict = {
 	1: [.334, .7, .2], # Forest 1
 	2: [.537, .722, .282], # Forest 2
@@ -103,8 +105,8 @@ func _ready():
 	# Inventory Creation
 	Items.Player_Inventory._add_item(1, 1) 
 	#Items.Player_Inventory._print_inventory()
-	Items.Player_Inventory._add_item(2,1)
-
+	Items.Player_Inventory._add_item(52,2)
+	
 	clear_room() # clean up for new floor
 	
 	# Color tiles for all 25 floors
@@ -173,6 +175,7 @@ func _ready():
 		$Cassandra.armorChanged.connect($GUI/Armor_Durability.updateArmor)
 		armorSetup = true
 	
+	
 
 func _process(delta):
 	for monster in monster_spawns:
@@ -197,6 +200,10 @@ func _process(delta):
 
 func _on_staircase_hitbox_area_entered(area): if area == $Cassandra/hurtbox: _ready() 
 func _on_new_seed_pressed(): _ready() #debug
+func _on_score_pressed(): 
+	#score._ready()
+	get_tree().change_scene_to_file("res://score.tscn")
+		
 
 func floor_structure():
 		hall_count = (current_floor + 3) # num of hallway segments, rec 10
@@ -767,3 +774,6 @@ func clear_room():
 	if current_floor == 15:
 		get_tree().change_scene_to_file("res://environment/Boss Fight 1.tscn")
 		
+
+
+

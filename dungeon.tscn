@@ -788,6 +788,13 @@ offset_top = 24.0
 offset_right = 281.0
 offset_bottom = 117.0
 
+[node name="Score" type="Button" parent="Debug_Hud"]
+offset_left = 28.0
+offset_top = 409.0
+offset_right = 78.0
+offset_bottom = 440.0
+text = "score"
+
 [node name="Cassandra" parent="." instance=ExtResource("11_ai3vm")]
 
 [node name="BackgroundSound" type="AudioStreamPlayer" parent="."]
@@ -804,3 +811,4 @@ script = ExtResource("14_1o1d0")
 [connection signal="pressed" from="Debug_Hud/up" to="Debug_Hud" method="_on_up_pressed"]
 [connection signal="pressed" from="Debug_Hud/down" to="Debug_Hud" method="_on_down_pressed"]
 [connection signal="pressed" from="Debug_Hud/shake" to="Debug_Hud" method="_on_shake_pressed"]
+[connection signal="pressed" from="Debug_Hud/Score" to="." method="_on_score_pressed"]
