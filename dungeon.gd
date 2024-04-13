@@ -772,7 +772,7 @@ func clear_room():
 	#		$TileMap.set_cell(0, Vector2i(i,j), 1, Vector2i(3, 0))
 	
 	if current_floor == 15:
-		get_tree().change_scene_to_file("res://environment/Boss Fight 1.tscn")
+		get_tree().change_scene_to_file("res://environment/king_slime_fight.tscn")
 		
 
 
