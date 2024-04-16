@@ -12,7 +12,7 @@ func _process(delta):
 	pass
 	
 func _can_drop_data(at_position, data):
-	return !is_occupied and data.has("origin_texture")
+	return !is_occupied and data.has("origin_texture") and data.has("EquipSlot")
 	var origin_slot = data["origin_slot"]
 	
 	return self == origin_slot or !is_occupied

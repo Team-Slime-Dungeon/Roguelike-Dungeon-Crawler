@@ -52,6 +52,7 @@ var weapon_sounds = {
 var current_weapon_sound: AudioStream
 @onready var weapon_sprite = $CassandraSprite/weapon
 @onready var attack_sound_player = $AudioStreamPlayer
+@onready var weapon_trail = $CassandraSprite/weapon/WeaponTrail
 #gets the weapon texture from the equipped slots
 var new_texuture
 
@@ -69,6 +70,7 @@ func _ready():
 func _on_texture_has_changed(item_name):
 	if item_name == null:
 		weapon.texture = null
+		update_weapon_sound("fist")
 		  # No weapon equipped, use fist sound
 	else:
 		new_texuture = load("res://InventoryTesting/Item Test/" + item_name + ".png")
@@ -165,7 +167,8 @@ func update_animation_parameter():
 		weapon.visible = true
 		is_attacking = true
 		attack_sound_player.play()
-		
+		weapon_trail.start_trail()  # Start the trail effect
+
 	elif(Input.is_action_just_released("ranged_attack")):
 		if (Items.Player_Inventory._can_throw_item(31)): # change to current_equipped ones later
 			animation_tree["parameters/conditions/attack"] = true
