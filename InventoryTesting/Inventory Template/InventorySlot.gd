@@ -30,6 +30,7 @@ func _get_drag_data(_pos):
 
 	
 	var data = {}
+	
 	data["origin_texture"] = texture
 	data["origin_texture"] = self
 	data["is_empty"] = !is_occupied
@@ -37,6 +38,7 @@ func _get_drag_data(_pos):
 	data["item_name"] = item_name
 	data["item_id"] = item_id
 	data["item_count"] = item_count
+	data["InvSlot"] = data
 	var drag_texture = TextureRect.new()
 	drag_texture.expand = true
 	drag_texture.texture = texture
