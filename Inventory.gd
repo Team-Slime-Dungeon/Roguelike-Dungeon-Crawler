@@ -18,6 +18,9 @@ var weapon_end_index = 3
 var helmet_start_index = 14
 var helmet_end_index = 16
 
+var throwable_start_index = 30
+var throwable_end_index = 31
+
 var treasure_start_index = 51
 var treasure_end_index = 64
 
@@ -33,7 +36,9 @@ var Item_List = {
 	14 : ["Bronze Helmet", 	25,		1,		0,				5,				null, null,	true ],
 	15 : ["Silver Helmet", 	50,		1,		0,				6,				null, null,	true ],
 	16 : ["Gold Helmet", 	75,		1,		0,				7,				null, null,	true ],
-	
+
+	30:  ["Random Throwable",	2,		0,		0,				0, 				null, null, false  ],
+	31 : ["Shuriken", 		2,		99,		2,				0,					null, null,	false ],
 	
 	#Weapon IDs 1-2. 49 will spawn a random sword, 50 will spawn a random helmet
 	49: ["Random Weapon",	50,		0,		0,				0,				null, null, false],
@@ -69,6 +74,7 @@ var Item_List = {
 var Item_Scenes = {
 	0: preload("res://equipment/coin.tscn"),
 	71: preload("res://equipment/Blue Mushroom.tscn"),
+	30: preload("res://equipment/Throwable_Item.tscn"),
 	
 	# Multi Use Scenes (Contain more than one item)
 	49: preload("res://equipment/Weapon_Item.tscn"),
@@ -116,7 +122,8 @@ func _print_inventory():
 	
 func _get_coins():
 	#print(Inventory[0])
-	return Inventory[0]
+	var total_coins = Inventory[0]
+	return total_coins
 
 func _get_item_price(item_id, amount=1):
 	if Item_List.has(item_id):
@@ -140,7 +147,7 @@ func _sell_item(item_id, amount):
 		return false
 	
 func _pay_for_item(item_id, amount=1, overfill=false):
-	var price_total = _get_item_price(item_id,amount)
+	var price_total = _get_item_price(item_id, amount)
 	
 	# Player has enough coins to pay for the item in their inventory
 	if _get_coins() >= price_total:
@@ -196,6 +203,18 @@ func _can_add_item(item_id, amount, overfill=false):
 		else:
 			print("Error: Item does not exist for _can_add_item.")
 			return false
+func _can_throw_item(item_id):
+	var throwable_item_ids = [31]
+	
+	# Item exists
+	if (Inventory.has(item_id)) and (item_id in throwable_item_ids):
+	# Item can removed
+		if _minus_item(item_id, 1 , true) == true:
+			print("Item is throwable!")
+			return true
+		
+	print("Couldn't throw.")
+	return false
 	
 func _add_item(item_id, amount):
 	var add_amount = amount

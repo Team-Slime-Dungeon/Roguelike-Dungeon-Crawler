@@ -10,7 +10,7 @@ var spawns_objects = true #flag for scene management
 
 # Possible Shop varieties and their possible inventories. Chosen at random
 var shop_names = ["General Store", "Weapon Shop", "Potion Shop"]
-var shop_inventory = {"General Store":[49, 50, 90], "Potion Shop":[90], "Weapon Shop":[49, 50]}
+var shop_inventory = {"General Store":[30, 49, 50, 90], "Potion Shop":[90], "Weapon Shop":[30, 49, 50]}
 
 # Stores what items the shop keeper has in their inventory
 var shop_items = []

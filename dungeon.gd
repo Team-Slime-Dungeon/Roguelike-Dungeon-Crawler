@@ -106,7 +106,7 @@ func _ready():
 	Items.Player_Inventory._add_item(1, 1) 
 	#Items.Player_Inventory._print_inventory()
 	Items.Player_Inventory._add_item(52,2)
-	
+	# Items.Player_Inventory._add_item(31,5) # Shuriken
 	clear_room() # clean up for new floor
 	
 	# Color tiles for all 25 floors

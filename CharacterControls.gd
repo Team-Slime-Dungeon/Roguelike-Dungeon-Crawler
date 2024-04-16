@@ -165,27 +165,29 @@ func update_animation_parameter():
 		weapon.visible = true
 		is_attacking = true
 		attack_sound_player.play()
+		
 	elif(Input.is_action_just_released("ranged_attack")):
-		animation_tree["parameters/conditions/attack"] = true
-		Global.player_is_idle = true
-		is_attacking = true
+		if (Items.Player_Inventory._can_throw_item(31)): # change to current_equipped ones later
+			animation_tree["parameters/conditions/attack"] = true
+			Global.player_is_idle = true
+			is_attacking = true
 		
-		var tossed_item = preload("res://equipment/Shuriken.tscn")
-		var new_projectile_spawn = tossed_item.instantiate()
-		var new_projectile_location = position / camera_scale#2#Vector2i(position)# / 2
-		
-		# Manages all the item spawns to remove them when the floor is cleared.
-		projectile_spawns.append(new_projectile_spawn)
-		add_child(new_projectile_spawn)
-		projectile_spawns[projectile_ID].global_position = new_projectile_location
-		projectile_spawns[projectile_ID]._set_dir(last_input)
+			var tossed_item = preload("res://equipment/Shuriken.tscn")
+			var new_projectile_spawn = tossed_item.instantiate()
+			var new_projectile_location = position / camera_scale#2#Vector2i(position)# / 2
+			
+			# Manages all the item spawns to remove them when the floor is cleared.
+			projectile_spawns.append(new_projectile_spawn)
+			add_child(new_projectile_spawn)
+			projectile_spawns[projectile_ID].global_position = new_projectile_location
+			projectile_spawns[projectile_ID]._set_dir(last_input)
 
-		projectile_ID += 1
+			projectile_ID += 1
 	else:
 		animation_tree["parameters/conditions/attack"] = false
 		weapon.visible = false
 		is_attacking = false
-	
+		
 	#sets the player in the correct direction
 	if(input_dir != Vector2.ZERO):
 		animation_tree["parameters/attack/blend_position"] = input_dir

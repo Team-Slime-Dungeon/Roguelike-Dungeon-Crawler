@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 #@onready var _animation_player = $AnimationPlayer
 #Adds the sprite sheet into the variable
-@onready var item_sprite = $WeaponSheet
+@onready var item_sprite = $ThrowableSheet
 
 #Creates an Index for the Frames
 var item_frame_index = 0
@@ -13,8 +13,8 @@ var shop_item = false
 var text_update = false
 
 var current_item = {}
-var ID = 1
-var amount = 1
+var ID = 31
+var amount = 5
 
 func _ready():
 	#set_item_frame(1) #Initializes a potion
@@ -25,9 +25,7 @@ func _set_shop(state = false):
 
 #ID number and Amount based on Frames
 var item_properties = {
-	0: {"ID": 1, "amount": 1},
-	1: {"ID": 2, "amount": 1},
-	2: {"ID": 3, "amount": 1}
+	0: {"ID": 31, "amount": 5}
 }
 
 # Remove the item
@@ -51,7 +49,8 @@ func _process(delta):
 
 			if Input.is_action_just_pressed("interact"):
 				print("Attempting purchase")
-				if Items.Player_Inventory._pay_for_item(current_item.ID, 1):
+
+				if Items.Player_Inventory._pay_for_item(current_item.ID, current_item.amount):
 					get_parent().shop_success()
 				else:
 					get_parent().shop_fail()
@@ -69,7 +68,7 @@ func set_item_frame(frame_index):
 	current_item = item_properties[frame_index]
 
 func choose_item_randomly():
-	var frame_index = randi() % 3  # Randomly choose an index between 0 and 3
+	var frame_index = randi() % 1  # Randomly choose an index between 0 and 4
 	set_item_frame(frame_index)
 	ID = current_item.ID
 	amount = current_item.amount
