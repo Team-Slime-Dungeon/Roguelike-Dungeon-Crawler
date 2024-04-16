@@ -34,6 +34,10 @@ func _gui_input(event):
 		#get_viewport().set_drag_preview(null)
 
 func _can_drop_data(pos, data):
+	var current_weapon = Items.Player_Inventory.get_current_weapon()
+	if current_weapon:
+		print("Drop denied: a weapon is currently equipped.")
+		return false
 	return data.has("item_id") # Check if the drag data has the required fields
 	
 func _drop_data(pos, data):

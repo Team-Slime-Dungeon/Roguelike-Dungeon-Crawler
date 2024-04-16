@@ -1,11 +1,11 @@
 extends TextureRect
 # List of valid weapon names
-var valid_weapon_names = ["Bronze Sword", "Silver Sword", "Gold Sword"]
+var valid_weapon_names = ["Bronze Helmet", "Silver Helmet", "Gold Helmet"]
 @onready var icon = $"."
 #var default_texture: Texture
 var current_texture: Texture
 var is_occupied = false 
-@onready var default_texture = preload("res://InventoryTesting/InventoryBackgroundPics/Sword Slot.png")
+@onready var default_texture = preload("res://InventoryTesting/InventoryBackgroundPics/Helmet Slot.png")
 func _ready():pass
 	
 	
@@ -78,28 +78,7 @@ func _drop_data(at_position, data):
 			
 	print("Item equipped: ", item_name, " with ID ", item_id)
 	
-	#Items.Player_Inventory.equip_weapon(new_weapon_id)
 	
-	#if _can_drop_data(at_position, data):
-		#texture = data["origin_texture"]
-		#is_occupied = true
-		#
-		## Clear the origin slot if it's different from the target slot
-		#if data["origin_slot"] != self:
-			#data["origin_slot"].clear_slot()
-	#
-	##gets the the icon's textures
-	##gets the weapon's id by it associated texture
-	##equips the weapon (adds it the equip weapon stats list) and deletes the weapon from the main inventory
-	##prints out the current weapon
-	##prints out the new inventory
-	var item_texture = icon.get_texture()
-	var equip_weapon_id = Items.Player_Inventory.get_item_id_by_texture(item_texture)
-	Items.Player_Inventory.equip_weapon(item_id)
-	icon.set_meta("equipped_item_id", equip_weapon_id)
-	var current_weapon = Items.Player_Inventory.get_current_weapon()
-	print("The current weapon is ", current_weapon)
-	Items.Player_Inventory._print_inventory()
 	
 	
 	
@@ -109,9 +88,4 @@ func _drop_data(at_position, data):
 func clear_slot():
 	texture = null
 	is_occupied = false
-	set_slot_texture("")  # This will load the default texture
-	
-	#if texture == null:
-		#modulate = Color(1, 1, 1, 0)  # Fully transparent
-	#else:
-		#modulate = Color(1, 1, 1, 1)  # Fully opaque (normal color)
+	set_slot_texture("")  # This will load the default textur
