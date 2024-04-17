@@ -110,12 +110,11 @@ func _ready():
 
 	clear_room() # clean up for new floor
 	
-	if current_floor == 15:
-		# generate boss floor
+	if current_floor == 2:
 		var king_scene = preload("res://king_slime.tscn")
 		var king_slime = king_scene.instantiate()
 		add_child(king_slime)
-		king_slime.global_position = Vector2(0,0)
+		king_slime.global_position = Vector2(50,-50)
 		generate_npc()
 		pass
 	else:
@@ -262,12 +261,7 @@ func generate_npc():
 		#print("rubio is free!!")
 	
 	#clear_npc(rubio)
-		
-	
 
-
-		
-	
 func generate_loot(monster):
 	# Generates a random item from the loot table depending on your floor. 
 	# If no loot table is loaded it defaults to no items spawned!
