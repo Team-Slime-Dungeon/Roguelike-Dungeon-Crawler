@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://crcqnnl6ies46" path="res://cassandra_scene.tscn" id="11_ai3vm"]
 [ext_resource type="Script" path="res://Armor_Durability.gd" id="12_7qrgi"]
 [ext_resource type="FontFile" uid="uid://b1dyomvma53nt" path="res://PixelifySans-Regular.ttf" id="12_m8q2w"]
-[ext_resource type="AudioStream" uid="uid://dhiy4c1nn72yc" path="res://Music/background sound.mp3" id="13_7lc74"]
+[ext_resource type="AudioStream" uid="uid://nip61wwn2jdq" path="res://Music/In_the_dungeon.wav" id="13_4xr6h"]
 [ext_resource type="PackedScene" uid="uid://dryac8f57oat6" path="res://Pause Menu/pause_menu.tscn" id="13_cipy3"]
 [ext_resource type="Script" path="res://BackgroundSound.gd" id="14_1o1d0"]
 
@@ -797,7 +797,8 @@ text = "score"
 [node name="Cassandra" parent="." instance=ExtResource("11_ai3vm")]
 
 [node name="BackgroundSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("13_7lc74")
+stream = ExtResource("13_4xr6h")
+autoplay = true
 script = ExtResource("14_1o1d0")
 
 [connection signal="area_entered" from="Staircase/Staircase_hitbox" to="." method="_on_staircase_hitbox_area_entered"]
