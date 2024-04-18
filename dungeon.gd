@@ -79,6 +79,8 @@ var monster_list = [
 	preload("res://monsters/Bushmo.tscn"),
 	]
 
+var king_slime = null
+
 var rubio_scene = preload("res://rubio.tscn")
 var rubio_spawns = []
 
@@ -112,11 +114,10 @@ func _ready():
 	
 	if current_floor == 2:
 		var king_scene = preload("res://king_slime.tscn")
-		var king_slime = king_scene.instantiate()
+		king_slime = king_scene.instantiate()
 		add_child(king_slime)
 		king_slime.global_position = Vector2(50,-50)
 		generate_npc()
-		pass
 	else:
 		# Color tiles for all 25 floors
 		if current_floor > 0 and current_floor <= 25:
@@ -203,7 +204,11 @@ func _process(delta):
 			#generate_treasure(chest)
 			generate_loot(chest)
 			chest.clear_chest()
-			
+
+	if is_instance_valid(king_slime) and king_slime.death_location != null:
+			print("he ded")
+			king_slime.enemy_clear()
+
 	# Grabs current coin total
 	$GUI/Coin_Counter.set_text("x " + str(Items.Player_Inventory._get_coins()))
 
@@ -327,9 +332,7 @@ func generate_loot(monster):
 			# Manages all the item spawns to remove them when the floor is cleared.
 			item_spawns.append(new_item_spawn)
 			add_child(new_item_spawn)
-			
 			item_spawns[item_spawn_ID].global_position = new_item_location
-
 			item_spawn_ID += 1
 	else: print("Error Generating Item: Invalid ID in loot table?")
 
@@ -387,7 +390,6 @@ func generate_monsters():
 			# Make enemy if the location is a floor tile
 			if ($TileMap.local_to_map(enemy_pos) in floor_pos):
 				var enemy = monster_list[randi() % monster_list.size()]
-
 				var enemy_spawn = enemy.instantiate()
 			
 				# Manages all the spawns to remove them when the floor is cleared.

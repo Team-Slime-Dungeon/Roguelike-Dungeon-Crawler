@@ -106,20 +106,18 @@ func _on_hurtbox_area_entered(area):
 			await $Hurt.timeout
 			$AnimationPlayer.play("movement")
 		
-		elif currentHealth == 10:
-			var spawn_pos = get_position()
-			for i in 5:
-				var scene = preload("res://monsters/Slime.tscn")
-				var slime = scene.instantiate()
-				add_child(slime)
-				slime.global_position = spawn_pos
+		elif currentHealth <= 10:
+			var scene = preload("res://monsters/Slime.tscn")
+			var slime = scene.instantiate()
+			add_child(slime)
+			slime.global_position = get_position()
 		
 		elif currentHealth <= 0:
 			$Death.start()
 			$AnimationPlayer.play("death")
 			await $Death.timeout
 			#slimedeathsound.play()
-			enemy_clear()
+			death_location = get_position()
 	# start at 20
 	# when health reduced to 15, split, start timer
 	# rejoin health = slimes left * 5AAA
