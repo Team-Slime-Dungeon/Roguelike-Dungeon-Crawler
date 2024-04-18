@@ -254,7 +254,7 @@ func _on_hurtbox_area_entered(area):
 			effects.play("death")
 			deathTimer4.start()
 			await deathTimer4.timeout
-			get_tree().cheange_scene_to_file("res://game_over_screen.tscn")
+			get_tree().change_scene_to_file("res://game_over_screen.tscn")
 			dead_sound.play()
 		healthChanged.emit(currentHealth)
 		
