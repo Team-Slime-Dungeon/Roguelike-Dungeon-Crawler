@@ -2,6 +2,7 @@ extends TextureRect
 signal item_set(item_name, inventory_slot, item_count)
 #var count_node = visible
 @onready var count_node = $count
+@onready var background = $"../Background"
 # Track if the slot is occupied
 var is_occupied = false 
 #var item_name = ""
@@ -95,6 +96,11 @@ func clear_slot():
 	#var count_node = get_node_or_null("Item_Icon/count")
 	if count_node.visible:
 		count_node.visible = false
+		
+	if background:
+		background.modulate = Color(0, 0, 0, 0)  # Make transparent
+	else:
+		print("Background node not found or not ready.")
 #func clear_count():
 	#var count_node = self.get_node("Item_Icon/count")
 	#count_node.visible = false  # Or make it invisible

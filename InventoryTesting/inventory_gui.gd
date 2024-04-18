@@ -144,6 +144,8 @@ func label_based_on_companion():
 
 func get_background_color(item_name: String) -> Color:
 	match item_name:
+		"Shuriken":
+			return Color(1.0, 0.0, 0.0)  # This is a bright, pure red
 		"Bronze Sword", "Bronze Helmet":
 			return Color(0.804, 0.498, 0.196)  # Semi-transparent red
 		"Silver Sword", "Silver Helmet":

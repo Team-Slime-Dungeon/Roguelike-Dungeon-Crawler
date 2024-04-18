@@ -34,11 +34,19 @@ func _gui_input(event):
 		#get_viewport().set_drag_preview(null)
 
 func _can_drop_data(pos, data):
-	var current_weapon = Items.Player_Inventory.get_current_weapon()
-	if current_weapon:
-		print("Drop denied: a weapon is currently equipped.")
-		return false
-	return data.has("item_id") # Check if the drag data has the required fields
+	# Check if the 'item_name' key exists in the data dictionary
+	if "item_name" in data:
+		var item_name = data["item_name"]
+		var current_weapon = Items.Player_Inventory.get_current_weapon()
+		if item_name in current_weapon:
+			print("Drop denied: a weapon is currently equipped.")
+			return false
+	else:
+		print("Drop data does not contain item_name.")
+		return false  
+	
+	# Check if the drag data has item id
+	return data.has("item_id")
 	
 func _drop_data(pos, data):
 	var item_id = data["item_id"] # 
