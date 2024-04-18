@@ -1,10 +1,126 @@
-[gd_scene load_steps=3 format=3 uid="uid://b36ol57ipto2x"]
+[gd_scene load_steps=10 format=3 uid="uid://b36ol57ipto2x"]
 
+[ext_resource type="Script" path="res://environment/King_Slime_Fight.gd" id="1_nt8gy"]
+[ext_resource type="Texture2D" uid="uid://cdejfmb3r8r6b" path="res://environment/cave1.png" id="2_03p76"]
+[ext_resource type="Texture2D" uid="uid://w72furwr3cqb" path="res://environment/cavewalls1.png" id="3_o05ds"]
 [ext_resource type="PackedScene" uid="uid://dp2pwjxvokjeb" path="res://king_slime.tscn" id="3_qi54h"]
-[ext_resource type="Script" path="res://king_slime.gd" id="4_e24im"]
 
-[node name="King Slime Fight" type="Node2D"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_d5qnm"]
+texture = ExtResource("2_03p76")
+texture_region_size = Vector2i(64, 32)
+2:0/0 = 0
+1:0/0 = 0
 
-[node name="CharacterBody2D" parent="." instance=ExtResource("3_qi54h")]
-position = Vector2(924, 55)
-script = ExtResource("4_e24im")
+[sub_resource type="TileSet" id="TileSet_c0yxt"]
+tile_shape = 1
+tile_layout = 4
+tile_size = Vector2i(64, 32)
+sources/1 = SubResource("TileSetAtlasSource_d5qnm")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_41f0x"]
+texture = ExtResource("2_03p76")
+texture_region_size = Vector2i(64, 32)
+0:2/0 = 0
+0:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:2/0/physics_layer_0/angular_velocity = 0.0
+1:3/0 = 0
+1:3/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:3/0/physics_layer_0/angular_velocity = 0.0
+2:4/0 = 0
+2:4/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+2:4/0/physics_layer_0/angular_velocity = 0.0
+0:4/0 = 0
+0:4/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:4/0/physics_layer_0/angular_velocity = 0.0
+1:4/0 = 0
+1:4/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:4/0/physics_layer_0/angular_velocity = 0.0
+2:3/0 = 0
+2:3/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+2:3/0/physics_layer_0/angular_velocity = 0.0
+2:2/0 = 0
+2:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+2:2/0/physics_layer_0/angular_velocity = 0.0
+1:2/0 = 0
+1:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:2/0/physics_layer_0/angular_velocity = 0.0
+0:3/0 = 0
+0:3/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:3/0/physics_layer_0/angular_velocity = 0.0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hsenm"]
+texture = ExtResource("3_o05ds")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-0.353554, -32.5269, -32.1734, -16.617, -32, 0, 0, 16, 32, 0, 31.1127, -16.617)
+0:3/0 = 0
+0:3/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:3/0/physics_layer_0/angular_velocity = 0.0
+2:4/0 = 0
+2:4/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+2:4/0/physics_layer_0/angular_velocity = 0.0
+3:4/0 = 0
+3:4/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+3:4/0/physics_layer_0/angular_velocity = 0.0
+0:5/0 = 0
+0:5/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:5/0/physics_layer_0/angular_velocity = 0.0
+1:5/0 = 0
+1:5/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:5/0/physics_layer_0/angular_velocity = 0.0
+2:5/0 = 0
+2:5/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+2:5/0/physics_layer_0/angular_velocity = 0.0
+3:5/0 = 0
+3:5/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+3:5/0/physics_layer_0/angular_velocity = 0.0
+1:0/0 = 0
+1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:0/0/physics_layer_0/angular_velocity = 0.0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-0.353554, -32.5269, -32.1734, -16.617, -32, 0, 0, 16, 32, 0, 31.1127, -16.617)
+3:0/0 = 0
+3:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+3:0/0/physics_layer_0/angular_velocity = 0.0
+2:0/0 = 0
+2:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+2:0/0/physics_layer_0/angular_velocity = 0.0
+
+[sub_resource type="TileSet" id="TileSet_l2mh0"]
+tile_shape = 1
+tile_layout = 4
+tile_size = Vector2i(64, 32)
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_41f0x")
+sources/1 = SubResource("TileSetAtlasSource_hsenm")
+
+[node name="King_Slime_Fight" type="Node2D"]
+script = ExtResource("1_nt8gy")
+
+[node name="BossFloor" type="TileMap" parent="."]
+texture_filter = 1
+tile_set = SubResource("TileSet_c0yxt")
+format = 2
+layer_0/name = "FloorTiles"
+layer_0/tile_data = PackedInt32Array(917502, 65537, 0, 917504, 65537, 0, 983042, 65537, 0, 1048574, 65537, 0, 786432, 65537, 0, 1114112, 65537, 0, 786434, 65537, 0, 786433, 65537, 0, 851967, 65537, 0, 917503, 65537, 0, 983039, 65537, 0, 1048575, 65537, 0, 1114111, 65537, 0, 1179646, 65537, 0, 1179647, 65537, 0, 1245183, 65537, 0, 1179648, 65537, 0, 1114113, 65537, 0, 917506, 65537, 0, 1048578, 65537, 0, 720897, 65537, 0, 720896, 65537, 0, 917505, 65537, 0, 983041, 65537, 0, 983040, 65537, 0, 1114114, 65537, 0, 1179649, 65537, 0, 1245184, 65537, 0, 1245185, 65537, 0, 851971, 65537, 0, 917507, 65537, 0, 983043, 65537, 0, 1048579, 65537, 0, 720898, 65537, 0, 1114115, 65537, 0, 1179650, 65537, 0, 851970, 65537, 0, 786435, 65537, 0, 65535, 131073, 0, 0, 65537, 0, 65534, 65537, 0, -1, 65537, 0, 131071, 65537, 0)
+
+[node name="BossDeco" type="TileMap" parent="."]
+show_behind_parent = true
+y_sort_enabled = true
+texture_filter = 1
+position = Vector2(0, 1)
+tile_set = SubResource("TileSet_l2mh0")
+format = 2
+layer_0/name = "Floor_Level"
+layer_0/y_sort_enabled = true
+layer_0/z_index = 1
+layer_0/tile_data = PackedInt32Array(720895, 1, 0, 720894, 1, 0, 720893, 1, 0, 720892, 1, 0, 655356, 65537, 0, 655357, 65537, 0, 655358, 65537, 0, 655359, 65537, 0, 655355, 65537, 0, 720891, 1, 0, 589819, 65537, 0, 589820, 65537, 0, 589821, 65537, 0, 589822, 65537, 0, 589823, 65537, 0)
+layer_1/name = "Floor_One"
+layer_1/y_sort_enabled = true
+layer_1/z_index = 2
+layer_1/tile_data = PackedInt32Array(589822, 131073, 0, 589823, 131073, 0, 589821, 131073, 0)
+
+[node name="Boss_Scene" parent="." instance=ExtResource("3_qi54h")]
+z_index = 1
+position = Vector2(564, 165)

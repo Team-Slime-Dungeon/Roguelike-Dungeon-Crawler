@@ -113,10 +113,10 @@ func _ready():
 	clear_room() # clean up for new floor
 	
 	if current_floor == 2:
-		var king_scene = preload("res://king_slime.tscn")
+		var king_scene = preload("res://king_slime_fight.tscn")
 		king_slime = king_scene.instantiate()
 		add_child(king_slime)
-		king_slime.global_position = Vector2(50,-50)
+		#king_slime.global_position = Vector2(50,-50)
 		generate_npc()
 	else:
 		# Color tiles for all 25 floors
@@ -205,9 +205,9 @@ func _process(delta):
 			generate_loot(chest)
 			chest.clear_chest()
 
-	if is_instance_valid(king_slime) and king_slime.death_location != null:
-			print("he ded")
-			king_slime.enemy_clear()
+	#if is_instance_valid(king_slime) and king_slime.death_location != null:
+	#		print("he ded")
+	#		king_slime.enemy_clear()
 
 	# Grabs current coin total
 	$GUI/Coin_Counter.set_text("x " + str(Items.Player_Inventory._get_coins()))

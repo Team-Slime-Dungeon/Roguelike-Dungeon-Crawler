@@ -28,7 +28,7 @@ func _ready():
 	if not $AnimationPlayer.is_playing():
 		$AnimationPlayer.play("movement")
 		$"Slime Body/ColorChange".play("Color_Change")
-
+		
 func _physics_process(delta):	
 	if player_chase and is_instance_valid(player):
 		velocity = (player.position + Vector2(16,16) - self.position) + velocity / chase_speed			
