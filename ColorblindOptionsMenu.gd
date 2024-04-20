@@ -9,7 +9,9 @@ var bldMode
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	_loadColBlind(count)
+	#_setLabel(SettingVal.colorMode)
+	_loadColBlind(SettingVal.colorMode)
+	count = SettingVal.colorMode
 	#bldMode = $"../../CanvasLayer/ColorRect"
 	#bldMode = get_node("../../../ColorBlind/ColorRectBld")
 	
@@ -17,7 +19,6 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	_setLabel(count)
 	pass
 
 func _setLabel(i):
@@ -42,4 +43,5 @@ func _Rbuttonspressed():
 	
 func _loadColBlind(val):
 	set_text(arr[val])
+	pass
 	

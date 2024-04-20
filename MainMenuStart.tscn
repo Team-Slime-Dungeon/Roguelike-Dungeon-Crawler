@@ -503,7 +503,6 @@ offset_right = 592.0
 offset_bottom = 181.0
 
 [node name="Label" type="Label" parent="Sets/Control"]
-visible = false
 layout_mode = 0
 offset_left = 130.0
 offset_top = 149.0
@@ -553,10 +552,10 @@ script = ExtResource("8_ws277")
 
 [node name="Button" type="Button" parent="Sets/Control"]
 layout_mode = 0
-offset_left = 480.0
-offset_top = 448.0
-offset_right = 530.0
-offset_bottom = 479.0
+offset_left = 418.0
+offset_top = 455.0
+offset_right = 547.0
+offset_bottom = 505.0
 theme_override_fonts/font = ExtResource("7_2mmw6")
 theme_override_font_sizes/font_size = 34
 text = "BACK
@@ -599,7 +598,7 @@ offset_left = 582.0
 offset_top = 376.0
 offset_right = 622.0
 offset_bottom = 399.0
-text = "Mod
+text = "
 "
 script = ExtResource("5_6282e")
 

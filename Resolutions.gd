@@ -91,6 +91,3 @@ func loadSettings():
 	_on_check_button_toggled(a2)
 	_on_OptionButton_item_selected(a1)
 	mainVolume.value = a3
-	ResOptionButton.select(a1)
-	#$Settings/Resolution2.select(a1))
-	

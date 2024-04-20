@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://dryac8f57oat6"]
+[gd_scene load_steps=7 format=3 uid="uid://dryac8f57oat6"]
 
 [ext_resource type="Script" path="res://Pause Menu/Pause_Menu.gd" id="1_kpkq0"]
 [ext_resource type="Script" path="res://Pause Menu/Resolutions_settings.gd" id="2_kulj6"]
 [ext_resource type="Script" path="res://Pause Menu/ColorblindOptions.gd" id="3_yqpa8"]
 [ext_resource type="Shader" path="res://clrBlind.gdshader" id="4_g2hcg"]
+[ext_resource type="FontFile" uid="uid://b1dyomvma53nt" path="res://PixelifySans-Regular.ttf" id="5_v67ms"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_l8j8a"]
 shader = ExtResource("4_g2hcg")
@@ -98,96 +99,113 @@ text = "Back"
 [node name="Resolution" type="Label" parent="Settings"]
 layout_mode = 0
 offset_left = 184.0
-offset_top = 136.0
-offset_right = 267.0
-offset_bottom = 162.0
-scale = Vector2(2.5, 2.5)
+offset_top = 149.0
+offset_right = 271.0
+offset_bottom = 175.0
+scale = Vector2(2.22, 2.22)
 text = "Resolution:"
 script = ExtResource("2_kulj6")
 
 [node name="Fullscreen" type="Label" parent="Settings"]
 layout_mode = 0
-offset_left = 189.0
-offset_top = 241.0
-offset_right = 273.0
-offset_bottom = 267.0
-scale = Vector2(2.5, 2.5)
+offset_left = 216.0
+offset_top = 222.0
+offset_right = 300.0
+offset_bottom = 248.0
+scale = Vector2(2.22, 2.22)
 text = "Fullscreen:"
 script = ExtResource("2_kulj6")
 
 [node name="Volume" type="Label" parent="Settings"]
 layout_mode = 0
 offset_left = 217.0
-offset_top = 338.0
+offset_top = 306.0
 offset_right = 281.0
-offset_bottom = 364.0
-scale = Vector2(2.5, 2.5)
+offset_bottom = 332.0
+scale = Vector2(2.22, 2.22)
 text = "Volume:"
 script = ExtResource("2_kulj6")
 
 [node name="Fullscreen2" type="CheckButton" parent="Settings"]
 layout_mode = 0
-offset_left = 529.0
-offset_top = 247.0
-offset_right = 573.0
-offset_bottom = 271.0
-scale = Vector2(2.5, 2.5)
+offset_left = 527.0
+offset_top = 229.0
+offset_right = 571.0
+offset_bottom = 253.0
+scale = Vector2(1.98, 1.98)
 
 [node name="Resolution2" type="OptionButton" parent="Settings"]
 layout_mode = 0
-offset_left = 448.0
-offset_top = 155.0
-offset_right = 594.0
-offset_bottom = 175.0
-scale = Vector2(2, 2)
+offset_left = 445.0
+offset_top = 154.0
+offset_right = 591.0
+offset_bottom = 174.0
+scale = Vector2(1.66, 1.66)
 
 [node name="HSlider" type="HSlider" parent="Settings"]
 layout_mode = 0
 offset_left = 446.0
-offset_top = 346.0
+offset_top = 314.0
 offset_right = 569.0
-offset_bottom = 362.0
-scale = Vector2(2.5, 2.5)
+offset_bottom = 330.0
+scale = Vector2(1.82, 1.66)
 
 [node name="Color Blind Mode" type="Label" parent="Settings"]
 layout_mode = 0
-offset_left = 119.0
-offset_top = 441.0
-offset_right = 257.0
-offset_bottom = 464.0
-scale = Vector2(2.5, 2.5)
+offset_left = 160.0
+offset_top = 375.0
+offset_right = 298.0
+offset_bottom = 398.0
+scale = Vector2(2.22, 2.22)
 text = "Color Blind Mode:"
 
 [node name="Mode" type="Label" parent="Settings"]
 layout_mode = 0
-offset_left = 689.0
-offset_top = 462.0
-offset_right = 729.0
-offset_bottom = 485.0
+offset_left = 730.0
+offset_top = 396.0
+offset_right = 770.0
+offset_bottom = 419.0
 text = "
 "
 script = ExtResource("3_yqpa8")
 
 [node name="<" type="Button" parent="Settings"]
 layout_mode = 0
-offset_left = 492.0
-offset_top = 456.0
-offset_right = 595.0
-offset_bottom = 487.0
+offset_left = 533.0
+offset_top = 390.0
+offset_right = 636.0
+offset_bottom = 421.0
 text = "<
 "
 
 [node name=">" type="Button" parent="Settings"]
 layout_mode = 0
-offset_left = 840.0
-offset_top = 456.0
-offset_right = 941.0
-offset_bottom = 487.0
+offset_left = 881.0
+offset_top = 390.0
+offset_right = 982.0
+offset_bottom = 421.0
 text = ">"
+
+[node name="Label3" type="Label" parent="Settings"]
+layout_mode = 0
+offset_left = 461.0
+offset_top = 48.0
+offset_right = 688.0
+offset_bottom = 124.0
+theme_override_colors/font_color = Color(0.796078, 0.741176, 0.92549, 1)
+theme_override_constants/shadow_offset_x = 34
+theme_override_constants/shadow_offset_y = 18
+theme_override_constants/outline_size = 4
+theme_override_constants/shadow_outline_size = 26
+theme_override_constants/line_spacing = 13
+theme_override_fonts/font = ExtResource("5_v67ms")
+theme_override_font_sizes/font_size = 60
+text = "Options:"
 
 [connection signal="pressed" from="CenterContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/Save Quit" to="." method="_on_save_quit_pressed"]
+[connection signal="pressed" from="Settings/Back" to="." method="_on_save_settings_pressed"]
 [connection signal="pressed" from="Settings/Back" to="." method="_on_back_pressed"]
 [connection signal="toggled" from="Settings/Fullscreen2" to="Settings/Fullscreen" method="_on_fullscreen_2_toggled"]
 [connection signal="item_selected" from="Settings/Resolution2" to="Settings/Resolution" method="_on_resolution_2_item_selected"]

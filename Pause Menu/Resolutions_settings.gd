@@ -2,7 +2,7 @@ extends Control
 
 @onready var ResOptionButton = $"../Resolution2"
 @onready var mainVolume = $"../HSlider"
-@onready var fullscreenToggle = $"../CheckButton"
+@onready var fullscreenToggle = $"../Fullscreen2"
 var indexRes
 var fullScr = false
 var a1
@@ -23,7 +23,8 @@ var Resolutions: Dictionary = {"3840x2160":Vector2i(3840,2160),
 
 func _ready():
 	AddResolutions()
-	#loadValues() #loads the menu value //off for testing
+	loadValues()# loads the menu value //off for testing
+	
 	#FullscreenToggle.pressed = OS.is_window_fullscreen()
 	#VsyncToggle.set_pressed_no_signal(OS.is_vsync_enabled())
 	#FXAAToggle.set_pressed_no_signal(get_viewport().get_use_fxaa())
@@ -45,6 +46,8 @@ func Centre_Window():
 func _on_fullscreen_2_toggled(button_pressed):
 	if button_pressed:
 		get_window().set_mode(Window.MODE_FULLSCREEN)
+		#if fullscreenToggle.button_pressed == false:
+		#	fullscreenToggle.button_pressed = true
 	else:
 		get_window().set_mode(Window.MODE_WINDOWED)
 
@@ -60,7 +63,7 @@ func loadValues():
 	
 	for i in config.get_sections():
 		$"../Resolution2".select(config.get_value(i, "Resolution"))
-		#$"../Fullscreen2" = config.get_value(i, "FullScreen")
+		a2 = config.get_value(i, "FullScreen")
 		$"../HSlider".value = config.get_value(i, "mainVolume")
-		#$"../Mode".count = config.get_value(i, "ColorBlind")
-
+		
+	fullscreenToggle.button_pressed = a2
