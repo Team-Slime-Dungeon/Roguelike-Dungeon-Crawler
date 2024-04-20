@@ -477,7 +477,6 @@ grow_vertical = 2
 script = ExtResource("1_230jb")
 
 [node name="Sets" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="ColorRect" type="ColorRect" parent="Sets"]
 material = SubResource("ShaderMaterial_u0t1y")
@@ -531,7 +530,6 @@ theme_override_colors/font_color = Color(0.796078, 0.741176, 0.92549, 1)
 theme_override_fonts/font = ExtResource("7_2mmw6")
 theme_override_font_sizes/font_size = 35
 text = "Fullscreen :"
-script = ExtResource("8_ws277")
 
 [node name="Label3" type="Label" parent="Sets/Control"]
 layout_mode = 0
@@ -548,7 +546,6 @@ theme_override_constants/line_spacing = 13
 theme_override_fonts/font = ExtResource("7_2mmw6")
 theme_override_font_sizes/font_size = 60
 text = "Options"
-script = ExtResource("8_ws277")
 
 [node name="Button" type="Button" parent="Sets/Control"]
 layout_mode = 0
@@ -578,7 +575,6 @@ theme_override_colors/font_color = Color(0.796078, 0.741176, 0.92549, 1)
 theme_override_fonts/font = ExtResource("7_2mmw6")
 theme_override_font_sizes/font_size = 35
 text = "Volume :"
-script = ExtResource("8_ws277")
 
 [node name="ClrBldLabel" type="Label" parent="Sets/Control"]
 layout_mode = 0

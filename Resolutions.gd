@@ -31,13 +31,8 @@ var Resolutions: Dictionary = {"3840x2160":Vector2i(3840,2160),
 
 func _ready():
 	AddResolutions() 
-	loadSettings() #calls to Load settings, Uncommenting with load settings
-	
-	#------- Below additional setting Not implemented
-	#FullscreenToggle.pressed = OS.is_window_fullscreen()
-	#VsyncToggle.set_pressed_no_signal(OS.is_vsync_enabled())
-	#FXAAToggle.set_pressed_no_signal(get_viewport().get_use_fxaa())
-	#MSAASlider.set_value(get_viewport().get_msaa())
+	loadSettings() #calls to Load settings
+
 
 func AddResolutions():
 	for r in Resolutions:
@@ -87,7 +82,7 @@ func loadSettings():
 		#SettValues.clrbnd = config.get_value(i, "colorblind")
 		#print(SettValues.clrbnd)
 	
-	print(a1)
+	#ResOptionButton.select(a1)
 	_on_check_button_toggled(a2)
 	_on_OptionButton_item_selected(a1)
 	mainVolume.value = a3
