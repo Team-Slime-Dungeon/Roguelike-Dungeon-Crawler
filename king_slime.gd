@@ -105,14 +105,12 @@ func _on_hurtbox_area_entered(area):
 			$Hurt.start()
 			await $Hurt.timeout
 			$AnimationPlayer.play("movement")
-		
-		elif currentHealth <= 10:
+		if currentHealth <= 10:
 			var scene = preload("res://monsters/Slime.tscn")
 			var slime = scene.instantiate()
 			add_child(slime)
 			slime.global_position = get_position()
-		
-		elif currentHealth <= 0:
+		if currentHealth <= 0:
 			$Death.start()
 			$AnimationPlayer.play("death")
 			await $Death.timeout

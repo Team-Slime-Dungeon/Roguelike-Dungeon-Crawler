@@ -370,10 +370,10 @@ _data = {
 radius = 46.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8kfxy"]
-radius = 46.0
+radius = 58.0086
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_anla1"]
-radius = 57.0088
+radius = 48.0416
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vusb7"]
 radius = 156.051
@@ -418,7 +418,7 @@ shape = SubResource("CircleShape2D_u0oje")
 [node name="hurtbox" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox"]
-position = Vector2(0, 18)
+position = Vector2(0, 6)
 shape = SubResource("CircleShape2D_8kfxy")
 
 [node name="Hurt" type="Timer" parent="."]
@@ -428,7 +428,7 @@ shape = SubResource("CircleShape2D_8kfxy")
 [node name="hitbox" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
-position = Vector2(0, 11)
+position = Vector2(0, 16)
 shape = SubResource("CircleShape2D_anla1")
 
 [node name="detectionarea1" type="Area2D" parent="."]
