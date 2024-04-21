@@ -32,6 +32,10 @@ SettingVal="*res://Pause Menu/SettingVal.gd"
 
 window/stretch/mode="viewport"
 
+[dotnet]
+
+project/assembly_name="RoguelikeDungeonCrawler"
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/gut/plugin.cfg")

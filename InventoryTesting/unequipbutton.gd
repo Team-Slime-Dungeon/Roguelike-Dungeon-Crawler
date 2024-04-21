@@ -12,7 +12,7 @@ func _process(delta):
 	pass
 	
 func _can_drop_data(at_position, data):
-	return !is_occupied and data.has("origin_texture")
+	return !is_occupied and data.has("origin_texture") and data.has("EquipSlot")
 	var origin_slot = data["origin_slot"]
 	
 	return self == origin_slot or !is_occupied
@@ -20,7 +20,7 @@ func _drop_data(at_position, data):
 	
 	var item_texture = data ["origin_texture"]
 	var item_id = Items.Player_Inventory.get_item_id_by_texture(item_texture)
-	
+
 	var origin_slot = data["origin_slot"]
 	var target_slot = self # Since this function is on the slot, 'self' refers to the target slot
 	# Check if dropping back to the origin slot or moving to a new slot

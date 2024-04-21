@@ -10,7 +10,7 @@ var spawns_objects = true #flag for scene management
 
 # Possible Shop varieties and their possible inventories. Chosen at random
 var shop_names = ["General Store", "Weapon Shop", "Potion Shop"]
-var shop_inventory = {"General Store":[50,90], "Potion Shop":[90], "Weapon Shop":[50]}
+var shop_inventory = {"General Store":[30, 49, 50, 90], "Potion Shop":[90], "Weapon Shop":[30, 49, 50]}
 
 # Stores what items the shop keeper has in their inventory
 var shop_items = []
@@ -68,11 +68,11 @@ func clear_spawns():
 	shop_spawn_id = 0
 
 func shop_success():
-	print("yay!")
+	print("Purchase is a success!")
 	$ShopAnimation.play("Shop_Purchase")
 	
 func shop_fail():
-	print("Boo!")
+	print("Purchase failed!")
 	$ShopAnimation.play("Shop_Purchase_Fail")
 
 #func _process(delta):
@@ -82,3 +82,14 @@ func shop_fail():
 func _on_shop_animation_animation_finished(animation):
 	if animation == "Shop_Purchase" or "Shop_Purchase_Fail":
 		$ShopAnimation.play("Idle")
+
+
+func _on_player_detection_body_entered(body):	
+	if body.name == "Cassandra": 
+		Items.inside_shop = true
+		print("Inside shop, sell is ", Items.inside_shop)
+		
+func _on_player_detection_body_exited(body): 	
+	if body.name == "Cassandra": 
+		Items.inside_shop = false
+		print("Left shop, sell is ", Items.inside_shop)

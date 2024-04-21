@@ -1,0 +1,52 @@
+[gd_scene load_steps=4 format=3 uid="uid://cb5qelbss41hw"]
+
+[ext_resource type="Script" path="res://score.gd" id="1_4mamk"]
+[ext_resource type="Texture2D" uid="uid://dfnshdf6xxgdp" path="res://InventoryTesting/InventoryBackgroundPics/inventoryframe.png" id="2_lqt7w"]
+[ext_resource type="FontFile" uid="uid://b1dyomvma53nt" path="res://PixelifySans-Regular.ttf" id="3_ikolv"]
+
+[node name="Score" type="Node2D"]
+script = ExtResource("1_4mamk")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Camera2D"]
+offset_left = -300.0
+offset_top = -250.0
+offset_right = 300.0
+offset_bottom = 250.0
+size_flags_vertical = 0
+texture = ExtResource("2_lqt7w")
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 6
+patch_margin_bottom = 6
+
+[node name="Score" type="Label" parent="Camera2D/NinePatchRect"]
+layout_mode = 0
+offset_left = 220.0
+offset_top = 3.0
+offset_right = 304.0
+offset_bottom = 26.0
+scale = Vector2(2, 2)
+theme_override_fonts/font = ExtResource("3_ikolv")
+text = "Final Score"
+
+[node name="Total" type="Label" parent="Camera2D/NinePatchRect"]
+layout_mode = 0
+offset_left = 391.0
+offset_top = 449.0
+offset_right = 440.0
+offset_bottom = 472.0
+scale = Vector2(2, 2)
+theme_override_fonts/font = ExtResource("3_ikolv")
+text = "Total: "
+
+[node name="Continue" type="Button" parent="."]
+offset_left = 307.0
+offset_top = 217.0
+offset_right = 399.0
+offset_bottom = 248.0
+theme_override_fonts/font = ExtResource("3_ikolv")
+text = "Continue..."
+
+[connection signal="pressed" from="Continue" to="." method="_on_continue_pressed"]

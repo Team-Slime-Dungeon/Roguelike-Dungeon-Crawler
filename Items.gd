@@ -9,6 +9,7 @@ func _ready():
 # This will handle spawning enemies and objects and will also handle deleting them.
 var item_spawns = []
 var item_spawn_id = 0
+var inside_shop = false
 
 # Add new item to all of the spawns
 # Mod is modifiers, such as alt. ID's for scenes with multiple items

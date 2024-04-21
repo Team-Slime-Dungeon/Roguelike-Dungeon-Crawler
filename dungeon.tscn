@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://dungeon.gd" id="1_ifql2"]
 [ext_resource type="Texture2D" uid="uid://cdejfmb3r8r6b" path="res://environment/cave1.png" id="2_nq54f"]
-[ext_resource type="Texture2D" uid="uid://w72furwr3cqb" path="res://environment/cavewalls1.png" id="3_gtmqh"]
+[ext_resource type="Texture2D" uid="uid://w72furwr3cqb" path="res://environment/cavewalls1.png" id="3_xawde"]
 [ext_resource type="Script" path="res://debug_UI.gd" id="6_grh6y"]
 [ext_resource type="Texture2D" uid="uid://2uvs3oud5cvk" path="res://debug_buttons.png" id="6_jqwbb"]
 [ext_resource type="PackedScene" uid="uid://eb8v1h7u5ytm" path="res://Health Functions/hearts_container.tscn" id="6_tho0w"]
@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://crcqnnl6ies46" path="res://cassandra_scene.tscn" id="11_ai3vm"]
 [ext_resource type="Script" path="res://Armor_Durability.gd" id="12_7qrgi"]
 [ext_resource type="FontFile" uid="uid://b1dyomvma53nt" path="res://PixelifySans-Regular.ttf" id="12_m8q2w"]
-[ext_resource type="AudioStream" uid="uid://dhiy4c1nn72yc" path="res://Music/background sound.mp3" id="13_7lc74"]
+[ext_resource type="AudioStream" uid="uid://nip61wwn2jdq" path="res://Music/In_the_dungeon.wav" id="13_4xr6h"]
 [ext_resource type="PackedScene" uid="uid://dryac8f57oat6" path="res://Pause Menu/pause_menu.tscn" id="13_cipy3"]
 [ext_resource type="Script" path="res://BackgroundSound.gd" id="14_1o1d0"]
 
@@ -269,7 +269,7 @@ texture_region_size = Vector2i(64, 32)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_alqgh"]
 resource_name = "Walls"
-texture = ExtResource("3_gtmqh")
+texture = ExtResource("3_xawde")
 texture_region_size = Vector2i(64, 64)
 0:0/0 = 0
 0:0/0/z_index = 2
@@ -526,7 +526,7 @@ texture_region_size = Vector2i(64, 32)
 2:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 2:0/0/physics_layer_0/angular_velocity = 0.0
 
-[sub_resource type="TileSet" id="TileSet_42v73"]
+[sub_resource type="TileSet" id="TileSet_a7nhb"]
 tile_shape = 1
 tile_layout = 4
 tile_size = Vector2i(64, 32)
@@ -572,10 +572,9 @@ format = 2
 
 [node name="TileMap" type="TileMap" parent="."]
 show_behind_parent = true
-z_index = 1
 y_sort_enabled = true
 texture_filter = 1
-tile_set = SubResource("TileSet_42v73")
+tile_set = SubResource("TileSet_a7nhb")
 format = 2
 layer_0/name = "Ground"
 layer_0/y_sort_enabled = true
@@ -788,10 +787,18 @@ offset_top = 24.0
 offset_right = 281.0
 offset_bottom = 117.0
 
+[node name="Score" type="Button" parent="Debug_Hud"]
+offset_left = 28.0
+offset_top = 409.0
+offset_right = 78.0
+offset_bottom = 440.0
+text = "score"
+
 [node name="Cassandra" parent="." instance=ExtResource("11_ai3vm")]
 
 [node name="BackgroundSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("13_7lc74")
+stream = ExtResource("13_4xr6h")
+autoplay = true
 script = ExtResource("14_1o1d0")
 
 [connection signal="area_entered" from="Staircase/Staircase_hitbox" to="." method="_on_staircase_hitbox_area_entered"]
@@ -804,3 +811,4 @@ script = ExtResource("14_1o1d0")
 [connection signal="pressed" from="Debug_Hud/up" to="Debug_Hud" method="_on_up_pressed"]
 [connection signal="pressed" from="Debug_Hud/down" to="Debug_Hud" method="_on_down_pressed"]
 [connection signal="pressed" from="Debug_Hud/shake" to="Debug_Hud" method="_on_shake_pressed"]
+[connection signal="pressed" from="Debug_Hud/Score" to="." method="_on_score_pressed"]
