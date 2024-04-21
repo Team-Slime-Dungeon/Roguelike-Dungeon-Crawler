@@ -2,12 +2,6 @@ extends Control
 
 @onready var ResOptionButton = $"../ResolutionButton"
 
-#------- Below additional setting Not implemented
-#onready var FullscreenToggle = $Options/FullscreenContainer/FullScreenToggle
-#onready var VsyncToggle = $Options/VsyncContainer/VSYNCHECK
-#onready var FXAAToggle = $Options/FXAAContainer/FXAACheck
-#onready var MSAASlider = $Options/MSAA/MSAASlider
-#----------------------------------
 @onready var mainVolume = $"../HSlider"
 @onready var fullscreenToggle = $"../CheckButton"
 var indexRes
@@ -26,6 +20,7 @@ var Resolutions: Dictionary = {"3840x2160":Vector2i(3840,2160),
 								"1280x720":Vector2i(1280,720),
 								"1440x900":Vector2i(1440,900),
 								"1600x900":Vector2i(1600,900),
+								"1152x648":Vector2i(1152,648),
 								"1024x600":Vector2i(1024,600),
 								"800x600": Vector2i(800,600)}
 
@@ -66,8 +61,9 @@ func _on_save_settings_pressed():
 	var config := ConfigFile.new()
 	config.load(SAVE_PATH)
 	config.set_value("Setting", "Resolution", $"../ResolutionButton".selected)
-	config.set_value("Setting", "FullScreen", fullscreenToggle.button_pressed)
-	config.set_value("Setting", "mainVolume", mainVolume.value)
+	config.set_value("Setting", "FullScreen", $"../CheckButton".button_pressed)
+	config.set_value("Setting", "mainVolume", $"../HSlider".value)
+	config.set_value("Setting", "Colorblind", $"../Mode".count)
 	config.save(SAVE_PATH)
 	pass # Replace with function body.
 	
@@ -82,7 +78,7 @@ func loadSettings():
 		#SettValues.clrbnd = config.get_value(i, "colorblind")
 		#print(SettValues.clrbnd)
 	
-	#ResOptionButton.select(a1)
+	ResOptionButton.select(a1)
 	_on_check_button_toggled(a2)
 	_on_OptionButton_item_selected(a1)
 	mainVolume.value = a3

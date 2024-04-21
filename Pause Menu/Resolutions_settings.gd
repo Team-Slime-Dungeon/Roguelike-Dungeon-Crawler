@@ -18,17 +18,14 @@ var Resolutions: Dictionary = {"3840x2160":Vector2i(3840,2160),
 								"1280x720":Vector2i(1280,720),
 								"1440x900":Vector2i(1440,900),
 								"1600x900":Vector2i(1600,900),
+								"1152x648":Vector2i(1152,648),
 								"1024x600":Vector2i(1024,600),
 								"800x600": Vector2i(800,600)}
 
 func _ready():
 	AddResolutions()
-	loadValues()# loads the menu value //off for testing
+	loadValues()# loads the menu value //
 	
-	#FullscreenToggle.pressed = OS.is_window_fullscreen()
-	#VsyncToggle.set_pressed_no_signal(OS.is_vsync_enabled())
-	#FXAAToggle.set_pressed_no_signal(get_viewport().get_use_fxaa())
-	#MSAASlider.set_value(get_viewport().get_msaa())
 
 func AddResolutions():
 	for r in Resolutions:
