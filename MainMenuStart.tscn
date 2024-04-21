@@ -477,7 +477,6 @@ grow_vertical = 2
 script = ExtResource("1_230jb")
 
 [node name="Sets" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="ColorRect" type="ColorRect" parent="Sets"]
 material = SubResource("ShaderMaterial_u0t1y")
@@ -552,7 +551,7 @@ text = "Options"
 layout_mode = 0
 offset_left = 418.0
 offset_top = 455.0
-offset_right = 547.0
+offset_right = 538.0
 offset_bottom = 505.0
 theme_override_fonts/font = ExtResource("7_2mmw6")
 theme_override_font_sizes/font_size = 34
@@ -615,6 +614,17 @@ offset_top = 370.0
 offset_right = 834.0
 offset_bottom = 401.0
 text = ">"
+
+[node name="apply" type="Button" parent="Sets/Control"]
+layout_mode = 0
+offset_left = 572.0
+offset_top = 454.0
+offset_right = 686.0
+offset_bottom = 505.0
+theme_override_fonts/font = ExtResource("7_2mmw6")
+theme_override_font_sizes/font_size = 34
+text = "apply
+"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -775,9 +785,9 @@ autoplay = true
 [connection signal="item_selected" from="Sets/Control/ResolutionButton" to="Sets/Control/Label" method="_on_OptionButton_item_selected"]
 [connection signal="toggled" from="Sets/Control/CheckButton" to="Sets/Control/Label" method="_on_check_button_toggled"]
 [connection signal="pressed" from="Sets/Control/Button" to="." method="_on_button_Back_pressed"]
-[connection signal="pressed" from="Sets/Control/Button" to="Sets/Control/Label" method="_on_save_settings_pressed"]
 [connection signal="pressed" from="Sets/Control/<" to="Sets/Control/Mode" method="_Lbuttonspressed"]
 [connection signal="pressed" from="Sets/Control/>" to="Sets/Control/Mode" method="_Rbuttonspressed"]
+[connection signal="pressed" from="Sets/Control/apply" to="Sets/Control/Label" method="_on_save_settings_pressed"]
 [connection signal="pressed" from="NewGmButt" to="." method="_on_texture_button_pressed"]
 [connection signal="pressed" from="ExitButton" to="." method="_on_exit_button_pressed"]
 [connection signal="pressed" from="SettingsBut" to="." method="_on_button_pressed"]
