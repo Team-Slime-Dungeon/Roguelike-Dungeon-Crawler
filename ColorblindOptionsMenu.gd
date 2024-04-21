@@ -30,6 +30,7 @@ func _Lbuttonspressed():
 		_setLabel(count)
 	else:
 		count = 0
+	SettingVal.colorMode= count
 	print(count)
 
 func _Rbuttonspressed():
@@ -39,6 +40,7 @@ func _Rbuttonspressed():
 	else:
 		_setLabel(3)
 		count = 3
+	SettingVal.colorMode= count
 	print(count)
 	
 func _loadColBlind(val):
