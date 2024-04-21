@@ -9,7 +9,6 @@
 script = ExtResource("1_jbm8j")
 
 [node name="WeaponSheet" type="Sprite2D" parent="."]
-position = Vector2(1, 1)
 texture = ExtResource("2_heyl5")
 hframes = 3
 

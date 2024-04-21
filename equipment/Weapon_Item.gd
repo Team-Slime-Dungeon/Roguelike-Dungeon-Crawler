@@ -74,4 +74,4 @@ func choose_item_randomly():
 	ID = current_item.ID
 	amount = current_item.amount
 	#print("Frame: ", frame_index)#Test Purposes
-	#print("Item_ID = ", current_item.ID) #Test Purposes
+	print("Item_ID = ", current_item.ID) #Test Purposes

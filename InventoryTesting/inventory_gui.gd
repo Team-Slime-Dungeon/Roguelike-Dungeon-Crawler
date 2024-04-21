@@ -55,6 +55,10 @@ func make_inventory():
 			inv_slots[index].set_meta("original_slot", inventory_slot)
 			print("Item Added: ", item_name, " in slot: ", inventory_slot, " ID: ", item_id)
 			#slot.set_meta("original_slot", slot.get_name())
+			
+			
+			var background_color = get_background_color(item_name)
+			inv_slots[index].get_node("Background").modulate = background_color  
 
 			#Moves to the next slot
 			#print("item name is ", item_name)
@@ -65,6 +69,8 @@ func clear_items():
 	for inv_slot in inv_slots:
 		inv_slot.get_node("Item_Icon").set_texture(null)
 		inv_slot.get_node("Item_Icon/count").visible = false
+		# Reset the background color to transparent
+		inv_slot.get_node("Background").modulate = Color(0, 0, 0, 0)  # Fully transparent
 
 #Makes sure it hides inventory when paused
 func _on_pause_toggled(is_paused):
@@ -133,6 +139,22 @@ func label_based_on_companion():
 		set_label_text("Companion value error")
 		set_label2_text("Companion value error")
 		set_label3_text("Companion value error")
+		
+		
+
+func get_background_color(item_name: String) -> Color:
+	match item_name:
+		"Shuriken":
+			return Color(1.0, 0.0, 0.0)  # This is a bright, pure red
+		"Bronze Sword", "Bronze Helmet":
+			return Color(0.804, 0.498, 0.196)  # Semi-transparent red
+		"Silver Sword", "Silver Helmet":
+			return Color(0.753, 0.753, 0.753)  # Semi-transparent green
+		"Gold Sword", "Gold Helmet":
+			return Color(1.0, 0.843, 0.0)  # Semi-transparent blue
+		_:
+			return Color(0, 0, 0, 0)  # Default, transparent
+
 
 
 func _on_texture_button_mouse_entered():
