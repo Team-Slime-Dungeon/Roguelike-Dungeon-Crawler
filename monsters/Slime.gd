@@ -179,3 +179,6 @@ func step_back():
 func resume_chase():
 	#Resume Chasing
 	player_chase = true 
+
+func is_enemy():
+	return true

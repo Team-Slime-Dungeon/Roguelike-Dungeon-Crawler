@@ -125,3 +125,5 @@ func _on_detectionarea_body_exited(body):
 		velocity.x = 0
 		velocity.y = 0
 	#	print("Player lost.")
+func is_enemy():
+	return true
