@@ -477,6 +477,7 @@ grow_vertical = 2
 script = ExtResource("1_230jb")
 
 [node name="Sets" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="ColorRect" type="ColorRect" parent="Sets"]
 material = SubResource("ShaderMaterial_u0t1y")
