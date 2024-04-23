@@ -578,8 +578,10 @@ tile_set = SubResource("TileSet_a7nhb")
 format = 2
 layer_0/name = "Ground"
 layer_0/y_sort_enabled = true
+layer_0/z_index = 1
 layer_1/name = "Decoration_Layer"
 layer_1/y_sort_enabled = true
+layer_1/z_index = 1
 layer_1/tile_data = PackedInt32Array()
 
 [node name="GUI" type="CanvasLayer" parent="."]
