@@ -12,7 +12,7 @@ var max_speed = 20
 var death_location = null
 
 #Debug Step back in case it has crashes it can be turned off here by making it false
-var allow_step_back = true
+var allow_step_back = false
 
 @onready var tween = get_tree().create_tween()
 
@@ -24,6 +24,8 @@ var Body_Color
 var Eye_Color
 var Detail_Color
 
+signal healthChanged
+
 func _ready(): 
 	if not $AnimationPlayer.is_playing():
 		$AnimationPlayer.play("movement")
@@ -31,7 +33,7 @@ func _ready():
 		
 func _physics_process(delta):	
 	if player_chase and is_instance_valid(player):
-		velocity = (player.position + Vector2(16,16) - self.position) + velocity / chase_speed			
+		velocity = (player.position + Vector2(16,16) - self.position) + velocity / chase_speed
 	else: 
 		move_timer += delta
 	
@@ -65,9 +67,8 @@ func get_direction():
 		4: return MovementState.UP
 		5: return null
 
-func enemy_clear():
-	queue_free()
-	#print("Slime cleared")
+func enemy_clear(): queue_free()
+
 
 func step_back():
   # Check if player exists and is valid
@@ -105,11 +106,6 @@ func _on_hurtbox_area_entered(area):
 			$Hurt.start()
 			await $Hurt.timeout
 			$AnimationPlayer.play("movement")
-		if currentHealth <= 10:
-			var scene = preload("res://monsters/Slime.tscn")
-			var slime = scene.instantiate()
-			add_child(slime)
-			slime.global_position = get_position()
 		if currentHealth <= 0:
 			$Death.start()
 			$AnimationPlayer.play("death")

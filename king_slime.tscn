@@ -376,7 +376,7 @@ radius = 58.0086
 radius = 48.0416
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vusb7"]
-radius = 156.051
+radius = 105.019
 
 [node name="King_Slime" type="CharacterBody2D"]
 script = ExtResource("1_rodqo")
