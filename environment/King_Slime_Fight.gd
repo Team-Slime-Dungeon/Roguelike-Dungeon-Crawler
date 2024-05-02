@@ -28,13 +28,13 @@ func _ready():
 	if fight_state == 99 and end_fight == false:
 		$Boss_Scene/AnimationPlayer.play("death")
 		await $Boss_Scene/AnimationPlayer.animation_finished
-		print("animation finished")
+		#print("animation finished")
 		fight_state = 100
-		print("running score")
+		#print("running score")
 		end_fight = true
 
 	if fight_state == 100 and end_fight == true:
-		print("starting credits.")
+		#print("starting credits.")
 		fight_state = 101
 		get_tree().change_scene_to_file("res://score.tscn")
 	#$"../Cassandra".update_camera_scale(2)

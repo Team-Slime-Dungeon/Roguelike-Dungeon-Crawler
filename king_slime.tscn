@@ -417,6 +417,8 @@ shape = SubResource("CircleShape2D_anla1")
 visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="detectionarea1"]
+visible = false
+top_level = true
 shape = SubResource("CircleShape2D_vusb7")
 
 [connection signal="area_entered" from="hurtbox" to="." method="_on_hurtbox_area_entered"]
