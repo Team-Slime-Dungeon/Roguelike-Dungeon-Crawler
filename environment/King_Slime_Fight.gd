@@ -7,6 +7,8 @@ var king_slime = null
 var death_location = null
 var midfight = false
 var monster_spawns = []
+
+@onready var score = preload("res://score.tscn")
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	# Color the tiles used for the Boss Fight
@@ -39,5 +41,6 @@ func _process(delta):
 			monster.enemy_clear()
 	
 	if $Boss_Scene.currentHealth == 0:
-		get_tree().change_scene_to_file("res://score.tscn")
-		
+		$Boss_Scene/AnimationPlayer.play("death")
+		await $Boss_Scene/AnimationPlayer.animation_finished
+		get_tree().change_scene_to_file(score)

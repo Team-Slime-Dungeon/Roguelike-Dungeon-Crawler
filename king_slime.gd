@@ -12,7 +12,7 @@ var max_speed = 20
 var death_location = null
 
 #Debug Step back in case it has crashes it can be turned off here by making it false
-var allow_step_back = false
+var allow_step_back = true
 
 @onready var tween = get_tree().create_tween()
 
@@ -106,15 +106,15 @@ func _on_hurtbox_area_entered(area):
 			$Hurt.start()
 			await $Hurt.timeout
 			$AnimationPlayer.play("movement")
-		if currentHealth <= 0:
-			$Death.start()
-			$AnimationPlayer.play("death")
-			await $Death.timeout
+		#if currentHealth <= 0:
+			#$Death.start()
+			#$AnimationPlayer.play("death")
+			#await $Death.timeout
 			#slimedeathsound.play()
 			death_location = get_position()
 	# start at 20
 	# when health reduced to 15, split, start timer
-	# rejoin health = slimes left * 5AAA
+	# rejoin health = slimes left * 5
 
 func _on_hitbox_area_entered(area):
 	#If the player gets hurt and if allow_step_back is true

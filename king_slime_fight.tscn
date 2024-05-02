@@ -150,3 +150,6 @@ layer_5/tile_data = PackedInt32Array(1179661, 1, 0, 1245197, 1, 0, 1310733, 1, 0
 [node name="Boss_Scene" parent="." instance=ExtResource("3_qi54h")]
 z_index = 1
 position = Vector2(573, 163)
+
+[node name="Death" type="Timer" parent="."]
+wait_time = 2.0
