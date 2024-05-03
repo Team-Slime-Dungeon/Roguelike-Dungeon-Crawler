@@ -10,9 +10,11 @@ var player_chase = false
 var currentHealth: int = 20
 var max_speed = 20
 var death_location = null
+var enemy_state = "alive"
 
 #Debug Step back in case it has crashes it can be turned off here by making it false
-var allow_step_back = false
+var allow_step_back = true
+var animation_running = false
 
 @onready var tween = get_tree().create_tween()
 
@@ -32,31 +34,31 @@ func _ready():
 		$"Slime Body/ColorChange".play("Color_Change")
 		
 func _physics_process(delta):	
-	if player_chase and is_instance_valid(player):
-		velocity = (player.position + Vector2(16,16) - self.position) + velocity / chase_speed
-	else: 
-		move_timer += delta
-	
-		if move_timer >= 1.0:  # Adjust this value to control the time for each type of movement
-			move_timer = 0
-			current_state = get_direction()
-	
-		match current_state:
-			MovementState.UP: velocity.y -= speed * delta
-			MovementState.LEFT: velocity.x -= speed * delta
-			MovementState.DOWN: velocity.y += speed * delta
-			MovementState.RIGHT: velocity.x += speed * delta
-	
-		if velocity.x >= max_speed:
-			velocity.x = max_speed
+	if enemy_state != "dead": # Stop movement on death
+		if player_chase and is_instance_valid(player):
+			#print("attacking player")
+			velocity = (player.position + Vector2(16,16) - self.position) + velocity / chase_speed
 			
-		if velocity.y >= max_speed:
-			velocity.y = max_speed
+		else:
+			#print("moving around")
+			move_timer += delta
 
-		#position = delta * motion
-		#motion = Vector2.ZERO 
-	
-	move_and_slide() # Need for collision
+			if move_timer >= 1.0:  # Adjust this value to control the time for each type of movement
+				move_timer = 0
+				current_state = get_direction()
+
+			match current_state:
+				MovementState.UP: velocity.y -= speed * delta
+				MovementState.LEFT: velocity.x -= speed * delta
+				MovementState.DOWN: velocity.y += speed * delta
+				MovementState.RIGHT: velocity.x += speed * delta
+
+			if velocity.x >= max_speed:
+				velocity.x = max_speed
+				
+			if velocity.y >= max_speed:
+				velocity.y = max_speed
+		move_and_slide() # Need for collision
 	
 func get_direction():
 	var current_direction = random.randi_range(1, 5)  # Select direction
@@ -68,7 +70,6 @@ func get_direction():
 		5: return null
 
 func enemy_clear(): queue_free()
-
 
 func step_back():
   # Check if player exists and is valid
@@ -97,24 +98,37 @@ func step_back():
 func resume_chase(): player_chase = true 
 
 func _on_hurtbox_area_entered(area):
-	if area.name == "weapon" or area.name == "Shuriken":
-		currentHealth -= 1
-		print("King Slime HP: ", currentHealth)
-		$AnimationPlayer.play("hit")
-		#slimehitsound.play()
-		if currentHealth > 0:
-			$Hurt.start()
-			await $Hurt.timeout
-			$AnimationPlayer.play("movement")
+	if area.name == "weapon" or area.name == "Shuriken" and enemy_state != "dead":
+		if animation_running == false and currentHealth > 0:
+			currentHealth -= 1
+			print("King Slime HP: ", currentHealth)
+
+			#slimehitsound.play()
+			# Handles the slime hit animation
+			if currentHealth > 0:
+				#print("KS still alive")
+				animation_running = true
+				$AnimationPlayer.play("hit")
+				$Hurt.start()
+				await $Hurt.timeout
+				$AnimationPlayer.play("movement")
+				animation_running = false
+			#	print("Resuming KS animation...")
+			#else:
+			#	print("Slime is dead")
+		#if animation_running == true and currentHealth > 0:
+		#	print("blocked animation interupt")
+	
 		if currentHealth <= 0:
-			$Death.start()
-			$AnimationPlayer.play("death")
-			await $Death.timeout
+			#$Death.start()
+			#$AnimationPlayer.play("death")
+			#await $Death.timeout
 			#slimedeathsound.play()
 			death_location = get_position()
+			enemy_state = "dead"
 	# start at 20
 	# when health reduced to 15, split, start timer
-	# rejoin health = slimes left * 5AAA
+	# rejoin health = slimes left * 5
 
 func _on_hitbox_area_entered(area):
 	#If the player gets hurt and if allow_step_back is true
@@ -122,14 +136,17 @@ func _on_hitbox_area_entered(area):
 		step_back()
 
 func _on_detectionarea_1_body_entered(body):
-	player = body
-# Wait for 0.2 seconds before chasing
-	await get_tree().create_timer(0.2).timeout
-	player_chase = true 
+	if enemy_state != "dead":
+		player = body
+		# Wait for 0.2 seconds before chasing
+		await get_tree().create_timer(0.2).timeout
+
+		#print("Chasing player")
+		player_chase = true 
 
 func _on_detectionarea_1_body_exited(body):
 	player = null
 	player_chase = false
 	velocity.x = 0
 	velocity.y = 0
-#	print("Player lost.")
+	#print("Player lost.")

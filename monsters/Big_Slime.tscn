@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://bcepbfmr2laak"]
 
 [ext_resource type="Script" path="res://monsters/Big_Slime.gd" id="1_ocesv"]
-[ext_resource type="Texture2D" uid="uid://dkwqbtk5cs0qk" path="res://monsters/Big Slime.png" id="1_rdr84"]
+[ext_resource type="Texture2D" uid="uid://wt8pmiwfbybf" path="res://monsters/Big Slime.png" id="1_rdr84"]
 
 [sub_resource type="Animation" id="Animation_ave0w"]
 resource_name = "Color_Change"
