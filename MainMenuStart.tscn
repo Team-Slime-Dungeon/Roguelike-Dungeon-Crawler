@@ -1,6 +1,7 @@
-[gd_scene load_steps=30 format=3 uid="uid://btsxsxswd7hs0"]
+[gd_scene load_steps=32 format=3 uid="uid://btsxsxswd7hs0"]
 
 [ext_resource type="Script" path="res://mainmenu.gd" id="1_230jb"]
+[ext_resource type="Shader" path="res://clrBlind.gdshader" id="2_fp5gj"]
 [ext_resource type="Shader" path="res://blur.gdshader" id="2_r8def"]
 [ext_resource type="Texture2D" uid="uid://c32cji1hifxob" path="res://MenuAssets/270.png" id="3_f50f4"]
 [ext_resource type="PackedScene" uid="uid://qdbllnpxqkkl" path="res://bg.tscn" id="3_kn0gk"]
@@ -15,6 +16,11 @@
 [ext_resource type="Shader" path="res://MainMenuStart.gdshader" id="11_hp4dv"]
 [ext_resource type="Texture2D" uid="uid://24dst4l36g52" path="res://title.png" id="11_vflqt"]
 [ext_resource type="AudioStream" uid="uid://bys0kjv0rvy3r" path="res://Music/Temp Roguelike Track.wav" id="15_a67p8"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_je885"]
+shader = ExtResource("2_fp5gj")
+shader_parameter/mode = 2
+shader_parameter/intensity = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_u0t1y"]
 shader = ExtResource("2_r8def")
@@ -476,6 +482,18 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_230jb")
 
+[node name="ColorBlindCanvasMM" type="CanvasLayer" parent="."]
+layer = -1
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="ColorBlindCanvasMM"]
+material = SubResource("ShaderMaterial_je885")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="Sets" type="CanvasLayer" parent="."]
 visible = false
 
@@ -616,9 +634,7 @@ offset_right = 834.0
 offset_bottom = 401.0
 text = ">"
 
-
 [node name="apply" type="Button" parent="Sets/Control"]
-
 layout_mode = 0
 offset_left = 572.0
 offset_top = 454.0
