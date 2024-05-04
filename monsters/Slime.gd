@@ -11,6 +11,9 @@ var currentHealth: int = 3
 var max_speed = 20
 var death_location = null
 
+var ally_count = 0
+var trg = null
+
 #Debug Step back in case it has crashes it can be turned off here by making it false
 var allow_step_back = true
 
@@ -74,8 +77,17 @@ func set_color(body_color=null,detail_color=null):
 	if detail_color != null:
 		$Details.modulate = detail_color
 
-func _physics_process(delta):	
-	if player_chase and is_instance_valid(player):
+func _physics_process(delta):
+	if Global.companion_following == true:
+		ally_count = is_ally_nearby()
+		print(ally_count)
+		if ally_count > 0:
+			trg = find_ally()
+			velocity = (trg.position + Vector2(16,16) - self.position) + velocity / chase_speed
+		elif player_chase and is_instance_valid(player):
+			velocity = (player.position + Vector2(16,16) - self.position) + velocity / chase_speed
+	
+	if player_chase and is_instance_valid(player) and !Global.companion_following:
 		velocity = (player.position + Vector2(16,16) - self.position) + velocity / chase_speed			
 	else: 
 		move_timer += delta
@@ -100,6 +112,26 @@ func _physics_process(delta):
 		#motion = Vector2.ZERO 
 	
 	move_and_slide() # Need for collision
+	
+func is_ally_nearby():
+	var curr_ally_count = 0
+	var bodies = $detectionarea1.get_overlapping_bodies()
+	for body in bodies:
+		print(body)
+		if body != null and body != self and body.has_method("is_ally") and body.is_ally(): 
+			curr_ally_count += 1
+			print("entered for loop")
+	
+	return curr_ally_count
+	
+func find_ally():
+	var bodies = $detectionarea1.get_overlapping_bodies()
+	var target = null
+	for body in bodies:
+		if body != null and body != self and body.has_method("is_ally") and body.is_ally(): 
+			target = body
+			break
+	return target
 	
 func get_direction():
 	var current_direction = random.randi_range(1, 5)  # Select direction
@@ -137,7 +169,9 @@ func _on_detectionarea_1_body_entered(body):
 	player = body
 # Wait for 0.2 seconds before chasing
 	await get_tree().create_timer(0.2).timeout
-	player_chase = true 
+	player_chase = true
+	if body.name == "Rubio":
+		print("Rubio entered detection area") 
 
 func _on_detectionarea_1_body_exited(body):
 	player = null

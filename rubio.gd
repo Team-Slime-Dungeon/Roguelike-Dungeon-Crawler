@@ -41,7 +41,7 @@ enum{
 func _ready():
 	randomize()
 	start_pos = position
-	Global.companion_following = false
+	
 	
 func _process(delta):
 	#if has_chatted == false:
@@ -141,14 +141,26 @@ func follow_player():
 			move_and_slide()
 			
 func update_follow_animations(dir):
-	if (dir.x == -1):
-		$AnimationPlayer.play("Walk_Left")	
-	if (dir.x == 1):
-		$AnimationPlayer.play("Walk_Right")
-	if (dir.y== -1):
-		$AnimationPlayer.play("Walk_Left")
-	if (dir.y == 1):
-		$AnimationPlayer.play("Walk_Right")
+	var last_dir = Vector2(0,0)
+	#print(Global.player_velocity)
+	if Global.player_velocity == Vector2.ZERO:
+		#print("entered idle")
+		if last_dir.x == 1:
+			$AnimationPlayer.play("Idle_Left")
+		else:
+			$AnimationPlayer.play("Idle_Right")
+			#print("entered idle right")
+	else:
+		if (dir.x == -1):
+			last_dir.x = -1
+			$AnimationPlayer.play("Walk_Left")	
+		if (dir.x == 1):
+			last_dir.x = 1
+			$AnimationPlayer.play("Walk_Right")
+		if (dir.y== -1):
+			$AnimationPlayer.play("Walk_Left")
+		if (dir.y == 1):
+			$AnimationPlayer.play("Walk_Right")
 		
 func choose(array):
 	array.shuffle()
@@ -156,7 +168,10 @@ func choose(array):
 	
 func move(delta):
 	if !is_chatting:
-		position += dir * speed * delta 	
+		position += dir * speed * delta 
+		
+func is_ally():
+	return true	
 		
 
 func _on_chat_detection_area_body_entered(body):

@@ -6,4 +6,4 @@ var companion_following
 var player_is_chatting
 
 var player_is_idle
-
+var player_velocity
