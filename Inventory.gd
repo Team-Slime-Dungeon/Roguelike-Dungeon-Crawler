@@ -63,7 +63,8 @@ var Item_List = {
 	
 	# Monster Drops
 	71: ["Blue Mushroom",	3,		 99,		0,				0, 				null, null , false ],
-	
+	72: ["King Slime Crown",	100,		 1,		0,				0, 				null, null , false ],
+
 	#Potions
 	90: ["Red Potion",		3,		 9,		0,				0, 				"HP+5", null , false ],
 	91: ["Purple Potion",	5,		 9,		0,				0, 				"Nothing", null , false ],
