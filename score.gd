@@ -4,7 +4,7 @@ var total = 0
 
 func _ready():
 	# Get all treasures and quantities
-	for i in range(52, 65):
+	for i in range(52, 73):
 		if Items.Player_Inventory.get_item_amount(i) != 0:
 			treasure[Items.Player_Inventory.get_item_name(i)] = Items.Player_Inventory.get_item_amount(i)
 			total += Items.Player_Inventory._get_item_price(i, Items.Player_Inventory.get_item_amount(i))

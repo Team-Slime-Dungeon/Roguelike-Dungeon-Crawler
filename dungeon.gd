@@ -23,7 +23,7 @@ var descend = false # check if player stepped on a staircase
 var merchant_spawned = false # check to see if a merchant has spawned
 
 @onready var score = preload("res://score.tscn").instantiate()
-
+@onready 
 var colorDict = {
 	1: [.334, .7, .2], # Forest 1
 	2: [.537, .722, .282], # Forest 2
@@ -86,7 +86,7 @@ var rubio_spawns = []
 
 func _ready():
 	current_floor += 1 # when entering the dungeon scene, you have descended once
-
+	
 	# Selects the tileset for the current floor
 	if current_floor <= 5:
 		dungeon_floor = dungeon_floor_tiles[0]
@@ -112,7 +112,10 @@ func _ready():
 
 	clear_room() # clean up for new floor
 	
-	if current_floor == 2:
+	if current_floor == 15: #15
+		$TileMap.clear()
+		$Staircase.visible = false
+		$Staircase.global_position = Vector2(500,500)
 		var king_scene = preload("res://king_slime_fight.tscn")
 		king_slime = king_scene.instantiate()
 		monster_spawns.append(king_slime)
@@ -226,9 +229,10 @@ func floor_structure():
 func generate_entity():
 	# finds a random position in the last quarter of node_pos
 	staircase_pos = randi() % (node_pos.size() - int(node_pos.size() * 0.75)) + int(node_pos.size() * 0.75)
-	
+
 	# converts the tilemap coords to global coords for staircase placement	
 	$Staircase.global_position = $TileMap.map_to_local(node_pos[staircase_pos]) / 2
+
 	
 func generate_npc():
 	
@@ -764,10 +768,10 @@ func clear_room():
 	
 	#rubio_scene.queue_free()
 	
-	#for i in range(-100, 100): # higher wall generation
-	#	for j in range(-100, 100):
-	#		$TileMap.set_cell(0, Vector2i(i,j), 1, Vector2i(3, 0))
-	
+	for i in range(-200, 200): # higher wall generation
+		for j in range(-200, 200):
+			$TileMap.set_cell(0, Vector2i(i,j), 1, Vector2i(2, 2))
+
 	#if current_floor == 15:
 	#	get_tree().change_scene_to_file("res://environment/king_slime_fight.tscn")
 		
