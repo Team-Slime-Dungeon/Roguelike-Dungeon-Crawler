@@ -27,6 +27,10 @@ var Body_Color
 var Eye_Color
 var Detail_Color
 
+var ally_chase = false
+var ally_count = 0
+var trg = null
+
 func _ready(): 
 	if not $BushmoAnim.is_playing():
 		$BushmoAnim.play("idle")
@@ -40,11 +44,46 @@ func set_color(body_color=null,detail_color=null):
 		$Texture.modulate = body_color
 
 func _physics_process(delta):
-	if player_chase and is_instance_valid(player):
+	
+	if Global.companion_following == true:
+		ally_count = is_ally_nearby()
+		
+		if ally_count > 0 and ally_chase:
+			trg = find_ally()
+			velocity = (trg.position + Vector2(16,16) - self.position) + velocity / chase_speed
+			$BushmoAnim.play("walking")
+			
+		elif player_chase and is_instance_valid(player):
+			velocity = (player.position + Vector2(16,16) - self.position) + velocity / chase_speed
+			$BushmoAnim.play("walking")
+			
+	if player_chase and is_instance_valid(player) and !Global.companion_following:
 		velocity = (player.position + Vector2(16,16) - self.position) + velocity / chase_speed
 		$BushmoAnim.play("walking")
 	
 	move_and_slide() # Need for collision
+	
+	
+func is_ally_nearby():
+	var curr_ally_count = 0
+	var bodies = $detectionarea.get_overlapping_bodies()
+	for body in bodies:
+		
+		if body != null and body != self and body.has_method("is_ally") and body.is_ally(): 
+			curr_ally_count += 1
+			ally_chase = true
+			
+	
+	return curr_ally_count
+	
+func find_ally():
+	var bodies = $detectionarea.get_overlapping_bodies()
+	var target = null
+	for body in bodies:
+		if body != null and body != self and body.has_method("is_ally") and body.is_ally(): 
+			target = body
+			break
+	return target
 	
 func get_direction():
 	var current_direction = 5
@@ -100,6 +139,31 @@ func step_back():
 		resume_chase_timer.one_shot = true
 		resume_chase_timer.connect("timeout", Callable(self, "resume_chase"))
 		resume_chase_timer.start()
+		
+	elif trg != null and is_instance_valid(trg) and Global.companion_following:
+		# Calculate direction to slide away from player
+		var slide_direction = (self.position - trg.position).normalized()
+	# Reduce slide distance to avoid getting stuck on edges
+		var slide_amount = slide_direction * 30  
+	# Slime's speed and direction for the slide
+		self.velocity = slide_amount
+		
+		# Make Slime Slide
+		move_and_slide()
+		
+	# Pause Chasing for a bit
+		ally_chase = false
+		var resume_chase_timer = Timer.new()
+		add_child(resume_chase_timer)
+		
+	# Wait before Resuming Chase
+		resume_chase_timer.wait_time = 0.5 
+		resume_chase_timer.one_shot = true
+		resume_chase_timer.connect("timeout", Callable(self, "resume_ally_chase"))
+		resume_chase_timer.start()
+		
+func resume_ally_chase():
+	ally_chase = true
 
 func _on_resume_chase():
 	player_chase = true # Resume chasing
@@ -121,6 +185,11 @@ func _on_detectionarea_body_exited(body):
 	if body.name == "Cassandra":
 		player = null
 		player_chase = false
+		$BushmoAnim.play("retreat")
+		velocity.x = 0
+		velocity.y = 0
+	if body.name == "Rubio":
+		ally_chase = false
 		$BushmoAnim.play("retreat")
 		velocity.x = 0
 		velocity.y = 0

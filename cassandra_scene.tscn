@@ -1037,11 +1037,9 @@ parameters/idle/blend_position = Vector2(-0.978528, 0.066)
 parameters/walk/blend_position = Vector2(-0.978528, 0.0293334)
 
 [node name="detection_area" type="Area2D" parent="."]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="detection_area"]
-visible = false
-position = Vector2(0, -5)
+position = Vector2(0, -1)
 shape = SubResource("CircleShape2D_ja0t6")
 
 [node name="Camera2D" type="Camera2D" parent="."]

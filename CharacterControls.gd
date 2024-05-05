@@ -142,6 +142,7 @@ func get_input():
 			SPEED = walking_speed
 		
 		velocity = input_dir * SPEED
+		Global.player_velocity = velocity
 		
 	# Update old direction
 	if input_dir != Vector2(0,0):
@@ -322,12 +323,13 @@ func dash_pressed(): dash()
 func ondash_released(): return
 
 func _on_detection_area_body_entered(body):
-	if body.has_method("entity"):
-		potion_is_in_range = true
-
+	if body.name == "Rubio":
+		#print("Rubio entered detection area")
+		pass
 func _on_detection_area_body_exited(body):
-	if body.has_method("entity"):
-		potion_is_in_range = false
+	if body.name == "Rubio":
+		pass
+		#print("Rubio exited detection area")
 
 func _on_ghost_timer_timeout():
 	add_ghost()
