@@ -246,8 +246,7 @@ func generate_npc():
 		add_child(rubio)
 		
 		rubio.global_position = $TileMap.map_to_local(rand_pos) / 2
-		print("global ", Global.companion_following)
-		#clear_npc(rubio)
+		
 		
 	elif Global.companion_following == true:
 		#var rubio_scene = preload("res://rubio.tscn")
@@ -257,12 +256,7 @@ func generate_npc():
 		
 		#var rubio = rubio_scene.instantiate()
 		rubio.global_position = Vector2(0,0)
-		print("rubi's postion", rubio.global_position)
-	#elif current_floor != 1:
-		#rubio.queue_free()
-		#print("rubio is free!!")
-	
-	#clear_npc(rubio)
+		
 
 func generate_loot(monster):
 	# Generates a random item from the loot table depending on your floor. 

@@ -11,6 +11,7 @@ var currentHealth: int = 3
 var max_speed = 20
 var death_location = null
 
+var ally_chase = false
 var ally_count = 0
 var trg = null
 
@@ -69,6 +70,8 @@ func _ready():
 		#print("Strongly Blue")
 		monster_type = "Blue Slime"
 		monster_drops = [0,0,71,71]
+		
+	print("Global ", Global.companion_following)
 
 func set_color(body_color=null,detail_color=null):
 	if body_color != null:
@@ -77,15 +80,17 @@ func set_color(body_color=null,detail_color=null):
 	if detail_color != null:
 		$Details.modulate = detail_color
 
-func _physics_process(delta):
+func _process(delta):
 	if Global.companion_following == true:
 		ally_count = is_ally_nearby()
-		print(ally_count)
-		if ally_count > 0:
+		
+		if ally_count > 0 and ally_chase:
 			trg = find_ally()
 			velocity = (trg.position + Vector2(16,16) - self.position) + velocity / chase_speed
+			
 		elif player_chase and is_instance_valid(player):
 			velocity = (player.position + Vector2(16,16) - self.position) + velocity / chase_speed
+			
 	
 	if player_chase and is_instance_valid(player) and !Global.companion_following:
 		velocity = (player.position + Vector2(16,16) - self.position) + velocity / chase_speed			
@@ -117,10 +122,11 @@ func is_ally_nearby():
 	var curr_ally_count = 0
 	var bodies = $detectionarea1.get_overlapping_bodies()
 	for body in bodies:
-		print(body)
+		
 		if body != null and body != self and body.has_method("is_ally") and body.is_ally(): 
 			curr_ally_count += 1
-			print("entered for loop")
+			ally_chase = true
+			
 	
 	return curr_ally_count
 	
@@ -166,20 +172,29 @@ func enemy_clear():
 	#print("Slime cleared")
 
 func _on_detectionarea_1_body_entered(body):
+	
 	player = body
 # Wait for 0.2 seconds before chasing
 	await get_tree().create_timer(0.2).timeout
 	player_chase = true
-	if body.name == "Rubio":
-		print("Rubio entered detection area") 
+	
+	
+		
+	
 
 func _on_detectionarea_1_body_exited(body):
-	player = null
-	player_chase = false
-	velocity.x = 0
-	velocity.y = 0
+	
+	
 #	print("Player lost.")
-
+	if body.name == "Rubio":
+		ally_chase = false
+		velocity.x = 0
+		velocity.y = 0
+	if body.name == "Cassandra":
+		player = null
+		player_chase = false
+		velocity.x = 0
+		velocity.y = 0
 
 func _on_hit_box_area_entered(area):
 	#If the player gets hurt and if allow_step_back is true
@@ -209,7 +224,31 @@ func step_back():
 		resume_chase_timer.one_shot = true
 		resume_chase_timer.connect("timeout", Callable(self, "resume_chase"))
 		resume_chase_timer.start()
-
+	
+	elif trg != null and is_instance_valid(trg) and Global.companion_following:
+		# Calculate direction to slide away from player
+		var slide_direction = (self.position - trg.position).normalized()
+	# Reduce slide distance to avoid getting stuck on edges
+		var slide_amount = slide_direction * 30  
+	# Slime's speed and direction for the slide
+		self.velocity = slide_amount
+		
+		# Make Slime Slide
+		move_and_slide()
+		
+	# Pause Chasing for a bit
+		ally_chase = false
+		var resume_chase_timer = Timer.new()
+		add_child(resume_chase_timer)
+		
+	# Wait before Resuming Chase
+		resume_chase_timer.wait_time = 0.5 
+		resume_chase_timer.one_shot = true
+		resume_chase_timer.connect("timeout", Callable(self, "resume_ally_chase"))
+		resume_chase_timer.start()
+		
+func resume_ally_chase():
+	ally_chase = true
 func resume_chase():
 	#Resume Chasing
 	player_chase = true 

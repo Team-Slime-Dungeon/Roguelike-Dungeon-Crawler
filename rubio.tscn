@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://crkvx1w0r2b1r"]
+[gd_scene load_steps=14 format=3 uid="uid://crkvx1w0r2b1r"]
 
 [ext_resource type="Texture2D" uid="uid://cihbkt56sxtcy" path="res://companions/rubio.png" id="1_a3l42"]
 [ext_resource type="Script" path="res://rubio.gd" id="1_sj4rq"]
@@ -150,7 +150,12 @@ radius = 137.004
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_a4tyr"]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qfuvf"]
+radius = 12.0
+
 [node name="Rubio" type="CharacterBody2D"]
+collision_layer = 7
+collision_mask = 7
 script = ExtResource("1_sj4rq")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -194,9 +199,18 @@ shape = SubResource("CircleShape2D_7keq8")
 position = Vector2(0, 13)
 shape = SubResource("CapsuleShape2D_a4tyr")
 
+[node name="hurtbox" type="Area2D" parent="."]
+collision_layer = 7
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox"]
+position = Vector2(0, 11)
+shape = SubResource("CapsuleShape2D_qfuvf")
+
 [connection signal="body_entered" from="chat_detection_area" to="." method="_on_chat_detection_area_body_entered"]
 [connection signal="body_exited" from="chat_detection_area" to="." method="_on_chat_detection_area_body_exited"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="dialogue_finished" from="Dialogue" to="." method="_on_dialogue_dialogue_finished"]
 [connection signal="body_entered" from="attack_detection" to="." method="_on_attack_detection_body_entered"]
 [connection signal="body_exited" from="attack_detection" to="." method="_on_attack_detection_body_exited"]
+[connection signal="area_entered" from="hurtbox" to="." method="_on_hurtbox_area_entered"]

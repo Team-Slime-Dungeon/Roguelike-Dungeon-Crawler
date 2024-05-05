@@ -28,7 +28,7 @@ func _input(event):
 	if d_active == false:
 		return
 	if event.is_action_pressed("attack"):
-		print("next")
+		
 		next_script()
 	
 func next_script():
