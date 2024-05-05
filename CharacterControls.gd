@@ -52,6 +52,7 @@ var weapon_sounds = {
 var current_weapon_sound: AudioStream
 @onready var weapon_sprite = $CassandraSprite/weapon
 @onready var attack_sound_player = $AudioStreamPlayer
+@onready var weapon_trail = $CassandraSprite/weapon/WeaponTrail
 #gets the weapon texture from the equipped slots
 var new_texuture
 
@@ -69,6 +70,7 @@ func _ready():
 func _on_texture_has_changed(item_name):
 	if item_name == null:
 		weapon.texture = null
+		update_weapon_sound("fist")
 		  # No weapon equipped, use fist sound
 	else:
 		new_texuture = load("res://InventoryTesting/Item Test/" + item_name + ".png")
@@ -140,6 +142,7 @@ func get_input():
 			SPEED = walking_speed
 		
 		velocity = input_dir * SPEED
+		Global.player_velocity = velocity
 		
 	# Update old direction
 	if input_dir != Vector2(0,0):
@@ -165,27 +168,30 @@ func update_animation_parameter():
 		weapon.visible = true
 		is_attacking = true
 		attack_sound_player.play()
-	elif(Input.is_action_just_released("ranged_attack")):
-		animation_tree["parameters/conditions/attack"] = true
-		Global.player_is_idle = true
-		is_attacking = true
-		
-		var tossed_item = preload("res://equipment/Shuriken.tscn")
-		var new_projectile_spawn = tossed_item.instantiate()
-		var new_projectile_location = position / camera_scale#2#Vector2i(position)# / 2
-		
-		# Manages all the item spawns to remove them when the floor is cleared.
-		projectile_spawns.append(new_projectile_spawn)
-		add_child(new_projectile_spawn)
-		projectile_spawns[projectile_ID].global_position = new_projectile_location
-		projectile_spawns[projectile_ID]._set_dir(last_input)
+		weapon_trail.start_trail()  # Start the trail effect
 
-		projectile_ID += 1
+	elif(Input.is_action_just_released("ranged_attack")):
+		if (Items.Player_Inventory._can_throw_item(31)): # change to current_equipped ones later
+			animation_tree["parameters/conditions/attack"] = true
+			Global.player_is_idle = true
+			is_attacking = true
+		
+			var tossed_item = preload("res://equipment/Shuriken.tscn")
+			var new_projectile_spawn = tossed_item.instantiate()
+			var new_projectile_location = position / camera_scale#2#Vector2i(position)# / 2
+			
+			# Manages all the item spawns to remove them when the floor is cleared.
+			projectile_spawns.append(new_projectile_spawn)
+			add_child(new_projectile_spawn)
+			projectile_spawns[projectile_ID].global_position = new_projectile_location
+			projectile_spawns[projectile_ID]._set_dir(last_input)
+
+			projectile_ID += 1
 	else:
 		animation_tree["parameters/conditions/attack"] = false
 		weapon.visible = false
 		is_attacking = false
-	
+		
 	#sets the player in the correct direction
 	if(input_dir != Vector2.ZERO):
 		animation_tree["parameters/attack/blend_position"] = input_dir
@@ -317,12 +323,13 @@ func dash_pressed(): dash()
 func ondash_released(): return
 
 func _on_detection_area_body_entered(body):
-	if body.has_method("entity"):
-		potion_is_in_range = true
-
+	if body.name == "Rubio":
+		#print("Rubio entered detection area")
+		pass
 func _on_detection_area_body_exited(body):
-	if body.has_method("entity"):
-		potion_is_in_range = false
+	if body.name == "Rubio":
+		pass
+		#print("Rubio exited detection area")
 
 func _on_ghost_timer_timeout():
 	add_ghost()

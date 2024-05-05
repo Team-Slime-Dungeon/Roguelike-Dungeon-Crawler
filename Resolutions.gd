@@ -2,12 +2,6 @@ extends Control
 
 @onready var ResOptionButton = $"../ResolutionButton"
 
-#------- Below additional setting Not implemented
-#onready var FullscreenToggle = $Options/FullscreenContainer/FullScreenToggle
-#onready var VsyncToggle = $Options/VsyncContainer/VSYNCHECK
-#onready var FXAAToggle = $Options/FXAAContainer/FXAACheck
-#onready var MSAASlider = $Options/MSAA/MSAASlider
-#----------------------------------
 @onready var mainVolume = $"../HSlider"
 @onready var fullscreenToggle = $"../CheckButton"
 var indexRes
@@ -26,18 +20,14 @@ var Resolutions: Dictionary = {"3840x2160":Vector2i(3840,2160),
 								"1280x720":Vector2i(1280,720),
 								"1440x900":Vector2i(1440,900),
 								"1600x900":Vector2i(1600,900),
+								"1152x648":Vector2i(1152,648),
 								"1024x600":Vector2i(1024,600),
 								"800x600": Vector2i(800,600)}
 
 func _ready():
 	AddResolutions() 
-	#loadSettings() #calls to Load settings, Uncommenting with load settings
-	
-	#------- Below additional setting Not implemented
-	#FullscreenToggle.pressed = OS.is_window_fullscreen()
-	#VsyncToggle.set_pressed_no_signal(OS.is_vsync_enabled())
-	#FXAAToggle.set_pressed_no_signal(get_viewport().get_use_fxaa())
-	#MSAASlider.set_value(get_viewport().get_msaa())
+	loadSettings() #calls to Load settings
+
 
 func AddResolutions():
 	for r in Resolutions:
@@ -59,6 +49,8 @@ func Centre_Window():
 func _on_check_button_toggled(button_pressed):
 	if button_pressed:
 		get_window().set_mode(Window.MODE_FULLSCREEN)
+		if fullscreenToggle.button_pressed == false:
+			fullscreenToggle.button_pressed = true
 	else:
 		get_window().set_mode(Window.MODE_WINDOWED)
 		
@@ -69,8 +61,9 @@ func _on_save_settings_pressed():
 	var config := ConfigFile.new()
 	config.load(SAVE_PATH)
 	config.set_value("Setting", "Resolution", $"../ResolutionButton".selected)
-	config.set_value("Setting", "FullScreen", fullscreenToggle.button_pressed)
-	config.set_value("Setting", "mainVolume", mainVolume.value)
+	config.set_value("Setting", "FullScreen", $"../CheckButton".button_pressed)
+	config.set_value("Setting", "mainVolume", $"../HSlider".value)
+	config.set_value("Setting", "Colorblind", $"../Mode".count)
 	config.save(SAVE_PATH)
 	pass # Replace with function body.
 	
@@ -85,7 +78,7 @@ func loadSettings():
 		#SettValues.clrbnd = config.get_value(i, "colorblind")
 		#print(SettValues.clrbnd)
 	
-	print(a1)
+	ResOptionButton.select(a1)
 	_on_check_button_toggled(a2)
 	_on_OptionButton_item_selected(a1)
 	mainVolume.value = a3

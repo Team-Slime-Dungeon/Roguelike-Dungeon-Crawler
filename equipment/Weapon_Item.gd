@@ -14,6 +14,7 @@ var text_update = false
 
 var current_item = {}
 var ID = 1
+var amount = 1
 
 func _ready():
 	#set_item_frame(1) #Initializes a potion
@@ -26,6 +27,7 @@ func _set_shop(state = false):
 var item_properties = {
 	0: {"ID": 1, "amount": 1},
 	1: {"ID": 2, "amount": 1},
+	2: {"ID": 3, "amount": 1}
 }
 
 # Remove the item
@@ -67,8 +69,9 @@ func set_item_frame(frame_index):
 	current_item = item_properties[frame_index]
 
 func choose_item_randomly():
-	var frame_index = randi() % 2  # Randomly choose an index between 0 and 3
+	var frame_index = randi() % 3  # Randomly choose an index between 0 and 3
 	set_item_frame(frame_index)
 	ID = current_item.ID
-	print("Frame: ", frame_index)#Test Purposes
+	amount = current_item.amount
+	#print("Frame: ", frame_index)#Test Purposes
 	print("Item_ID = ", current_item.ID) #Test Purposes

@@ -1,15 +1,29 @@
 extends TextureRect
-
+# List of valid weapon names
+var valid_weapon_names = ["Bronze Sword", "Silver Sword", "Gold Sword"]
 @onready var icon = $"."
-
+#var default_texture: Texture
+var current_texture: Texture
 var is_occupied = false 
-
+@onready var default_texture = preload("res://InventoryTesting/InventoryBackgroundPics/Sword Slot.png")
+func _ready():pass
+	
+	
 func update_slot_state():
 	# Update `is_occupied` based on the current texture
 	is_occupied = texture != null
 	
 	
 	
+	
+func set_slot_texture(texture_path: String):
+	if texture_path != "":
+		current_texture = load(texture_path)
+		#modulate = Color(1, 1, 1, 1)  # Full color for any non-default texture
+	else:
+		current_texture = default_texture
+		#modulate = Color(0.784, 0.784, 0.784, 0.5)  # Apply ghostly, semi-transparent modulate for default texture
+	texture = current_texture
 #returns the equipped weapon's texture	
 func _get_weapon_texture():
 	return icon.get_texture()
@@ -22,7 +36,7 @@ func _get_drag_data(_pos):
 	data ["origin_texture"] = texture
 	data ["origin_slot"] = self
 	data["is_empty"] = !is_occupied
-	
+	data["EquipSlot"] = data
 	
 	var drag_texture = TextureRect.new()
 	drag_texture.expand = true
@@ -40,7 +54,7 @@ func _get_drag_data(_pos):
 	return data
 	
 func _can_drop_data(at_position, data):
-	return !is_occupied and data.has("origin_texture")
+	return !is_occupied and data.has("origin_texture") and data.get("item_name") in valid_weapon_names
 
 func _drop_data(at_position, data):
 	var origin_slot = data["origin_slot"]
@@ -89,8 +103,15 @@ func _drop_data(at_position, data):
 	
 	
 	
+	
 
 			
 func clear_slot():
 	texture = null
 	is_occupied = false
+	set_slot_texture("")  # This will load the default texture
+	
+	#if texture == null:
+		#modulate = Color(1, 1, 1, 0)  # Fully transparent
+	#else:
+		#modulate = Color(1, 1, 1, 1)  # Fully opaque (normal color)

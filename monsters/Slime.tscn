@@ -18,8 +18,8 @@ radius = 14.0
 height = 28.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1kn2s"]
-radius = 80.0
-height = 160.0
+radius = 93.0
+height = 186.0
 
 [sub_resource type="Animation" id="Animation_okju6"]
 length = 0.001
@@ -516,7 +516,6 @@ stream = ExtResource("3_in0n6")
 stream = ExtResource("4_26x7l")
 
 [node name="detectionarea1" type="Area2D" parent="."]
-visible = false
 collision_layer = 4
 collision_mask = 4
 
@@ -531,14 +530,14 @@ libraries = {
 }
 
 [node name="Body" type="Sprite2D" parent="."]
-modulate = Color(1, 0.139216, 0.072549, 1)
+modulate = Color(1, 0.0588235, 0, 1)
 texture_filter = 1
 texture = ExtResource("4_ryy2i")
 hframes = 9
 frame = 1
 
 [node name="Details" type="Sprite2D" parent="."]
-modulate = Color(0.632353, 0.132353, 0, 1)
+modulate = Color(0.615686, 0.101961, 0, 1)
 texture_filter = 1
 texture = ExtResource("4_ryy2i")
 hframes = 9

@@ -22,6 +22,8 @@ var kink_probability = 0.5
 var descend = false # check if player stepped on a staircase
 var merchant_spawned = false # check to see if a merchant has spawned
 
+@onready var score = preload("res://score.tscn").instantiate()
+@onready 
 var colorDict = {
 	1: [.334, .7, .2], # Forest 1
 	2: [.537, .722, .282], # Forest 2
@@ -75,20 +77,16 @@ var chest_spawn_ID = 0
 var monster_list = [
 	preload("res://monsters/Slime.tscn"),
 	preload("res://monsters/Bushmo.tscn"),
-
 	]
-var  item_scenes = { 
-		0: preload("res://equipment/coin.tscn"), 
-		51: preload("res://equipment/treasure_spawns.tscn"),
-		71: preload("res://equipment/Blue Mushroom.tscn"),
-	}
+
+var king_slime = null
 
 var rubio_scene = preload("res://rubio.tscn")
 var rubio_spawns = []
 
 func _ready():
 	current_floor += 1 # when entering the dungeon scene, you have descended once
-
+	
 	# Selects the tileset for the current floor
 	if current_floor <= 5:
 		dungeon_floor = dungeon_floor_tiles[0]
@@ -109,46 +107,65 @@ func _ready():
 	# Inventory Creation
 	Items.Player_Inventory._add_item(1, 1) 
 	#Items.Player_Inventory._print_inventory()
-	Items.Player_Inventory._add_item(2,1)
+	Items.Player_Inventory._add_item(52,2)
+	# Items.Player_Inventory._add_item(31,5) # Shuriken
 
 	clear_room() # clean up for new floor
 	
-	# Color tiles for all 25 floors
-	if current_floor > 0 and current_floor <= 25:
-		$TileMap.modulate = Color(
-			colorDict[current_floor][0],
-			colorDict[current_floor][1],
-			colorDict[current_floor][2],
-		)
-		$FloorTiles.modulate = Color(
-			colorDict[current_floor][2],
-			colorDict[current_floor][1],
-			colorDict[current_floor][0],
-		)
-		$Staircase/Sprite2D.modulate = Color(
-			colorDict[current_floor][0],
-			colorDict[current_floor][1],
-			colorDict[current_floor][2],
-		)
+	if current_floor == 15: #15
+		$TileMap.clear()
+		$Staircase.visible = false
+		$Staircase.global_position = Vector2(500,500)
+		var king_scene = preload("res://king_slime_fight.tscn")
+		king_slime = king_scene.instantiate()
+		monster_spawns.append(king_slime)
+		add_child(king_slime)
+		king_slime.global_position = Vector2(50,-50)
+		generate_npc()
+	else:
+		# Color tiles for all 25 floors
+		if current_floor > 0 and current_floor <= 25:
+			$TileMap.modulate = Color(
+				colorDict[current_floor][0],
+				colorDict[current_floor][1],
+				colorDict[current_floor][2],
+			)
+			$FloorTiles.modulate = Color(
+				colorDict[current_floor][2],
+				colorDict[current_floor][1],
+				colorDict[current_floor][0],
+			)
+			$Staircase/Sprite2D.modulate = Color(
+				colorDict[current_floor][0],
+				colorDict[current_floor][1],
+				colorDict[current_floor][2],
+			)
+			
+		else: $TileMap.modulate = Color(0, 0, 0)
 		
-	else: $TileMap.modulate = Color(0, 0, 0)
+		floor_structure() # fill in int
+		generate_hallways()
+		generate_rooms()
+		
+		generate_entity() # generate staircase, items
+		generate_monsters()
+		spawn_chests()
+		
+		#if current_floor == 1:
+		generate_npc()
+		#elif Global.companion_following == true:
+			#var rubio_scene = preload("res://rubio.tscn")
+			#var rubio = rubio_scene.instantiate()
+			#add_child(rubio)
+			#rubio.global_position = Vector2(0,0)
+			#print("rubi's postion", rubio.global_position)
 	
-	floor_structure() # fill in int
-	generate_hallways()
-	generate_rooms()
-	
-	generate_entity() # generate staircase, items
-	generate_monsters()
-	spawn_chests()
-	
-	#if current_floor == 1:
-	generate_npc()
-	#elif Global.companion_following == true:
-		#var rubio_scene = preload("res://rubio.tscn")
-		#var rubio = rubio_scene.instantiate()
-		#add_child(rubio)
-		#rubio.global_position = Vector2(0,0)
-		#print("rubi's postion", rubio.global_position)
+		# debug info
+		$Debug_Hud.visible = debug
+		$Debug_Hud/Seed.set_text("Debug " 
+			+ "\nnode_pos: " + str(node_pos)
+			+ "\nStaircase Position: " + str(node_pos[staircase_pos])
+			+ "\nfloor_structure: " + str([hall_count, hall_length, room_min, room_max])) 
 	
 	$Cassandra.global_position = Vector2(0,0) # returns player to root room
 	$GUI/Current_Floor.set_text("Floor: " + str(current_floor))
@@ -158,13 +175,6 @@ func _ready():
 		#$Rubio.visible = true
 	#else:
 		#$Rubio.visible = false
-		
-	# debug info
-	$Debug_Hud.visible = debug
-	$Debug_Hud/Seed.set_text("Debug " 
-		+ "\nnode_pos: " + str(node_pos)
-		+ "\nStaircase Position: " + str(node_pos[staircase_pos])
-		+ "\nfloor_structure: " + str([hall_count, hall_length, room_min, room_max])) 
 	
 	# move to function as dev continues
 	if not healthSetupCompleted: # Set up health
@@ -178,6 +188,7 @@ func _ready():
 		$GUI/Armor_Durability.updateArmor($Cassandra.currentArmor)
 		$Cassandra.armorChanged.connect($GUI/Armor_Durability.updateArmor)
 		armorSetup = true
+	
 	
 
 func _process(delta):
@@ -197,12 +208,16 @@ func _process(delta):
 			#generate_treasure(chest)
 			generate_loot(chest)
 			chest.clear_chest()
-			
+
 	# Grabs current coin total
 	$GUI/Coin_Counter.set_text("x " + str(Items.Player_Inventory._get_coins()))
 
 func _on_staircase_hitbox_area_entered(area): if area == $Cassandra/hurtbox: _ready() 
 func _on_new_seed_pressed(): _ready() #debug
+func _on_score_pressed(): 
+	#score._ready()
+	get_tree().change_scene_to_file("res://score.tscn")
+		
 
 func floor_structure():
 		hall_count = (current_floor + 3) # num of hallway segments, rec 10
@@ -214,9 +229,10 @@ func floor_structure():
 func generate_entity():
 	# finds a random position in the last quarter of node_pos
 	staircase_pos = randi() % (node_pos.size() - int(node_pos.size() * 0.75)) + int(node_pos.size() * 0.75)
-	
+
 	# converts the tilemap coords to global coords for staircase placement	
 	$Staircase.global_position = $TileMap.map_to_local(node_pos[staircase_pos]) / 2
+
 	
 func generate_npc():
 	
@@ -234,8 +250,7 @@ func generate_npc():
 		add_child(rubio)
 		
 		rubio.global_position = $TileMap.map_to_local(rand_pos) / 2
-		print("global ", Global.companion_following)
-		#clear_npc(rubio)
+		
 		
 	elif Global.companion_following == true:
 		#var rubio_scene = preload("res://rubio.tscn")
@@ -245,18 +260,8 @@ func generate_npc():
 		
 		#var rubio = rubio_scene.instantiate()
 		rubio.global_position = Vector2(0,0)
-		print("rubi's postion", rubio.global_position)
-	#elif current_floor != 1:
-		#rubio.queue_free()
-		#print("rubio is free!!")
-	
-	#clear_npc(rubio)
 		
-	
 
-
-		
-	
 func generate_loot(monster):
 	# Generates a random item from the loot table depending on your floor. 
 	# If no loot table is loaded it defaults to no items spawned!
@@ -315,16 +320,14 @@ func generate_loot(monster):
 		
 		if new_item_map_location in floor_pos or new_item_map_location in hall_pos:
 			# get item scene information and create it from slain monster location
-			var new_item = item_scenes[loot_ID]
+			var new_item = Items.Player_Inventory.Item_Scenes[loot_ID]
 			var new_item_spawn = new_item.instantiate()
 			var new_item_location = Vector2i(monster.death_location) / 2
 			
 			# Manages all the item spawns to remove them when the floor is cleared.
 			item_spawns.append(new_item_spawn)
 			add_child(new_item_spawn)
-				
 			item_spawns[item_spawn_ID].global_position = new_item_location
-
 			item_spawn_ID += 1
 	else: print("Error Generating Item: Invalid ID in loot table?")
 
@@ -382,7 +385,6 @@ func generate_monsters():
 			# Make enemy if the location is a floor tile
 			if ($TileMap.local_to_map(enemy_pos) in floor_pos):
 				var enemy = monster_list[randi() % monster_list.size()]
-
 				var enemy_spawn = enemy.instantiate()
 			
 				# Manages all the spawns to remove them when the floor is cleared.
@@ -766,10 +768,13 @@ func clear_room():
 	
 	#rubio_scene.queue_free()
 	
-	#for i in range(-100, 100): # higher wall generation
-	#	for j in range(-100, 100):
-	#		$TileMap.set_cell(0, Vector2i(i,j), 1, Vector2i(3, 0))
-	
-	#if current_floor == 6:
-		#get_tree().change_scene_to_file("res://environment/Boss Fight 1.tscn")
+	for i in range(-200, 200): # higher wall generation
+		for j in range(-200, 200):
+			$TileMap.set_cell(0, Vector2i(i,j), 1, Vector2i(2, 2))
+
+	#if current_floor == 15:
+	#	get_tree().change_scene_to_file("res://environment/king_slime_fight.tscn")
 		
+
+
+

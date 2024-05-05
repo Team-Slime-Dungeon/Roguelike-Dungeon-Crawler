@@ -1,19 +1,16 @@
 [gd_scene load_steps=4 format=3 uid="uid://bmib81efpqnw0"]
 
 [ext_resource type="Script" path="res://equipment/Weapon_Item.gd" id="1_jbm8j"]
-[ext_resource type="Texture2D" uid="uid://dtjex21l1im35" path="res://equipment/weapons.png" id="2_5m6lq"]
+[ext_resource type="Texture2D" uid="uid://bweyo2ils6aja" path="res://equipment/swords.png" id="2_heyl5"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kibbh"]
 
 [node name="Weapon_Item" type="CharacterBody2D"]
-position = Vector2(-1, -1)
 script = ExtResource("1_jbm8j")
 
 [node name="WeaponSheet" type="Sprite2D" parent="."]
-position = Vector2(1, 1)
-texture = ExtResource("2_5m6lq")
-hframes = 7
-vframes = 7
+texture = ExtResource("2_heyl5")
+hframes = 3
 
 [node name="Player_Detection" type="Area2D" parent="."]
 

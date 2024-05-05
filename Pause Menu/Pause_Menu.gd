@@ -66,7 +66,7 @@ func _on_save_settings_pressed():
 	config.set_value("Setting", "Resolution", $Settings/Resolution2.selected)
 	config.set_value("Setting", "FullScreen", $Settings/Fullscreen2.button_pressed)
 	config.set_value("Setting", "mainVolume", $Settings/HSlider.value)
-	config.set_value("Setting", "ColorBlind", $Settings/Mode.count)
+	config.set_value("Setting", "Colorblind", $Settings/Mode.count)
 	print($Settings/Mode.count)
 	config.save(SAVE_PATH)
 	pass # Replace with function body.	

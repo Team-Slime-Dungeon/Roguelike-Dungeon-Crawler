@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://qdbllnpxqkkl"]
 
 [ext_resource type="Script" path="res://bg.gd" id="1_ejel4"]
-[ext_resource type="Texture2D" uid="uid://5f71xaywnfdp" path="res://MenuAssets/Untitled_Artwork 4.png" id="2_f32jh"]
+[ext_resource type="Texture2D" uid="uid://cjsmdcqrmya4c" path="res://MenuAssets/FinalRev.png" id="2_1wkbj"]
 [ext_resource type="Texture2D" uid="uid://damjn23mhquhc" path="res://MenuAssets/OrnagePebleblur.png" id="3_vbcwp"]
 [ext_resource type="Texture2D" uid="uid://c7yrt6nwqmtkl" path="res://MenuAssets/PinkPebleblur.png" id="4_gfjps"]
 [ext_resource type="Texture2D" uid="uid://bmibfbkky4wiv" path="res://MenuAssets/RedPebleblur.png" id="6_05e5j"]
@@ -13,7 +13,7 @@ script = ExtResource("1_ejel4")
 [node name="Bg" type="Sprite2D" parent="."]
 position = Vector2(574.5, 320.73)
 scale = Vector2(0.647222, 0.617117)
-texture = ExtResource("2_f32jh")
+texture = ExtResource("2_1wkbj")
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="."]
 visible = false

@@ -18,6 +18,9 @@ var weapon_end_index = 3
 var helmet_start_index = 14
 var helmet_end_index = 16
 
+var throwable_start_index = 30
+var throwable_end_index = 31
+
 var treasure_start_index = 51
 var treasure_end_index = 64
 
@@ -26,36 +29,42 @@ var Item_List = {
 	0 : ["Coin",			1,		99,				0,				0,			null,			 null, false ],
 	
 	# Weapons and Equipment IDs 1 - 50
-	1 : ["Bronze Sword",	5,		1,		2,				0,				null, null,	true ],
-	2 : ["Silver Sword",	15,		1,		3,				0,				null, null,	true ],
-	3 : ["Gold Sword", 		30,		1,		5,				0,				null, null,	true ],
+	1 : ["Bronze Sword",	25,		1,		2,				0,				null, null,	true ],
+	2 : ["Silver Sword",	50,		1,		3,				0,				null, null,	true ],
+	3 : ["Gold Sword", 		75,		1,		5,				0,				null, null,	true ],
 	
-	14 : ["Bronze Helmet", 	5,		1,		0,				5,				null, null,	true ],
-	15 : ["Silver Helmet", 	15,		1,		0,				6,				null, null,	true ],
-	16 : ["Gold Helmet", 	30,		1,		0,				7,				null, null,	true ],
+	14 : ["Bronze Helmet", 	25,		1,		0,				5,				null, null,	true ],
+	15 : ["Silver Helmet", 	50,		1,		0,				6,				null, null,	true ],
+	16 : ["Gold Helmet", 	75,		1,		0,				7,				null, null,	true ],
+
+	30:  ["Random Throwable",	2,		0,		0,				0, 				null, null, false  ],
+	31 : ["Shuriken", 		2,		99,		2,				0,					null, null,	false ],
 	
-	#Weapon IDs 1-2. 50 will spawn a random sword
-	50: ["Random Weapon",	20,		0,		0,				0,				null, null, false],
+	#Weapon IDs 1-2. 49 will spawn a random sword, 50 will spawn a random helmet
+	49: ["Random Weapon",	50,		0,		0,				0,				null, null, false],
+	50: ["Random Helmet",	50,		0,		0,				0,				null, null, false],
+	
 	# Treasures IDs 51 - 100. 51 will spawn a random item, 52 on can be found inside 51
-	51: ["Random Treasure",	20,		0,		0,				0, 				null, null, false  ],
+	51: ["Random Treasure",	40,		0,		0,				0, 				null, null, false  ],
 	
 	52: ["Ruby Necklace",	10,		99,		0,				0, 				null, null, false  ],
-	53: ["Emerald Crown",	20,		99,		0,				0, 				null, null, false  ],
-	54: ["Ancient Tome",	25,		99,		0,				0, 				null, null, false  ],
-	55: ["Ruby",			30,		99,		0,				0, 				null, null, false  ],
-	56: ["Old Earring",		35,		99,		0,				0, 				null, null, false  ],
-	57: ["Ancient Coins",	40,		99,		0,				0, 				null, null, false  ],
-	58: ["Pearl Necklace",	45, 	99,		0,				0, 				null, null , false ],
-	59: ["Sapphire",		50,		99,		0,				0, 				null, null , false ],
-	60: ["Emerald",			65,		99,		0,				0, 				null, null , false ],
-	61: ["Topaz",			75,		99,		0,				0, 				null, null , false ],
+	53: ["Emerald Crown",	10,		99,		0,				0, 				null, null, false  ],
+	54: ["Ancient Tome",	15,		99,		0,				0, 				null, null, false  ],
+	55: ["Ruby",			20,		99,		0,				0, 				null, null, false  ],
+	56: ["Old Earring",		25,		99,		0,				0, 				null, null, false  ],
+	57: ["Ancient Coins",	30,		99,		0,				0, 				null, null, false  ],
+	58: ["Pearl Necklace",	35, 	99,		0,				0, 				null, null , false ],
+	59: ["Sapphire",		40,		99,		0,				0, 				null, null , false ],
+	60: ["Emerald",			45,		99,		0,				0, 				null, null , false ],
+	61: ["Topaz",			50,		99,		0,				0, 				null, null , false ],
 	62: ["Sacred Technology", 89,	999,	0,				0, 				null, null , false ], # I actually have that many
 	63: ["Diamond",			90,		99,		0,				0, 				null, null , false ],
-	64: ["Petrified Egg",	100,	99,		0,				0, 				null, null , false ],
+	64: ["Petrified Egg",	101,	99,		0,				0, 				null, null , false ],
 	
 	# Monster Drops
 	71: ["Blue Mushroom",	3,		 99,		0,				0, 				null, null , false ],
-	
+	72: ["King Slime Crown",	100,		 1,		0,				0, 				null, null , false ],
+
 	#Potions
 	90: ["Red Potion",		3,		 9,		0,				0, 				"HP+5", null , false ],
 	91: ["Purple Potion",	5,		 9,		0,				0, 				"Nothing", null , false ],
@@ -64,9 +73,13 @@ var Item_List = {
 }
 
 var Item_Scenes = {
+	0: preload("res://equipment/coin.tscn"),
 	71: preload("res://equipment/Blue Mushroom.tscn"),
-	# Multi Use Scenes (Contain more than one)
-	50: preload("res://equipment/Weapon_Item.tscn"),
+	30: preload("res://equipment/Throwable_Item.tscn"),
+	
+	# Multi Use Scenes (Contain more than one item)
+	49: preload("res://equipment/Weapon_Item.tscn"),
+	50: preload("res://equipment/Helmet_Item.tscn"),
 	51: preload("res://equipment/treasure_spawns.tscn"),
 	90: preload("res://equipment/EquipmentTest/Potion_Item.tscn"),
 }
@@ -110,7 +123,8 @@ func _print_inventory():
 	
 func _get_coins():
 	#print(Inventory[0])
-	return Inventory[0]
+	var total_coins = Inventory[0]
+	return total_coins
 
 func _get_item_price(item_id, amount=1):
 	if Item_List.has(item_id):
@@ -118,17 +132,30 @@ func _get_item_price(item_id, amount=1):
 		var temp_price = Item_List[item_id][item_price]
 		return (temp_price * amount)
 	else:
-		print("Error: Item has no price or does not exist.")
+		print("Error: Item has no price or does not exist. ID Given: ",item_id)
+		
+func _sell_item(item_id, amount):
+	var price = _get_item_price(item_id, amount)
+	var price_total = price / 2
 
+	print("real: ",price, " / adjusted:", price_total)
+	if _minus_item(item_id, amount ,true) == true:
+		_add_item(0, price_total)
+		print("Added ", price_total," coins")
+		return true
+	else:
+		print("Error: Couldn't sell")
+		return false
+	
 func _pay_for_item(item_id, amount=1, overfill=false):
-	var price_total = _get_item_price(item_id,amount)
+	var price_total = _get_item_price(item_id, amount)
 	
 	# Player has enough coins to pay for the item in their inventory
 	if _get_coins() >= price_total:
 		# Checks if the player can add the item to their inventory. If item types can hold one (swords) leave this off
 		if _can_add_item(item_id,amount, overfill):
 			_add_item(item_id,amount)
-			_minus_item(0,price_total)
+			_minus_item(0,price_total,true)
 			return true
 		else:
 			print("You can't carry anymore of those!")
@@ -177,6 +204,18 @@ func _can_add_item(item_id, amount, overfill=false):
 		else:
 			print("Error: Item does not exist for _can_add_item.")
 			return false
+func _can_throw_item(item_id):
+	var throwable_item_ids = [31]
+	
+	# Item exists
+	if (Inventory.has(item_id)) and (item_id in throwable_item_ids):
+	# Item can removed
+		if _minus_item(item_id, 1 , true) == true:
+			print("Item is throwable!")
+			return true
+		
+	print("Couldn't throw.")
+	return false
 	
 func _add_item(item_id, amount):
 	var add_amount = amount
@@ -235,9 +274,11 @@ func _minus_item(item_id, amount, delete=false):
 		# Print the updated value if not deleted
 		if delete == false:
 			print(Item_List[item_id][item_name], " in inventory updated to ", Inventory[item_id])
+		return true
 	# Item is not in inventory
 	else: 
 		print("Error: Item ID [",item_id,"] not in inventory, cannot remove.")
+		return false
 		
 func _delete_item(item_id):
 	# Check if the inventory has the item
@@ -245,9 +286,11 @@ func _delete_item(item_id):
 		# Delete the item from the inventory dictionary
 		Inventory.erase(item_id)
 		print("Item ", Item_List[item_id][item_name]," was deleted from inventory.")
+		return true
 	else:
 		# If item ID is not found in inventory, print error to terminal
 		print("Error: Item ID [",item_id,"] is not in inventory, cannot be deleted.")
+		return false
 		
 func get_item_name(item_id):
 	# If the item exists

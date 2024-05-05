@@ -2,6 +2,7 @@ extends TextureRect
 signal item_set(item_name, inventory_slot, item_count)
 #var count_node = visible
 @onready var count_node = $count
+@onready var background = $"../Background"
 # Track if the slot is occupied
 var is_occupied = false 
 #var item_name = ""
@@ -30,6 +31,7 @@ func _get_drag_data(_pos):
 
 	
 	var data = {}
+	
 	data["origin_texture"] = texture
 	data["origin_texture"] = self
 	data["is_empty"] = !is_occupied
@@ -37,6 +39,7 @@ func _get_drag_data(_pos):
 	data["item_name"] = item_name
 	data["item_id"] = item_id
 	data["item_count"] = item_count
+	data["InvSlot"] = data
 	var drag_texture = TextureRect.new()
 	drag_texture.expand = true
 	drag_texture.texture = texture
@@ -93,6 +96,11 @@ func clear_slot():
 	#var count_node = get_node_or_null("Item_Icon/count")
 	if count_node.visible:
 		count_node.visible = false
+		
+	if background:
+		background.modulate = Color(0, 0, 0, 0)  # Make transparent
+	else:
+		print("Background node not found or not ready.")
 #func clear_count():
 	#var count_node = self.get_node("Item_Icon/count")
 	#count_node.visible = false  # Or make it invisible

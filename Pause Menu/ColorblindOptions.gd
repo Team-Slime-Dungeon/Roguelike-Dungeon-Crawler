@@ -1,22 +1,24 @@
 extends Label
 
-var arr = ["Protanopia", "Deutranopia", "Tritanopia", "Off"]
+@export var arr = ["Protanopia", "Deutranopia", "Tritanopia", "Off"]
 var modeLabel
-var count = 3
+var count =  SettingVal.colorMode
 
 var bldMode
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	_setLabel(SettingVal.colorMode)
 	bldMode = $"../../CanvasLayer/ColorRect"
+	#bldMode.material.set("shader_parameter/mode",count)
+	_loadColBlind(count)
 	#bldMode = get_node("../../../ColorBlind/ColorRectBld")
 	
 	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	_setLabel(count)
 	pass
 
 func _setLabel(i):
@@ -43,4 +45,11 @@ func _Rbuttonspressed():
 		$"../../CanvasLayer".hide()
 	print(count)
 	
+	
+func _loadColBlind(val):
+	if(val >= 0 && val <=2):
+		$"../../CanvasLayer".show()
+	bldMode.material.set("shader_parameter/mode", val)
+	set_text(arr[val])
+
 	
