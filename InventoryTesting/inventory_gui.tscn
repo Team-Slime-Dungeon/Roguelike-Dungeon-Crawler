@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://cul7b22epo42i"]
+[gd_scene load_steps=22 format=3 uid="uid://cul7b22epo42i"]
 
 [ext_resource type="Script" path="res://InventoryTesting/inventory_gui.gd" id="1_ap1sc"]
 [ext_resource type="Texture2D" uid="uid://dfnshdf6xxgdp" path="res://InventoryTesting/InventoryBackgroundPics/inventoryframe.png" id="2_02nu5"]
@@ -9,14 +9,15 @@
 [ext_resource type="Script" path="res://InventoryTesting/HelmetIcon.gd" id="6_jyvsn"]
 [ext_resource type="Texture2D" uid="uid://cg14no0crpnyc" path="res://InventoryTesting/InventoryBackgroundPics/Sword Slot.png" id="6_p5iel"]
 [ext_resource type="Script" path="res://InventoryTesting/Playerequip_inv/EquipSlot.gd" id="6_yi8ey"]
-[ext_resource type="Texture2D" uid="uid://q7hya32jg06y" path="res://icon.svg" id="9_5fv2j"]
 [ext_resource type="Script" path="res://InventoryTesting/trashingbutton.gd" id="9_gicqq"]
 [ext_resource type="Texture2D" uid="uid://db1hxdrm8mtmg" path="res://InventoryTesting/InventoryBackgroundPics/Sheild Slot.png" id="10_b5xuv"]
 [ext_resource type="Texture2D" uid="uid://jmrtyy66elth" path="res://trashcanpic.webp" id="10_cf7rm"]
 [ext_resource type="Texture2D" uid="uid://d2etfk3yo07po" path="res://armoricon1.png" id="10_iydl1"]
 [ext_resource type="Script" path="res://InventoryTesting/ArmorIcon.gd" id="11_3d76c"]
 [ext_resource type="Script" path="res://InventoryTesting/unequipbutton.gd" id="11_o5mek"]
+[ext_resource type="Texture2D" uid="uid://c6xxccma3kxgi" path="res://companions/rubio faceshot.png" id="12_i56lt"]
 [ext_resource type="Texture2D" uid="uid://q4w5jbyxx2f7" path="res://InventoryTesting/Item Test/Coin.png" id="13_u7cjr"]
+[ext_resource type="Texture2D" uid="uid://o0us27snqty0" path="res://equipment/Shuriken.png" id="14_ppts4"]
 [ext_resource type="FontFile" uid="uid://bbs1yygn0xhkm" path="res://m3x6.ttf" id="14_qhqyf"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_tbsgo"]
@@ -69,6 +70,7 @@ current_tab = 1
 tab_focus_mode = 0
 
 [node name="Inventory" type="TabBar" parent="Tabs"]
+visible = false
 layout_mode = 2
 focus_mode = 1
 
@@ -231,14 +233,15 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 4.68755
-offset_top = 4.68755
-offset_right = -5.31245
-offset_bottom = -5.31245
+offset_left = -2.75027
+offset_top = 2.00272e-05
+offset_right = 190.25
+offset_bottom = 167.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("9_5fv2j")
-expand_mode = 1
+scale = Vector2(0.185004, 0.185004)
+texture = ExtResource("12_i56lt")
+expand_mode = 2
 
 [node name="Armor" type="TextureRect" parent="Tabs/Companion/Background"]
 layout_mode = 0
@@ -284,7 +287,7 @@ offset_right = -6.87238
 offset_bottom = -5.46812
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("6_gswts")
+texture = ExtResource("14_ppts4")
 expand_mode = 1
 
 [node name="Label" type="Label" parent="Tabs/Companion/Background"]

@@ -121,9 +121,9 @@ func set_label3_text(new_text):
 #Funtion to change all labels based on companions
 func label_based_on_companion():
 	if companion == 1:
-		set_label_text("Companion1 Name HP :")
-		set_label2_text("         Effect: \n Some description \n of the companion \n and their abilities")
-		set_label3_text("There is something else that we can add Here im sure")
+		set_label_text("Companion: Rubio")
+		set_label2_text("         Effect: \n Throws Projectiles \n to enemies \n from a distance.")
+		set_label3_text("Type: Shining Knight")
 		
 	elif companion == 2:
 		set_label_text("Companion2 Name HP :")
